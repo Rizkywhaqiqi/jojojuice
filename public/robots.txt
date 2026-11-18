@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://jojojuice.vercel.app/sitemap.xml
