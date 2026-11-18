@@ -48,11 +48,11 @@
     },
     {
       "source": "/admin",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/admin/:path*",
-      "destination": "/index.html"
+      "destination": "/"
     }
   ],
   "cleanUrls": true
