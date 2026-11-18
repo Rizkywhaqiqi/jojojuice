@@ -54,5 +54,6 @@
       "source": "/admin/:path*",
       "destination": "/index.html"
     }
-  ]
+  ],
+  "cleanUrls": true
 }

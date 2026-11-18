@@ -22,6 +22,10 @@ npm run build
 - Cloudflare Web Analytics: production hostname only. The embedded beacon identifier is public, not an API credential.
 - Maps: Leaflet with OpenStreetMap tiles and visible attribution; route links open Google Maps.
 
+## Public pages
+
+Public sections are separate pages: `/`, `/tentang`, `/menu`, `/outlet`, `/kontak`, and `/pesan`. The build emits one HTML file per URL with its own title, description, and canonical URL. Vercel clean URLs allow direct visits and refreshes. Shared navigation uses normal page links. Older section anchors redirect to the corresponding page. The dashboard remains at `/admin`.
+
 ## Dashboard
 
 Open `/admin`. The owner receives a private one-time activation link to choose their own password (12–128 characters). Activation key is carried in the URL fragment and removed from the address bar after loading. Its hash is configured on the Worker as `BOOTSTRAP_HASH`; never commit the original key. Setup locks after the owner account is created.

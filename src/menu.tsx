@@ -1,3 +1,3 @@
-'use client';
 import {Menu} from 'lucide-react';
-export default function BrandMenu(){return <details className="bp-mobile-menu" onKeyDown={e=>{if(e.key==='Escape')e.currentTarget.removeAttribute('open')}}><summary aria-label="Menu navigasi brand"><Menu size={23}/></summary><nav aria-label="Navigasi mobile" onClick={e=>{if((e.target as HTMLElement).closest('a'))e.currentTarget.closest('details')?.removeAttribute('open')}}><a href="#cerita">Cerita kami</a><a href="#rasa">Pilihan rasa</a><a href="#outlet">Outlet</a><a href="#pesan">Pesan sekarang</a><a href="#terhubung">Terhubung</a></nav></details>}
+import {PUBLIC_PAGES} from './navigation';
+export default function BrandMenu({currentPage}:{currentPage:string}){return <details className="bp-mobile-menu" onKeyDown={e=>{if(e.key==='Escape')e.currentTarget.removeAttribute('open')}}><summary aria-label="Menu navigasi JOJO Juice"><Menu size={23}/></summary><nav aria-label="Navigasi mobile">{PUBLIC_PAGES.map(p=><a href={p.path} key={p.path} aria-current={currentPage===p.path?'page':undefined}>{p.label}</a>)}</nav></details>}
