@@ -1,0 +1,3 @@
+'use client';
+import {Menu} from 'lucide-react';
+export default function BrandMenu(){return <details className="bp-mobile-menu" onKeyDown={e=>{if(e.key==='Escape')e.currentTarget.removeAttribute('open')}}><summary aria-label="Menu navigasi brand"><Menu size={23}/></summary><nav aria-label="Navigasi mobile" onClick={e=>{if((e.target as HTMLElement).closest('a'))e.currentTarget.closest('details')?.removeAttribute('open')}}><a href="#cerita">Cerita kami</a><a href="#rasa">Pilihan rasa</a><a href="#terhubung">Terhubung</a><a href="https://jojo-group-karier.sturdylyre2.chatgpt.site">Kembali ke JOJO GROUP</a></nav></details>}
