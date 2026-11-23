@@ -1,0 +1,71 @@
+/* JOJO Tropical Editorial V2 — inspired by modern F&B editorial layouts, JOJO identity retained. */
+.bp-juice{--bp-bg:#fff9f1;--bp-fg:#321d20;--bp-accent:#ed1c24;--bp-soft:#fce7de;--bp-line:#321d2024;background:#fff9f1;color:#321d20}
+.bp-juice .bp-header{background:#fff9f1;border-bottom:1px solid #321d2024;min-height:84px;padding:14px 5%}
+.bp-juice .bp-header>nav{font-size:13px;font-weight:700;letter-spacing:0;text-transform:none;gap:30px}
+.bp-juice .bp-header-order{border-radius:100px;font-size:12px;padding:15px 21px;box-shadow:none;text-decoration:none}
+.bp-juice .bp-wordmark{font-family:Impact,"Arial Narrow",Arial,sans-serif;font-size:35px;color:#ed1c24;letter-spacing:-.04em}
+.bp-juice .bp-footer{background:#fff9f1;color:#321d20;border-top:1px solid #321d2024;padding:43px 5%}
+.bp-juice .bp-footer .bp-wordmark{color:#ed1c24}
+.jojo-tropical{--jt-red:#ed1c24;--jt-cream:#fff9f1;--jt-ink:#321d20;--jt-yellow:#ffc103;font-family:Arial,Helvetica,sans-serif;color:var(--jt-ink);overflow:hidden}
+.jojo-tropical *{box-sizing:border-box}
+.jojo-tropical h1,.jojo-tropical h2,.jojo-tropical h3{font-family:Impact,"Arial Narrow",Arial,sans-serif;font-weight:900;letter-spacing:-.025em}
+.jojo-tropical h2 em,.jojo-tropical h1 em{font-family:Georgia,serif;font-weight:400;font-style:italic;letter-spacing:-.065em}
+.jt-eyebrow,.jt-label{font-size:11px;font-weight:800;letter-spacing:.14em;line-height:1.5}
+.jt-pill{display:inline-flex;gap:18px;align-items:center;justify-content:center;min-height:49px;border-radius:100px;padding:15px 23px;font-size:12px;font-weight:800;transition:transform .2s}
+.jt-pill:hover{transform:translateY(-3px)}
+.jt-pill-light{background:#fff;color:var(--jt-red)}
+.jt-pill-red{background:var(--jt-red);color:#fff}
+.jt-hero{display:grid;grid-template-columns:48% 52%;min-height:660px;position:relative;isolation:isolate;background:var(--jt-red);color:#fff;padding:45px 5%;overflow:hidden}
+.jt-hero-copy{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:35px 2% 35px 0;z-index:2}
+.jt-hero h1{font-size:clamp(75px,9vw,150px);line-height:.9;margin:26px 0}
+.jt-hero h1 em{font-size:.76em}
+.jt-hero-copy p{font-size:16px;line-height:1.75;max-width:400px;margin-bottom:32px}
+.jt-hero-visual{position:relative;display:grid;place-items:center;min-width:0}
+.jt-hero-circle{position:absolute;width:82%;aspect-ratio:1;border-radius:50%;background:#fff6e9;right:1%;top:10%}
+.jt-hero-visual img{position:relative;z-index:1;width:75%;height:550px;object-fit:contain;border-radius:38%;filter:drop-shadow(0 18px 26px #7b051739)}
+.jt-sticker{position:absolute;z-index:3;left:2%;top:15%;width:120px;height:120px;border-radius:50%;background:var(--jt-yellow);color:var(--jt-red);display:grid;place-items:center;text-align:center;font:900 23px/1.1 Impact,Arial,sans-serif;transform:rotate(-15deg)}
+.jt-hero-tag{position:absolute;right:3%;bottom:10%;z-index:2;background:#fff;color:var(--jt-red);padding:15px 22px;border-radius:50px;font-weight:900;font-size:12px;transform:rotate(5deg)}
+.jt-ticker{background:#fff;color:var(--jt-red);white-space:nowrap;overflow:hidden;border-bottom:1px solid #321d2024;padding:15px 0;font:900 23px Impact,Arial,sans-serif;letter-spacing:.07em}
+.jt-ticker span{display:inline-block;min-width:200%;animation:jt-slide 30s linear infinite}
+@keyframes jt-slide{to{transform:translateX(-50%)}}
+.jt-section{padding:100px 5%;background:var(--jt-cream)}
+.jt-label{color:var(--jt-red);display:block;margin-bottom:20px}
+.jt-section-head{display:flex;align-items:end;justify-content:space-between;gap:32px;margin-bottom:35px}
+.jt-section h2{font-size:clamp(52px,6vw,95px);line-height:1}
+.jt-section h2 em{font-size:.85em}
+.jt-section-head p{font-size:15px;max-width:350px;line-height:1.75}
+.jt-filters{display:flex;gap:8px;flex-wrap:wrap;margin:30px 0}
+.jt-filter{border:1px solid #e9c6bd;background:transparent;border-radius:30px;padding:10px 20px;font-size:12px;font-weight:800;color:var(--jt-ink);min-height:42px}
+.jt-filter.active{background:var(--jt-red);color:#fff;border-color:var(--jt-red)}
+.jt-products{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.jt-product{display:block;background:#ffe9e0;border-radius:18px;overflow:hidden;transition:transform .2s}
+.jt-product:hover{transform:translateY(-5px)}
+.jt-product:nth-child(2){background:#fff0bf}
+.jt-product:nth-child(3){background:#dff3ed}
+.jt-product-image{height:360px;padding:18px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.jt-product-image img{width:100%;height:100%;object-fit:contain}
+.jt-product-bottom{padding:22px 24px 27px;display:flex;align-items:end;justify-content:space-between;gap:12px}
+.jt-product h3{font-size:31px;line-height:1.1;margin-bottom:8px}
+.jt-product p{font-size:12px;line-height:1.6}
+.jt-arrow{flex-shrink:0;width:44px;height:44px;border-radius:50%;background:var(--jt-red);color:#fff;display:grid;place-items:center}
+.jt-text-link{display:inline-flex;align-items:center;gap:16px;font-size:12px;font-weight:800;border-bottom:1px solid var(--jt-red);padding:15px 0;margin-top:22px;color:var(--jt-red)}
+.jt-story{background:#fce7de;display:grid;grid-template-columns:49% 51%;min-height:560px}
+.jt-story-image{background:#f8c5bd;overflow:hidden}
+.jt-story-image img{display:block;width:100%;height:100%;object-fit:cover;min-height:510px}
+.jt-story-copy{padding:80px 10%;display:flex;flex-direction:column;align-items:flex-start;justify-content:center}
+.jt-story-copy .jt-eyebrow{color:var(--jt-red)}
+.jt-story-copy h2{font-size:clamp(56px,6vw,100px);line-height:.95;margin:20px 0}
+.jt-story-copy p{max-width:450px;font-size:16px;line-height:1.85;margin-bottom:30px}
+.jt-location{background:#fff;display:grid;grid-template-columns:1fr 1fr;gap:55px;align-items:center;padding:110px 5%}
+.jt-location h2{font-size:clamp(55px,6vw,100px);line-height:.95;color:var(--jt-red);margin:22px 0}
+.jt-location p{font-size:15px;line-height:1.8;max-width:380px;margin-bottom:28px}
+.jt-location-art{height:400px;background:#fbe4d8;border-radius:50% 50% 20px 20px;position:relative;display:grid;place-items:center;overflow:hidden}
+.jt-location-ring{position:absolute;width:250px;height:250px;border:3px solid #ed1c2440;border-radius:50%}
+.jt-location-ring-outer{width:365px;height:365px}
+.jt-pin{width:125px;height:125px;border-radius:50% 50% 50% 7px;transform:rotate(-15deg);display:grid;place-items:center;text-align:center;color:#fff;background:var(--jt-red);font:900 29px/1 Impact,Arial,sans-serif;z-index:2}
+.jt-closing{background:var(--jt-red);color:#fff;text-align:center;padding:90px 5% 100px}
+.jt-closing h2{font-size:clamp(60px,9vw,145px);line-height:1;margin:16px 0 30px}
+.jt-closing p{font-size:15px;line-height:1.8;margin:0 auto 25px;max-width:500px}
+@media(max-width:900px){.bp-juice .bp-header>nav{gap:15px}.jt-hero{min-height:580px}.jt-hero h1{font-size:clamp(70px,9vw,112px)}.jt-hero-visual img{height:440px}.jt-product-image{height:280px}.jt-section{padding:72px 5%}}
+@media(max-width:720px){.bp-juice .bp-header{min-height:72px;padding:13px 6%}.bp-juice .bp-header>nav{display:none}.bp-juice .bp-header-order{display:none}.jt-hero{grid-template-columns:1fr;padding:45px 6% 55px;gap:20px;min-height:0}.jt-hero-copy{padding:0}.jt-hero h1{font-size:clamp(78px,18vw,124px);margin:20px 0}.jt-hero-copy p{font-size:14px;margin-bottom:22px}.jt-hero-visual{min-height:350px}.jt-hero-visual img{height:350px;width:72%}.jt-hero-circle{width:78%;right:11%;top:0}.jt-sticker{height:85px;width:85px;font-size:17px;top:1%;left:0}.jt-hero-tag{bottom:1%;right:0;font-size:10px}.jt-section{padding:64px 6%}.jt-section-head{display:block}.jt-section h2{font-size:clamp(58px,13vw,84px)}.jt-section-head p{margin-top:20px}.jt-products{grid-template-columns:1fr;gap:16px}.jt-product-image{height:360px}.jt-story{grid-template-columns:1fr}.jt-story-image img{min-height:380px;max-height:450px}.jt-story-copy{padding:60px 7%}.jt-location{grid-template-columns:1fr;padding:70px 6%;gap:30px}.jt-location-art{height:330px}.jt-closing{padding:70px 6%}.jt-closing h2{font-size:clamp(65px,14vw,105px)}.jt-ticker{font-size:18px}}
+@media(prefers-reduced-motion:reduce){.jojo-tropical *, .jojo-tropical *:before,.jojo-tropical *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
