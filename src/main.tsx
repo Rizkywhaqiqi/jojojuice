@@ -4,6 +4,7 @@ import BrandProfile from './profile';
 import {normalizePath} from './navigation';
 const Admin=React.lazy(()=>import('./admin'));
 import './styles.css';
+import './comic.css';
 const page=normalizePath(location.pathname);
 const legacy:Record<string,string>={'#cerita':'/tentang','#rasa':'/menu','#outlet':'/outlet','#terhubung':'/kontak','#pesan':'/pesan'};
 if(page==='/'&&legacy[location.hash])location.replace(legacy[location.hash]);
