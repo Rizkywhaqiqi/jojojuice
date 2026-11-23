@@ -1,0 +1,70 @@
+/* JOJO 2026 — original comic-inspired brand experience. */
+.brand-profile.bp-juice{--bp-bg:#fefefe;--bp-fg:#181818;--bp-accent:#ed1c24;--bp-accent-fg:#fff;--bp-soft:#39bfe7;--bp-line:#18181822;background:#fefefe;color:#181818}
+.bp-juice .bp-header{background:#fefefe;border-bottom:2px solid #181818;min-height:78px;padding:12px 4%;gap:16px}
+.bp-juice .bp-wordmark{font-family:Impact,"Arial Narrow",sans-serif;font-size:35px;letter-spacing:-.045em;font-style:normal;color:#ed1c24;line-height:1}
+.bp-juice .bp-wordmark small{font:700 8px Arial,sans-serif;letter-spacing:.15em;color:#141414;margin-top:6px}
+.bp-juice .bp-header>nav{gap:25px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.02em}
+.bp-juice .bp-header-order{background:#ed1c24;color:#fff;border-radius:100px;font-weight:900;font-size:11px;letter-spacing:.03em}
+.bp-juice .bp-footer{background:#151515;color:white;border:0;padding:45px 5%;font-size:12px}
+.bp-juice .bp-footer .bp-wordmark{color:#fff}
+.jojo-comic{overflow:hidden;font-family:Arial,Helvetica,sans-serif}
+.jojo-comic h1,.jojo-comic h2{font-family:Impact,"Arial Narrow",Arial,sans-serif;font-stretch:condensed;letter-spacing:-.035em;font-weight:900;line-height:.87;margin:0}
+.jojo-comic h2 em,.jojo-comic h1 i{font-style:normal;color:#ed1c24}
+.comic-cover{min-height:min(850px,calc(100svh - 78px));position:relative;display:grid;grid-template-columns:55% 45%;overflow:hidden;background:#39bfe7;color:#151515;padding:75px 5% 65px;isolation:isolate}
+.comic-cover::before{content:"";position:absolute;inset:0;background-image:radial-gradient(#ffffff55 1px,transparent 1px);background-size:17px 17px;opacity:.5;pointer-events:none;z-index:-1}
+.comic-cover-top,.comic-cover-bottom{position:absolute;left:5%;right:5%;display:flex;justify-content:space-between;z-index:4;gap:15px;font-size:11px;font-weight:900;letter-spacing:.12em}
+.comic-cover-top{top:25px}.comic-cover-bottom{bottom:24px}
+.comic-sky-orb{position:absolute;border:4px solid #121212;border-radius:50%;pointer-events:none}.comic-orb-a{width:450px;height:450px;background:#ffc103;right:-90px;top:-200px}.comic-orb-b{width:220px;height:220px;background:#fff;bottom:-130px;left:37%}
+.comic-cover-copy{position:relative;z-index:3;align-self:center;padding:20px 0 0}
+.comic-edition,.comic-chapter-caption{font-size:11px;letter-spacing:.19em;font-weight:900}
+.comic-edition{display:inline-block;background:#fff;border:2px solid #111;padding:12px 16px;box-shadow:5px 5px 0 #111;transform:rotate(-2deg);margin-bottom:30px}
+.comic-cover h1{font-size:clamp(90px,11.5vw,192px);text-shadow:5px 5px 0 #fff;position:relative}
+.comic-cover h1 span{color:#ed1c24}.comic-cover h1 i{color:#ffc103;text-shadow:4px 4px 0 #111,-2px -2px 0 #111}
+.comic-cover-copy>p{font-size:clamp(15px,1.5vw,20px);line-height:1.55;font-weight:700;max-width:410px;margin:30px 0}
+.comic-read-button,.comic-finale-button{display:inline-flex;align-items:center;gap:30px;justify-content:space-between;background:#ed1c24;color:#fff;border:3px solid #111;box-shadow:6px 6px 0 #111;padding:17px 22px;font-size:14px;font-weight:900;letter-spacing:.05em;transition:transform .2s,box-shadow .2s}
+.comic-read-button:hover,.comic-finale-button:hover{transform:translate(4px,4px);box-shadow:2px 2px 0 #111}
+.comic-cover-art{position:relative;align-self:center;min-width:0;z-index:2;transform:rotate(5deg)}
+.comic-cover-art img{display:block;width:min(100%,480px);height:min(62vh,580px);object-fit:contain;background:#fff;border:7px solid #151515;border-radius:47% 47% 18% 18%;box-shadow:17px 20px 0 #ed1c24;margin:auto}
+.comic-burst{position:absolute;z-index:3;top:1%;left:-6%;background:#ffc103;border:4px solid #111;clip-path:polygon(50% 0%,61% 19%,82% 8%,81% 31%,100% 40%,82% 55%,94% 76%,70% 75%,60% 100%,44% 81%,25% 94%,22% 70%,0 61%,19% 45%,6% 22%,31% 26%);width:160px;height:160px;display:grid;place-content:center;text-align:center;font:900 30px/.92 Impact,Arial,sans-serif;transform:rotate(-17deg)}
+.comic-art-stamp{position:absolute;bottom:1%;right:0;background:#ed1c24;border:3px solid #111;color:white;border-radius:50%;width:110px;height:110px;display:grid;place-content:center;text-align:center;font:900 17px/1 Impact,Arial,sans-serif;transform:rotate(15deg)}
+.comic-ticker{background:#ed1c24;color:white;border-top:3px solid #111;border-bottom:3px solid #111;overflow:hidden;padding:17px 0;font:900 clamp(21px,3vw,42px)/1 Impact,Arial,sans-serif;white-space:nowrap}
+.comic-ticker div{width:max-content;animation:jojo-marquee 24s linear infinite}
+@keyframes jojo-marquee{to{transform:translateX(-45%)}}
+.comic-chapter{padding:35px 5% 110px;position:relative;scroll-margin-top:80px}
+.comic-chapter-caption{padding:13px 0;border-top:3px solid #111;border-bottom:3px solid #111;display:flex;gap:20px;align-items:center;margin-bottom:70px}.comic-chapter-caption span{color:#ed1c24}
+.comic-chapter-one{background:#fefefe}.comic-chapter-layout{display:grid;grid-template-columns:43% 57%;gap:1%;align-items:center;max-width:1550px;margin:0 auto}
+.comic-chapter-text{padding-right:8%}.comic-bubble{display:inline-block;border:3px solid #111;background:#ffc103;border-radius:60px 60px 60px 6px;padding:12px 18px;font:900 14px Arial,sans-serif;box-shadow:4px 4px 0 #111;transform:rotate(-4deg);margin-bottom:32px}
+.jojo-comic h2{font-size:clamp(70px,8vw,145px)}
+.comic-chapter-text p,.comic-story-panel p,.comic-location-layout p{font-size:clamp(16px,1.4vw,20px);line-height:1.65;max-width:440px;font-weight:600;margin:27px 0}
+.comic-link{display:inline-flex;align-items:center;gap:22px;border-bottom:3px solid currentColor;padding:12px 0;font-size:13px;font-weight:900;letter-spacing:.08em}
+.comic-card-stack{display:grid;grid-template-columns:1fr 1fr;gap:22px;padding:0 25px}
+.comic-product-card{min-width:0;border:4px solid #111;padding:15px 15px 24px;box-shadow:9px 9px 0 #111;transition:transform .25s}
+.comic-product-card:hover{transform:translateY(-8px) rotate(0deg)}
+.comic-card-red{background:#ed1c24;color:#fff;transform:rotate(-5deg)}.comic-card-blue{background:#39bfe7;transform:rotate(5deg);margin-top:80px}
+.comic-product-card img{display:block;width:100%;aspect-ratio:4/5;object-fit:contain;background:#fff;border:3px solid #111}
+.comic-product-card strong{display:block;font:900 clamp(21px,3vw,42px) Impact,Arial,sans-serif;line-height:1;margin-top:19px}
+.comic-product-card span{display:block;font-size:10px;letter-spacing:.08em;font-weight:900;margin-top:8px}
+.comic-chapter-two{background:#ffc103;border-block:4px solid #111}
+.comic-split{display:grid;grid-template-columns:1fr 1fr;gap:0;max-width:1400px;margin:auto;border:4px solid #111;box-shadow:14px 14px 0 #111;min-height:570px}
+.comic-photo-panel{position:relative;background:#39bfe7;overflow:hidden;border-right:4px solid #111}
+.comic-photo-panel img{width:100%;height:100%;position:absolute;inset:0;object-fit:cover}
+.comic-photo-note{position:absolute;bottom:25px;left:25px;background:#fff;border:3px solid #111;box-shadow:5px 5px 0 #111;padding:17px;font:900 28px/1 Impact,Arial,sans-serif;transform:rotate(-6deg)}
+.comic-story-panel{background:#fff;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:60px 9%}
+.comic-chapter-three{background:#39bfe7;min-height:700px}
+.comic-location-layout{display:grid;grid-template-columns:60% 40%;align-items:center;max-width:1400px;margin:auto;gap:30px}
+.comic-location-layout h2 em{color:#ed1c24;text-shadow:3px 3px 0 white}
+.comic-location-art{position:relative;height:470px;display:grid;place-items:center}
+.comic-location-ring{width:340px;height:340px;border:8px dashed #111;border-radius:50%;animation:jojo-spin 28s linear infinite;background:#ffc103}
+.comic-location-ring::after{content:"";position:absolute;inset:45px;border:6px solid #fff;border-radius:50%}
+.comic-map-pin{position:absolute;z-index:2;top:80px;background:#ed1c24;color:white;border:5px solid #111;border-radius:50% 50% 50% 5%;width:160px;height:160px;display:grid;place-content:center;text-align:center;transform:rotate(-15deg);font:900 36px/.9 Impact,Arial,sans-serif;box-shadow:9px 9px 0 #111}
+.comic-location-dot{position:absolute;bottom:5%;right:8%;font-size:100px;color:#ed1c24}
+@keyframes jojo-spin{to{transform:rotate(360deg)}}
+.comic-finale{text-align:center;background:#ed1c24;color:#fff;padding:100px 5% 110px;display:flex;flex-direction:column;align-items:center;gap:28px;border-top:4px solid #111}
+.comic-finale>span{font-size:12px;letter-spacing:.18em;font-weight:900}.comic-finale h2{font-size:clamp(85px,12vw,190px);text-shadow:5px 5px 0 #111}.comic-finale h2 em{color:#ffc103}.comic-finale-button{background:#ffc103;color:#111}.comic-finale small{font-weight:900;letter-spacing:.14em;font-size:10px}
+.bp-juice .page-intro,.bp-juice .outlet-section,.bp-juice .bp-tastes{background:#fefefe}
+.bp-juice .home-discover h2,.bp-juice .page-intro h1,.bp-juice .menu-page h1,.bp-juice .outlet-section h1,.bp-juice .contact-page h1,.bp-juice .order-page h1{font-family:Impact,"Arial Narrow",Arial,sans-serif;font-weight:900;font-style:normal}
+.bp-juice .brand-profile h2 em,.bp-juice .page-intro em{font-style:normal}
+.bp-juice .bp-button{background:#ed1c24;color:#fff;border-radius:50px}
+@media(max-width:1050px){.comic-cover h1{font-size:clamp(85px,10vw,135px)}.comic-cover{min-height:690px}.comic-burst{width:125px;height:125px;font-size:24px}.comic-chapter-layout{grid-template-columns:40% 60%}.comic-card-stack{padding:0 10px}.comic-product-card strong{font-size:27px}}
+@media(max-width:720px){.bp-juice .bp-header{min-height:70px}.bp-juice .bp-wordmark{font-size:29px}.comic-cover{grid-template-columns:1fr;min-height:auto;padding:70px 6% 70px;gap:42px}.comic-cover-top,.comic-cover-bottom{font-size:9px;left:6%;right:6%}.comic-cover h1{font-size:clamp(80px,21vw,145px);text-shadow:3px 3px 0 #fff}.comic-cover-copy>p{font-size:15px;max-width:300px}.comic-cover-art{max-width:340px;width:90%;justify-self:center;transform:rotate(4deg)}.comic-cover-art img{height:350px}.comic-burst{left:-12%;top:-8%}.comic-art-stamp{width:85px;height:85px;font-size:13px}.comic-chapter{padding:22px 6% 75px}.comic-chapter-caption{margin-bottom:45px;font-size:9px}.comic-chapter-layout,.comic-split,.comic-location-layout{grid-template-columns:1fr}.jojo-comic h2{font-size:clamp(68px,16vw,110px)}.comic-chapter-text{padding:0}.comic-card-stack{gap:12px;margin-top:48px;padding:0 9px 0 0}.comic-product-card{padding:8px 8px 18px;border-width:3px;box-shadow:5px 5px 0 #111}.comic-product-card strong{font-size:clamp(19px,5vw,30px)}.comic-product-card span{font-size:8px}.comic-card-blue{margin-top:45px}.comic-split{min-height:0;box-shadow:8px 8px 0 #111}.comic-photo-panel{height:380px;border-right:0;border-bottom:4px solid #111}.comic-story-panel{padding:55px 7%}.comic-location-layout{gap:15px}.comic-location-art{height:340px}.comic-location-ring{width:250px;height:250px}.comic-map-pin{width:120px;height:120px;font-size:27px;top:50px}.comic-location-dot{font-size:60px}.comic-finale{padding:75px 5%;gap:23px}.comic-finale h2{font-size:clamp(73px,15vw,110px)}.comic-ticker{font-size:25px}.comic-photo-note{font-size:20px}.comic-bubble{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.comic-ticker div,.comic-location-ring{animation:none}.comic-product-card,.comic-read-button,.comic-finale-button{transition:none}}
