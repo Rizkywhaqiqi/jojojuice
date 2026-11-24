@@ -1,0 +1,157 @@
+/* JOJO BRAND GUIDELINES 2026 — authoritative identity palette.
+   Primary red #ED1C24 (50%), white #FEFEFE (35%),
+   blue #39BFE7 (10%), yellow #FFC103 (5%).
+   Typography neutrals are used only for text legibility.
+   Loaded after existing layout CSS to preserve scrapbook composition. */
+:root{
+ --red:#ED1C24;
+ --paper:#FEFEFE;
+ --yellow:#FFC103;
+ --ink:#262626;
+ --white:#FEFEFE;
+ --jojo-red:#ED1C24;
+ --jojo-white:#FEFEFE;
+ --jojo-blue:#39BFE7;
+ --jojo-yellow:#FFC103;
+ --jojo-text:#282828;
+}
+html,body{background:var(--jojo-white);color:var(--jojo-text)}
+:where(a,button,input,select,textarea):focus-visible{outline:3px solid var(--jojo-blue);outline-offset:3px}
+::selection{background:var(--jojo-blue);color:#111}
+.button{background:var(--jojo-yellow);color:#1c1c1c}
+.button.outline{background:var(--jojo-white);color:var(--jojo-red)}
+@media(hover:hover) and (pointer:fine){.button:hover{background:var(--jojo-white);color:var(--jojo-red)}}
+
+/* Desktop/mobile header — white and red are official colors. */
+.header.anna-header{background:transparent;color:var(--jojo-white)}
+.anna-header.is-scrolled,.anna-header.is-open{
+ background:var(--jojo-white);color:var(--jojo-red);
+ box-shadow:0 1px 0 rgba(237,28,36,.18)
+}
+.anna-header .anna-nav-side a[aria-current="page"]{color:inherit}
+.anna-header .anna-nav-side a::after{background:currentColor}
+.anna-header .anna-menu-toggle{color:inherit}
+.anna-menu-bars i{background:currentColor}
+.anna-overlay-panel{background:var(--jojo-white);color:var(--jojo-red)}
+.anna-overlay-top,.anna-overlay-bottom,.anna-overlay-links a{border-color:rgba(237,28,36,.2)}
+.anna-overlay-links a{color:var(--jojo-red)}
+.anna-overlay-links a[aria-current="page"]{color:var(--jojo-red)}
+.anna-overlay-links a:hover{color:#151515}
+.anna-overlay .anna-overlay-number,.anna-overlay-bottom{color:var(--jojo-red)}
+.anna-overlay .anna-overlay-backdrop{background:rgba(0,0,0,.58)}
+
+/* New editorial homepage: keep scrapbook layout, change only visual identity. */
+.jojo-editorial{
+ --j-green:#ED1C24;
+ --j-cream:#FEFEFE;
+ --j-red:#ED1C24;
+ --j-yellow:#FFC103;
+ --j-ink:#ED1C24;
+ background:var(--jojo-white);
+ color:var(--jojo-red)
+}
+.jojo-editorial h1,.jojo-editorial h2,.jojo-editorial h3{color:var(--jojo-red)}
+.jojo-editorial p{color:#252525}
+.jojo-editorial-overline{color:var(--jojo-red)}
+.jojo-editorial-btn{background:var(--jojo-yellow);color:#252525}
+.jojo-editorial-btn.secondary{background:var(--jojo-red);color:var(--jojo-white)}
+.jojo-editorial-hero{background:var(--jojo-red);color:var(--jojo-white)}
+.jojo-editorial-hero-shade{
+ background:linear-gradient(90deg,rgba(65,5,8,.77),rgba(65,5,8,.35) 65%,rgba(65,5,8,.1))
+}
+.jojo-editorial-hero h1,.jojo-editorial-hero p,.jojo-editorial-hero .jojo-editorial-kicker{color:var(--jojo-white)}
+.jojo-editorial-hero h1 em{color:var(--jojo-yellow)}
+.jojo-editorial-hero .jojo-editorial-btn.secondary{background:var(--jojo-white);color:var(--jojo-red)}
+.jojo-paper,.jojo-origin,.jojo-lifestyle,.jojo-picks,.jojo-last-call{background-color:var(--jojo-white);color:var(--jojo-red)}
+.jojo-origin::before,.jojo-picks::before{background-image:radial-gradient(rgba(237,28,36,.55) .6px,transparent .6px)}
+.jojo-origin-outline{-webkit-text-stroke-color:rgba(237,28,36,.22)}
+.jojo-origin-handwritten,.jojo-origin-spark{color:var(--jojo-red)}
+.jojo-photo-stamp{background:var(--jojo-white);box-shadow:0 15px 32px rgba(237,28,36,.16)}
+.jojo-photo-stamp figcaption{color:var(--jojo-red)}
+.jojo-lifestyle-circle{background:var(--jojo-blue)}
+.jojo-lifestyle-image{border-color:var(--jojo-white);box-shadow:15px 22px 0 rgba(237,28,36,.25)}
+.jojo-lifestyle-sticker{background:var(--jojo-yellow);color:#252525;box-shadow:0 0 0 4px var(--jojo-yellow),0 0 0 7px var(--jojo-red)}
+.jojo-lifestyle-sun,.jojo-scribble-arrow{color:var(--jojo-red)}
+.jojo-pick{color:#202020}
+.jojo-pick-yellow{background:var(--jojo-yellow)}
+.jojo-pick-pink{background:var(--jojo-blue)}
+.jojo-pick-blue{background:var(--jojo-white);border:2px solid var(--jojo-red)}
+.jojo-pick h3,.jojo-pick-index,.jojo-pick-tag{color:var(--jojo-red)}
+.jojo-pick-link{color:var(--jojo-red)}
+.jojo-gather{background:var(--jojo-red);color:var(--jojo-white)}
+.jojo-gather-copy h2,.jojo-gather-copy .jojo-editorial-overline,.jojo-gather-copy p{color:var(--jojo-white)}
+.jojo-gather-copy h2 em{color:var(--jojo-yellow)}
+.jojo-gather-image::after{background:linear-gradient(to top,rgba(85,0,0,.3),transparent 60%)}
+.jojo-gather-stamp{background:var(--jojo-yellow);color:#252525}
+.jojo-community-strip{background:var(--jojo-red);color:var(--jojo-white)}
+.jojo-community-top h2,.jojo-community-top p{color:var(--jojo-white)}
+.jojo-community-top .jojo-editorial-overline{color:var(--jojo-yellow)}
+.jojo-community-top h2 em{color:var(--jojo-yellow)}
+.jojo-community-photos a{background:var(--jojo-blue)}
+.jojo-community-photos a:nth-child(1) img,.jojo-community-photos a:nth-child(3) img{background:var(--jojo-blue)}
+.jojo-last-call{background:var(--jojo-white)}
+.jojo-last-call h2 em,.jojo-last-spark{color:var(--jojo-red)}
+.jojo-last-small{color:var(--jojo-red)}
+
+/* Shared footer across all six routes */
+.jojo-site-footer{background:var(--jojo-red);color:var(--jojo-white)}
+.jojo-site-footer .jojo-footer-brand>span,
+.jojo-site-footer .jojo-footer-label{color:var(--jojo-yellow)}
+.jojo-site-footer .jojo-footer-connect .jojo-footer-order{background:var(--jojo-yellow);color:#202020}
+.jojo-site-footer .jojo-footer-connect .jojo-footer-order:hover{background:var(--jojo-white);color:var(--jojo-red)}
+.jojo-site-footer a:hover{color:var(--jojo-yellow)}
+.jojo-site-footer .jojo-footer-bottom{background:var(--jojo-yellow);color:#252525}
+
+/* Existing shared story/banner layout */
+.banner{background:var(--jojo-red)}
+.banner:before{background:linear-gradient(90deg,rgba(40,0,0,.7),rgba(40,0,0,.25))}
+.story-split,.products{background:var(--jojo-white)}
+.visual-split{background:var(--jojo-white)}
+.community,.closing{background:var(--jojo-red)}
+.community h2,.closing h2{color:var(--jojo-white)}
+.community h2 em{color:var(--jojo-yellow)}
+
+/* Menu catalogue: white paper, red hierarchy, blue highlights, small yellow accents */
+.menu-catalog{--menu-ink:#272727;--menu-red:#ED1C24;--menu-paper:#FEFEFE;background:var(--jojo-white);color:var(--jojo-text)}
+.catalog-intro{background:var(--jojo-red);color:var(--jojo-white)}
+.catalog-intro h1 span{color:var(--jojo-yellow)}
+.catalog-featured{background:var(--jojo-blue)}
+.catalog-featured h2,.catalog-featured-text p{color:#202020}
+.catalog-featured h2 em{color:var(--jojo-red)}
+.catalog-controls,.catalog-toolbar,.catalog-results .catalog-group,.catalog-group,.catalog-note,.catalog-empty,.jojo-official-menu-links{background:var(--jojo-white)}
+.catalog-controls,.catalog-toolbar{border-color:rgba(237,28,36,.28)}
+.catalog-families{border-bottom-color:rgba(237,28,36,.2)}
+.catalog-families button{border-color:rgba(237,28,36,.2);color:var(--jojo-red)}
+.catalog-families button.active,.catalog-category-bar button.selected{background:var(--jojo-red);color:var(--jojo-white)}
+.catalog-results .catalog-group,.catalog-group{border-top-color:var(--jojo-red)}
+.catalog-group h3,.catalog-item strong,.catalog-index,.catalog-favorite,.catalog-reset{color:var(--jojo-red)}
+.catalog-favorite{background:var(--jojo-yellow);color:#252525}
+.catalog-note{border-left-color:var(--jojo-red);border-block:1px solid rgba(237,28,36,.2)}
+.catalog-footer-cta{background:var(--jojo-red);color:var(--jojo-white)}
+.catalog-footer-cta h2{color:var(--jojo-white)}
+.jojo-official-menu-links{border-color:var(--jojo-red)}
+.jojo-official-menu-links>div a{background:var(--jojo-red);color:var(--jojo-white)}
+
+/* Ordering, directory and contact */
+.jojo-order,.jojo-contact-options,.jojo-directory{background:var(--jojo-white);color:var(--jojo-text)}
+.jojo-service{background:var(--jojo-white);border-top-color:var(--jojo-red);box-shadow:0 0 0 1px rgba(237,28,36,.17)}
+.jojo-service.is-primary{background:var(--jojo-red);color:var(--jojo-white);border-top-color:var(--jojo-yellow)}
+.jojo-directory-tabs button{border-color:var(--jojo-red);color:var(--jojo-red)}
+.jojo-directory-tabs button.active{background:var(--jojo-red);color:var(--jojo-white)}
+.jojo-outlet-card,.jojo-contact-grid>a{background:var(--jojo-white);border-top-color:var(--jojo-red);box-shadow:0 0 0 1px rgba(237,28,36,.13)}
+.jojo-outlet-card h3,.jojo-contact-grid h3{color:var(--jojo-red)}
+.jojo-outlet-area,.jojo-outlet-card>a,.jojo-contact-grid>a>span,.jojo-contact-grid strong{color:var(--jojo-red)}
+.jojo-outlet-empty{background:var(--jojo-white)}
+.jojo-contact-grid>a:hover{background:rgba(57,191,231,.14)}
+
+/* How to order */
+.how-order{background:var(--jojo-white);color:var(--jojo-text)}
+.how-order-hero{background:var(--jojo-red);color:var(--jojo-white)}
+.how-order-hero h1{color:var(--jojo-white)}
+.how-order-hero h1 em{color:var(--jojo-yellow)}
+.how-order-step{background:var(--jojo-white);border-top-color:var(--jojo-red);box-shadow:0 0 0 1px rgba(237,28,36,.15)}
+.how-order-number,.how-order-step>a{color:var(--jojo-red)}
+.how-order-help{background:var(--jojo-red);color:var(--jojo-white)}
+.how-order-help h2{color:var(--jojo-white)}
+.how-order-help h2 em{color:var(--jojo-yellow)}
+@media(prefers-reduced-motion:reduce){.jojo-editorial *, .jojo-editorial *:before, .jojo-editorial *:after{transition:none!important}}
