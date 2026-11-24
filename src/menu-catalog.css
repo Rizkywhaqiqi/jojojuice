@@ -1,0 +1,78 @@
+
+/* Menu katalog JOJO, derived from the supplied printed menu layouts. */
+.menu-catalog{background:#f8f0e4;color:#252422}
+.menu-catalog .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.catalog-intro{min-height:510px;padding:175px max(6%,calc((100vw - 1320px)/2)) 85px;background:#ed1c24;color:#fff;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;gap:20px}
+.catalog-intro h1{font-family:Impact,'Arial Narrow',sans-serif;font-size:clamp(95px,15vw,210px);line-height:.86;letter-spacing:-.045em}
+.catalog-intro h1 span{color:#ffc103}
+.catalog-intro p{font-size:clamp(17px,2vw,24px);font-weight:600;line-height:1.45;max-width:690px}
+.catalog-intro-links{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-top:8px}
+.catalog-inline-cta{font-size:12px;font-weight:800;text-decoration:underline;text-underline-offset:5px}
+.catalog-featured{padding:88px 6%;display:grid;grid-template-columns:.8fr 1.2fr;align-items:center;gap:6%;background:#dedddd}
+.catalog-featured h2{color:#222;margin:24px 0;font-size:clamp(65px,8vw,127px);line-height:.9}
+.catalog-featured h2 em{color:#ed1c24}
+.catalog-featured-text p{max-width:330px;font-weight:600}
+.catalog-featured-images{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.catalog-featured-images figure{margin:0;min-width:0;display:flex;flex-direction:column;justify-content:space-between}
+.catalog-featured-images figure img{height:clamp(210px,26vw,400px);width:100%;object-fit:contain;display:block}
+.catalog-featured-images figcaption{text-align:center;font-size:11px;font-weight:900;letter-spacing:.04em;margin-top:14px}
+.catalog-body{padding-top:105px;padding-bottom:115px}
+.catalog-body-head{display:grid;grid-template-columns:1.1fr .9fr;gap:7%;align-items:end;margin-bottom:34px}
+.catalog-body-head h2{font-size:clamp(64px,8vw,115px);line-height:.93;margin:16px 0 0}
+.catalog-body-head p{font-size:15px;line-height:1.7;max-width:480px}
+.catalog-toolbar{background:#fffaf3;border:1px solid #ddd0c3;padding:22px 22px 14px;position:relative}
+.catalog-search{display:block;margin-bottom:17px}
+.catalog-search input{width:100%;border:1px solid #c6bdb4;background:#fff;color:#222;padding:15px 18px;font:inherit;font-size:15px;outline-offset:3px;border-radius:2px}
+.catalog-search input:focus-visible{outline:3px solid #39bfe7}
+.catalog-category-bar{display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin;padding:3px 0 12px;overscroll-behavior-inline:contain}
+.catalog-category-bar button{border:1px solid #cdc4b9;background:transparent;color:#222;padding:10px 14px;white-space:nowrap;font-size:11px;font-weight:800;min-height:44px;text-transform:uppercase;letter-spacing:.04em;border-radius:2px;flex-shrink:0}
+.catalog-category-bar button.selected,.catalog-category-bar button:hover{background:#ed1c24;color:#fff;border-color:#ed1c24}
+.catalog-count{font-size:11px;font-weight:800;letter-spacing:.13em;color:#69635c;margin:20px 0 12px}
+.catalog-group{margin:0 0 28px;background:#fffaf3;border-top:4px solid #252422;padding:27px 28px 32px;scroll-margin-top:100px}
+.catalog-group-top{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-bottom:20px;border-bottom:1px solid #d8cec2}
+.catalog-group-top>div{min-width:0}
+.catalog-index{font-size:10px;font-weight:800;letter-spacing:.14em;color:#ed1c24}
+.catalog-group h3{font-family:Impact,'Arial Narrow',sans-serif;font-size:clamp(37px,4vw,66px);line-height:1;letter-spacing:-.02em;text-transform:uppercase;margin:9px 0}
+.catalog-group-top p{color:#5a554e;font-size:14px;line-height:1.5;max-width:520px}
+.catalog-group-top>img{width:clamp(88px,13vw,160px);height:155px;object-fit:contain;flex-shrink:0}
+.catalog-item-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:40px}
+.catalog-item{padding:16px 0;display:flex;align-items:baseline;justify-content:space-between;gap:14px;border-bottom:1px solid #e2d9cd;min-width:0}
+.catalog-item>div{display:flex;align-items:center;flex-wrap:wrap;gap:9px;min-width:0}
+.catalog-item-name{font-size:15px;font-weight:750;line-height:1.3}
+.catalog-item strong{font-size:14px;white-space:nowrap;color:#ed1c24;font-variant-numeric:tabular-nums}
+.catalog-favorite{display:inline-flex;background:#ed1c24;color:white;font-size:9px;font-weight:800;padding:4px 6px;letter-spacing:.05em}
+.catalog-note{border-left:5px solid #ed1c24;padding:22px 26px;background:#f1e3d8;display:grid;gap:9px}
+.catalog-note>strong{font-size:12px;letter-spacing:.1em}
+.catalog-note p{font-size:13px;line-height:1.65}
+.catalog-footer-cta{background:#ed1c24;color:#fff;padding:42px 44px;display:flex;align-items:center;justify-content:space-between;gap:25px;margin-top:55px}
+.catalog-footer-cta h2{color:#fff;font-size:clamp(55px,7vw,100px);margin:8px 0 0}
+.catalog-footer-cta .button{white-space:nowrap}
+.catalog-empty{text-align:center;padding:70px 15px}
+.catalog-empty h3{font:900 clamp(35px,6vw,70px)/1 Impact,'Arial Narrow',sans-serif}
+.catalog-empty p{margin:15px auto}
+@media(max-width:950px){.catalog-featured{grid-template-columns:1fr;gap:25px}.catalog-featured-images figure img{height:290px}.catalog-body-head{grid-template-columns:1fr;gap:18px}}
+@media(max-width:760px){
+ .catalog-intro{padding:160px 6% 65px;min-height:410px;gap:16px}
+ .catalog-intro h1{font-size:clamp(76px,17vw,126px)}
+ .catalog-intro p{font-size:16px}
+ .catalog-featured{padding:60px 6% 55px;gap:20px}
+ .catalog-featured h2{font-size:clamp(70px,15vw,105px)}
+ .catalog-featured-images{gap:6px}
+ .catalog-featured-images figure img{height:190px}
+ .catalog-featured-images figcaption{font-size:9px}
+ .catalog-body{padding-top:72px;padding-bottom:72px}
+ .catalog-body-head h2{font-size:clamp(58px,12vw,88px)}
+ .catalog-body-head p{font-size:13px}
+ .catalog-toolbar{padding:14px}
+ .catalog-group{padding:24px 17px;margin-bottom:18px}
+ .catalog-group h3{font-size:clamp(35px,8vw,52px)}
+ .catalog-group-top>img{height:105px;width:90px}
+ .catalog-item-grid{grid-template-columns:1fr}
+ .catalog-item{padding:13px 0}
+ .catalog-item-name{font-size:14px}
+ .catalog-item strong{font-size:13px}
+ .catalog-footer-cta{padding:30px 22px;display:block}
+ .catalog-footer-cta .button{margin-top:20px}
+ .catalog-note{padding:20px}
+}
+@media(max-width:380px){.catalog-intro-links{align-items:stretch;flex-direction:column}.catalog-featured-images figure img{height:150px}.catalog-category-bar button{font-size:10px;padding:10px}}
