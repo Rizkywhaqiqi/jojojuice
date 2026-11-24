@@ -1,0 +1,157 @@
+/* JOJO editorial homepage
+   Reference direction: Vietnamese-inspired editorial scrapbook, adapted to JOJO branding.
+   Images are existing JOJO assets; decorative lines and stamps are CSS/SVG. */
+.jojo-editorial{--j-green:#263e2a;--j-cream:#f5eee0;--j-red:#ed1c24;--j-yellow:#ffc103;--j-ink:#263e2a;background:var(--j-cream);color:var(--j-ink);overflow:clip}
+.jojo-editorial h1,.jojo-editorial h2,.jojo-editorial h3{font-family:var(--jojo-display,'Arial Black',Impact,sans-serif);letter-spacing:-.045em}
+.jojo-editorial h1 em,.jojo-editorial h2 em{font-style:italic;color:var(--j-red)}
+.jojo-editorial p{line-height:1.75}
+.jojo-editorial-overline,.jojo-editorial-kicker{font:800 11px/1.4 var(--jojo-body,Arial,sans-serif);letter-spacing:.14em}
+.jojo-editorial-btn{min-height:46px;display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:14px 22px;background:var(--j-yellow);color:var(--j-green);font:900 11px/1.2 var(--jojo-body,Arial,sans-serif);letter-spacing:.065em;border:1px solid transparent;text-align:center;transition:background .2s ease,transform .25s ease}
+.jojo-editorial-btn.secondary{background:var(--j-green);color:#fff}
+.jojo-editorial-btn:focus-visible{outline:3px solid #39bfe7;outline-offset:3px}
+@media(hover:hover) and (pointer:fine){.jojo-editorial-btn:hover{background:#fff;transform:translateY(-3px)}.jojo-editorial-btn.secondary:hover{background:var(--j-red);color:#fff}}
+.jojo-editorial-actions{display:flex;flex-wrap:wrap;gap:11px;margin-top:26px}
+.jojo-editorial-hero{position:relative;isolation:isolate;min-height:min(820px,100svh);height:clamp(640px,80vh,900px);display:flex;align-items:center;overflow:hidden;background:#24341f;color:white}
+.jojo-editorial-hero-image{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:center}
+.jojo-editorial-hero-shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(19,34,19,.79) 0%,rgba(24,34,20,.48) 60%,rgba(24,34,20,.14) 100%)}
+.jojo-editorial-hero-content{width:min(1320px,88%);margin:60px auto 0;position:relative}
+.jojo-editorial-kicker{display:inline-block;color:#fff;letter-spacing:.17em}
+.jojo-editorial-hero h1{font-size:clamp(77px,12.7vw,186px);line-height:.91;margin:28px 0 22px;text-shadow:0 4px 20px #0004;max-width:1180px}
+.jojo-editorial-hero h1>span{color:#fff}
+.jojo-editorial-hero h1 em{color:var(--j-yellow);font-weight:900}
+.jojo-editorial-hero p{font-weight:700;font-size:clamp(17px,2vw,23px);line-height:1.5;max-width:520px}
+.jojo-editorial-hero .jojo-editorial-btn.secondary{background:var(--j-red)}
+.jojo-editorial-hero-side{position:absolute;right:4%;bottom:36px;writing-mode:vertical-rl;letter-spacing:.14em;font-size:10px;font-weight:900}
+.jojo-paper{background-color:var(--j-cream);position:relative}
+.jojo-origin{min-height:800px;padding:110px max(6%,calc((100vw - 1320px)/2));display:grid;grid-template-columns:minmax(0,.87fr) minmax(0,1.13fr);align-items:center;gap:3%;overflow:hidden}
+.jojo-origin::before,.jojo-picks::before{content:"";position:absolute;inset:0;opacity:.17;pointer-events:none;background-image:radial-gradient(#6b6c53 .6px,transparent .6px);background-size:21px 21px;mask-image:linear-gradient(100deg,transparent 30%,#000)}
+.jojo-origin-copy{max-width:510px;position:relative;z-index:2}
+.jojo-origin h2{font-size:clamp(75px,8.1vw,122px);line-height:.89;margin:21px 0 30px}
+.jojo-origin h2 em{color:var(--j-red);font-style:italic;display:inline-block;transform:rotate(-5deg);transform-origin:left center}
+.jojo-origin-copy p{max-width:420px;font-size:15px;margin:0 0 29px}
+.jojo-origin-art{position:relative;min-height:650px;align-self:stretch}
+.jojo-origin-outline{position:absolute;top:4%;right:-4%;font:900 clamp(155px,19vw,290px)/.72 Impact,'Arial Black',sans-serif;letter-spacing:-.075em;color:transparent;-webkit-text-stroke:1.8px rgba(39,67,37,.2);opacity:.7;transform:rotate(-5deg);pointer-events:none}
+.jojo-photo-stamp{margin:0;position:absolute;padding:11px 11px 29px;background:#fff;box-shadow:0 16px 34px #2b30212c;outline:1px solid #ffffff90;border-radius:2px;max-width:100%}
+.jojo-photo-stamp::before{content:"";pointer-events:none;position:absolute;inset:-6px;background:repeating-linear-gradient(90deg,#fff 0 13px,transparent 13px 20px) top/100% 7px no-repeat,repeating-linear-gradient(90deg,#fff 0 13px,transparent 13px 20px) bottom/100% 7px no-repeat;z-index:-1}
+.jojo-photo-stamp img{width:100%;height:100%;object-fit:cover;display:block}
+.jojo-photo-stamp figcaption{position:absolute;bottom:8px;left:9px;right:9px;text-align:center;font:900 9px/1.2 var(--jojo-body,Arial,sans-serif);letter-spacing:.095em;color:#263e2a}
+.jojo-stamp-one{width:55%;height:370px;left:4%;top:7%;transform:rotate(-10deg);z-index:2}
+.jojo-stamp-two{width:52%;height:390px;right:0;bottom:6%;transform:rotate(9deg);z-index:3}
+.jojo-origin-spark{position:absolute;width:85px;height:85px;right:5%;top:1%;color:var(--j-red);transform:rotate(10deg)}
+.jojo-origin-handwritten{position:absolute;left:1%;bottom:9%;font:italic 900 clamp(24px,3vw,46px)/1 var(--jojo-display,Impact,sans-serif);color:var(--j-red);transform:rotate(-10deg)}
+.jojo-lifestyle{min-height:680px;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:9%;padding:60px max(6%,calc((100vw - 1320px)/2)) 105px}
+.jojo-lifestyle-visual{position:relative;min-width:0;min-height:560px;display:grid;place-items:center}
+.jojo-lifestyle-circle{position:absolute;width:91%;aspect-ratio:1;border-radius:50%;background:#e4dbb6;transform:rotate(-18deg)}
+.jojo-lifestyle-image{position:relative;z-index:1;object-fit:cover;width:83%;height:440px;border:12px solid #fff;box-shadow:15px 22px 0 #cbbca6;transform:rotate(-7deg)}
+.jojo-lifestyle-sticker{position:absolute;z-index:3;left:0;bottom:5%;width:140px;height:140px;display:grid;place-items:center;text-align:center;border-radius:50%;background:var(--j-yellow);color:var(--j-green);transform:rotate(-14deg);font:900 31px/.93 var(--jojo-display,Impact,sans-serif);box-shadow:0 0 0 4px var(--j-yellow),0 0 0 7px var(--j-green)}
+.jojo-lifestyle-sun{position:absolute;right:1%;top:-3%;width:130px;color:var(--j-red)}
+.jojo-lifestyle-copy h2{font-size:clamp(55px,6.1vw,88px);line-height:.97;margin:22px 0}
+.jojo-lifestyle-copy h2 span{color:var(--j-red)}
+.jojo-lifestyle-copy p{max-width:490px;font-size:15px}
+.jojo-picks{padding:110px max(6%,calc((100vw - 1320px)/2)) 125px}
+.jojo-picks-heading{position:relative;z-index:1;max-width:800px}
+.jojo-picks-heading h2{font-size:clamp(67px,8vw,118px);line-height:.95;margin:17px 0 22px}
+.jojo-picks-heading p{font-size:15px}
+.jojo-scribble-arrow{position:absolute;right:12%;top:70px;color:var(--j-red);width:150px;transform:rotate(14deg)}
+.jojo-picks-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:50px;position:relative;z-index:1}
+.jojo-pick{position:relative;min-height:450px;padding:23px 22px 25px;display:flex;flex-direction:column;align-items:center;overflow:hidden;color:var(--j-green);transition:transform .3s ease,box-shadow .3s ease}
+.jojo-pick-yellow{background:#f9df80}.jojo-pick-pink{background:#efc1bb}.jojo-pick-blue{background:#b4e0e7}
+.jojo-pick-index{align-self:flex-start;font:900 10px/1.3 var(--jojo-body,Arial,sans-serif);letter-spacing:.1em}
+.jojo-pick img{width:100%;height:270px;object-fit:contain;margin:13px 0 7px;filter:drop-shadow(0 14px 10px #2222);transition:transform .4s ease}
+.jojo-pick-tag{font:900 10px/1.3 var(--jojo-body,Arial,sans-serif);letter-spacing:.1em;margin:5px 0 7px}
+.jojo-pick h3{text-align:center;font-size:clamp(28px,3vw,43px);line-height:.98}
+.jojo-pick-link{margin-top:auto;border-bottom:1px solid currentColor;font:900 10px/1.4 var(--jojo-body,Arial,sans-serif);letter-spacing:.065em;padding-top:18px;padding-bottom:4px}
+@media(hover:hover){.jojo-pick:hover{transform:translateY(-7px);box-shadow:0 15px 25px #263e2a28}.jojo-pick:hover img{transform:scale(1.06) rotate(-3deg)}}
+.jojo-gather{display:grid;grid-template-columns:1.1fr .9fr;min-height:680px;background:var(--j-green);color:#fff}
+.jojo-gather-image{position:relative;min-height:520px;overflow:hidden}
+.jojo-gather-image>img{width:100%;height:100%;position:absolute;inset:0;object-fit:cover}
+.jojo-gather-image::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,#1325197a,transparent 50%)}
+.jojo-gather-stamp{position:absolute;z-index:2;right:35px;bottom:38px;width:155px;height:155px;display:grid;place-items:center;text-align:center;background:var(--j-yellow);color:var(--j-green);font:900 21px/1 var(--jojo-display,Impact,sans-serif);border-radius:50%;transform:rotate(13deg)}
+.jojo-gather-copy{padding:85px max(7%,calc((100vw - 1320px)/4));display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+.jojo-gather-copy h2{color:#fff;font-size:clamp(65px,7vw,110px);line-height:.93;margin:21px 0}
+.jojo-gather-copy h2 em{color:var(--j-yellow)}
+.jojo-gather-copy p{max-width:420px;font-size:15px}
+.jojo-gather-copy .jojo-editorial-btn{margin-top:30px}
+.jojo-community-strip{padding:95px max(6%,calc((100vw - 1320px)/2)) 110px;background:#243e2a;color:#fff}
+.jojo-community-top{display:grid;grid-template-columns:1fr .7fr;gap:15px;align-items:end;margin-bottom:34px}
+.jojo-community-top>.jojo-editorial-overline{grid-column:1/-1;color:var(--j-yellow)}
+.jojo-community-top h2{font-size:clamp(60px,6.8vw,102px);line-height:.94;margin:0}
+.jojo-community-top h2 em{color:var(--j-yellow)}
+.jojo-community-top p{max-width:400px;font-size:14px}
+.jojo-community-photos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:25px}
+.jojo-community-photos a{display:block;height:260px;overflow:hidden;background:#51654e}
+.jojo-community-photos img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.jojo-community-photos a:nth-child(1) img,.jojo-community-photos a:nth-child(3) img{object-fit:contain;background:#dce8d5}
+@media(hover:hover){.jojo-community-photos a:hover img{transform:scale(1.07)}}
+.jojo-last-call{position:relative;text-align:center;padding:125px 6% 100px;background:var(--j-cream);overflow:hidden}
+.jojo-last-call h2{font-size:clamp(64px,8vw,126px);line-height:.95;margin:22px auto;max-width:1150px}
+.jojo-last-call .jojo-editorial-actions{justify-content:center}
+.jojo-last-spark{position:absolute;width:135px;top:60px;left:5%;color:var(--j-red);transform:rotate(-15deg)}
+.jojo-last-small{display:block;margin-top:75px;font:800 10px/1.4 var(--jojo-body,Arial,sans-serif);letter-spacing:.15em}
+@media(max-width:1100px){
+ .jojo-origin{min-height:700px}
+ .jojo-origin-art{min-height:560px}
+ .jojo-stamp-one{height:320px}.jojo-stamp-two{height:350px}
+ .jojo-lifestyle{gap:6%}.jojo-lifestyle-visual{min-height:450px}.jojo-lifestyle-image{height:350px}
+ .jojo-pick{min-height:390px}.jojo-pick img{height:220px}
+ .jojo-community-photos a{height:210px}
+}
+@media(max-width:760px){
+ .jojo-editorial-hero{min-height:700px;height:100svh;max-height:900px;align-items:flex-end}
+ .jojo-editorial-hero-image{object-position:54% center}
+ .jojo-editorial-hero-shade{background:linear-gradient(to top,#172b1ade 0%,#172b1a69 58%,#172b1a45)}
+ .jojo-editorial-hero-content{width:88%;margin:0 auto;padding:0 0 93px}
+ .jojo-editorial-hero h1{font-size:clamp(64px,14vw,105px);line-height:.98;margin:19px 0}
+ .jojo-editorial-hero p{font-size:17px}
+ .jojo-editorial-hero-side{bottom:22px;right:6%;writing-mode:initial;font-size:9px}
+ .jojo-origin{padding:75px 6% 45px;grid-template-columns:1fr;gap:10px;min-height:0}
+ .jojo-origin h2{font-size:clamp(65px,14vw,102px)}
+ .jojo-origin-copy p{font-size:14px;max-width:530px}
+ .jojo-origin-art{min-height:550px;margin-top:28px}
+ .jojo-stamp-one{height:330px;max-width:55%}
+ .jojo-stamp-two{height:340px;max-width:53%}
+ .jojo-origin-spark{right:0}
+ .jojo-lifestyle{grid-template-columns:1fr;padding:40px 6% 75px;gap:15px}
+ .jojo-lifestyle-visual{min-height:460px}
+ .jojo-lifestyle-image{height:340px}
+ .jojo-lifestyle-sticker{width:105px;height:105px;font-size:23px;left:5%;bottom:2%}
+ .jojo-lifestyle-copy h2{font-size:clamp(49px,11vw,75px)}
+ .jojo-lifestyle-copy p{font-size:14px}
+ .jojo-picks{padding:77px 6% 85px}
+ .jojo-picks-heading h2{font-size:clamp(57px,12.5vw,95px)}
+ .jojo-scribble-arrow{width:80px;right:4%;top:60px}
+ .jojo-picks-grid{grid-template-columns:1fr;max-width:520px;margin:28px auto 0;gap:14px}
+ .jojo-pick{min-height:430px}
+ .jojo-pick img{height:275px;max-width:350px}
+ .jojo-pick h3{font-size:39px}
+ .jojo-gather{grid-template-columns:1fr}
+ .jojo-gather-image{min-height:400px}
+ .jojo-gather-stamp{width:115px;height:115px;font-size:16px;right:20px;bottom:20px}
+ .jojo-gather-copy{padding:65px 6% 80px}
+ .jojo-gather-copy h2{font-size:clamp(67px,13vw,99px)}
+ .jojo-community-strip{padding:70px 6% 80px}
+ .jojo-community-top{grid-template-columns:1fr;gap:15px}
+ .jojo-community-top>.jojo-editorial-overline{grid-column:auto}
+ .jojo-community-top h2{font-size:clamp(55px,11vw,85px)}
+ .jojo-community-photos{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .jojo-community-photos a{height:clamp(150px,41vw,250px)}
+ .jojo-last-call{padding:90px 6% 75px}
+ .jojo-last-call h2{font-size:clamp(52px,11vw,82px)}
+ .jojo-last-spark{width:80px;top:22px;left:4%}
+ .jojo-last-small{margin-top:55px}
+}
+@media(max-width:390px){
+ .jojo-editorial-hero h1{font-size:clamp(55px,13vw,70px)}
+ .jojo-editorial-actions{flex-direction:column;align-items:stretch}
+ .jojo-editorial-hero .jojo-editorial-btn{width:100%}
+ .jojo-origin-art{min-height:440px}
+ .jojo-stamp-one{height:270px}.jojo-stamp-two{height:275px}
+ .jojo-origin-handwritten{font-size:26px}
+ .jojo-origin h2{font-size:64px}
+ .jojo-lifestyle-visual{min-height:370px}
+ .jojo-lifestyle-image{height:270px}
+ .jojo-community-photos a{height:155px}
+}
+@media(prefers-reduced-motion:reduce){
+ .jojo-editorial *, .jojo-editorial *::before,.jojo-editorial *::after{transition:none!important;animation:none!important}
+}
