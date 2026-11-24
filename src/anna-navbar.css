@@ -76,7 +76,7 @@
 .anna-header a:focus-visible,.anna-header button:focus-visible,.anna-overlay a:focus-visible,.anna-overlay button:focus-visible{
  outline:3px solid #39bfe7;outline-offset:4px;
 }
-@media(max-width:900px){
+@media(max-width:1120px){
  .anna-header .header-inner.anna-header-inner{
   width:90%;min-height:77px;
   display:grid;grid-template-columns:1fr auto 1fr;gap:10px;
@@ -94,7 +94,7 @@
  .anna-menu-bars{display:flex;flex-direction:column;gap:6px}
  .anna-menu-bars i{display:block;width:22px;height:2px;background:currentColor;border-radius:2px}
 }
-@media(min-width:901px) and (max-width:1100px){
+@media(min-width:1121px) and (max-width:1100px){
  .anna-header .header-inner.anna-header-inner{column-gap:25px}
  .anna-header .anna-nav-side{gap:20px}
  .anna-header .anna-nav-side a{font-size:11px}
@@ -111,15 +111,15 @@
 }
 
 /* Extra ordering destination: preserve Anna-style centered mark on narrow laptops. */
-@media(min-width:901px){
+@media(min-width:1121px){
  .anna-header .header-inner.anna-header-inner{column-gap:clamp(16px,2.3vw,40px)}
  .anna-header .anna-nav-side{gap:clamp(12px,1.9vw,28px)}
  .anna-header .anna-nav-side a{font-size:clamp(10px,.82vw,12px);letter-spacing:.035em}
 }
-@media(min-width:901px) and (max-width:1190px){
+@media(min-width:1121px) and (max-width:1190px){
  .anna-header .anna-logo-link .logo{width:115px!important}
 }
-@media(max-width:900px){
+@media(max-width:1120px){
  .anna-overlay-links{justify-content:flex-start}
  .anna-overlay-links a{font-size:clamp(39px,6.5vw,65px);padding:12px 0;line-height:1.06}
 }
@@ -130,3 +130,18 @@
  .anna-overlay-links{padding:10px 0}
  .anna-overlay-bottom{padding-top:14px}
 }
+
+/* 2026 global navigation QA: six balanced destinations and safe responsive behavior. */
+@media(min-width:1121px){
+ .anna-header .anna-nav-side a{font-size:clamp(10px,.85vw,12px)}
+ .anna-header .header-inner.anna-header-inner{column-gap:clamp(13px,2vw,30px)}
+ .anna-header .anna-nav-side{gap:clamp(12px,1.65vw,26px)}
+}
+@media(max-width:1120px){
+ .anna-header .anna-nav-side{display:none!important}
+ .anna-header .anna-logo-link{grid-column:2}
+ .anna-header .anna-menu-toggle{display:inline-flex;grid-column:3;justify-self:end}
+}
+.anna-header .anna-menu-toggle:focus-visible{outline:3px solid #39bfe7;outline-offset:4px}
+.anna-overlay-panel{overscroll-behavior:contain}
+.anna-overlay-backdrop:focus{outline:none}
