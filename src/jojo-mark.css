@@ -1,0 +1,9 @@
+/* Official JOJO identity used instead of visible typed brand names. */
+.jojo-mark{display:inline-flex;vertical-align:-.18em;align-items:center;justify-content:center;line-height:0;white-space:nowrap;max-width:100%;padding:2px 3px;background:#fefefe;border-radius:3px;box-decoration-break:clone}
+.jojo-mark img{display:block;width:auto;height:.9em;min-height:13px;max-height:inherit;object-fit:contain}
+.jojo-mark--heading{vertical-align:-.09em;padding:.06em .09em;border-radius:.05em}
+.jojo-mark--heading img{height:.76em;min-height:30px}
+.jojo-mark--footer{padding:3px 5px;background:#fff}
+.jojo-mark--footer img{height:32px;min-height:0}
+.bp-juice .jt-product h3 .jojo-mark,.bp-juice h1 .jojo-mark,.bp-juice h2 .jojo-mark{white-space:nowrap}
+@media(max-width:720px){.jojo-mark--footer img{height:27px}}
