@@ -17,7 +17,11 @@ export default function SiteMotion(){
    '.centered > *','.catalog-featured-text',
    '.catalog-featured-images figure','.catalog-body-head',
    '.catalog-toolbar','.catalog-group','.catalog-note',
-   '.catalog-footer-cta','.catalog-empty'
+   '.catalog-footer-cta','.catalog-empty',
+   '.catalog-featured-images figure','.jojo-directory-heading',
+   '.jojo-outlet-card','.jojo-order-header','.jojo-service',
+   '.jojo-contact-heading','.jojo-contact-grid > a',
+   '.how-order-head','.how-order-step','.how-order-help > div'
   ].join(',');
   const seen=new WeakSet<Element>();
   const observer=new IntersectionObserver(entries=>{
