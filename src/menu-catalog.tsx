@@ -95,7 +95,7 @@ export default function MenuCatalog(){
     <div className="catalog-control-row">
      <label className="catalog-search"><span className="sr-only">Cari menu</span><input type="search" value={query} onChange={event=>setQuery(event.target.value)} placeholder="Cari minuman, buah, makanan…" aria-label="Cari nama menu"/>{query&&<button type="button" onClick={()=>setQuery('')} aria-label="Hapus pencarian">×</button>}</label>
      <label className="catalog-control-select"><span>KATEGORI</span><select value={category} onChange={event=>setCategory(event.target.value)} aria-label="Pilih kategori"><option value="all">Semua kategori</option>{availableGroups.map(group=><option value={group.id} key={group.id}>{group.title}</option>)}</select></label>
-     <label className="catalog-control-select catalog-sort"><span>URUTKAN</span><select value={sort} onChange={event=>setSort(event.target.value)} aria-label="Urutkan berdasarkan harga"><option value="default">Urutan menu</option><option value="low">Harga termurah</option><option value="high">Harga tertinggi</option></select></label>
+     <label className="catalog-control-select catalog-sort"><span>URUTKAN</span><select value={sort} onChange={event=>setSort(event.target.value as Sort)} aria-label="Urutkan berdasarkan harga"><option value="default">Urutan menu</option><option value="low">Harga termurah</option><option value="high">Harga tertinggi</option></select></label>
     </div>
    </div>
    <div className="catalog-result-line"><p aria-live="polite"><strong>{count}</strong> PILIHAN · {filtered.length} KATEGORI</p>{(family!=='all'||category!=='all'||query||sort!=='default')&&<button type="button" className="catalog-reset" onClick={reset}>RESET FILTER</button>}</div>
