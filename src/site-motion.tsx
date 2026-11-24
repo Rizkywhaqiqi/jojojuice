@@ -1,21 +1,20 @@
 import {useEffect} from 'react';
 import './motion.css';
 
-/**
- * Progressive enhancement: sections are readable before JS and under reduced motion.
- * Only observed sections animate; dynamic menu filter results are registered as they appear.
- */
+/** Motion is a progressive enhancement: content is never hidden waiting for JS. */
 export default function SiteMotion(){
  useEffect(()=>{
-  if(typeof window==='undefined'||!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   const root=document.querySelector<HTMLElement>('#main-content');
-  if(!root)return;
+  if(!root||!('IntersectionObserver' in window))return;
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
+  if(reduced.matches)return;
+
   const selector=[
    '.story-split > div','.story-split > figure',
    '.visual-split > div','.visual-split > img',
    '.products > h2','.products > .center-copy','.product-grid article',
    '.community > div','.community > img','.closing > *',
-   '.centered > *:not(.banner)', '.catalog-featured-text',
+   '.centered > *','.catalog-featured-text',
    '.catalog-featured-images figure','.catalog-body-head',
    '.catalog-toolbar','.catalog-group','.catalog-note',
    '.catalog-footer-cta','.catalog-empty'
@@ -24,28 +23,36 @@ export default function SiteMotion(){
   const observer=new IntersectionObserver(entries=>{
    for(const entry of entries){
     if(!entry.isIntersecting)continue;
-    entry.target.classList.add('motion-visible');
     observer.unobserve(entry.target);
+    entry.target.classList.add('motion-visible');
    }
-  },{threshold:0.08,rootMargin:'0px 0px -28px 0px'});
+  },{threshold:0,rootMargin:'0px 0px -35px 0px'});
+
   const register=()=>{
    root.querySelectorAll<HTMLElement>(selector).forEach(node=>{
     if(seen.has(node))return;
     seen.add(node);
-    if(node.getBoundingClientRect().top<window.innerHeight*0.94){
-     node.classList.add('motion-visible');
+    if(node.getBoundingClientRect().top<window.innerHeight-35){
+     // Above the fold stays visible without an unnecessary entrance.
      return;
     }
-    node.classList.add('motion-pending');
     observer.observe(node);
    });
   };
   register();
-  const changes=new MutationObserver(mutations=>{
-   if(mutations.some(mutation=>mutation.type==='childList'))register();
+
+  // Filtered catalogue sections are replaced by React; register those new nodes.
+  const mutations=new MutationObserver(changes=>{
+   if(changes.some(change=>change.type==='childList'))register();
   });
-  changes.observe(root,{childList:true,subtree:true});
-  return()=>{changes.disconnect();observer.disconnect();root.querySelectorAll('.motion-pending').forEach(el=>el.classList.remove('motion-pending'))};
+  mutations.observe(root,{childList:true,subtree:true});
+  const onPreference=()=>{if(reduced.matches){observer.disconnect();mutations.disconnect()}};
+  reduced.addEventListener('change',onPreference);
+  return()=>{
+   reduced.removeEventListener('change',onPreference);
+   mutations.disconnect();
+   observer.disconnect();
+  };
  },[]);
  return null;
 }
