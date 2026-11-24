@@ -83,3 +83,37 @@ a:focus-visible,button:focus-visible{outline:3px solid #39BFE7;outline-offset:4p
  .hero .actions .button{width:100%}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Responsive QA after interactive navigation and motion fixes. */
+[hidden]{display:none!important}
+.header{isolation:isolate}
+.header-inner>a:first-child:focus-visible{outline-offset:5px}
+.hero h1,.story-split h2,.community h2,.visual-split h2,.closing h2{
+ overflow-wrap:break-word
+}
+.product-grid article img{display:block;margin-inline:auto}
+@media(max-width:760px){
+ .mobile-nav:not([hidden]){
+  position:absolute;
+  top:100%;
+  inset-inline:0;
+  width:100%;
+  z-index:30;
+  box-shadow:0 18px 30px rgba(0,0,0,.2);
+  padding-bottom:24px;
+  max-height:calc(100svh - 75px);
+  overflow-y:auto;
+ }
+ .mobile-nav a:last-child{background:var(--red);color:#fff;text-align:center;justify-content:center;margin-top:14px;border:0}
+ .hero h1{hyphens:none;font-size:clamp(54px,12vw,96px);line-height:1}
+ .hero-inner{padding-top:140px;padding-bottom:56px}
+ .story-split h2,.visual-split h2,.community h2{
+  font-size:clamp(40px,10.5vw,72px);line-height:1.05
+ }
+ .footer-main nav{row-gap:4px}
+}
+@media(max-width:360px){
+ .header-inner .logo{width:104px}
+ .nav-toggle{min-width:64px;padding:10px 12px}
+ .hero h1{font-size:clamp(50px,11.8vw,65px)}
+}
