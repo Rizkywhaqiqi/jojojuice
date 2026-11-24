@@ -1,3 +1,4 @@
+import HowToOrder from './how-to-order';
 import {JOJO_LINKS} from './jojo-links';
 import {OrderOptions,OutletDirectory,ContactOptions} from './jojo-directory';
 import SiteMotion from './site-motion';
@@ -5,7 +6,7 @@ import './anna-navbar.css';
 import MenuCatalog from './menu-catalog';
 import {useEffect,useRef,useState} from 'react';
 const IG=JOJO_LINKS.instagram;
-const nav=[['HOME','/'],['STORY','/story'],['MENU','/menu'],['OUTLET','/outlet'],['CONTACT','/contact']];
+const nav=[['HOME','/'],['STORY','/story'],['MENU','/menu'],['HOW TO ORDER','/how-to-order'],['OUTLET','/outlet'],['CONTACT','/contact']];
 const products=[{name:'DRAGON BALL',img:'jojo-dragon.webp',desc:'Campaign highlight dari JOJO Juice.'},{name:'FRESH JOJO',img:'jojo-refresh.webp',desc:'Segar untuk setiap momen.'},{name:'GREEN N GLOW',img:'jojo-green.webp',desc:'Warna yang fresh buat harimu.'}];
 function Logo(){return <img className="logo" src="/brands/jojo-logo.svg" alt="JOJO Juice" width="135" height="70"/>}
 function CTA({children,href=JOJO_LINKS.esb,outline=false}:{children:string,href?:string,outline?:boolean}){return <a className={outline?'button outline':'button'} href={href} {...(href.startsWith('http')?{target:'_blank',rel:'noreferrer noopener'}:{})}>{children}</a>}
@@ -93,4 +94,4 @@ function Menu(){return <MenuCatalog/>}
 function Outlet(){return <><Banner title="FIND US" image="jojo-moments.webp"/><OutletDirectory/><OrderOptions compact/></>}
 function Contact(){return <><Banner title="SAY HELLO" image="jojo-together.webp"/><ContactOptions/><OrderOptions compact/></>}
 function NotFound(){return <section className="section centered not-found"><span className="eyebrow">404 / HALAMAN TIDAK DITEMUKAN</span><h1>NYASAR,<br/>BRO?</h1><p>Halaman yang kamu cari tidak tersedia. Yuk kembali ke yang fresh.</p><CTA href="/">KEMBALI KE BERANDA</CTA></section>}
-export default function App(){let path=window.location.pathname.replace(/\/$/,'')||'/';useEffect(()=>{document.title=(path==='/'?'JOJO Juice':path.slice(1).toUpperCase()+' — JOJO Juice')+' · Feel Fresh. Live Fun.'},[path]);return <><Header path={path}/><SiteMotion/><main id="main-content">{path==='/story'?<Story/>:path==='/menu'?<Menu/>:path==='/outlet'?<Outlet/>:path==='/contact'?<Contact/>:path==='/'?<Home/>:<NotFound/>}</main><Footer/></>}
+export default function App(){let path=window.location.pathname.replace(/\/$/,'')||'/';useEffect(()=>{document.title=(path==='/'?'JOJO Juice':path.slice(1).toUpperCase()+' — JOJO Juice')+' · Feel Fresh. Live Fun.'},[path]);return <><Header path={path}/><SiteMotion/><main id="main-content">{path==='/story'?<Story/>:path==='/menu'?<Menu/>:path==='/outlet'?<Outlet/>:path==='/contact'?<Contact/>:path==='/how-to-order'?<HowToOrder/>:path==='/'?<Home/>:<NotFound/>}</main><Footer/></>}
