@@ -52,32 +52,58 @@ const groups:Group[]=[
  ]}
 ];
 const format=(value:number)=>'Rp '+new Intl.NumberFormat('id-ID').format(value*1000);
+const drinkIds=new Set(['refresher','special','juice','mixed','oreo','foam','coffee','tea','chocolate','others']);
+type Family='all'|'drink'|'food'|'favorite';
+type Sort='default'|'low'|'high';
 export default function MenuCatalog(){
+ const [family,setFamily]=useState<Family>('all');
  const [category,setCategory]=useState('all');
  const [query,setQuery]=useState('');
+ const [sort,setSort]=useState<Sort>('default');
  const search=query.trim().toLocaleLowerCase('id');
- const filtered=useMemo(()=>groups.filter(group=>(category==='all'||category===group.id)).map(group=>({...group,items:group.items.filter(item=>!search||[item.name,group.title,group.subtitle].some(text=>text.toLocaleLowerCase('id').includes(search)))})).filter(group=>group.items.length>0),[category,search]);
+ const availableGroups=useMemo(()=>groups.filter(group=>family==='all'||(family==='drink'?drinkIds.has(group.id):family==='food'?!drinkIds.has(group.id):group.items.some(item=>item.featured))),[family]);
+ const filtered=useMemo(()=>availableGroups.filter(group=>category==='all'||category===group.id).map(group=>{
+  const items=group.items.filter(item=>(family!=='favorite'||item.featured)&&(!search||[item.name,group.title,group.subtitle].some(text=>text.toLocaleLowerCase('id').includes(search))));
+  if(sort!=='default')items.sort((a,b)=>sort==='low'?a.price-b.price:b.price-a.price);
+  return {...group,items};
+ }).filter(group=>group.items.length>0),[availableGroups,category,search,sort,family]);
  const count=filtered.reduce((sum,g)=>sum+g.items.length,0);
+ const total=groups.reduce((sum,g)=>sum+g.items.length,0);
+ const chooseFamily=(next:Family)=>{setFamily(next);setCategory('all')};
+ const reset=()=>{setFamily('all');setCategory('all');setQuery('');setSort('default')};
  return <div className="menu-catalog">
   <section className="catalog-intro">
    <span className="eyebrow">FEEL FRESH. LIVE FUN.</span>
    <h1>THE <span>MENU.</span></h1>
-   <p>Dari jus buah sampai camilan gurih. Pilih yang paling cocok buat harimu.</p>
-   <div className="catalog-intro-links"><a className="button" href="#pilihan-menu">JELAJAHI MENU</a><a href="https://www.instagram.com/jojojuiceid/" target="_blank" rel="noopener noreferrer" className="catalog-inline-cta">TANYA KETERSEDIAAN</a></div>
+   <p>Cari rasa favoritmu. Dari jus buah segar sampai teman ngemil.</p>
+   <div className="catalog-intro-links"><a className="button" href="#pilihan-menu">LIHAT PILIHAN</a><span className="catalog-hero-counter">{total} PILIHAN · 15 KATEGORI</span></div>
   </section>
-  <section className="catalog-featured" aria-label="Pilihan minuman unggulan">
-   <div className="catalog-featured-text"><span className="eyebrow">THE FRESH SIDE OF JOJO</span><h2>SEGAR<br/>DARI<br/><em>BUAH.</em></h2><p>Refresher, special blends, dan banyak pilihan lainnya.</p></div>
-   <div className="catalog-featured-images"><figure><img src="/brands/jojo-green.webp" alt="Green N Glow" loading="eager"/><figcaption>GREEN N GLOW</figcaption></figure><figure><img src="/brands/jojo-dragon.webp" alt="Dragon Ball" loading="eager"/><figcaption>DRAGON BALL</figcaption></figure><figure><img src="/brands/jojo-refresh.webp" alt="Minuman buah JOJO" loading="eager"/><figcaption>FRESH EVERY DAY</figcaption></figure></div>
+  <section className="catalog-featured" aria-label="Pilihan minuman JOJO">
+   <div className="catalog-featured-text"><span className="eyebrow">JOJO FAVORITES</span><h2>RASA<br/><em>SEGAR.</em></h2><p>Yang fruity, creamy, sampai savory. Tinggal pilih sesuai mood.</p></div>
+   <div className="catalog-featured-images">
+    <figure><img src="/brands/jojo-green.webp" alt="Green N Glow JOJO" loading="lazy" width="360" height="400"/><figcaption>GREEN N GLOW</figcaption></figure>
+    <figure><img src="/brands/jojo-dragon.webp" alt="Dragon Ball JOJO" loading="lazy" width="360" height="400"/><figcaption>DRAGON BALL</figcaption></figure>
+    <figure><img src="/brands/jojo-refresh.webp" alt="Minuman buah JOJO" loading="lazy" width="360" height="400"/><figcaption>FRESH EVERY DAY</figcaption></figure>
+   </div>
   </section>
   <section className="catalog-body section" id="pilihan-menu">
-   <div className="catalog-body-head"><div><span className="eyebrow">DARI MENU RESMI JOJO</span><h2>PILIH <em>RASAMU.</em></h2></div><p>Harga yang tertera mengikuti materi menu yang dibagikan. Harga dalam rupiah; ketersediaan dan harga outlet dapat berubah.</p></div>
-   <div className="catalog-toolbar"><label className="catalog-search"><span className="sr-only">Cari nama menu atau kategori</span><input type="search" value={query} onChange={e=>setQuery(e.target.value)} placeholder="Cari minuman atau makanan…" aria-label="Cari menu"/></label><div className="catalog-category-bar" role="group" aria-label="Filter kategori"><button type="button" aria-pressed={category==='all'} className={category==='all'?'selected':''} onClick={()=>setCategory('all')}>SEMUA</button>{groups.map(group=><button type="button" key={group.id} aria-pressed={category===group.id} className={category===group.id?'selected':''} onClick={()=>setCategory(group.id)}>{group.title}</button>)}</div></div>
-   <p className="catalog-count" aria-live="polite">{count} ITEM · {filtered.length} KATEGORI</p>
-   {count===0?<div className="catalog-empty"><h3>MENU TIDAK DITEMUKAN.</h3><p>Coba kata lain atau lihat semua kategori.</p><button className="button" onClick={()=>{setQuery('');setCategory('all')}}>LIHAT SEMUA</button></div>:filtered.map((group,index)=><section className="catalog-group" key={group.id} aria-labelledby={'cat-'+group.id}>
-    <div className="catalog-group-top"><div><span className="catalog-index">{String(index+1).padStart(2,'0')} / MENU</span><h3 id={'cat-'+group.id}>{group.title}</h3><p>{group.subtitle}</p></div>{group.image&&<img src={group.image} alt={group.imageAlt||group.title} width="220" height="250" loading="lazy"/>}</div>
-    <div className="catalog-item-grid">{group.items.map(item=><article className="catalog-item" key={item.name}><div><span className="catalog-item-name">{item.name}</span>{item.featured&&<span className="catalog-favorite" aria-label="Pilihan unggulan">FAVORIT</span>}</div><strong>{format(item.price)}</strong></article>)}</div>
-   </section>)}
-   <aside className="catalog-note"><strong>CATATAN MENU</strong><p>Harga disalin dari materi desain menu JOJO yang diberikan. Beberapa materi menunjukkan versi harga berbeda; angka di halaman ini menggunakan versi visual menu yang lebih terperinci untuk setiap kategori. Untuk harga dan stok terkini, konfirmasi lewat outlet atau Instagram resmi.</p><p><strong>TOPPING:</strong> Chia Seed, Bubble, Grass Jelly, Coffee Jelly, Rainbow Jelly, Nata De Coco, Popping Boba, Bouncing Pearl — tambahan Rp 4.000 menurut materi menu.</p></aside>
+   <div className="catalog-body-head"><div><span className="eyebrow">EXPLORE THE MENU</span><h2>PILIH <em>RASAMU.</em></h2></div><p>Nama dan harga mengikuti materi menu JOJO yang dibagikan. Harga dan ketersediaan di outlet bisa berubah.</p></div>
+   <div className="catalog-controls">
+    <div className="catalog-families" role="group" aria-label="Jenis menu">
+     {([{id:'all',label:'SEMUA'},{id:'drink',label:'MINUMAN'},{id:'food',label:'MAKANAN'},{id:'favorite',label:'FAVORIT'}] as const).map(tab=><button key={tab.id} type="button" className={family===tab.id?'active':''} aria-pressed={family===tab.id} onClick={()=>chooseFamily(tab.id)}>{tab.label}</button>)}
+    </div>
+    <div className="catalog-control-row">
+     <label className="catalog-search"><span className="sr-only">Cari menu</span><input type="search" value={query} onChange={event=>setQuery(event.target.value)} placeholder="Cari minuman, buah, makanan…" aria-label="Cari nama menu"/>{query&&<button type="button" onClick={()=>setQuery('')} aria-label="Hapus pencarian">×</button>}</label>
+     <label className="catalog-control-select"><span>KATEGORI</span><select value={category} onChange={event=>setCategory(event.target.value)} aria-label="Pilih kategori"><option value="all">Semua kategori</option>{availableGroups.map(group=><option value={group.id} key={group.id}>{group.title}</option>)}</select></label>
+     <label className="catalog-control-select catalog-sort"><span>URUTKAN</span><select value={sort} onChange={event=>setSort(event.target.value)} aria-label="Urutkan berdasarkan harga"><option value="default">Urutan menu</option><option value="low">Harga termurah</option><option value="high">Harga tertinggi</option></select></label>
+    </div>
+   </div>
+   <div className="catalog-result-line"><p aria-live="polite"><strong>{count}</strong> PILIHAN · {filtered.length} KATEGORI</p>{(family!=='all'||category!=='all'||query||sort!=='default')&&<button type="button" className="catalog-reset" onClick={reset}>RESET FILTER</button>}</div>
+   {count===0?<div className="catalog-empty"><h3>BELUM KETEMU.</h3><p>Coba nama lain atau kembali ke seluruh pilihan.</p><button type="button" className="button" onClick={reset}>LIHAT SEMUA MENU</button></div>:<div className="catalog-results">{filtered.map((group,index)=><section className="catalog-group" key={group.id} aria-labelledby={'cat-'+group.id}>
+    <div className="catalog-group-top"><div><span className="catalog-index">{String(index+1).padStart(2,'0')} / {drinkIds.has(group.id)?'MINUMAN':'MAKANAN'}</span><h3 id={'cat-'+group.id}>{group.title}</h3><p>{group.subtitle}</p></div>{group.image&&<img src={group.image} alt={group.imageAlt||group.title} width="160" height="165" loading="lazy"/>}</div>
+    <div className="catalog-item-grid">{group.items.map(item=><article className="catalog-item" key={item.name}><div><span className="catalog-item-name">{item.name}</span>{item.featured&&<span className="catalog-favorite">FAVORIT</span>}</div><strong>{format(item.price)}</strong></article>)}</div>
+   </section>)}</div>}
+   <aside className="catalog-note"><strong>INFO MENU</strong><p>Harga disalin dari materi menu JOJO; terdapat perbedaan harga pada sebagian materi. Silakan konfirmasi harga dan stok terbaru langsung ke outlet.</p><p><strong>TOPPING +Rp 4.000:</strong> Chia Seed, Bubble, Grass Jelly, Coffee Jelly, Rainbow Jelly, Nata De Coco, Popping Boba, Bouncing Pearl.</p></aside>
    <div className="catalog-footer-cta"><div><span className="eyebrow">LAGI HAUS?</span><h2>JOJO AJA.</h2></div><a className="button" href="https://www.instagram.com/jojojuiceid/" target="_blank" rel="noopener noreferrer">TANYA & PESAN</a></div>
   </section>
  </div>;
