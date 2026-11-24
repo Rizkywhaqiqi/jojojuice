@@ -98,3 +98,14 @@
  .bp-juice .about-page-story{padding:65px 6%}
 }
 @media(prefers-reduced-motion:reduce){.je-moments-gallery img{transition:none;transform:none!important}}
+
+.bp-juice .about-page-story h2{font-family:Impact,"Arial Narrow",sans-serif;color:#ed1c24;font-size:clamp(42px,5vw,82px);line-height:.97;margin:16px 0 25px}
+.bp-juice .about-page-story .bp-kicker{color:#ed1c24;font-size:11px;letter-spacing:.12em}
+.bp-juice .jojo-gallery h2{font-family:Impact,"Arial Narrow",sans-serif;color:#ed1c24;font-size:clamp(52px,6vw,91px);line-height:.98}
+.bp-juice .jojo-gallery h2 em{font-family:inherit;font-style:normal}
+.bp-juice .jojo-moment-grid figure{border:0;box-shadow:none}
+.je-about-cta{background:#ed1c24;color:#fff;padding:85px 5%;display:flex;align-items:flex-start;flex-direction:column;gap:18px}
+.je-about-cta span{font-weight:700;font-size:11px;letter-spacing:.13em}
+.je-about-cta h2{font-family:Impact,"Arial Narrow",sans-serif;font-size:clamp(66px,9vw,140px);line-height:.95}
+.je-about-cta a{display:inline-flex;align-items:center;gap:16px;background:#fff;color:#ed1c24;padding:17px 22px;font-size:13px;font-weight:700;margin-top:6px}
+@media(max-width:720px){.je-about-cta{padding:75px 6%}.je-about-cta h2{font-size:clamp(62px,12vw,96px)}}
