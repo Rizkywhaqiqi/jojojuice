@@ -1,3 +1,4 @@
+import {JOJO_LINKS} from './jojo-links';
 import {useMemo,useState} from 'react';
 import './menu-catalog.css';
 
@@ -104,7 +105,8 @@ export default function MenuCatalog(){
     <div className="catalog-item-grid">{group.items.map(item=><article className="catalog-item" key={item.name}><div><span className="catalog-item-name">{item.name}</span>{item.featured&&<span className="catalog-favorite">FAVORIT</span>}</div><strong>{format(item.price)}</strong></article>)}</div>
    </section>)}</div>}
    <aside className="catalog-note"><strong>INFO MENU</strong><p>Harga disalin dari materi menu JOJO; terdapat perbedaan harga pada sebagian materi. Silakan konfirmasi harga dan stok terbaru langsung ke outlet.</p><p><strong>TOPPING +Rp 4.000:</strong> Chia Seed, Bubble, Grass Jelly, Coffee Jelly, Rainbow Jelly, Nata De Coco, Popping Boba, Bouncing Pearl.</p></aside>
-   <div className="catalog-footer-cta"><div><span className="eyebrow">LAGI HAUS?</span><h2>JOJO AJA.</h2></div><a className="button" href="https://www.instagram.com/jojojuiceid/" target="_blank" rel="noopener noreferrer">TANYA & PESAN</a></div>
+   <div className="jojo-official-menu-links"><span className="eyebrow">MATERI MENU RESMI</span><p>Butuh versi asli dari JOJO? Lihat menu melalui tautan Google Drive resmi.</p><div><a href={JOJO_LINKS.juiceMenu} target="_blank" rel="noopener noreferrer">MENU JOJO JUICE</a><a href={JOJO_LINKS.dailyBarMenu} target="_blank" rel="noopener noreferrer">MENU JOJO DAILY BAR</a></div></div>
+   <div className="catalog-footer-cta"><div><span className="eyebrow">LAGI HAUS?</span><h2>JOJO AJA.</h2></div><a className="button" href={JOJO_LINKS.esb} target="_blank" rel="noopener noreferrer">ORDER SEKARANG</a></div>
   </section>
  </div>;
 }
