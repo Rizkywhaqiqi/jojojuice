@@ -1,0 +1,51 @@
+/* Cross-page QA safeguards, scoped to current JOJO components. */
+.skip-to-content{
+ position:fixed;z-index:150;left:16px;top:-90px;
+ padding:13px 18px;background:#283327;color:#fff;
+ font:800 12px/1.4 var(--jojo-body,Arial,sans-serif);
+ box-shadow:0 4px 16px #0003;text-decoration:none;
+}
+.skip-to-content:focus{top:12px;outline:3px solid #39bfe7;outline-offset:3px}
+#main-content{min-height:55vh}
+#main-content:focus{outline:none}
+.anna-nav-side a[aria-current="page"]{text-decoration:none}
+.anna-overlay-links a{min-width:0;overflow-wrap:break-word}
+.anna-overlay-links a>span+*{min-width:0}
+.anna-overlay-links .anna-overlay-number{flex:0 0 auto}
+.catalog-result-line,.catalog-control-row,.jojo-directory-heading,
+.how-order-hero-content,.how-order-steps-grid,.jojo-outlet-grid{min-width:0}
+.catalog-control-row select,.catalog-control-row input,
+.jojo-directory-filters input{font-size:16px} /* avoids iOS automatic zoom */
+.jojo-outlet-card a,.jojo-contact-grid>a,.jojo-service,
+.how-order-step>a{outline-offset:4px}
+@media(max-width:1120px){
+ .anna-header .anna-nav-side{display:none!important}
+ .anna-header .anna-menu-toggle{display:inline-flex!important}
+ .anna-header .header-inner.anna-header-inner{grid-template-columns:1fr auto 1fr}
+}
+@media(max-width:760px){
+ .hero h1{font-size:clamp(49px,11.3vw,86px);line-height:1.02}
+ .banner h1{font-size:clamp(55px,12.7vw,88px);overflow-wrap:anywhere}
+ .catalog-intro h1{font-size:clamp(58px,14vw,98px)}
+ .story-split h2,.visual-split h2,.community h2,.closing h2{
+  overflow-wrap:anywhere;
+ }
+ .footer-main{gap:22px}
+ .footer-main nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;column-gap:12px}
+ .footer-main nav a{min-width:0;font-size:11px}
+ .jojo-contact-grid h3{overflow-wrap:anywhere}
+ .how-order-hero h1{font-size:clamp(61px,13.5vw,105px)}
+}
+@media(max-width:390px){
+ .anna-overlay-links a{font-size:clamp(29px,9vw,39px);gap:11px}
+ .anna-overlay-links .anna-overlay-number{font-size:10px}
+ .anna-overlay-panel{padding-inline:17px}
+ .catalog-result-line{align-items:flex-start}
+ .jojo-contact-grid>a{padding:17px}
+ .how-order-step h3{font-size:30px}
+}
+@media(prefers-reduced-motion:reduce){
+ .skip-to-content,.jojo-service,.jojo-outlet-card,.jojo-contact-grid>a{
+  scroll-behavior:auto;transition:none!important;animation:none!important
+ }
+}
