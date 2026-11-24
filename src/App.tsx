@@ -27,7 +27,7 @@ function Header({path}:{path:string}){
     if(nextDirection&&nextDirection!==direction){direction=nextDirection;travel=0;}
     travel+=Math.abs(delta);
     lastY=y;
-    setScrolled(y>45);
+    setScrolled(y>45 || !nav.some(([,href])=>href===path));
     if(y<95){setCompact(false);travel=0;}
     else if(travel>=(direction>0?26:17)){
      setCompact(direction>0);
@@ -38,7 +38,7 @@ function Header({path}:{path:string}){
   update();
   window.addEventListener('scroll',update,{passive:true});
   return()=>{window.removeEventListener('scroll',update);cancelAnimationFrame(raf)};
- },[]);
+ },[path]);
  useEffect(()=>{
   if(!open)return;
   const previousOverflow=document.body.style.overflow;
