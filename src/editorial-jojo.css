@@ -1,0 +1,100 @@
+/* JOJO 2026 editorial foundation. Burrito Madre is a structural reference only. */
+.bp-juice{--bp-bg:#fefefe;--bp-fg:#251c1b;--bp-accent:#ed1c24;--bp-accent-fg:#fefefe;--bp-soft:#fff5f1;background:#fefefe;color:#251c1b}
+.bp-juice .bp-header{background:#fefefe;border-bottom:1px solid #e6dedb;min-height:78px;padding:12px 5%}
+.bp-juice .bp-header>nav a[aria-current="page"]{color:#ed1c24;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:7px}
+.bp-juice .bp-footer{background:#ed1c24;color:#fff;border:0}
+.bp-juice .bp-footer .bp-wordmark{color:#fff}
+.bp-juice .bp-footer a{color:#fff}
+.jojo-tropical{background:#fefefe;color:#231d1b}
+.jojo-tropical h1,.jojo-tropical h2,.jojo-tropical h3{font-family:Impact,"Arial Narrow","Arial Black",sans-serif;letter-spacing:-.035em;font-style:normal}
+.jojo-tropical h1 em,.jojo-tropical h2 em{font-family:inherit;font-style:normal;letter-spacing:inherit}
+.jojo-tropical h2{line-height:.98}
+.jt-hero{grid-template-columns:minmax(0,41%) minmax(0,59%);min-height:clamp(530px,47vw,710px);background:#ed1c24}
+.jt-hero h1{font-size:clamp(58px,6.2vw,106px);line-height:.94;letter-spacing:-.045em}
+.jt-hero h1 em{font-size:1em}
+.jt-hero-copy{padding:clamp(45px,6vw,85px) clamp(25px,4.5vw,85px)}
+.jt-hero-copy p{max-width:350px}
+.jt-hero-visual{min-height:530px}
+.jt-hero-visual img{object-position:50% 48%}
+.jt-condensation{opacity:.16}
+.jt-section{background:#fefefe;padding:95px 5% 105px}
+.jt-section h2{font-size:clamp(56px,6vw,94px)}
+.jt-section h2 em{font-size:1em}
+.jt-section-head{align-items:end;gap:35px}
+.jt-section-head p{color:#554c49}
+.jt-products{gap:16px}
+.jt-product,.jt-product:nth-child(2),.jt-product:nth-child(3){background:#f8f3ee;border-radius:0;box-shadow:none}
+.jt-product:nth-child(2){background:#f0f6f4}
+.jt-product:nth-child(3){background:#fff0e6}
+.jt-product-image{height:clamp(240px,29vw,400px);padding:15px}
+.jt-product-image img{object-fit:contain}
+.jt-product-bottom{padding:22px 18px}
+.jt-product h3{font-size:clamp(24px,2.5vw,34px)}
+.jt-product p{max-width:260px}
+.jt-filter{border:1px solid #d8d1cd;background:#fff;color:#2c2622}
+.jt-filter.active{background:#ed1c24;color:#fff;border-color:#ed1c24}
+.jt-pill{font-weight:700;min-height:48px;border-radius:2px}
+.je-index{display:inline-block;font-size:11px;letter-spacing:.13em;font-weight:700;color:#ed1c24;margin-bottom:24px}
+.je-overview{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);gap:7%;padding:112px 5% 120px;border-top:1px solid #eee7e3;background:#fff}
+.je-overview-heading h2{color:#ed1c24;font-size:clamp(88px,10vw,178px);line-height:.82;letter-spacing:-.055em}
+.je-overview-copy{padding-top:48px;max-width:590px}
+.je-overview-copy p{color:#ed1c24;font-size:clamp(18px,1.75vw,26px);line-height:1.45;margin:0 0 23px;letter-spacing:-.01em}
+.je-inline-link{display:inline-flex;align-items:center;gap:14px;color:#ed1c24;font-size:13px;font-weight:700;border-bottom:1px solid #ed1c24;padding:11px 0;margin-top:8px}
+.je-moments{background:#f4f0e9;padding:95px 5% 110px}
+.je-moments-head{display:flex;align-items:end;justify-content:space-between;gap:36px;margin-bottom:38px}
+.je-moments-head h2{font-size:clamp(58px,6.4vw,104px);line-height:.94;color:#ed1c24}
+.je-moments-head p{font-size:16px;line-height:1.8;max-width:290px}
+.je-moments-gallery{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:18px;align-items:stretch}
+.je-moments-gallery figure{margin:0;min-width:0;background:#fefefe}
+.je-moments-gallery img{display:block;width:100%;height:clamp(300px,38vw,525px);object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.je-moments-gallery figure{overflow:hidden}
+.je-moments-gallery figure:hover img{transform:scale(1.035)}
+.je-moments-gallery figcaption{font-size:13px;font-weight:600;padding:18px 17px;color:#251c1b}
+.jt-location{background:#fefefe;padding:95px 5%;gap:6%}
+.jt-location h2{font-size:clamp(60px,6.6vw,103px)}
+.jt-location-photo{border-radius:0;max-height:550px}
+.jt-location-photo img{max-height:550px}
+.jt-closing{background:#ed1c24;text-align:left;padding:90px 5%}
+.jt-closing h2{font-size:clamp(88px,11vw,170px)}
+.jt-closing p{margin:0 0 32px}
+.bp-juice .about-page-intro{background:#ed1c24;color:#fff;padding:110px 5%}
+.bp-juice .about-page-intro h1{font-family:Impact,"Arial Narrow",sans-serif;font-size:clamp(72px,11vw,170px);line-height:.9;letter-spacing:-.04em}
+.bp-juice .about-page-story{background:#fff;padding:100px 5%;gap:6%;align-items:center}
+.bp-juice .about-page-story .bp-large-copy{font-family:Arial,Helvetica,sans-serif;color:#ed1c24;font-size:clamp(19px,2.05vw,30px);line-height:1.5}
+.bp-juice .jojo-gallery{background:#f5f0eb}
+@media(max-width:900px){
+.je-overview{gap:5%;padding:85px 5%}
+.je-overview-heading h2{font-size:clamp(70px,10vw,120px)}
+.je-overview-copy{padding-top:35px}
+.je-moments-gallery{gap:12px}
+.jt-hero{grid-template-columns:43% 57%}
+}
+@media(max-width:720px){
+ .jt-hero{grid-template-columns:1fr}
+ .jt-hero-copy{padding:56px 6% 42px}
+ .jt-hero-visual{height:410px;min-height:0}
+ .jt-hero h1{font-size:clamp(66px,14vw,96px)}
+ .jt-section{padding:68px 6% 78px}
+ .jt-section h2{font-size:clamp(59px,12vw,88px)}
+ .jt-products{grid-template-columns:1fr;gap:15px}
+ .jt-product-image{height:330px}
+ .je-overview{grid-template-columns:1fr;gap:16px;padding:75px 6% 85px}
+ .je-overview-heading h2{font-size:clamp(81px,18vw,126px)}
+ .je-overview-copy{padding:5px 0 0}
+ .je-overview-copy p{font-size:clamp(18px,4.4vw,23px)}
+ .je-moments{padding:70px 6%}
+ .je-moments-head{display:block}
+ .je-moments-head h2{font-size:clamp(60px,12vw,90px)}
+ .je-moments-head p{margin-top:20px}
+ .je-moments-gallery{grid-template-columns:1fr 1fr;gap:12px}
+ .je-moments-gallery .je-moment-large{grid-column:1 / -1}
+ .je-moments-gallery img{height:230px}
+ .je-moments-gallery .je-moment-large img{height:360px}
+ .je-moments-gallery figcaption{padding:12px;font-size:12px}
+ .jt-location{padding:80px 6%;gap:32px}
+ .jt-closing{padding:75px 6%}
+ .jt-closing h2{font-size:clamp(76px,16vw,115px)}
+ .bp-juice .about-page-intro{padding:76px 6%}
+ .bp-juice .about-page-story{padding:65px 6%}
+}
+@media(prefers-reduced-motion:reduce){.je-moments-gallery img{transition:none;transform:none!important}}
