@@ -109,3 +109,91 @@
 .je-about-cta h2{font-family:Impact,"Arial Narrow",sans-serif;font-size:clamp(66px,9vw,140px);line-height:.95}
 .je-about-cta a{display:inline-flex;align-items:center;gap:16px;background:#fff;color:#ed1c24;padding:17px 22px;font-size:13px;font-weight:700;margin-top:6px}
 @media(max-width:720px){.je-about-cta{padding:75px 6%}.je-about-cta h2{font-size:clamp(62px,12vw,96px)}}
+
+/* Burrito Madre-inspired CTA silhouette; JOJO brand palette & typography. */
+/* Source reference: archive's Order control uses a compact pill, uppercase 600 text. */
+.bp-juice :is(.bp-header-order,.bp-button,.jt-pill,.je-about-cta a,.jt-filter){
+  border-radius:999px;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:12px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.045em;
+  line-height:1.2;
+  min-height:44px;
+  padding:13px 23px;
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  gap:14px;
+  white-space:normal;
+  text-align:center;
+  text-decoration:none;
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+  transition:background-color .24s ease,color .24s ease,border-color .24s ease,transform .24s ease,box-shadow .24s ease;
+}
+.bp-juice :is(.bp-header-order,.bp-button,.jt-pill,.je-about-cta a):hover{
+  transform:translateY(-2px);
+  box-shadow:0 7px 18px rgba(78,16,15,.13);
+}
+.bp-juice :is(.bp-header-order,.bp-button,.jt-pill,.je-about-cta a) svg{
+  flex-shrink:0;
+  transition:transform .24s ease;
+}
+.bp-juice :is(.bp-header-order,.bp-button,.jt-pill,.je-about-cta a):hover svg{
+  transform:translate(3px,-2px);
+}
+.bp-juice :is(.bp-header-order,.bp-button,.jt-pill,.je-about-cta a):active{
+  transform:translateY(0) scale(.98);
+  box-shadow:none;
+}
+.bp-juice :is(.bp-header-order,.bp-button,.jt-pill,.je-about-cta a,.jt-filter):focus-visible{
+  outline:3px solid #39bfe7;
+  outline-offset:3px;
+}
+.bp-juice .bp-header-order,.bp-juice .bp-button,.bp-juice .jt-pill-red{
+  background:#ed1c24;
+  border:1px solid #ed1c24;
+  color:#fefefe;
+}
+.bp-juice .bp-header-order:hover,.bp-juice .bp-button:hover,.bp-juice .jt-pill-red:hover{
+  background:#c91521;
+  border-color:#c91521;
+  color:#fff;
+}
+.bp-juice .jt-pill-light,.bp-juice .je-about-cta a{
+  background:#fefefe;
+  color:#ed1c24;
+  border:1px solid #fefefe;
+}
+.bp-juice .jt-pill-light:hover,.bp-juice .je-about-cta a:hover{
+  background:#fff0ec;
+  border-color:#fff0ec;
+  color:#c91521;
+}
+.bp-juice .jt-filter{
+  padding:10px 20px;
+  min-height:40px;
+  font-size:11px;
+  box-shadow:none;
+  cursor:pointer;
+}
+.bp-juice .jt-filter:hover{
+  border-color:#ed1c24;
+  color:#ed1c24;
+}
+.bp-juice .jt-filter.active:hover{
+  color:#fff;
+  background:#c91521;
+  border-color:#c91521;
+}
+@media(max-width:720px){
+  .bp-juice :is(.bp-button,.jt-pill,.je-about-cta a){min-height:46px;padding:14px 20px}
+  .bp-juice .jt-hero-actions{align-items:center}
+}
+@media(prefers-reduced-motion:reduce){
+  .bp-juice :is(.bp-header-order,.bp-button,.jt-pill,.je-about-cta a,.jt-filter),
+  .bp-juice :is(.bp-header-order,.bp-button,.jt-pill,.je-about-cta a) svg{transition:none!important}
+}
