@@ -1,0 +1,49 @@
+/* JOJO location & ordering pages — native brand palette */
+.jojo-screen-reader{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.jojo-order{background:#fff8ed;color:#283327;padding:90px max(6%,calc((100vw - 1320px)/2))}
+.jojo-order-header{max-width:650px}
+.jojo-order-header h2{margin:12px 0 15px}
+.jojo-order-header p{font-size:15px;max-width:520px}
+.jojo-order-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-top:35px}
+.jojo-service{min-width:0;display:flex;flex-direction:column;gap:12px;min-height:195px;padding:25px 20px;background:#f8f0e4;border-top:3px solid #283327;transition:transform .2s ease,background-color .2s ease}
+.jojo-service.is-primary{background:#ed1c24;color:#fff;border-top-color:#ffc103}
+.jojo-service>span:first-child{font-size:clamp(17px,2vw,25px);line-height:1.1;font-weight:900;overflow-wrap:anywhere}
+.jojo-service small{font-size:12px}
+.jojo-service-action{margin-top:auto;font-size:10px;letter-spacing:.065em;font-weight:900}
+@media(hover:hover){.jojo-service:hover{transform:translateY(-4px);background:#fff}.jojo-service.is-primary:hover{background:#d9151c}}
+.jojo-directory{background:#f8f0e4}
+.jojo-directory-heading{display:grid;grid-template-columns:1.2fr .8fr;gap:5%;align-items:end}
+.jojo-directory-heading h2{margin:12px 0 0}
+.jojo-directory-heading>p{font-size:14px;max-width:490px}
+.jojo-directory-filters{margin-top:40px;display:flex;gap:17px;align-items:center;justify-content:space-between;border-top:1px solid #c5b9ad;border-bottom:1px solid #c5b9ad;padding:16px 0}
+.jojo-directory-tabs{display:flex;flex-wrap:wrap;gap:7px}
+.jojo-directory-tabs button{background:transparent;color:#283327;border:1px solid #c3b6a9;padding:11px 15px;min-height:44px;font-size:11px;font-weight:800;cursor:pointer}
+.jojo-directory-tabs button.active{background:#ed1c24;color:white;border-color:#ed1c24}
+.jojo-directory-filters label{min-width:0;flex:0 0 240px}
+.jojo-directory-filters input{font:inherit;font-size:13px;padding:13px 14px;background:#fff;border:1px solid #c3b6a9;width:100%;min-height:44px}
+.jojo-directory-count{font-size:11px;letter-spacing:.1em;font-weight:900;color:#716a62;margin:25px 0 16px}
+.jojo-outlet-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.jojo-outlet-card{min-width:0;background:#fffaf3;padding:24px 22px;border-top:3px solid #283327;min-height:185px;display:flex;flex-direction:column;justify-content:space-between;gap:18px}
+.jojo-outlet-area{font-size:10px;font-weight:900;color:#ed1c24;letter-spacing:.08em}
+.jojo-outlet-card h3{font-family:var(--jojo-display,Impact,sans-serif);font-size:clamp(23px,2.2vw,35px);line-height:1.1;margin:9px 0;overflow-wrap:break-word}
+.jojo-outlet-card>a{align-self:flex-start;font-size:11px;font-weight:900;border-bottom:1px solid #ed1c24;color:#ed1c24;padding-bottom:5px}
+.jojo-source-note{font-size:12px;line-height:1.8;color:#68635e;margin-top:25px}
+.jojo-source-note a{text-decoration:underline;text-underline-offset:3px}
+.jojo-outlet-empty{padding:50px 20px;background:#fffaf3;text-align:center}
+.jojo-outlet-empty h3{font-size:28px}
+.jojo-outlet-empty button{border:1px solid #283327;background:transparent;min-height:44px;padding:10px 17px;margin-top:18px;font-size:12px;font-weight:800;cursor:pointer}
+.jojo-contact-options{background:#fff8ed}
+.jojo-contact-heading{max-width:640px}
+.jojo-contact-heading h2{margin:14px 0}
+.jojo-contact-heading p{font-size:15px}
+.jojo-contact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin-top:40px}
+.jojo-contact-grid>a{min-width:0;display:flex;flex-direction:column;align-items:flex-start;min-height:230px;padding:28px;border-top:3px solid #283327;background:#f8f0e4;gap:14px}
+.jojo-contact-grid>a>span{font-size:11px;letter-spacing:.1em;font-weight:900;color:#ed1c24}
+.jojo-contact-grid h3{font:900 clamp(26px,3.2vw,45px)/1 var(--jojo-display,Impact,sans-serif)}
+.jojo-contact-grid p{font-size:13px;line-height:1.65}
+.jojo-contact-grid strong{font-size:11px;color:#ed1c24;letter-spacing:.07em;margin-top:auto;border-bottom:1px solid #ed1c24;padding-bottom:6px}
+.jojo-contact-grid>a:hover{background:#f1e2d7}
+@media(max-width:1050px){.jojo-order-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.jojo-outlet-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.jojo-directory-filters{flex-direction:column;align-items:stretch}.jojo-directory-filters label{flex:0 1 auto}}
+@media(max-width:760px){.jojo-order{padding:65px 6%}.jojo-order-grid{gap:10px;margin-top:25px}.jojo-service{min-height:165px;padding:20px 15px}.jojo-service>span:first-child{font-size:18px}.jojo-directory-heading{grid-template-columns:1fr;gap:13px}.jojo-directory-filters{margin-top:26px}.jojo-directory-tabs{display:flex;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin;padding-bottom:8px}.jojo-directory-tabs button{white-space:nowrap;flex-shrink:0}.jojo-outlet-grid{grid-template-columns:1fr;gap:10px}.jojo-outlet-card{min-height:155px}.jojo-contact-grid{grid-template-columns:1fr;gap:10px;margin-top:25px}.jojo-contact-grid>a{min-height:190px;padding:23px}}
+@media(max-width:365px){.jojo-order-grid{grid-template-columns:1fr}.jojo-service{min-height:130px}}
+@media(prefers-reduced-motion:reduce){.jojo-service{transition:none!important}}
