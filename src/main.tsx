@@ -1,11 +1,1 @@
-import React from 'react';
-import {createRoot} from 'react-dom/client';
-import BrandProfile from './profile';
-import {normalizePath} from './navigation';
-const Admin=React.lazy(()=>import('./admin'));
-import './styles.css';
-import './comic.css';
-const page=normalizePath(location.pathname);
-const legacy:Record<string,string>={'#cerita':'/tentang','#rasa':'/menu','#outlet':'/outlet','#terhubung':'/kontak','#pesan':'/pesan'};
-if(page==='/'&&legacy[location.hash])location.replace(legacy[location.hash]);
-createRoot(document.getElementById('root')!).render(<React.StrictMode>{(page==='/admin'||page.startsWith('/admin/'))?<React.Suspense fallback={<p style={{padding:40}}>Memuat dashboard…</p>}><Admin/></React.Suspense>:<BrandProfile slug="jojo-juice" page={page}/>}</React.StrictMode>);
+import React from 'react';import{createRoot}from'react-dom/client';import App from './App';import './styles.css';createRoot(document.getElementById('root')!).render(<React.StrictMode><App/></React.StrictMode>);

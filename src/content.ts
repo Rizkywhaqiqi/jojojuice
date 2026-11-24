@@ -1,6 +1,0 @@
-export type OrderLink={id:string;label:string;url:string};
-export type Outlet={id:string;name:string;city:string;address:string;description:string;hours:string;lat:number;lng:number;active:boolean;orderLinks:OrderLink[]};
-export type Content={profile:{intro:string;aboutTitle:string;aboutText:string;instagram:string};outlets:Outlet[];orderLinks:OrderLink[]};
-export type Snapshot={version:number;content:Content};
-export const DEFAULT_CONTENT:Content={profile:{intro:'Sedikit jeda, banyak warna. Temani harimu dengan pilihan jus buah dan smoothie dari JOJO Juice.',aboutTitle:'Ini cerita JOJO Juice.',aboutText:'Ada banyak cara menikmati hari. Melangkah keluar, bertemu teman, atau sekadar berhenti sebentar untuk menikmati minuman favorit. JOJO Juice hadir untuk menjadi bagian dari momen-momen itu.',instagram:'https://www.instagram.com/jojojuiceid/'},outlets:[],orderLinks:[]};
-export async function api<T>(path:string,options:RequestInit={}):Promise<T>{const r=await fetch('/api/'+path,{...options,credentials:'same-origin',headers:{'Content-Type':'application/json',...options.headers}});let data;try{data=await r.json()}catch{throw new Error('Layanan belum tersedia. Coba lagi sebentar.')}if(!r.ok)throw new Error(data.error||'Permintaan gagal.');return data as T;}
