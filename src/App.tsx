@@ -1,4 +1,5 @@
 import EditorialHome from './editorial-home';
+import './editorial-footer.css';
 import HowToOrder from './how-to-order';
 import {JOJO_LINKS} from './jojo-links';
 import {OrderOptions,OutletDirectory,ContactOptions} from './jojo-directory';
