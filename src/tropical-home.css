@@ -69,3 +69,55 @@
 @media(max-width:900px){.bp-juice .bp-header>nav{gap:15px}.jt-hero{min-height:580px}.jt-hero h1{font-size:clamp(70px,9vw,112px)}.jt-hero-visual img{height:440px}.jt-product-image{height:280px}.jt-section{padding:72px 5%}}
 @media(max-width:720px){.bp-juice .bp-header{min-height:72px;padding:13px 6%}.bp-juice .bp-header>nav{display:none}.bp-juice .bp-header-order{display:none}.jt-hero{grid-template-columns:1fr;padding:45px 6% 55px;gap:20px;min-height:0}.jt-hero-copy{padding:0}.jt-hero h1{font-size:clamp(78px,18vw,124px);margin:20px 0}.jt-hero-copy p{font-size:14px;margin-bottom:22px}.jt-hero-visual{min-height:350px}.jt-hero-visual img{height:350px;width:72%}.jt-hero-circle{width:78%;right:11%;top:0}.jt-sticker{height:85px;width:85px;font-size:17px;top:1%;left:0}.jt-hero-tag{bottom:1%;right:0;font-size:10px}.jt-section{padding:64px 6%}.jt-section-head{display:block}.jt-section h2{font-size:clamp(58px,13vw,84px)}.jt-section-head p{margin-top:20px}.jt-products{grid-template-columns:1fr;gap:16px}.jt-product-image{height:360px}.jt-story{grid-template-columns:1fr}.jt-story-image img{min-height:380px;max-height:450px}.jt-story-copy{padding:60px 7%}.jt-location{grid-template-columns:1fr;padding:70px 6%;gap:30px}.jt-location-art{height:330px}.jt-closing{padding:70px 6%}.jt-closing h2{font-size:clamp(65px,14vw,105px)}.jt-ticker{font-size:18px}}
 @media(prefers-reduced-motion:reduce){.jojo-tropical *, .jojo-tropical *:before,.jojo-tropical *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* Editorial refinement: let JOJO's real photography and brand red lead. */
+.bp-juice .bp-header{min-height:76px}
+.jojo-tropical h1,.jojo-tropical h2{letter-spacing:-.025em}
+.jt-hero{min-height:580px;grid-template-columns:48% 52%;padding-top:55px;padding-bottom:55px}
+.jt-hero h1{font-size:clamp(65px,7.2vw,118px);line-height:.98;margin:22px 0}
+.jt-hero h1 em{font-size:.72em}
+.jt-hero-copy p{font-size:15px;max-width:380px}
+.jt-hero-circle{width:77%;background:#fff9f1;border-radius:28px;aspect-ratio:4/5;right:7%;top:4%}
+.jt-hero-visual img{width:82%;height:475px;border-radius:12px;filter:none}
+.jt-section{padding-top:80px;padding-bottom:80px}
+.jt-section h2{font-size:clamp(48px,5.1vw,76px)}
+.jt-section h2 em{font-size:.85em}
+.jt-product{border-radius:8px;background:#f6e9e4}
+.jt-product:nth-child(2){background:#f4efe8}
+.jt-product:nth-child(3){background:#eaf0e9}
+.jt-product-image{height:320px;padding:20px}
+.jt-product-bottom{padding:20px 22px 23px}
+.jt-product h3{font-size:27px}
+.jt-arrow{width:36px;height:36px}
+.jt-story{background:#f6ede7;min-height:480px}
+.jt-story-copy{padding:65px 10%}
+.jt-story-copy h2{font-size:clamp(52px,5vw,80px)}
+.jt-story-image img{min-height:470px}
+.jt-location{padding:85px 5%;gap:8%}
+.jt-location h2{font-size:clamp(52px,5vw,80px)}
+.jt-location-photo{min-height:420px;overflow:hidden;border-radius:8px;background:#f8ebe3}
+.jt-location-photo img{width:100%;height:100%;max-height:490px;object-fit:cover;display:block}
+.jt-closing{padding:75px 5% 85px}
+.jt-closing h2{font-size:clamp(66px,7vw,108px)}
+.jt-eyebrow,.jt-label{letter-spacing:.1em}
+.jt-pill{border-radius:4px}
+.jt-filter{border-radius:4px}
+.bp-juice .bp-header-order{border-radius:4px}
+@media(max-width:900px){.jt-hero h1{font-size:clamp(60px,8vw,90px)}.jt-hero-visual img{height:410px}.jt-section h2{font-size:60px}}
+@media(max-width:720px){
+ .jt-hero{grid-template-columns:1fr;padding:48px 6% 42px;gap:30px}
+ .jt-hero h1{font-size:clamp(65px,15vw,95px);margin:18px 0}
+ .jt-hero-visual{min-height:320px}
+ .jt-hero-circle{width:78%;right:11%;top:4%;border-radius:15px;aspect-ratio:5/6}
+ .jt-hero-visual img{height:320px;width:74%}
+ .jt-section{padding:56px 6%}
+ .jt-section h2{font-size:clamp(48px,11vw,70px)}
+ .jt-product-image{height:315px}
+ .jt-story-copy{padding:54px 7%}
+ .jt-location{padding:60px 6%;gap:28px}
+ .jt-location h2{font-size:clamp(52px,11vw,75px)}
+ .jt-location-photo{min-height:290px}
+ .jt-location-photo img{max-height:370px}
+ .jt-closing{padding:66px 6%}
+ .jt-closing h2{font-size:clamp(60px,12vw,90px)}
+}
