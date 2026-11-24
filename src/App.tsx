@@ -1,4 +1,5 @@
 import SiteMotion from './site-motion';
+import './anna-navbar.css';
 import MenuCatalog from './menu-catalog';
 import {useEffect,useRef,useState} from 'react';
 const IG='https://www.instagram.com/jojojuiceid/';
