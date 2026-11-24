@@ -1,0 +1,20 @@
+/* Shared JOJO editorial footer — fresh dark-green palette. */
+.jojo-site-footer{background:#263e2a;color:#f7efe0}
+.jojo-site-footer .jojo-footer-top{display:grid;grid-template-columns:1.25fr 1fr .6fr;gap:6%;padding:74px max(6%,calc((100vw - 1320px)/2)) 62px;align-items:start}
+.jojo-site-footer .jojo-footer-brand{display:flex;flex-direction:column;align-items:flex-start;gap:19px;max-width:380px}
+.jojo-site-footer .jojo-footer-brand>a{display:block;line-height:0}
+.jojo-site-footer .jojo-footer-brand .logo{display:block;width:155px;height:auto;max-width:100%;background:transparent;padding:0;border-radius:0}
+.jojo-site-footer .jojo-footer-brand p{font-size:16px;line-height:1.6;max-width:260px}
+.jojo-site-footer .jojo-footer-brand>span{font-size:10px;font-weight:900;letter-spacing:.12em;color:#ffc103}
+.jojo-site-footer .jojo-footer-label{display:block;font-size:11px;font-weight:900;color:#ffc103;letter-spacing:.12em;margin-bottom:22px}
+.jojo-site-footer .jojo-footer-links nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 23px}
+.jojo-site-footer .jojo-footer-links nav a,.jojo-site-footer .jojo-footer-connect>a:not(.jojo-footer-order){font-size:12px;font-weight:800;line-height:1.5;letter-spacing:.055em}
+.jojo-site-footer .jojo-footer-links nav a{min-height:30px}
+.jojo-site-footer .jojo-footer-connect{display:flex;flex-direction:column;align-items:flex-start;gap:15px}
+.jojo-site-footer .jojo-footer-connect .jojo-footer-label{margin-bottom:7px}
+.jojo-site-footer .jojo-footer-connect .jojo-footer-order{display:inline-flex;align-items:center;justify-content:center;min-height:44px;background:#ffc103;color:#263e2a;font:900 11px/1.2 var(--jojo-body,Arial,sans-serif);letter-spacing:.07em;padding:12px 19px;margin-top:10px}
+.jojo-site-footer a:hover{color:#ffc103}
+.jojo-site-footer .jojo-footer-order:hover{background:#fff;color:#263e2a}
+.jojo-site-footer .jojo-footer-bottom{background:#ffc103;color:#263e2a;display:flex;align-items:center;justify-content:space-between;padding:15px max(6%,calc((100vw - 1320px)/2));font-size:10px;font-weight:900;letter-spacing:.07em;gap:16px}
+@media(max-width:850px){.jojo-site-footer .jojo-footer-top{grid-template-columns:1fr 1fr;gap:40px}.jojo-site-footer .jojo-footer-brand{grid-column:1/-1}}
+@media(max-width:570px){.jojo-site-footer .jojo-footer-top{grid-template-columns:1fr;padding:60px 6% 45px;gap:38px}.jojo-site-footer .jojo-footer-brand{grid-column:auto}.jojo-site-footer .jojo-footer-links nav{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.jojo-site-footer .jojo-footer-bottom{flex-direction:column;align-items:flex-start;padding:18px 6%;gap:6px;font-size:10px}}
