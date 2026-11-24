@@ -1,0 +1,11 @@
+/* JOJO typography tokens — official fonts load when licensed font assets are supplied.
+   Fallbacks remain legible, with no broken font downloads. */
+:root{
+ --jojo-display:'Kilimanjaro Sans','Arial Black',Impact,'Arial Narrow',sans-serif;
+ --jojo-body:'Gabriel Sans',Arial,Helvetica,sans-serif;
+}
+body,button,input,select,textarea{font-family:var(--jojo-body)}
+h1,h2,h3,.not-found h1{font-family:var(--jojo-display)}
+.eyebrow,.desktop-nav a,.anna-nav-side a,
+.footer-main nav a,.footer-main>a:last-child,
+.button,.nav-toggle,.footer-bottom{font-family:var(--jojo-body)}
