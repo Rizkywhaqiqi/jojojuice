@@ -1,0 +1,28 @@
+/* JOJO order guide — editorial layout; responsive and accessible. */
+.how-order{background:#f8f0e4;color:#283327}
+.how-order-hero{min-height:620px;padding:155px max(6%,calc((100vw - 1320px)/2)) 75px;background:#ed1c24;color:#fff;display:grid;grid-template-columns:1fr .8fr;align-items:center;gap:6%;overflow:hidden}
+.how-order-hero-content{min-width:0;position:relative;z-index:1}
+.how-order-hero h1{font-size:clamp(78px,11vw,164px);line-height:.91;letter-spacing:-.045em;margin:18px 0 24px}
+.how-order-hero h1 em{color:#ffc103}
+.how-order-hero p{font-size:clamp(16px,1.8vw,22px);line-height:1.55;max-width:550px;margin-bottom:25px}
+.how-order-hero>img{width:100%;max-height:540px;object-fit:contain;filter:drop-shadow(0 18px 28px #71121340)}
+.how-order-head{display:grid;grid-template-columns:1fr .8fr;align-items:end;gap:6%}
+.how-order-head .eyebrow{grid-column:1/-1}
+.how-order-head h2{font-size:clamp(60px,7.5vw,110px);margin:10px 0}
+.how-order-head>p{font-size:15px;max-width:450px;margin-bottom:10px}
+.how-order-steps{scroll-margin-top:88px}
+.how-order-steps-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px;margin-top:35px}
+.how-order-step{background:#fffaf3;min-width:0;display:flex;flex-direction:column;min-height:350px;gap:21px;padding:29px;border-top:4px solid #283327}
+.how-order-number{font-family:var(--jojo-display,Impact,sans-serif);font-size:clamp(85px,9vw,125px);line-height:.92;color:#ed1c24}
+.how-order-step h3{font-family:var(--jojo-display,Impact,sans-serif);font-size:clamp(28px,3vw,42px);line-height:1.06;margin-bottom:13px}
+.how-order-step p{font-size:13px;line-height:1.75}
+.how-order-step>a{align-self:flex-start;color:#ed1c24;border-bottom:1px solid currentColor;padding:6px 0;font-size:11px;letter-spacing:.06em;font-weight:900;margin-top:auto}
+#order-platforms{scroll-margin-top:78px}
+.how-order-help{background:#283327;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:35px}
+.how-order-help h2{color:#fff}
+.how-order-help h2 em{color:#ffc103}
+.how-order-help p{max-width:650px;font-size:14px}
+.how-order-help>.button{flex-shrink:0}
+@media(max-width:1000px){.how-order-hero{grid-template-columns:1.15fr .85fr}.how-order-steps-grid{gap:11px}.how-order-step{padding:22px;min-height:390px}}
+@media(max-width:760px){.how-order-hero{padding:140px 6% 45px;grid-template-columns:1fr;gap:20px;min-height:0}.how-order-hero h1{font-size:clamp(67px,14vw,110px)}.how-order-hero>img{max-height:285px;margin:auto}.how-order-head{grid-template-columns:1fr;gap:12px}.how-order-head .eyebrow{grid-column:auto}.how-order-head h2{font-size:clamp(57px,12vw,85px)}.how-order-head>p{font-size:14px}.how-order-steps-grid{grid-template-columns:1fr;gap:12px;margin-top:22px}.how-order-step{min-height:0;padding:22px;gap:16px}.how-order-number{font-size:85px}.how-order-step h3{font-size:34px}.how-order-step>a{margin-top:8px}.how-order-help{flex-direction:column;align-items:flex-start}.how-order-help>.button{width:100%}}
+@media(prefers-reduced-motion:reduce){.how-order *{scroll-behavior:auto}}
