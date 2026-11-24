@@ -1,3 +1,4 @@
+import EditorialHome from './editorial-home';
 import HowToOrder from './how-to-order';
 import {JOJO_LINKS} from './jojo-links';
 import {OrderOptions,OutletDirectory,ContactOptions} from './jojo-directory';
@@ -94,4 +95,4 @@ function Menu(){return <MenuCatalog/>}
 function Outlet(){return <><Banner title="FIND US" image="jojo-moments.webp"/><OutletDirectory/><OrderOptions compact/></>}
 function Contact(){return <><Banner title="SAY HELLO" image="jojo-together.webp"/><ContactOptions/><OrderOptions compact/></>}
 function NotFound(){return <section className="section centered not-found"><span className="eyebrow">404 / HALAMAN TIDAK DITEMUKAN</span><h1>NYASAR,<br/>BRO?</h1><p>Halaman yang kamu cari tidak tersedia. Yuk kembali ke yang fresh.</p><CTA href="/">KEMBALI KE BERANDA</CTA></section>}
-export default function App(){let path=window.location.pathname.replace(/\/$/,'')||'/';useEffect(()=>{document.title=(path==='/'?'JOJO Juice':path.slice(1).toUpperCase()+' — JOJO Juice')+' · Feel Fresh. Live Fun.'},[path]);return <><a className="skip-to-content" href="#main-content">LEWATI NAVIGASI</a><Header path={path}/><SiteMotion/><main id="main-content">{path==='/story'?<Story/>:path==='/menu'?<Menu/>:path==='/outlet'?<Outlet/>:path==='/contact'?<Contact/>:path==='/how-to-order'?<HowToOrder/>:path==='/'?<Home/>:<NotFound/>}</main><Footer/></>}
+export default function App(){let path=window.location.pathname.replace(/\/$/,'')||'/';useEffect(()=>{document.title=(path==='/'?'JOJO Juice':path.slice(1).toUpperCase()+' — JOJO Juice')+' · Feel Fresh. Live Fun.'},[path]);return <><a className="skip-to-content" href="#main-content">LEWATI NAVIGASI</a><Header path={path}/><SiteMotion/><main id="main-content">{path==='/story'?<Story/>:path==='/menu'?<Menu/>:path==='/outlet'?<Outlet/>:path==='/contact'?<Contact/>:path==='/how-to-order'?<HowToOrder/>:path==='/'?<EditorialHome/>:<NotFound/>}</main><Footer/></>}
