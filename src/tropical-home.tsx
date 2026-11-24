@@ -11,7 +11,9 @@ type Filter='all'|'fruit'|'fresh';
 export default function TropicalHome(){
  const [filter,setFilter]=useState<Filter>('all');
  useEffect(()=>{
+  const root=document.querySelector<HTMLElement>('.jojo-tropical');
   const nodes=Array.from(document.querySelectorAll<HTMLElement>('.jojo-tropical [data-reveal]'));
+  root?.classList.add('jt-motion-ready');
   if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches){
    nodes.forEach(node=>node.classList.add('is-visible'));
    return;
