@@ -1,12 +1,42 @@
 import SiteMotion from './site-motion';
 import MenuCatalog from './menu-catalog';
-import {useEffect,useState} from 'react';
+import {useEffect,useRef,useState} from 'react';
 const IG='https://www.instagram.com/jojojuiceid/';
 const nav=[['HOME','/'],['STORY','/story'],['MENU','/menu'],['OUTLET','/outlet'],['CONTACT','/contact']];
 const products=[{name:'DRAGON BALL',img:'jojo-dragon.webp',desc:'Campaign highlight dari JOJO Juice.'},{name:'FRESH JOJO',img:'jojo-refresh.webp',desc:'Segar untuk setiap momen.'},{name:'GREEN N GLOW',img:'jojo-green.webp',desc:'Warna yang fresh buat harimu.'}];
 function Logo(){return <img className="logo" src="/brands/jojo-logo.svg" alt="JOJO Juice" width="135" height="70"/>}
 function CTA({children,href=IG,outline=false}:{children:string,href?:string,outline?:boolean}){return <a className={outline?'button outline':'button'} href={href} {...(href.startsWith('http')?{target:'_blank',rel:'noreferrer noopener'}:{})}>{children}</a>}
-function Header({path}:{path:string}){const[open,setOpen]=useState(false);useEffect(()=>{if(!open)return;const onKey=(event:KeyboardEvent)=>{if(event.key==='Escape')setOpen(false)};window.addEventListener('keydown',onKey);return()=>window.removeEventListener('keydown',onKey)},[open]);return <header className="header"><div className="header-inner"><a href="/" aria-label="Beranda JOJO"><Logo/></a><nav className="desktop-nav" aria-label="Navigasi utama">{nav.map(([label,href])=><a key={href} aria-current={path===href?'page':undefined} href={href}>{label}</a>)}</nav><CTA>ORDER NOW</CTA><button type="button" className="nav-toggle" aria-expanded={open} aria-controls="mobile-nav" aria-label={open?"Tutup navigasi":"Buka navigasi"} onClick={()=>setOpen(!open)}>{open?'CLOSE':'MENU'}</button></div>{open&&<nav id="mobile-nav" className="mobile-nav" aria-label="Navigasi mobile">{nav.map(([label,href])=><a key={href} href={href} aria-current={path===href?"page":undefined} onClick={()=>setOpen(false)}>{label}</a>)}</nav>}</header>}
+function Header({path}:{path:string}){
+ const [open,setOpen]=useState(false);
+ const toggleRef=useRef<HTMLButtonElement>(null);
+ useEffect(()=>{
+  if(!open)return;
+  const onKey=(event:KeyboardEvent)=>{
+   if(event.key==='Escape'){
+    setOpen(false);
+    toggleRef.current?.focus();
+   }
+  };
+  const onResize=()=>{if(window.innerWidth>760)setOpen(false)};
+  window.addEventListener('keydown',onKey);
+  window.addEventListener('resize',onResize);
+  return()=>{window.removeEventListener('keydown',onKey);window.removeEventListener('resize',onResize)};
+ },[open]);
+ return <header className="header">
+  <div className="header-inner">
+   <a href="/" aria-label="Beranda JOJO"><Logo/></a>
+   <nav className="desktop-nav" aria-label="Navigasi utama">
+    {nav.map(([label,href])=><a key={href} aria-current={path===href?'page':undefined} href={href}>{label}</a>)}
+   </nav>
+   <CTA>ORDER NOW</CTA>
+   <button ref={toggleRef} type="button" className="nav-toggle" aria-expanded={open} aria-controls="mobile-nav" aria-label={open?'Tutup navigasi':'Buka navigasi'} onClick={()=>setOpen(!open)}>{open?'CLOSE':'MENU'}</button>
+  </div>
+  <nav id="mobile-nav" className="mobile-nav" aria-label="Navigasi mobile" hidden={!open}>
+   {nav.map(([label,href])=><a key={href} href={href} aria-current={path===href?'page':undefined} onClick={()=>setOpen(false)}>{label}</a>)}
+   <a href={IG} target="_blank" rel="noopener noreferrer" onClick={()=>setOpen(false)}>ORDER NOW</a>
+  </nav>
+ </header>;
+}
 function Footer(){return <footer><div className="footer-main"><a href="/" aria-label="Kembali ke beranda JOJO"><Logo/></a><nav aria-label="Navigasi footer">{nav.map(([label,href])=><a key={href} href={href}>{label}</a>)}</nav><a href={IG} target="_blank" rel="noreferrer">INSTAGRAM</a></div><div className="footer-bottom"><span>© {new Date().getFullYear()} JOJO JUICE</span><span>FEEL FRESH. LIVE FUN.</span><span>PONTIANAK · SINCE 2007</span></div></footer>}
 function Banner({title,image}:{title:string,image:string}){return <section className="banner"><img src={'/brands/'+image} alt="" /><div className="banner-inner"><h1>{title}</h1></div></section>}
 function Products(){return <section className="products section"><h2>MADE FRESH DAILY.</h2><p className="center-copy">Pilihan visual minuman JOJO. Menu dan harga terbaru bisa dikonfirmasi lewat Instagram resmi.</p><div className="product-grid">{products.map(p=><article key={p.name}><img src={'/brands/'+p.img} alt={p.name} loading="lazy"/><h3>{p.name}</h3><p>{p.desc}</p></article>)}</div><div className="center"><CTA>TANYA MENU LENGKAP</CTA></div></section>}
