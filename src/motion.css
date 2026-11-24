@@ -1,0 +1,38 @@
+/* JOJO motion system — playful but restrained. Motion is enhancement, not layout. */
+@media(prefers-reduced-motion:no-preference){
+ @keyframes jojo-hero-text{
+  from{opacity:0;transform:translate3d(0,22px,0)}
+  to{opacity:1;transform:translate3d(0,0,0)}
+ }
+ @keyframes jojo-hero-photo{
+  from{transform:scale(1.055);filter:saturate(.93)}
+  to{transform:scale(1);filter:saturate(1)}
+ }
+ .hero>img{animation:jojo-hero-photo 1.4s cubic-bezier(.2,.75,.2,1) both;transform-origin:center}
+ .hero .eyebrow,.banner h1,.catalog-intro>.eyebrow{animation:jojo-hero-text .6s .08s ease-out both}
+ .hero h1,.catalog-intro h1{animation:jojo-hero-text .95s .19s cubic-bezier(.2,.7,.2,1) both}
+ .hero p,.catalog-intro p{animation:jojo-hero-text .72s .36s ease-out both}
+ .hero .actions,.catalog-intro-links{animation:jojo-hero-text .72s .47s ease-out both}
+ .motion-pending{transition:opacity .7s ease,transform .75s cubic-bezier(.22,.75,.24,1)}
+ .motion-pending:not(.motion-visible){opacity:0;transform:translate3d(0,27px,0)}
+ .motion-pending.motion-visible{opacity:1;transform:translate3d(0,0,0)}
+ .product-grid article,.catalog-featured-images figure,.catalog-group{transition:box-shadow .3s ease,transform .3s ease}
+ .product-grid article:hover,.catalog-featured-images figure:hover{transform:translateY(-5px)}
+ .product-grid article>img,.catalog-featured-images img,.catalog-group-top>img{transition:transform .6s cubic-bezier(.2,.75,.2,1)}
+ .product-grid article:hover img,.catalog-featured-images figure:hover img{transform:scale(1.045)}
+ .story-split figure,.visual-split,.community{overflow:hidden}
+ .story-split figure img,.visual-split>img,.community>img{transition:transform .9s cubic-bezier(.2,.75,.2,1)}
+ .story-split figure:hover img,.visual-split:hover>img,.community:hover>img{transform:scale(1.025)}
+ .button,.catalog-category-bar button,.catalog-inline-cta,.desktop-nav a,.mobile-nav a{transition:color .22s ease,background-color .22s ease,transform .22s ease,box-shadow .22s ease}
+ .button:hover{transform:translateY(-2px);box-shadow:0 8px 18px #18171024}
+ .button:active{transform:translateY(0) scale(.98);box-shadow:none}
+ .catalog-category-bar button:active{transform:scale(.97)}
+ .desktop-nav a:hover{transform:translateY(-2px)}
+}
+@media(prefers-reduced-motion:reduce){
+ .hero>img,.hero h1,.hero p,.hero .actions,.hero .eyebrow,.banner h1,
+ .catalog-intro>.eyebrow,.catalog-intro h1,.catalog-intro p,.catalog-intro-links{
+  animation:none!important;transition:none!important
+ }
+ .motion-pending{opacity:1!important;transform:none!important;transition:none!important}
+}
