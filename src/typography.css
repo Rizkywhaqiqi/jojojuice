@@ -9,3 +9,21 @@ h1,h2,h3,.not-found h1{font-family:var(--jojo-display)}
 .eyebrow,.desktop-nav a,.anna-nav-side a,
 .footer-main nav a,.footer-main>a:last-child,
 .button,.nav-toggle,.footer-bottom{font-family:var(--jojo-body)}
+
+/* Overrides for the menu's existing hard-coded Impact/Arial declarations. */
+.menu-catalog .catalog-intro h1,
+.menu-catalog .catalog-featured h2,
+.menu-catalog .catalog-body-head h2,
+.menu-catalog .catalog-group h3,
+.menu-catalog .catalog-footer-cta h2,
+.menu-catalog .catalog-empty h3,
+.anna-overlay .anna-overlay-links a{font-family:var(--jojo-display)}
+.menu-catalog .catalog-control-select select,
+.menu-catalog .catalog-item-name,
+.menu-catalog .catalog-item strong,
+.menu-catalog .catalog-families button,
+.menu-catalog .catalog-favorite,
+.anna-overlay .anna-overlay-number,
+.anna-overlay .anna-overlay-close,
+.anna-header .anna-nav-side a,
+.anna-header .anna-menu-toggle{font-family:var(--jojo-body)}
