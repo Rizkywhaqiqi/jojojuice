@@ -197,3 +197,14 @@
   .bp-juice :is(.bp-header-order,.bp-button,.jt-pill,.je-about-cta a,.jt-filter),
   .bp-juice :is(.bp-header-order,.bp-button,.jt-pill,.je-about-cta a) svg{transition:none!important}
 }
+
+/* GSAP owns intro and scroll transforms; remove earlier competing keyframes. */
+@media(prefers-reduced-motion:no-preference){
+ .jojo-tropical.jt-gsap .jt-enter,
+ .jojo-tropical.jt-gsap .jt-hero-visual img{animation:none!important}
+ .jojo-tropical.jt-gsap [data-reveal]{transition:none!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .jojo-tropical.jt-gsap [data-reveal],
+ .jojo-tropical.jt-gsap .jt-hero-visual img{opacity:1!important;visibility:visible!important;transform:none!important}
+}
