@@ -121,3 +121,36 @@
  .jt-closing{padding:66px 6%}
  .jt-closing h2{font-size:clamp(60px,12vw,90px)}
 }
+
+/* Photo-first split hero, JOJO brand 2026 */
+.jt-hero{display:grid;grid-template-columns:minmax(0,42%) minmax(0,58%);padding:0;min-height:clamp(550px,49vw,740px);background:#ed1c24;color:#fff;overflow:hidden}
+.jt-hero-copy{padding:clamp(55px,7vw,110px) clamp(28px,5vw,90px);z-index:1;justify-content:center;min-width:0}
+.jt-hero h1{font-size:clamp(54px,6.1vw,104px);line-height:1.03;margin:26px 0;white-space:normal}
+.jt-hero h1 em{font-size:.76em;line-height:1.1}
+.jt-hero-copy p{font-size:clamp(14px,1.1vw,17px);line-height:1.8;max-width:390px;margin-bottom:30px}
+.jt-hero-actions{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.jt-hero-secondary{color:#fff;display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:700;min-height:48px;border-bottom:1px solid #ffffff90}
+.jt-hero-visual{position:relative;display:block;margin:0;width:100%;height:100%;min-height:550px;overflow:hidden;background:#f7e8de}
+.jt-hero-visual img{display:block;width:100%;height:100%;object-fit:cover;object-position:center center;max-height:none;border-radius:0;filter:none}
+.jt-hero-visual::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,#ed1c2410,transparent 18%)}
+@media(max-width:900px){
+ .jt-hero{grid-template-columns:minmax(0,43%) minmax(0,57%);min-height:520px}
+ .jt-hero-copy{padding:50px 6%}
+ .jt-hero h1{font-size:clamp(48px,6.4vw,75px)}
+ .jt-hero-visual{min-height:520px}
+ .jt-hero-visual img{height:100%;object-fit:cover}
+}
+@media(max-width:720px){
+ .jt-hero{grid-template-columns:1fr;min-height:0}
+ .jt-hero-copy{padding:54px 6% 42px}
+ .jt-hero h1{font-size:clamp(60px,13vw,85px);margin:20px 0}
+ .jt-hero-copy p{max-width:400px;margin-bottom:24px}
+ .jt-hero-visual{width:100%;height:440px;min-height:0}
+ .jt-hero-visual img{width:100%;height:100%;object-fit:cover;object-position:center 42%}
+ .jt-hero-visual::after{display:none}
+}
+@media(max-width:480px){
+ .jt-hero-visual{height:360px}
+ .jt-hero-actions{gap:17px}
+ .jt-hero h1{font-size:clamp(55px,14vw,72px)}
+}
