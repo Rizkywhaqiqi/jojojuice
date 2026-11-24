@@ -109,3 +109,24 @@
  .header.anna-header,.anna-header .header-inner.anna-header-inner,.anna-header .anna-logo-link .logo,
  .anna-overlay-panel,.anna-overlay-links a{animation:none!important;transition:none!important}
 }
+
+/* Extra ordering destination: preserve Anna-style centered mark on narrow laptops. */
+@media(min-width:901px){
+ .anna-header .header-inner.anna-header-inner{column-gap:clamp(16px,2.3vw,40px)}
+ .anna-header .anna-nav-side{gap:clamp(12px,1.9vw,28px)}
+ .anna-header .anna-nav-side a{font-size:clamp(10px,.82vw,12px);letter-spacing:.035em}
+}
+@media(min-width:901px) and (max-width:1190px){
+ .anna-header .anna-logo-link .logo{width:115px!important}
+}
+@media(max-width:900px){
+ .anna-overlay-links{justify-content:flex-start}
+ .anna-overlay-links a{font-size:clamp(39px,6.5vw,65px);padding:12px 0;line-height:1.06}
+}
+@media(max-width:480px){
+ .anna-overlay-links a{font-size:clamp(34px,10vw,52px)}
+ .anna-overlay-panel{padding:20px 24px}
+ .anna-overlay-top{padding-bottom:17px}
+ .anna-overlay-links{padding:10px 0}
+ .anna-overlay-bottom{padding-top:14px}
+}
