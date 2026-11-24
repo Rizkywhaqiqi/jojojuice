@@ -1,4 +1,6 @@
-import {useEffect,useState} from 'react';
+import {useEffect,useRef,useState} from 'react';
+import gsap from 'gsap';
+import {ScrollTrigger} from 'gsap/ScrollTrigger';
 import {MapPin} from 'lucide-react';
 import './tropical-home.css';
 import './editorial-jojo.css';
@@ -11,26 +13,39 @@ const drinks=[
 type Filter='all'|'fruit'|'fresh';
 export default function TropicalHome(){
  const [filter,setFilter]=useState<Filter>('all');
+
+ const rootRef=useRef<HTMLDivElement>(null);
  useEffect(()=>{
-  const root=document.querySelector<HTMLElement>('.jojo-tropical');
-  const nodes=Array.from(document.querySelectorAll<HTMLElement>('.jojo-tropical [data-reveal]'));
-  root?.classList.add('jt-motion-ready');
-  if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-   nodes.forEach(node=>node.classList.add('is-visible'));
-   return;
-  }
-  const observer=new IntersectionObserver(entries=>{
-   for(const entry of entries){
-    if(entry.isIntersecting){
-     entry.target.classList.add('is-visible');
-     observer.unobserve(entry.target);
-    }
-   }
-  },{threshold:0.12,rootMargin:'0px 0px -35px 0px'});
-  nodes.forEach(node=>observer.observe(node));
-  return ()=>observer.disconnect();
+  const root=rootRef.current;
+  if(!root)return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  gsap.registerPlugin(ScrollTrigger);
+  const context=gsap.context(()=>{
+   const intro=gsap.timeline({defaults:{ease:'power3.out'}});
+   intro.from('.jt-hero-copy .jt-eyebrow',{autoAlpha:0,y:14,duration:.55})
+    .from('.jt-hero h1',{autoAlpha:0,y:32,duration:.9},'-=.3')
+    .from('.jt-hero-copy p',{autoAlpha:0,y:20,duration:.65},'-=.5')
+    .from('.jt-hero-actions',{autoAlpha:0,y:15,duration:.55},'-=.42')
+    .fromTo('.jt-hero-visual img',{scale:1.065,autoAlpha:.6},{scale:1,autoAlpha:1,duration:1.35,ease:'power2.out'},0);
+   root.querySelectorAll<HTMLElement>('[data-reveal]').forEach((section)=>{
+    gsap.fromTo(section,{autoAlpha:0,y:30},{autoAlpha:1,y:0,duration:.85,ease:'power2.out',
+     scrollTrigger:{trigger:section,start:'top 88%',once:true}});
+   });
+   const media=gsap.matchMedia();
+   media.add('(min-width: 768px) and (prefers-reduced-motion: no-preference)',()=>{
+    gsap.to('.jt-hero-visual img',{yPercent:4,ease:'none',scrollTrigger:{
+     trigger:'.jt-hero',start:'top top',end:'bottom top',scrub:.6}});
+   });
+  },root);
+  return ()=>context.revert();
  },[]);
- return <div className="jojo-tropical">
+ useEffect(()=>{
+  if(!rootRef.current||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const cards=rootRef.current.querySelectorAll('.jt-product');
+  const tween=gsap.fromTo(cards,{autoAlpha:0,y:14},{autoAlpha:1,y:0,duration:.48,stagger:.075,ease:'power2.out',overwrite:'auto'});
+  return ()=>{tween.kill();gsap.set(cards,{clearProps:'opacity,visibility,transform'});};
+ },[filter]);
+ return <div className="jojo-tropical jt-gsap" ref={rootRef}>
   <section className="jt-hero" aria-labelledby="jt-hero-title">
    <div className="jt-hero-copy jt-enter"><span className="jt-eyebrow">DARI PONTIANAK, SEJAK 2007</span><h1 id="jt-hero-title">FEEL FRESH.<br/><em>LIVE FUN.</em></h1><p>Jus buah fresh buat menemani harimu. Dari kuliah, kerja, sampai nongkrong bareng teman.</p><div className="jt-hero-actions"><a className="jt-pill jt-pill-light" href="/menu">Lihat menu </a><a className="jt-hero-secondary" href="/outlet">Cari outlet </a></div></div>
    <figure className="jt-hero-visual jt-enter-photo"><span className="jt-condensation" aria-hidden="true"/><img src="/brands/jojo-hero.webp" alt="Foto campaign minuman JOJO Juice" fetchPriority="high" width="1080" height="1350"/></figure>
