@@ -67,7 +67,7 @@ export default function MenuCatalog(){
   const items=group.items.filter(item=>(family!=='favorite'||item.featured)&&(!search||[item.name,group.title,group.subtitle].some(text=>text.toLocaleLowerCase('id').includes(search))));
   if(sort!=='default')items.sort((a,b)=>sort==='low'?a.price-b.price:b.price-a.price);
   return {...group,items};
- }).filter(group=>group.items.length>0),[availableGroups,category,search,sort,family]);
+ }).filter(group=>group.items.length>0).sort((a,b)=>sort==='default'?0:sort==='low'?a.items[0].price-b.items[0].price:b.items[0].price-a.items[0].price),[availableGroups,category,search,sort,family]);
  const count=filtered.reduce((sum,g)=>sum+g.items.length,0);
  const total=groups.reduce((sum,g)=>sum+g.items.length,0);
  const chooseFamily=(next:Family)=>{setFamily(next);setCategory('all')};
@@ -96,7 +96,7 @@ export default function MenuCatalog(){
     <div className="catalog-control-row">
      <label className="catalog-search"><span className="sr-only">Cari menu</span><input type="search" value={query} onChange={event=>setQuery(event.target.value)} placeholder="Cari minuman, buah, makanan…" aria-label="Cari nama menu"/>{query&&<button type="button" onClick={()=>setQuery('')} aria-label="Hapus pencarian">×</button>}</label>
      <label className="catalog-control-select"><span>KATEGORI</span><select value={category} onChange={event=>setCategory(event.target.value)} aria-label="Pilih kategori"><option value="all">Semua kategori</option>{availableGroups.map(group=><option value={group.id} key={group.id}>{group.title}</option>)}</select></label>
-     <label className="catalog-control-select catalog-sort"><span>URUTKAN</span><select value={sort} onChange={event=>setSort(event.target.value as Sort)} aria-label="Urutkan berdasarkan harga"><option value="default">Urutan menu</option><option value="low">Harga termurah</option><option value="high">Harga tertinggi</option></select></label>
+     <label className="catalog-control-select catalog-sort"><span>URUTKAN</span><select value={sort} onChange={event=>setSort(event.target.value as Sort)} aria-label="Urutkan berdasarkan harga"><option value="default">Urutan menu</option><option value="low">Kategori termurah dulu</option><option value="high">Kategori termahal dulu</option></select></label>
     </div>
    </div>
    <div className="catalog-result-line"><p aria-live="polite"><strong>{count}</strong> PILIHAN · {filtered.length} KATEGORI</p>{(family!=='all'||category!=='all'||query||sort!=='default')&&<button type="button" className="catalog-reset" onClick={reset}>RESET FILTER</button>}</div>
