@@ -110,3 +110,30 @@ test('final ordering step is an accessible instruction not a fake CTA',()=>{
  assert.ok(guide.includes('<p className="how-order-step-finish" role="note">'));
  assert.ok(!guide.includes('LANJUTKAN DI APLIKASI'));
 });
+
+test('new JOJO lifestyle, freshness and outlet editorial photo sets render in intended routes',()=>{
+ const app=read('src/App.tsx');
+ const home=read('src/editorial-home.tsx');
+ const gallery=read('src/jojo-editorial-gallery.tsx');
+ assert.ok(app.includes('<StoryNature/>')&&app.includes('<StoryStreet/>'));
+ assert.ok(app.includes('<OutletExperience/>'));
+ assert.ok(app.includes('image="editorial/jojo-interior-space.webp"'));
+ assert.ok(home.includes('/brands/editorial/jojo-street-friends.webp'));
+ for(const name of [
+  'jojo-street-drink','jojo-street-friends','jojo-street-overhead',
+  'jojo-street-moment','jojo-street-moving','jojo-avocado-harvest',
+  'jojo-avocado-tree','jojo-avocado-juice','jojo-interior-counter',
+  'jojo-interior-space','jojo-interior-seating','jojo-interior-brand'
+ ]){
+  assert.ok(existsSync(new URL('../public/brands/editorial/'+name+'.webp',import.meta.url)),name+' asset required');
+  assert.ok(gallery.includes(name+'.webp')||home.includes(name+'.webp'),name+' is referenced');
+ }
+});
+
+test('existing looping homepage videos remain untouched by new visual galleries',()=>{
+ const home=read('src/editorial-home.tsx');
+ assert.equal(home.split('<JOJOFilm/>').length-1,1);
+ assert.equal((home.match(/<JOJOMomentVideo source=/g)??[]).length,2);
+ assert.ok(home.includes('jojo-moments-1.mp4')&&home.includes('jojo-moments-2.mp4'));
+ assert.ok(!read('src/jojo-editorial-gallery.tsx').includes('<video'));
+});
