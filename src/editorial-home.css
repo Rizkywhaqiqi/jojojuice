@@ -335,3 +335,55 @@
  .jojo-tropical-feature-video .jojo-tropical-feature-copy{padding:47px 6% 53px}
  .jojo-tropical-story h2,.jojo-tropical-feature-video h2{font-size:clamp(41px,10vw,57px);line-height:1.04}
 }
+
+/* 2026-11: Prevent the two middle homepage films from painting over adjacent sections.
+   The media participates in normal layout instead of filling an absolute-positioned
+   fixed-min-height box. Each editorial row owns its own height and spacing. */
+.jojo-editorial .jojo-tropical-story,
+.jojo-editorial .jojo-tropical-feature-video{
+  min-height:0;
+  height:auto;
+  align-items:stretch;
+  overflow:hidden;
+  position:relative;
+}
+.jojo-editorial .jojo-tropical-story{margin-bottom:clamp(18px,2.5vw,36px)}
+.jojo-editorial .jojo-tropical-feature-video{margin-bottom:clamp(20px,3vw,42px)}
+.jojo-editorial .jojo-tropical-story .jojo-tropical-video,
+.jojo-editorial .jojo-tropical-feature-video .jojo-tropical-video{
+  position:relative;
+  display:flex;
+  align-items:stretch;
+  min-height:0;
+  height:auto;
+  max-height:none;
+  overflow:hidden;
+  isolation:isolate;
+  background:#252525;
+}
+.jojo-editorial .jojo-tropical-story .jojo-tropical-video>video,
+.jojo-editorial .jojo-tropical-feature-video .jojo-tropical-video>video{
+  position:relative;
+  inset:auto;
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:16/9;
+  max-width:100%;
+  min-width:0;
+  object-fit:cover;
+}
+@media(max-width:900px){
+ .jojo-editorial .jojo-tropical-story,
+ .jojo-editorial .jojo-tropical-feature-video{display:flex;flex-direction:column}
+ .jojo-editorial .jojo-tropical-story .jojo-tropical-content,
+ .jojo-editorial .jojo-tropical-feature-video .jojo-tropical-feature-copy{order:0}
+ .jojo-editorial .jojo-tropical-story .jojo-tropical-video,
+ .jojo-editorial .jojo-tropical-feature-video .jojo-tropical-video{
+  order:1;width:100%;min-height:0;height:auto;aspect-ratio:auto
+ }
+ .jojo-editorial .jojo-tropical-story .jojo-tropical-video>video,
+ .jojo-editorial .jojo-tropical-feature-video .jojo-tropical-video>video{
+  object-fit:contain;aspect-ratio:16/9;height:auto
+ }
+}
