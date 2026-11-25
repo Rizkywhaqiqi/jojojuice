@@ -26,10 +26,12 @@ test('menu hero retains its original JOJO fruit basket image',()=>{
  assert.ok(existsSync(new URL('../public/brands/jojo-photo-2.webp',import.meta.url)));
 });
 
-test('motion respects live reduced-motion changes',()=>{
- assert.match(motion,/preference\.addEventListener\('change',onPreference\)/);
- assert.match(motion,/preference\.removeEventListener\('change',onPreference\)/);
- assert.match(motion,/if\(preference\.matches\)stop\(\)/);
+test('GSAP motion supports live reduced-motion updates and cleans up on route lifecycle',()=>{
+ assert.match(motion,/gsap\.matchMedia\(\)/);
+ assert.match(motion,/prefers-reduced-motion: no-preference/);
+ assert.match(motion,/media\.revert\(\)/);
+ assert.match(motion,/context\.revert\(\)/);
+ assert.match(motion,/ScrollTrigger/);
  assert.match(css,/@media\(prefers-reduced-motion:reduce\)/);
 });
 
@@ -173,4 +175,27 @@ test('Gather section uses the official lifestyle drink photo without yellow slog
  assert.ok(!section.includes('GOOD TIMES'));
  assert.ok(existsSync(new URL('../public/brands/editorial/jojo-street-drink.webp',import.meta.url)));
  assert.ok(section.includes('GATHER.'));
+});
+
+test('GSAP animates JOJO editorial sections while leaving media playback independent',()=>{
+ const motion=read('src/site-motion.tsx');
+ assert.ok(motion.includes("from 'gsap'"));
+ assert.ok(motion.includes("from 'gsap/ScrollTrigger'"));
+ assert.ok(motion.includes('gsap.registerPlugin(ScrollTrigger)'));
+ assert.ok(motion.includes('.jojo-editorial-hero'));
+ assert.ok(motion.includes('.jojo-photo-story-heading'));
+ assert.ok(motion.includes('.jojo-editorial-gallery-photo'));
+ assert.ok(motion.includes('.jojo-pick'));
+ assert.ok(motion.includes('.how-order-step'));
+ assert.ok(motion.includes('.catalog-group'));
+ assert.ok(motion.includes('.jojo-full-bleed-film'));
+ assert.ok(!motion.includes('video.play('));
+ assert.ok(!motion.includes('pin:true'));
+ assert.ok(!motion.includes('scrub:true'));
+});
+test('GSAP dependency is pinned to a stable GSAP 3 version',()=>{
+ const pkg=JSON.parse(read('package.json'));
+ assert.equal(pkg.dependencies.gsap,'3.15.1');
+ const styles=read('src/motion.css');
+ assert.ok(!styles.includes('.motion-visible{animation:'));
 });
