@@ -1,0 +1,61 @@
+/* JOJO photo stories: genuine campaign photos, optimized WebP. */
+.jojo-photo-story{padding:clamp(64px,7vw,110px) max(6%,calc((100vw - 1320px)/2));background:var(--jojo-white,#FEFEFE);color:#262626}
+.jojo-photo-story-heading{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.65fr);gap:clamp(22px,5vw,82px);align-items:end;margin-bottom:clamp(26px,4vw,48px)}
+.jojo-photo-story-heading>div{min-width:0}
+.jojo-photo-story .eyebrow{color:var(--jojo-red,#ED1C24);font-size:11px;letter-spacing:.13em;font-weight:900}
+.jojo-photo-story h2{font-family:var(--jojo-display,Impact,'Arial Narrow',sans-serif);font-size:clamp(55px,7vw,105px);line-height:.95;letter-spacing:-.04em;margin:19px 0 0;color:var(--jojo-red,#ED1C24)}
+.jojo-photo-story h2 em{font-style:italic;color:var(--jojo-red,#ED1C24)}
+.jojo-photo-story-heading>p{max-width:440px;font-size:clamp(14px,1.2vw,17px);line-height:1.8;color:#383838}
+.jojo-editorial-gallery-photo{margin:0;position:relative;min-width:0;overflow:hidden;background:#252525;isolation:isolate}
+.jojo-editorial-gallery-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .5s ease}
+.jojo-editorial-gallery-photo figcaption{position:absolute;bottom:0;left:0;right:0;padding:32px 16px 14px;background:linear-gradient(0deg,#0009,transparent);color:#FEFEFE;letter-spacing:.1em;font:900 10px/1.4 var(--jojo-body,Arial,sans-serif)}
+.jojo-nature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(8px,1.5vw,18px)}
+.jojo-nature-grid .jojo-editorial-gallery-photo{aspect-ratio:4/5}
+.jojo-photo-story-nature{background:#FEFEFE}
+.jojo-street-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(8px,1.3vw,16px)}
+.jojo-street-grid .jojo-editorial-gallery-photo{aspect-ratio:3/4}
+.jojo-street-grid .jojo-editorial-gallery-photo:nth-child(2){margin-top:35px}
+.jojo-street-grid .jojo-editorial-gallery-photo:nth-child(4){margin-top:35px}
+.jojo-photo-story-street{background:#fff5ee}
+.jojo-photo-story-outlet{background:#fff5ee}
+.jojo-interior-grid{display:grid;grid-template-columns:1.2fr .8fr .8fr;grid-template-rows:repeat(2,minmax(0,260px));gap:clamp(8px,1.3vw,16px)}
+.jojo-interior-grid .jojo-editorial-gallery-photo:first-child{grid-row:1/3}
+.jojo-interior-grid .jojo-editorial-gallery-photo:nth-child(2){grid-column:2;grid-row:1/3}
+.jojo-interior-grid .jojo-editorial-gallery-photo:nth-child(3){grid-column:3;grid-row:1}
+.jojo-interior-grid .jojo-editorial-gallery-photo:nth-child(4){grid-column:3;grid-row:2}
+.jojo-gallery-ending{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-top:clamp(25px,3.5vw,44px);padding-top:21px;border-top:1px solid rgba(237,28,36,.22)}
+.jojo-gallery-ending>span{font:900 11px/1.5 var(--jojo-body,Arial,sans-serif);letter-spacing:.1em;color:var(--jojo-red,#ED1C24)}
+.jojo-gallery-ending>a{display:inline-flex;align-items:center;gap:12px;min-height:48px;padding:12px 18px;background:var(--jojo-red,#ED1C24);color:#FEFEFE;font:900 11px/1.4 var(--jojo-body,Arial,sans-serif);letter-spacing:.06em}
+.jojo-gallery-ending>a:hover{background:#ba1019}
+.jojo-gallery-ending>a:focus-visible{outline:3px solid var(--jojo-blue,#39BFE7);outline-offset:4px}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ .jojo-editorial-gallery-photo:hover img{transform:scale(1.045)}
+}
+@media(max-width:850px){
+ .jojo-photo-story-heading{grid-template-columns:1fr;gap:18px}
+ .jojo-photo-story h2{font-size:clamp(49px,9vw,81px)}
+ .jojo-interior-grid{grid-template-columns:1fr 1fr;grid-template-rows:repeat(2,minmax(0,280px))}
+ .jojo-interior-grid .jojo-editorial-gallery-photo:first-child,
+ .jojo-interior-grid .jojo-editorial-gallery-photo:nth-child(2),
+ .jojo-interior-grid .jojo-editorial-gallery-photo:nth-child(3),
+ .jojo-interior-grid .jojo-editorial-gallery-photo:nth-child(4){grid-row:auto;grid-column:auto}
+}
+@media(max-width:580px){
+ .jojo-photo-story{padding:62px 6% 66px}
+ .jojo-photo-story h2{font-size:clamp(43px,10vw,65px);line-height:1}
+ .jojo-photo-story-heading>p{font-size:14px}
+ .jojo-nature-grid{grid-template-columns:1fr 1fr;gap:9px}
+ .jojo-nature-grid .jojo-editorial-gallery-photo:first-child{grid-column:1/-1;aspect-ratio:5/3}
+ .jojo-nature-grid .jojo-editorial-gallery-photo:not(:first-child){aspect-ratio:4/5}
+ .jojo-street-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .jojo-street-grid .jojo-editorial-gallery-photo:nth-child(2),.jojo-street-grid .jojo-editorial-gallery-photo:nth-child(4){margin-top:0}
+ .jojo-street-grid .jojo-editorial-gallery-photo{aspect-ratio:4/5}
+ .jojo-interior-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,215px));gap:9px}
+ .jojo-editorial-gallery-photo figcaption{font-size:9px;padding:22px 10px 10px}
+ .jojo-gallery-ending>a{width:100%;justify-content:space-between}
+}
+@media(max-width:360px){
+ .jojo-interior-grid{grid-template-rows:repeat(2,minmax(0,170px))}
+ .jojo-photo-story h2{font-size:43px}
+}
+@media(prefers-reduced-motion:reduce){.jojo-editorial-gallery-photo img{transition:none!important}}

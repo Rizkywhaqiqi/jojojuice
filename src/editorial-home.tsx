@@ -82,7 +82,7 @@ export default function EditorialHome(){
   </section>
 
   <section className="jojo-gather" aria-labelledby="jojo-gather-title">
-   <div className="jojo-gather-image"><img src="/brands/jojo-moments.webp" alt="Momen santai menikmati JOJO Juice bersama teman" loading="lazy"/><span className="jojo-gather-stamp">GOOD TIMES<br/>TASTE BETTER</span></div>
+   <div className="jojo-gather-image"><img src="/brands/editorial/jojo-street-friends.webp" alt="Dua teman menikmati minuman JOJO Juice di suasana urban" width="1200" height="1500" loading="lazy"/><span className="jojo-gather-stamp">GOOD TIMES<br/>TASTE BETTER</span></div>
    <div className="jojo-gather-copy"><span className="jojo-editorial-overline">EVERY SIP IS A MOMENT</span><h2 id="jojo-gather-title">GATHER.<br/>SIP.<br/><em>REPEAT.</em></h2><p>Ketemu, ngobrol, ketawa, dan ulangi. Bikin hari biasa jadi sedikit lebih spesial bareng JOJO.</p><a className="jojo-editorial-btn" href="/outlet">FIND OUR OUTLETS</a></div>
   </section>
 

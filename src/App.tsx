@@ -6,6 +6,7 @@ import {OrderOptions,OutletDirectory,ContactOptions} from './jojo-directory';
 import SiteMotion from './site-motion';
 import './anna-navbar.css';
 import MenuCatalog from './menu-catalog';
+import {StoryNature,StoryStreet,OutletExperience} from './jojo-editorial-gallery';
 import {useEffect,useRef,useState} from 'react';
 const IG=JOJO_LINKS.instagram;
 const nav=[['HOME','/'],['STORY','/story'],['MENU','/menu'],['HOW TO ORDER','/how-to-order'],['OUTLET','/outlet'],['CONTACT','/contact']];
@@ -119,10 +120,12 @@ function Story(){return <>
   <div className="jojo-story-intro-heading"><span className="eyebrow">KENALAN LEBIH DEKAT</span><h2>SEJAK 2007,<br/><em>SELALU FRESH.</em></h2></div>
   <div className="jojo-story-intro-copy"><p>JOJO Juice tumbuh dari Pontianak dengan semangat menghadirkan minuman berbasis buah yang fresh, fun, dan dekat dengan keseharian.</p><p>Dari kerja, kuliah, nongkrong, sampai santai bersama teman, JOJO hadir menemani.</p><a className="button" href="/menu">LIHAT PILIHAN MENU</a></div>
  </section>
+ <StoryNature/>
  <section className="story-split section jojo-story-values"><figure><img src="/brands/jojo-together.webp" alt="Dua minuman JOJO dinikmati bersama" loading="lazy"/></figure><div><span className="eyebrow">THE JOJO WAY</span><h2>FUN.<br/>FRESH.<br/><em>ACTIVE.</em></h2><p>Karakter kami ceria, aktif, dan mudah akrab. Kini hadir di berbagai lokasi Kalimantan Barat.</p><CTA href="/outlet">TEMUKAN OUTLET</CTA></div></section>
+ <StoryStreet/>
 </>}
 function Menu(){return <MenuCatalog/>}
-function Outlet(){return <><Banner title="FIND US" image="jojo-moments.webp" eyebrow="TEMPAT KETEMU YANG FRESH" copy="Cari cabang JOJO yang paling sesuai dengan wilayahmu." cta="LIHAT LOKASI OUTLET" href="#outlet-list"/><OutletDirectory/><OrderOptions compact/></>}
+function Outlet(){return <><Banner title="FIND US" image="editorial/jojo-interior-space.webp" eyebrow="TEMPAT KETEMU YANG FRESH" copy="Cari cabang JOJO yang paling sesuai dengan wilayahmu." cta="LIHAT LOKASI OUTLET" href="#outlet-list"/><OutletExperience/><OutletDirectory/><OrderOptions compact/></>}
 function Contact(){return <><Banner title="SAY HELLO" image="jojo-together.webp" eyebrow="KEEP IN TOUCH" copy="Ada pertanyaan atau ide kolaborasi? Hubungi JOJO melalui kanal resmi." cta="PILIH CARA KONTAK" href="#contact-channels"/><ContactOptions/><OrderOptions compact/></>}
 function NotFound(){return <section className="section centered not-found"><span className="eyebrow">404 / HALAMAN TIDAK DITEMUKAN</span><h1>NYASAR,<br/>BRO?</h1><p>Halaman yang kamu cari tidak tersedia. Yuk kembali ke yang fresh.</p><CTA href="/">KEMBALI KE BERANDA</CTA></section>}
 export default function App(){let path=window.location.pathname.replace(/\/$/,'')||'/';useEffect(()=>{document.title=(path==='/'?'JOJO Juice':path.slice(1).toUpperCase()+' — JOJO Juice')+' · Feel Fresh. Live Fun.'},[path]);return <><a className="skip-to-content" href="#main-content">LEWATI NAVIGASI</a><Header path={path}/><SiteMotion/><main id="main-content">{path==='/story'?<Story/>:path==='/menu'?<Menu/>:path==='/outlet'?<Outlet/>:path==='/contact'?<Contact/>:path==='/how-to-order'?<HowToOrder/>:path==='/'?<EditorialHome/>:<NotFound/>}</main><Footer/></>}
