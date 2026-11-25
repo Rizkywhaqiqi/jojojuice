@@ -119,28 +119,6 @@ function Story(){return <>
   <div className="jojo-story-intro-heading"><span className="eyebrow">KENALAN LEBIH DEKAT</span><h2>SEJAK 2007,<br/><em>SELALU FRESH.</em></h2></div>
   <div className="jojo-story-intro-copy"><p>JOJO Juice tumbuh dari Pontianak dengan semangat menghadirkan minuman berbasis buah yang fresh, fun, dan dekat dengan keseharian.</p><p>Dari kerja, kuliah, nongkrong, sampai santai bersama teman, JOJO hadir menemani.</p><a className="button" href="/menu">LIHAT PILIHAN MENU</a></div>
  </section>
- <section className="jojo-story-reels section" aria-labelledby="jojo-story-reels-title" id="jojo-moments">
-  <div className="jojo-story-reels-heading">
-   <div><span className="eyebrow">REAL MOMENTS, REAL JOJO</span><h2 id="jojo-story-reels-title">TAKE A SIP.<br/><em>KEEP MOVING.</em></h2></div>
-   <p>Dari jalan-jalan di kota sampai menikmati udara segar bareng teman. Dua cerita singkat tentang momen sehari-hari bersama JOJO.</p>
-  </div>
-  <div className="jojo-story-reels-grid">
-   <figure className="jojo-story-reel">
-    <video controls playsInline preload="none" poster="/media/jojo-moments-1-poster.webp" aria-label="Video JOJO Juice saat jalan-jalan santai di kota">
-     <source src="/media/jojo-moments-1.mp4" type="video/mp4"/>
-     Browser kamu tidak mendukung video HTML5.
-    </video>
-    <figcaption><span>01 / CITY MOMENTS</span><strong>FRESH ON THE GO.</strong><small>JOJO untuk hari yang terus bergerak.</small></figcaption>
-   </figure>
-   <figure className="jojo-story-reel">
-    <video controls playsInline preload="none" poster="/media/jojo-moments-2-poster.webp" aria-label="Video momen outdoor bersama teman dan JOJO Juice">
-     <source src="/media/jojo-moments-2.mp4" type="video/mp4"/>
-     Browser kamu tidak mendukung video HTML5.
-    </video>
-    <figcaption><span>02 / OUTDOOR MOMENTS</span><strong>TAKE THE FRESH ROUTE.</strong><small>Teman jalan, teman cerita, teman segar.</small></figcaption>
-   </figure>
-  </div>
- </section>
  <section className="story-split section jojo-story-values"><figure><img src="/brands/jojo-together.webp" alt="Dua minuman JOJO dinikmati bersama" loading="lazy"/></figure><div><span className="eyebrow">THE JOJO WAY</span><h2>FUN.<br/>FRESH.<br/><em>ACTIVE.</em></h2><p>Karakter kami ceria, aktif, dan mudah akrab. Kini hadir di berbagai lokasi Kalimantan Barat.</p><CTA href="/outlet">TEMUKAN OUTLET</CTA></div></section>
 </>}
 function Menu(){return <MenuCatalog/>}
