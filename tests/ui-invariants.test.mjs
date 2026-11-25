@@ -118,9 +118,9 @@ test('new JOJO lifestyle, freshness and outlet editorial photo sets render in in
  assert.ok(app.includes('<StoryNature/>')&&app.includes('<StoryStreet/>'));
  assert.ok(app.includes('<OutletExperience/>'));
  assert.ok(app.includes('image="editorial/jojo-interior-space.webp"'));
- assert.ok(home.includes('/brands/editorial/jojo-street-friends.webp'));
+ assert.ok(home.includes('/brands/editorial/jojo-street-drink.webp'));
  for(const name of [
-  'jojo-street-drink','jojo-street-friends','jojo-street-overhead',
+  'jojo-street-drink','jojo-street-overhead',
   'jojo-street-moment','jojo-street-moving','jojo-avocado-harvest',
   'jojo-avocado-tree','jojo-avocado-juice','jojo-interior-counter',
   'jojo-interior-space','jojo-interior-seating','jojo-interior-brand'
