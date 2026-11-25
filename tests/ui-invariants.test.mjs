@@ -38,3 +38,22 @@ test('menu filters are retained for the UI audit',()=>{
  assert.match(menu,/catalog-control-row/);
  assert.match(menu,/catalog-empty/);
 });
+
+test('all secondary routes have a working page hero and in-page destination',()=>{
+ const app=read('src/App.tsx');
+ const directory=read('src/jojo-directory.tsx');
+ assert.match(app,/function Banner\(\{title,image,eyebrow,copy,cta,href\}/);
+ assert.match(app,/href="#cerita-jojo"/);
+ assert.match(app,/href="#outlet-list"/);
+ assert.match(app,/href="#contact-channels"/);
+ assert.match(app,/id="cerita-jojo"/);
+ assert.match(directory,/id="outlet-list"/);
+ assert.match(directory,/id="contact-channels"/);
+});
+
+test('outlet search exposes filtering status and an explicit reset',()=>{
+ const directory=read('src/jojo-directory.tsx');
+ assert.match(directory,/role="status" aria-live="polite"/);
+ assert.match(directory,/Hapus pencarian outlet/);
+ assert.match(directory,/RESET FILTER/);
+});
