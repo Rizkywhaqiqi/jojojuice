@@ -18,3 +18,38 @@
 .jojo-site-footer .jojo-footer-bottom{background:#ffc103;color:#263e2a;display:flex;align-items:center;justify-content:space-between;padding:15px max(6%,calc((100vw - 1320px)/2));font-size:10px;font-weight:900;letter-spacing:.07em;gap:16px}
 @media(max-width:850px){.jojo-site-footer .jojo-footer-top{grid-template-columns:1fr 1fr;gap:40px}.jojo-site-footer .jojo-footer-brand{grid-column:1/-1}}
 @media(max-width:570px){.jojo-site-footer .jojo-footer-top{grid-template-columns:1fr;padding:60px 6% 45px;gap:38px}.jojo-site-footer .jojo-footer-brand{grid-column:auto}.jojo-site-footer .jojo-footer-links nav{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.jojo-site-footer .jojo-footer-bottom{flex-direction:column;align-items:flex-start;padding:18px 6%;gap:6px;font-size:10px}}
+
+/* Other-page editorial: coherent hero language and readable content hierarchy. */
+.jojo-page-hero.banner{min-height:clamp(440px,60vh,660px);height:auto;display:flex;align-items:end;justify-content:flex-start}
+.jojo-page-hero.banner>img{object-position:center 48%}
+.jojo-page-hero.banner::before{background:linear-gradient(90deg,rgba(50,6,12,.88) 0%,rgba(50,6,12,.57) 51%,rgba(50,6,12,.22) 100%)}
+.jojo-page-hero .banner-inner{width:min(1320px,88%);text-align:left;margin:0 auto;padding:160px 0 72px;position:relative;z-index:1}
+.jojo-page-hero .eyebrow{display:block;color:var(--jojo-yellow,#FFC103);letter-spacing:.12em;margin-bottom:18px}
+.jojo-page-hero h1{font-size:clamp(66px,10vw,145px);line-height:.95;max-width:1040px;color:var(--jojo-white,#FEFEFE);margin:0 0 18px}
+.jojo-page-hero p{max-width:580px;font-size:clamp(15px,1.7vw,21px);font-weight:650;line-height:1.5;color:var(--jojo-white,#FEFEFE)}
+.jojo-page-hero-link{display:inline-flex;align-items:center;justify-content:center;min-height:48px;margin-top:25px;padding:12px 22px;background:var(--jojo-yellow,#FFC103);color:#202020;font-size:11px;font-weight:900;letter-spacing:.06em;text-align:center}
+.jojo-page-hero-link:hover{background:var(--jojo-white,#FEFEFE);color:var(--jojo-red,#ED1C24)}
+.jojo-story-intro{display:grid;grid-template-columns:1.1fr .9fr;align-items:start;gap:8%;background:var(--jojo-white,#FEFEFE)}
+.jojo-story-intro-heading h2{font-size:clamp(55px,6.2vw,94px);line-height:.96;margin:22px 0}
+.jojo-story-intro-heading em{color:var(--jojo-red,#ED1C24)}
+.jojo-story-intro-copy{padding-top:25px}
+.jojo-story-intro-copy p{font-size:clamp(15px,1.2vw,18px);line-height:1.8;margin-bottom:19px}
+.jojo-story-intro-copy .button{margin-top:15px}
+.jojo-story-values{background:var(--jojo-white,#FEFEFE)}
+.jojo-story-values h2{font-size:clamp(58px,7vw,100px);line-height:.95}
+@media(max-width:760px){
+ .jojo-page-hero.banner{min-height:560px;align-items:end}
+ .jojo-page-hero.banner::before{background:linear-gradient(to top,rgba(50,6,12,.9),rgba(50,6,12,.36) 65%,rgba(50,6,12,.12))}
+ .jojo-page-hero .banner-inner{width:88%;padding:138px 0 54px}
+ .jojo-page-hero h1{font-size:clamp(61px,14vw,103px);line-height:.98;margin-bottom:17px}
+ .jojo-page-hero p{font-size:16px}
+ .jojo-story-intro{grid-template-columns:1fr;gap:0}
+ .jojo-story-intro-heading h2{font-size:clamp(49px,11vw,76px)}
+ .jojo-story-intro-copy{padding-top:8px}
+ .jojo-story-values{gap:35px}
+}
+@media(max-width:380px){
+ .jojo-page-hero h1{font-size:clamp(52px,13vw,68px)}
+ .jojo-page-hero .banner-inner{padding-bottom:48px}
+ .jojo-page-hero-link{width:100%}
+}
