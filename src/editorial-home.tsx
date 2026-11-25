@@ -1,3 +1,4 @@
+import {useEffect,useRef,useState} from 'react';
 import {JOJO_LINKS} from './jojo-links';
 import './editorial-home.css';
 
@@ -15,6 +16,40 @@ function Spark({className=''}:{className?:string}){return <svg className={classN
 function PhotoStamp({src,alt,caption,className}:{src:string;alt:string;caption:string;className:string}){
  return <figure className={`jojo-photo-stamp ${className}`}><img src={src} alt={alt} loading="lazy"/><figcaption>{caption}</figcaption></figure>;
 }
+function JOJOFilm(){
+ const videoRef=useRef<HTMLVideoElement>(null);
+ const [playing,setPlaying]=useState(false);
+ const [muted,setMuted]=useState(true);
+ useEffect(()=>{
+  const media=window.matchMedia('(prefers-reduced-motion: reduce)');
+  if(media.matches){videoRef.current?.pause();return;}
+  const promise=videoRef.current?.play();
+  promise?.catch(()=>setPlaying(false));
+ },[]);
+ const togglePlay=()=>{
+  const video=videoRef.current;
+  if(!video)return;
+  if(video.paused){video.play().catch(()=>setPlaying(false));}
+  else video.pause();
+ };
+ const toggleMute=()=>{
+  const video=videoRef.current;
+  if(!video)return;
+  video.muted=!video.muted;
+  setMuted(video.muted);
+ };
+ return <section className="jojo-film" aria-label="JOJO Juice brand video">
+  <div className="jojo-film-header"><span className="jojo-editorial-overline">SIX SECONDS OF FRESH</span><span className="jojo-film-divider" aria-hidden="true"/><span className="jojo-editorial-overline">THIS IS JOJO.</span></div>
+  <div className="jojo-film-stage">
+   <video ref={videoRef} src="/media/jojovid.mp4" poster="/brands/jojo-refresh.webp" muted={muted} loop playsInline preload="metadata" autoPlay onPlay={()=>setPlaying(true)} onPause={()=>setPlaying(false)} onVolumeChange={event=>setMuted(event.currentTarget.muted)} aria-label="Video singkat produk minuman JOJO Juice"/>
+   <div className="jojo-film-controls">
+    <button type="button" onClick={togglePlay} aria-label={playing?'Jeda video JOJO':'Putar video JOJO'}>{playing?'PAUSE':'PLAY'}</button>
+    <button type="button" onClick={toggleMute} aria-label={muted?'Nyalakan suara video':'Matikan suara video'}>{muted?'SOUND OFF':'SOUND ON'}</button>
+   </div>
+  </div>
+ </section>;
+}
+
 export default function EditorialHome(){
  return <div className="jojo-editorial">
   <section className="jojo-editorial-hero">
@@ -31,6 +66,8 @@ export default function EditorialHome(){
    </div>
    <span className="jojo-editorial-hero-side">GOOD MOOD, GOOD JUICE — SINCE 2007</span>
   </section>
+
+  <JOJOFilm/>
 
   <section className="jojo-paper jojo-origin" aria-labelledby="jojo-origin-title">
    <div className="jojo-origin-copy">
