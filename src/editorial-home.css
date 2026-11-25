@@ -163,18 +163,9 @@
 .jojo-film-divider{height:1px;flex:1;background:rgba(237,28,36,.28)}
 .jojo-film-stage{width:100%;position:relative;aspect-ratio:16/9;max-height:88vh;overflow:hidden;background:#ED1C24}
 .jojo-film-stage video{display:block;width:100%;height:100%;object-fit:cover}
-.jojo-film-controls{position:absolute;right:clamp(15px,4.5vw,80px);bottom:clamp(15px,3vw,35px);display:flex;gap:8px;z-index:2}
-.jojo-film-controls button{min-width:96px;min-height:44px;padding:10px 15px;border:1px solid rgba(254,254,254,.8);border-radius:0;background:rgba(15,15,15,.68);color:#FEFEFE;font:900 11px/1.2 var(--jojo-body,Arial,sans-serif);letter-spacing:.06em;backdrop-filter:blur(8px)}
-.jojo-film-controls button:hover{background:#ED1C24}
-.jojo-film-controls button:focus-visible{outline:3px solid #39BFE7;outline-offset:3px}
 @media(max-width:760px){
  .jojo-film{padding-top:18px}
  .jojo-film-header{padding:0 6% 14px}
  .jojo-film-header .jojo-editorial-overline{font-size:9px}
  .jojo-film-stage{max-height:none;aspect-ratio:16/9}
- .jojo-film-stage{aspect-ratio:auto}
- .jojo-film-stage video{aspect-ratio:16/9;height:auto;object-fit:cover}
- .jojo-film-controls{position:static;justify-content:flex-end;padding:10px 6%;gap:8px;background:#FEFEFE}
- .jojo-film-controls button{min-width:88px;min-height:44px;font-size:10px;padding:8px 10px;background:#ED1C24;border-color:#ED1C24;color:#FEFEFE}
 }
-@media(prefers-reduced-motion:reduce){.jojo-film-controls button{transition:none!important}}
