@@ -118,7 +118,15 @@ function Story(){return <>
   <div className="jojo-story-intro-copy"><p>JOJO Juice tumbuh dari Pontianak dengan semangat menghadirkan minuman berbasis buah yang fresh, fun, dan dekat dengan keseharian.</p><p>Dari kerja, kuliah, nongkrong, sampai santai bersama teman, JOJO hadir menemani.</p><a className="button" href="/menu">LIHAT PILIHAN MENU</a></div>
  </section>
  <StoryNature/>
- <section className="story-split section jojo-story-values"><figure><img src="/brands/jojo-together.webp" alt="Dua minuman JOJO dinikmati bersama" loading="lazy"/></figure><div><span className="eyebrow">THE JOJO WAY</span><h2>FUN.<br/>FRESH.<br/><em>ACTIVE.</em></h2><p>Karakter kami ceria, aktif, dan mudah akrab. Kini hadir di berbagai lokasi Kalimantan Barat.</p><CTA href="/outlet">TEMUKAN OUTLET</CTA></div></section>
+ <section className="jojo-story-values" aria-labelledby="jojo-story-values-title">
+  <img src="/brands/jojo-story-fruit-basket.webp" alt="Jus JOJO dingin di keranjang berisi buah segar" loading="lazy" decoding="async"/>
+  <div>
+   <span className="eyebrow">THE JOJO WAY</span>
+   <h2 id="jojo-story-values-title">BUAH SEGAR.<br/><em>JUS DINGIN.</em></h2>
+   <p>Dari keranjang buah ke gelas dingin. Begini cara JOJO menikmati segarnya buah.</p>
+   <CTA href="/outlet">TEMUKAN OUTLET</CTA>
+  </div>
+ </section>
  <StoryStreet/>
 </>}
 function Menu(){return <MenuCatalog/>}
