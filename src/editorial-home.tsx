@@ -78,12 +78,12 @@ export default function EditorialHome(){
     <a href="/menu" className="jojo-tropical-cta">EXPLORE OUR JUICES <span aria-hidden="true">↗</span></a>
    </div>
    <div className="jojo-tropical-photo">
-    <img src="/brands/jojo-picnic.webp" alt="Momen tropical bersama minuman JOJO Juice" loading="lazy"/>
+    <img src="/brands/jojo-photo-1.webp" alt="Aneka minuman JOJO Juice dan buah segar dalam suasana piknik tropis" loading="lazy"/>
    </div>
   </section>
 
   <section className="jojo-tropical-feature" aria-labelledby="jojo-feature-title">
-   <div className="jojo-tropical-feature-photo"><img src="/brands/jojo-together.webp" alt="Minuman JOJO Juice dinikmati bersama" loading="lazy"/></div>
+   <div className="jojo-tropical-feature-photo"><img src="/brands/jojo-photo-2.webp" alt="Keranjang berisi buah tropis dan minuman JOJO Juice di tepi pantai" loading="lazy"/></div>
    <div className="jojo-tropical-feature-copy">
     <span className="jojo-editorial-overline">MADE FOR EVERYDAY MOMENTS</span>
     <h2 id="jojo-feature-title">MADE FRESH.<br/><em>MADE FOR FUN.</em></h2>
