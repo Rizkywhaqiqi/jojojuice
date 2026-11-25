@@ -63,6 +63,16 @@ test('two uploaded JOJO moments silently loop in Home instead of Story',()=>{
  const home=read('src/editorial-home.tsx');
  const story=app.slice(app.indexOf('function Story(){'),app.indexOf('function Menu(){'));
  assert.equal((home.match(/<JOJOMomentVideo source=/g)??[]).length,2);
+ const welcomeStart=home.indexOf('<section className="jojo-tropical-story"');
+ const everydayStart=home.indexOf('<section className="jojo-tropical-feature');
+ const favoritesStart=home.indexOf('<section className="jojo-paper jojo-picks"');
+ const firstClip=home.indexOf('source="/media/jojo-moments-1.mp4"');
+ const secondClip=home.indexOf('source="/media/jojo-moments-2.mp4"');
+ const welcomeHeading=home.indexOf('id="jojo-tropical-title"');
+ const everydayHeading=home.indexOf('id="jojo-feature-title"');
+ assert.ok(welcomeStart<welcomeHeading&&welcomeHeading<firstClip&&firstClip<everydayStart);
+ assert.ok(everydayStart<everydayHeading&&everydayHeading<secondClip&&secondClip<favoritesStart);
+ assert.ok(!home.includes('jojo-tropical-video-pair'));
  assert.match(home,/return <video ref={ref} src={source} poster={poster} muted loop playsInline preload="metadata"/);
  assert.match(home,/new IntersectionObserver/);
  assert.match(home,/reduced\.addEventListener\('change',sync\)/);

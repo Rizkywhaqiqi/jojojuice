@@ -81,19 +81,20 @@ export default function EditorialHome(){
     </div>
     <a href="/menu" className="jojo-tropical-cta">EXPLORE OUR JUICES</a>
    </div>
-   <div className="jojo-tropical-photo"><img src="/brands/jojo-photo-1.webp" alt="Minuman JOJO Juice di atas kain piknik dengan buah tropis" loading="lazy"/></div>
+   <div className="jojo-tropical-photo jojo-tropical-video" aria-label="Momen JOJO di kota">
+    <JOJOMomentVideo source="/media/jojo-moments-1.mp4" poster="/media/jojo-moments-1-poster.webp" label="Video JOJO Juice saat jalan-jalan di kota"/>
+   </div>
   </section>
 
-  <section className="jojo-tropical-feature" aria-labelledby="jojo-feature-title">
-   <div className="jojo-tropical-feature-photo jojo-tropical-video-pair" aria-label="Dua video momen JOJO">
-    <JOJOMomentVideo source="/media/jojo-moments-1.mp4" poster="/media/jojo-moments-1-poster.webp" label="Video JOJO Juice saat jalan-jalan di kota"/>
-    <JOJOMomentVideo source="/media/jojo-moments-2.mp4" poster="/media/jojo-moments-2-poster.webp" label="Video JOJO Juice bersama teman di luar ruangan"/>
-   </div>
+  <section className="jojo-tropical-feature jojo-tropical-feature-video" aria-labelledby="jojo-feature-title">
    <div className="jojo-tropical-feature-copy">
     <span className="jojo-editorial-overline">MADE FOR EVERYDAY MOMENTS</span>
     <h2 id="jojo-feature-title">MADE FRESH.<br/><em>MADE FOR FUN.</em></h2>
     <p>Dari jeda kuliah sampai nongkrong sore, selalu ada alasan buat menikmati yang fresh. Temukan JOJO favoritmu, lalu ajak teman buat berbagi cerita.</p>
     <a href="/story" className="jojo-tropical-cta">GET TO KNOW US</a>
+   </div>
+   <div className="jojo-tropical-feature-photo jojo-tropical-video" aria-label="Momen JOJO bersama teman">
+    <JOJOMomentVideo source="/media/jojo-moments-2.mp4" poster="/media/jojo-moments-2-poster.webp" label="Video JOJO Juice bersama teman di luar ruangan"/>
    </div>
   </section>
 

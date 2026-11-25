@@ -283,9 +283,31 @@
  .jojo-tropical-content,.jojo-tropical-feature-copy{padding-inline:6%}
 }
 
-/* Home editorial: two distinct JOJO lifestyle films replace the former still photo.
-   Playback matches the hero's muted, looping film; offscreen videos pause. */
-.jojo-tropical-feature-photo.jojo-tropical-video-pair{display:grid;grid-template-columns:1fr;grid-template-rows:repeat(2,minmax(0,1fr));gap:8px;background:var(--jojo-white,#FEFEFE);min-width:0;overflow:hidden}
-.jojo-tropical-video-pair>video{display:block;width:100%;height:100%;min-height:0;object-fit:cover;object-position:center;background:var(--jojo-blue,#39BFE7)}
-@media(max-width:900px){.jojo-tropical-feature-photo.jojo-tropical-video-pair{min-height:0;aspect-ratio:auto;gap:6px}.jojo-tropical-video-pair>video{aspect-ratio:16/9;height:auto}}
-@media(prefers-reduced-motion:reduce){.jojo-tropical-video-pair>video{animation:none!important}}
+/* Editorial rhythm: Welcome copy → city video → Everyday copy → outdoor video.
+   Every video has its own section and respects offscreen/reduced-motion playback. */
+.jojo-tropical-story .jojo-tropical-video,
+.jojo-tropical-feature-video .jojo-tropical-video{
+ position:relative;min-height:620px;overflow:hidden;background:var(--jojo-blue,#39BFE7);
+}
+.jojo-tropical-feature-video .jojo-tropical-video{min-height:570px}
+.jojo-tropical-story .jojo-tropical-video>video,
+.jojo-tropical-feature-video .jojo-tropical-video>video{
+ position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;object-position:center;
+}
+.jojo-tropical-feature-video{grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr)}
+.jojo-tropical-feature-video .jojo-tropical-feature-copy{
+ padding-left:max(8%,calc((100vw - 1320px)/2));padding-right:clamp(24px,4vw,70px);
+}
+@media(max-width:900px){
+ .jojo-tropical-story .jojo-tropical-video{order:0;min-height:0;aspect-ratio:16/10}
+ .jojo-tropical-feature-video .jojo-tropical-video{min-height:0;aspect-ratio:16/10}
+ .jojo-tropical-feature-video .jojo-tropical-feature-copy{padding:65px 6%}
+}
+@media(max-width:520px){
+ .jojo-tropical-story .jojo-tropical-video,
+ .jojo-tropical-feature-video .jojo-tropical-video{aspect-ratio:4/5}
+ .jojo-tropical-feature-video .jojo-tropical-feature-copy{padding:52px 6% 66px}
+}
+@media(prefers-reduced-motion:reduce){
+ .jojo-tropical-video>video{animation:none!important}
+}
