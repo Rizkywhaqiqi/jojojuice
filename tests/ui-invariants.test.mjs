@@ -9,7 +9,7 @@ const motion=read('src/site-motion.tsx');
 const css=read('src/motion.css');
 
 test('homepage hero remains a static JOJO photograph',()=>{
- assert.match(home,/<img className="jojo-editorial-hero-image" src="\/brands\/jojo-home-hero\.jpg"/);
+ assert.match(home,/<img className="jojo-editorial-hero-image" src="\/brands\/jojo-home-cooler-landscape\.jpg"/);
  assert.ok(existsSync(new URL('../public/brands/jojo-home-cooler-landscape.jpg',import.meta.url)));
  assert.doesNotMatch(home,/jojo-editorial-hero-video/);
 });
@@ -205,5 +205,5 @@ test('Story hero uses official Drive 1.jpg without changing the homepage hero',(
  const home=read('src/editorial-home.tsx');
  assert.match(app,/<Banner title="OUR STORY" image="jojo-story-hero-1\.jpg"/);
  assert.ok(existsSync(new URL('../public/brands/jojo-story-hero-1.jpg',import.meta.url)));
- assert.match(home,/src="\/brands\/jojo-home-hero\.jpg"/);
+ assert.match(home,/src="\/brands\/jojo-home-cooler-landscape\.jpg"/);
 });
