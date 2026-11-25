@@ -199,3 +199,11 @@ test('GSAP dependency is pinned to a stable GSAP 3 version',()=>{
  const styles=read('src/motion.css');
  assert.ok(!styles.includes('.motion-visible{animation:'));
 });
+
+test('Story hero uses official Drive 1.jpg without changing the homepage hero',()=>{
+ const app=read('src/App.tsx');
+ const home=read('src/editorial-home.tsx');
+ assert.match(app,/<Banner title="OUR STORY" image="jojo-story-hero-1\.jpg"/);
+ assert.ok(existsSync(new URL('../public/brands/jojo-story-hero-1.jpg',import.meta.url)));
+ assert.match(home,/src="\/brands\/jojo-home-hero\.jpg"/);
+});
