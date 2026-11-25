@@ -49,3 +49,12 @@
  .how-order-hero h1{font-size:clamp(54px,12.5vw,70px)}
  .how-order-step{padding:20px}
 }
+
+/* Third step is an instructional note, not a fake button. */
+.how-order-step-finish{border:0;border-left:3px solid var(--jojo-red,#ED1C24);padding:11px 12px;background:rgba(237,28,36,.06);color:#2b2b2b;font-size:11px;max-width:100%;margin-bottom:0}
+@media(max-width:760px){
+ .how-order-hero{gap:22px}
+ .how-order-steps-grid{gap:16px}
+ .how-order-step{gap:14px}
+ .how-order-step-finish{width:100%}
+}

@@ -1,5 +1,5 @@
 import {JOJO_LINKS} from './jojo-links';
-import {useMemo,useState} from 'react';
+import {useEffect,useMemo,useRef,useState} from 'react';
 import './menu-catalog.css';
 
 type Item={name:string;price:number;featured?:boolean;description?:string};
@@ -62,6 +62,19 @@ export default function MenuCatalog(){
  const [query,setQuery]=useState('');
  const [sort,setSort]=useState<Sort>('default');
  const [showAllCategories,setShowAllCategories]=useState(false);
+ const shortcutsRef=useRef<HTMLDivElement>(null);
+ useEffect(()=>{
+  const wrapper=shortcutsRef.current;
+  if(!wrapper)return;
+  const active=wrapper.querySelector<HTMLElement>('button[aria-pressed="true"]');
+  if(!active)return;
+  // Reveal active chip without scrolling the entire page.
+  const left=active.offsetLeft-wrapper.offsetLeft;
+  const right=left+active.offsetWidth;
+  const viewLeft=wrapper.scrollLeft,viewRight=viewLeft+wrapper.clientWidth;
+  if(left<viewLeft+8)wrapper.scrollTo({left:Math.max(0,left-12),behavior:'auto'});
+  else if(right>viewRight-8)wrapper.scrollTo({left:right-wrapper.clientWidth+12,behavior:'auto'});
+ },[category,family,showAllCategories]);
  const search=query.trim().toLocaleLowerCase('id');
  const availableGroups=useMemo(()=>groups.filter(group=>family==='all'||(family==='drink'?drinkIds.has(group.id):family==='food'?!drinkIds.has(group.id):group.items.some(item=>item.featured))),[family]);
  const filtered=useMemo(()=>availableGroups.filter(group=>category==='all'||category===group.id).map(group=>{
@@ -108,7 +121,7 @@ export default function MenuCatalog(){
     <div className="catalog-families" role="group" aria-label="Jenis menu">
      {([{id:'all',label:'SEMUA'},{id:'drink',label:'MINUMAN'},{id:'food',label:'MAKANAN'},{id:'favorite',label:'FAVORIT'}] as const).map(tab=><button key={tab.id} type="button" className={family===tab.id?'active':''} aria-pressed={family===tab.id} onClick={()=>chooseFamily(tab.id)}>{tab.label}</button>)}
     </div>
-    <div className="catalog-category-shortcuts" aria-label="Pintasan kategori">
+    <div ref={shortcutsRef} className="catalog-category-shortcuts" role="group" aria-label="Pintasan kategori, geser ke samping untuk pilihan lain">
      <button type="button" className={category==='all'?'active':''} aria-pressed={category==='all'} onClick={()=>setCategory('all')}>SEMUA KATEGORI</button>
      {shortcutGroups.map(group=><button type="button" key={group.id} className={category===group.id?'active':''} aria-pressed={category===group.id} onClick={()=>setCategory(group.id)}>{group.title}</button>)}
      {availableGroups.length>5&&<button type="button" className="catalog-category-more" aria-expanded={showAllCategories} onClick={()=>setShowAllCategories(value=>!value)}>{showAllCategories?'LEBIH SEDIKIT':'+ KATEGORI LAIN'}</button>}
