@@ -137,3 +137,16 @@ test('existing looping homepage videos remain untouched by new visual galleries'
  assert.ok(home.includes('jojo-moments-1.mp4')&&home.includes('jojo-moments-2.mp4'));
  assert.ok(!read('src/jojo-editorial-gallery.tsx').includes('<video'));
 });
+
+test('middle homepage films stay in their own flow layout instead of overlapping sections',()=>{
+ const css=read('src/editorial-home.css');
+ const fix=css.slice(css.indexOf('/* 2026-11: Prevent the two middle homepage films'));
+ assert.ok(fix.includes('position:relative'));
+ assert.ok(fix.includes('inset:auto'));
+ assert.ok(fix.includes('height:auto'));
+ assert.ok(fix.includes('min-height:0'));
+ assert.ok(fix.includes('aspect-ratio:16/9'));
+ assert.ok(fix.includes('margin-bottom:clamp('));
+ const home=read('src/editorial-home.tsx');
+ assert.equal((home.match(/<JOJOMomentVideo source=/g)??[]).length,2);
+});
