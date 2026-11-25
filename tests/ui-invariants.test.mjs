@@ -58,13 +58,16 @@ test('outlet search exposes filtering status and an explicit reset',()=>{
  assert.match(directory,/RESET FILTER/);
 });
 
-test('two extra JOJO story clips load on demand without repeating homepage autoplay',()=>{
+test('two JOJO Story clips loop silently without play controls',()=>{
  const app=read('src/App.tsx');
  const story=app.slice(app.indexOf('function Story(){'),app.indexOf('function Menu(){'));
- assert.equal((story.match(/<video controls playsInline preload="none"/g)??[]).length,2);
- assert.match(story,/src="\/media\/jojo-moments-1\.mp4"/);
- assert.match(story,/src="\/media\/jojo-moments-2\.mp4"/);
- assert.doesNotMatch(story,/<video[^>]*autoplay/i);
+ assert.equal((story.match(/<StoryLoopVideo source=/g)??[]).length,2);
+ assert.match(app,/return <video ref={ref} src={source} poster={poster} muted loop playsInline preload="metadata"/);
+ assert.doesNotMatch(story,/<video controls/);
+ assert.match(app,/new IntersectionObserver/);
+ assert.match(app,/reduced\.addEventListener\('change',sync\)/);
+ assert.match(story,/source="\/media\/jojo-moments-1\.mp4"/);
+ assert.match(story,/source="\/media\/jojo-moments-2\.mp4"/);
  for(const file of ['jojo-moments-1.mp4','jojo-moments-2.mp4','jojo-moments-1-poster.webp','jojo-moments-2-poster.webp']){
   assert.ok(existsSync(new URL('../public/media/'+file,import.meta.url)),file+' must be deployed');
  }
