@@ -172,7 +172,9 @@
  .jojo-film-header{padding:0 6% 14px}
  .jojo-film-header .jojo-editorial-overline{font-size:9px}
  .jojo-film-stage{max-height:none;aspect-ratio:16/9}
- .jojo-film-controls{right:11px;bottom:11px;gap:6px}
- .jojo-film-controls button{min-width:76px;min-height:44px;font-size:10px;padding:8px 10px}
+ .jojo-film-stage{aspect-ratio:auto}
+ .jojo-film-stage video{aspect-ratio:16/9;height:auto;object-fit:cover}
+ .jojo-film-controls{position:static;justify-content:flex-end;padding:10px 6%;gap:8px;background:#FEFEFE}
+ .jojo-film-controls button{min-width:88px;min-height:44px;font-size:10px;padding:8px 10px;background:#ED1C24;border-color:#ED1C24;color:#FEFEFE}
 }
 @media(prefers-reduced-motion:reduce){.jojo-film-controls button{transition:none!important}}
