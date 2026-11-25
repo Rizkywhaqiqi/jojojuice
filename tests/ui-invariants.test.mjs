@@ -138,15 +138,26 @@ test('existing looping homepage videos remain untouched by new visual galleries'
  assert.ok(!read('src/jojo-editorial-gallery.tsx').includes('<video'));
 });
 
-test('middle homepage films stay in their own flow layout instead of overlapping sections',()=>{
- const css=read('src/editorial-home.css');
- const fix=css.slice(css.indexOf('/* 2026-11: Prevent the two middle homepage films'));
- assert.ok(fix.includes('position:relative'));
- assert.ok(fix.includes('inset:auto'));
- assert.ok(fix.includes('height:auto'));
- assert.ok(fix.includes('min-height:0'));
- assert.ok(fix.includes('aspect-ratio:16/9'));
- assert.ok(fix.includes('margin-bottom:clamp('));
+test('homepage has four full-width, alternating editorial sections',()=>{
  const home=read('src/editorial-home.tsx');
- assert.equal((home.match(/<JOJOMomentVideo source=/g)??[]).length,2);
+ const css=read('src/editorial-home.css');
+ const welcome=home.indexOf('<section className="jojo-tropical-story"');
+ const city=home.indexOf('<section className="jojo-full-bleed-film"',welcome);
+ const everyday=home.indexOf('<section className="jojo-tropical-feature jojo-tropical-feature-video"');
+ const outdoors=home.indexOf('<section className="jojo-full-bleed-film"',city+1);
+ const favorites=home.indexOf('<section className="jojo-paper jojo-picks"');
+ assert.ok(welcome>=0 && welcome<city && city<everyday && everyday<outdoors && outdoors<favorites);
+ assert.equal((home.match(/<section className="jojo-full-bleed-film"/g)??[]).length,2);
+ const citySection=home.slice(city,everyday);
+ const outdoorsSection=home.slice(outdoors,favorites);
+ assert.ok(citySection.includes('source="/media/jojo-moments-1.mp4"'));
+ assert.ok(outdoorsSection.includes('source="/media/jojo-moments-2.mp4"'));
+ assert.ok(!home.slice(welcome,city).includes('<JOJOMomentVideo'));
+ assert.ok(!home.slice(everyday,outdoors).includes('<JOJOMomentVideo'));
+ const fix=css.slice(css.indexOf('/* Full-bleed editorial rhythm'));
+ assert.ok(fix.includes('display:block'));
+ assert.ok(fix.includes('width:100%'));
+ assert.ok(fix.includes('aspect-ratio:16/9'));
+ assert.ok(fix.includes('position:relative'));
+ assert.ok(fix.includes('object-fit:contain'));
 });
