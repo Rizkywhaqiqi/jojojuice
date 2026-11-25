@@ -118,9 +118,9 @@ test('new JOJO lifestyle, freshness and outlet editorial photo sets render in in
  assert.ok(app.includes('<StoryNature/>')&&app.includes('<StoryStreet/>'));
  assert.ok(app.includes('<OutletExperience/>'));
  assert.ok(app.includes('image="editorial/jojo-interior-space.webp"'));
- assert.ok(home.includes('/brands/editorial/jojo-street-friends.webp'));
+ assert.ok(home.includes('/brands/editorial/jojo-street-drink.webp'));
  for(const name of [
-  'jojo-street-drink','jojo-street-friends','jojo-street-overhead',
+  'jojo-street-drink','jojo-street-overhead',
   'jojo-street-moment','jojo-street-moving','jojo-avocado-harvest',
   'jojo-avocado-tree','jojo-avocado-juice','jojo-interior-counter',
   'jojo-interior-space','jojo-interior-seating','jojo-interior-brand'
@@ -160,4 +160,17 @@ test('homepage has four full-width, alternating editorial sections',()=>{
  assert.ok(fix.includes('aspect-ratio:16/9'));
  assert.ok(fix.includes('position:relative'));
  assert.ok(fix.includes('object-fit:contain'));
+});
+
+test('Gather section uses the official lifestyle drink photo without yellow slogan badge',()=>{
+ const home=read('src/editorial-home.tsx');
+ const start=home.indexOf('<section className="jojo-gather"');
+ const end=home.indexOf('</section>',start);
+ assert.ok(start>=0&&end>start);
+ const section=home.slice(start,end);
+ assert.ok(section.includes('/brands/editorial/jojo-street-drink.webp'));
+ assert.ok(!section.includes('jojo-gather-stamp'));
+ assert.ok(!section.includes('GOOD TIMES'));
+ assert.ok(existsSync(new URL('../public/brands/editorial/jojo-street-drink.webp',import.meta.url)));
+ assert.ok(section.includes('GATHER.'));
 });
