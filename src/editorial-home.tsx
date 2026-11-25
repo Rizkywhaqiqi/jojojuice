@@ -62,7 +62,7 @@ export default function EditorialHome(){
     </div>
     <a href="/menu" className="jojo-tropical-cta">EXPLORE OUR JUICES</a>
    </div>
-   <div className="jojo-tropical-photo"><JOJOVideo label="Video JOJO Juice untuk momen tropis sehari-hari"/></div>
+   <div className="jojo-tropical-photo"><img src="/brands/jojo-photo-1.webp" alt="Minuman JOJO Juice di atas kain piknik dengan buah tropis" loading="lazy"/></div>
   </section>
 
   <section className="jojo-tropical-feature" aria-labelledby="jojo-feature-title">
@@ -89,7 +89,7 @@ export default function EditorialHome(){
   </section>
 
   <section className="jojo-gather" aria-labelledby="jojo-gather-title">
-   <div className="jojo-gather-image"><JOJOVideo label="Video JOJO Juice untuk momen berkumpul"/><span className="jojo-gather-stamp">GOOD TIMES<br/>TASTE BETTER</span></div>
+   <div className="jojo-gather-image"><img src="/brands/jojo-moments.webp" alt="Momen santai menikmati JOJO Juice bersama teman" loading="lazy"/><span className="jojo-gather-stamp">GOOD TIMES<br/>TASTE BETTER</span></div>
    <div className="jojo-gather-copy"><span className="jojo-editorial-overline">EVERY SIP IS A MOMENT</span><h2 id="jojo-gather-title">GATHER.<br/>SIP.<br/><em>REPEAT.</em></h2><p>Ketemu, ngobrol, ketawa, dan ulangi. Bikin hari biasa jadi sedikit lebih spesial bareng JOJO.</p><a className="jojo-editorial-btn" href="/outlet">FIND OUR OUTLETS</a></div>
   </section>
 
