@@ -80,7 +80,7 @@ function Header({path}:{path:string}){
    document.removeEventListener('keydown',onKey);
    document.removeEventListener('focusin',onFocus);
   };
- },[]);
+ },[open]);
   useEffect(()=>{const onResize=()=>{if(window.innerWidth>1120)setOpen(false)};window.addEventListener('resize',onResize);return()=>window.removeEventListener('resize',onResize)},[]);
  const close=()=>{setOpen(false);requestAnimationFrame(()=>toggleRef.current?.focus())};
  const left=nav.slice(0,3);

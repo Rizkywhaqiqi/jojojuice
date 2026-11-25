@@ -311,3 +311,27 @@
 @media(prefers-reduced-motion:reduce){
  .jojo-tropical-video>video{animation:none!important}
 }
+
+/* Editorial layout refinement: clean text-to-video order, no 16:9 footage cropped to portrait. */
+.jojo-tropical-content,.jojo-tropical-feature-copy{min-width:0}
+.jojo-tropical-video{isolation:isolate}
+.jojo-tropical-story .jojo-tropical-video>video{object-position:50% 44%}
+.jojo-tropical-feature-video .jojo-tropical-video>video{object-position:50% 49%}
+@media(max-width:900px){
+ .jojo-tropical-story,.jojo-tropical-feature-video{display:flex;flex-direction:column}
+ .jojo-tropical-story .jojo-tropical-content,
+ .jojo-tropical-feature-video .jojo-tropical-feature-copy{order:0;padding:clamp(46px,8vw,72px) 6%}
+ .jojo-tropical-story .jojo-tropical-video,
+ .jojo-tropical-feature-video .jojo-tropical-video{
+  order:1;width:100%;aspect-ratio:16/9;min-height:0;background:#252525
+ }
+ .jojo-tropical-story .jojo-tropical-video>video,
+ .jojo-tropical-feature-video .jojo-tropical-video>video{object-fit:contain;background:#252525}
+}
+@media(max-width:520px){
+ .jojo-tropical-story .jojo-tropical-video,
+ .jojo-tropical-feature-video .jojo-tropical-video{aspect-ratio:16/9}
+ .jojo-tropical-story .jojo-tropical-content,
+ .jojo-tropical-feature-video .jojo-tropical-feature-copy{padding:47px 6% 53px}
+ .jojo-tropical-story h2,.jojo-tropical-feature-video h2{font-size:clamp(41px,10vw,57px);line-height:1.04}
+}

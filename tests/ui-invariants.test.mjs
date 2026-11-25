@@ -73,13 +73,40 @@ test('two uploaded JOJO moments silently loop in Home instead of Story',()=>{
  assert.ok(welcomeStart<welcomeHeading&&welcomeHeading<firstClip&&firstClip<everydayStart);
  assert.ok(everydayStart<everydayHeading&&everydayHeading<secondClip&&secondClip<favoritesStart);
  assert.ok(!home.includes('jojo-tropical-video-pair'));
- assert.match(home,/return <video ref={ref} src={source} poster={poster} muted loop playsInline preload="metadata"/);
- assert.match(home,/new IntersectionObserver/);
- assert.match(home,/reduced\.addEventListener\('change',sync\)/);
+ assert.ok(home.includes('const ref=useCoordinatedVideo()'));
+ const coordinator=read('src/use-coordinated-video.ts');
+ assert.ok(coordinator.includes('const candidates=new Map'));
+ assert.ok(coordinator.includes('const canPlay=!document.hidden'));
+ assert.ok(coordinator.includes('active.pause()'));
+ assert.ok(coordinator.includes("reduced.addEventListener('change',reconcile)"));
  assert.match(home,/source="\/media\/jojo-moments-1\.mp4"/);
  assert.match(home,/source="\/media\/jojo-moments-2\.mp4"/);
  assert.doesNotMatch(story,/jojo-moments-[12]\.mp4/);
  for(const file of ['jojo-moments-1.mp4','jojo-moments-2.mp4','jojo-moments-1-poster.webp','jojo-moments-2-poster.webp']){
   assert.ok(existsSync(new URL('../public/media/'+file,import.meta.url)),file+' must be deployed');
  }
+});
+
+test('mobile navigation dialog effects rerun after open changes',()=>{
+ const app=read('src/App.tsx');
+ const begin=app.indexOf('const background=Array.from(document.querySelectorAll');
+ const end=app.indexOf('useEffect(()=>{const onResize',begin);
+ assert.ok(begin>0&&end>begin);
+ const effect=app.slice(begin,end);
+ assert.ok(effect.includes('},[open]);'));
+ assert.ok(effect.includes("document.addEventListener('keydown',onKey)"));
+ assert.ok(effect.includes("document.addEventListener('focusin',onFocus)"));
+ assert.ok(effect.includes('oldInert.forEach'));
+});
+test('active menu category becomes visible in horizontal chips',()=>{
+ const menu=read('src/menu-catalog.tsx');
+ assert.ok(menu.includes('ref={shortcutsRef}'));
+ assert.ok(menu.includes('wrapper.scrollTo('));
+ assert.ok(menu.includes('[category,family,showAllCategories]'));
+});
+test('final ordering step is an accessible instruction not a fake CTA',()=>{
+ const guide=read('src/how-to-order.tsx');
+ assert.ok(guide.includes('KONFIRMASI DI PLATFORM PILIHANMU'));
+ assert.ok(guide.includes('<p className="how-order-step-finish" role="note">'));
+ assert.ok(!guide.includes('LANJUTKAN DI APLIKASI'));
 });

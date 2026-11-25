@@ -1,4 +1,4 @@
-import {useEffect,useRef} from 'react';
+import {useCoordinatedVideo} from './use-coordinated-video';
 import {JOJO_LINKS} from './jojo-links';
 import './editorial-home.css';
 
@@ -11,41 +11,11 @@ const picks=[
 function Spark({className=''}:{className?:string}){return <svg className={className} viewBox="0 0 90 90" fill="none" aria-hidden="true"><path d="M45 4c3 27 14 38 41 41-27 3-38 14-41 41C42 59 31 48 4 45 31 42 42 31 45 4Z" stroke="currentColor" strokeWidth="3" strokeLinejoin="round"/></svg>}
 
 function JOJOVideo({className='',label='Video JOJO Juice'}:{className?:string;label?:string}){
- const videoRef=useRef<HTMLVideoElement>(null);
- useEffect(()=>{
-  const video=videoRef.current;
-  if(!video)return;
-  const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
-  let visible=false;
-  const sync=()=>{
-   if(reducedMotion.matches||document.hidden||!visible){video.pause();return;}
-   video.play().catch(()=>{/* Autoplay may be blocked; the JOJO photo poster stays visible. */});
-  };
-  const observer=new IntersectionObserver(([entry])=>{visible=entry.isIntersecting&&entry.intersectionRatio>=.25;sync()},{threshold:[0,.25]});
-  observer.observe(video);
-  reducedMotion.addEventListener('change',sync);
-  document.addEventListener('visibilitychange',sync);
-  return()=>{observer.disconnect();reducedMotion.removeEventListener('change',sync);document.removeEventListener('visibilitychange',sync);video.pause()};
- },[]);
- return <video className={className} ref={videoRef} src="/media/jojovid.mp4" poster="/brands/jojo-photo-2.webp" muted loop playsInline preload="metadata" aria-label={label}/>;
+ const ref=useCoordinatedVideo();
+ return <video className={className} ref={ref} src="/media/jojovid.mp4" poster="/brands/jojo-photo-2.webp" muted loop playsInline preload="metadata" aria-label={label}/>;
 }
 function JOJOMomentVideo({source,poster,label}:{source:string;poster:string;label:string}){
- const ref=useRef<HTMLVideoElement>(null);
- useEffect(()=>{
-  const video=ref.current;
-  if(!video)return;
-  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
-  let visible=false;
-  const sync=()=>{
-   if(!visible||document.hidden||reduced.matches){video.pause();return;}
-   video.play().catch(()=>{/* Poster remains visible if browser autoplay is blocked. */});
-  };
-  const observer=new IntersectionObserver(([entry])=>{visible=entry.isIntersecting&&entry.intersectionRatio>=.25;sync()},{threshold:[0,.25]});
-  observer.observe(video);
-  reduced.addEventListener('change',sync);
-  document.addEventListener('visibilitychange',sync);
-  return()=>{observer.disconnect();reduced.removeEventListener('change',sync);document.removeEventListener('visibilitychange',sync);video.pause()};
- },[]);
+ const ref=useCoordinatedVideo();
  return <video ref={ref} src={source} poster={poster} muted loop playsInline preload="metadata" aria-label={label}/>;
 }
 function JOJOFilm(){return <section className="jojo-film" aria-label="Film pendek JOJO Juice"><div className="jojo-film-stage"><JOJOVideo label="Film produk minuman segar JOJO Juice"/></div></section>}

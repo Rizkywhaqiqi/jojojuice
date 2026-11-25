@@ -205,3 +205,15 @@
  .catalog-category-shortcuts{scroll-padding-inline:16px}
 }
 @media(max-width:380px){.catalog-price-item{gap:9px}.catalog-price-item strong{font-size:13px}}
+
+/* Scrollable categories and denser mobile discovery. */
+.catalog-category-shortcuts{scroll-padding-inline:16px;-webkit-overflow-scrolling:touch}
+.catalog-category-shortcuts button{scroll-margin-inline:12px}
+@media(max-width:760px){
+ .catalog-featured{gap:18px}
+ .catalog-featured-images{gap:10px}
+ .catalog-featured-images figure img{max-height:180px}
+ .catalog-control-row{align-items:stretch}
+ .catalog-body-head{gap:14px}
+}
+@media(max-width:390px){.catalog-control-row{grid-template-columns:1fr}.catalog-families button{letter-spacing:0}}
