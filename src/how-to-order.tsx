@@ -11,8 +11,8 @@ export default function HowToOrder(){
  return <div className="how-order">
   <section className="how-order-hero">
    <div className="how-order-hero-media" aria-hidden="true">
-    <img className="how-order-hero-fallback" src="/brands/jojo-refresh.webp" alt="" fetchPriority="high"/>
-    <video className="how-order-hero-video" autoPlay muted loop playsInline preload="metadata" poster="/brands/jojo-refresh.webp" aria-hidden="true" onError={event=>{event.currentTarget.style.display='none'}}>
+    <img className="how-order-hero-fallback" src="/media/how-to-order-hero-poster.webp" alt="" fetchPriority="high"/>
+    <video className="how-order-hero-video" autoPlay muted loop playsInline preload="metadata" poster="/media/how-to-order-hero-poster.webp" aria-hidden="true" onError={event=>{event.currentTarget.style.display='none'}}>
      <source src="/media/how-to-order-hero.mp4" type="video/mp4"/>
     </video>
    </div>
