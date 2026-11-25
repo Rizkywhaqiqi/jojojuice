@@ -61,6 +61,7 @@ export default function MenuCatalog(){
  const [category,setCategory]=useState('all');
  const [query,setQuery]=useState('');
  const [sort,setSort]=useState<Sort>('default');
+ const [showAllCategories,setShowAllCategories]=useState(false);
  const search=query.trim().toLocaleLowerCase('id');
  const availableGroups=useMemo(()=>groups.filter(group=>family==='all'||(family==='drink'?drinkIds.has(group.id):family==='food'?!drinkIds.has(group.id):group.items.some(item=>item.featured))),[family]);
  const filtered=useMemo(()=>availableGroups.filter(group=>category==='all'||category===group.id).map(group=>{
@@ -70,8 +71,8 @@ export default function MenuCatalog(){
  }).filter(group=>group.items.length>0).sort((a,b)=>sort==='default'?0:sort==='low'?a.items[0].price-b.items[0].price:b.items[0].price-a.items[0].price),[availableGroups,category,search,sort,family]);
  const count=filtered.reduce((sum,g)=>sum+g.items.length,0);
  const total=groups.reduce((sum,g)=>sum+g.items.length,0);
- const chooseFamily=(next:Family)=>{setFamily(next);setCategory('all')};
- const reset=()=>{setFamily('all');setCategory('all');setQuery('');setSort('default')};
+ const chooseFamily=(next:Family)=>{setFamily(next);setCategory('all');setShowAllCategories(false)};
+ const reset=()=>{setFamily('all');setCategory('all');setQuery('');setSort('default');setShowAllCategories(false)};
  return <div className="menu-catalog">
   <section className="catalog-intro">
    <span className="eyebrow">FEEL FRESH. LIVE FUN.</span>
@@ -92,6 +93,11 @@ export default function MenuCatalog(){
    <div className="catalog-controls">
     <div className="catalog-families" role="group" aria-label="Jenis menu">
      {([{id:'all',label:'SEMUA'},{id:'drink',label:'MINUMAN'},{id:'food',label:'MAKANAN'},{id:'favorite',label:'FAVORIT'}] as const).map(tab=><button key={tab.id} type="button" className={family===tab.id?'active':''} aria-pressed={family===tab.id} onClick={()=>chooseFamily(tab.id)}>{tab.label}</button>)}
+    </div>
+    <div className="catalog-category-shortcuts" aria-label="Pintasan kategori">
+     <button type="button" className={category==='all'?'active':''} aria-pressed={category==='all'} onClick={()=>setCategory('all')}>SEMUA KATEGORI</button>
+     {availableGroups.slice(0,showAllCategories?availableGroups.length:5).map(group=><button type="button" key={group.id} className={category===group.id?'active':''} aria-pressed={category===group.id} onClick={()=>setCategory(group.id)}>{group.title}</button>)}
+     {availableGroups.length>5&&<button type="button" className="catalog-category-more" aria-expanded={showAllCategories} onClick={()=>setShowAllCategories(value=>!value)}>{showAllCategories?'LEBIH SEDIKIT':'+ KATEGORI LAIN'}</button>}
     </div>
     <div className="catalog-control-row">
      <label className="catalog-search"><span className="sr-only">Cari menu</span><input type="search" value={query} onChange={event=>setQuery(event.target.value)} placeholder="Cari minuman, buah, makanan…" aria-label="Cari nama menu"/>{query&&<button type="button" onClick={()=>setQuery('')} aria-label="Hapus pencarian">×</button>}</label>

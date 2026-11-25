@@ -1,4 +1,4 @@
-import {useEffect,useRef,useState} from 'react';
+import {useEffect,useRef} from 'react';
 import {JOJO_LINKS} from './jojo-links';
 import './editorial-home.css';
 
@@ -18,34 +18,36 @@ function PhotoStamp({src,alt,caption,className}:{src:string;alt:string;caption:s
 }
 function JOJOFilm(){
  const videoRef=useRef<HTMLVideoElement>(null);
- const [playing,setPlaying]=useState(false);
- const [muted,setMuted]=useState(true);
  useEffect(()=>{
-  const media=window.matchMedia('(prefers-reduced-motion: reduce)');
-  if(media.matches){videoRef.current?.pause();return;}
-  const promise=videoRef.current?.play();
-  promise?.catch(()=>setPlaying(false));
+  const video=videoRef.current;
+  if(!video)return;
+  const motion=window.matchMedia('(prefers-reduced-motion: reduce)');
+  const syncPlayback=()=>{
+   if(motion.matches||document.hidden||!visible){
+    video.pause();
+    return;
+   }
+   video.play().catch(()=>{/* Browser autoplay may be blocked; poster remains visible. */});
+  };
+  let visible=false;
+  const observer=new IntersectionObserver(([entry])=>{
+   visible=entry.isIntersecting&&entry.intersectionRatio>=0.25;
+   syncPlayback();
+  },{threshold:[0,0.25]});
+  observer.observe(video);
+  motion.addEventListener('change',syncPlayback);
+  document.addEventListener('visibilitychange',syncPlayback);
+  return()=>{
+   observer.disconnect();
+   motion.removeEventListener('change',syncPlayback);
+   document.removeEventListener('visibilitychange',syncPlayback);
+   video.pause();
+  };
  },[]);
- const togglePlay=()=>{
-  const video=videoRef.current;
-  if(!video)return;
-  if(video.paused){video.play().catch(()=>setPlaying(false));}
-  else video.pause();
- };
- const toggleMute=()=>{
-  const video=videoRef.current;
-  if(!video)return;
-  video.muted=!video.muted;
-  setMuted(video.muted);
- };
  return <section className="jojo-film" aria-label="JOJO Juice brand video">
   <div className="jojo-film-header"><span className="jojo-editorial-overline">SIX SECONDS OF FRESH</span><span className="jojo-film-divider" aria-hidden="true"/><span className="jojo-editorial-overline">THIS IS JOJO.</span></div>
   <div className="jojo-film-stage">
-   <video ref={videoRef} src="/media/jojovid.mp4" poster="/brands/jojo-refresh.webp" muted={muted} loop playsInline preload="metadata" autoPlay onPlay={()=>setPlaying(true)} onPause={()=>setPlaying(false)} onVolumeChange={event=>setMuted(event.currentTarget.muted)} aria-label="Video singkat produk minuman JOJO Juice"/>
-   <div className="jojo-film-controls">
-    <button type="button" onClick={togglePlay} aria-label={playing?'Jeda video JOJO':'Putar video JOJO'}>{playing?'PAUSE':'PLAY'}</button>
-    <button type="button" onClick={toggleMute} aria-label={muted?'Nyalakan suara video':'Matikan suara video'}>{muted?'SOUND OFF':'SOUND ON'}</button>
-   </div>
+   <video ref={videoRef} src="/media/jojovid.mp4" poster="/brands/jojo-refresh.webp" muted loop playsInline preload="metadata" aria-label="Video singkat produk minuman JOJO Juice"/>
   </div>
  </section>;
 }

@@ -164,3 +164,11 @@
  .catalog-intro h1{font-size:65px}
 }
 @media(prefers-reduced-motion:reduce){.catalog-families button,.catalog-results .catalog-group{transition:none!important}}
+
+/* UX audit: touch-friendly, horizontally scrollable category shortcuts. */
+.catalog-category-shortcuts{display:flex;gap:8px;align-items:center;overflow-x:auto;scrollbar-width:thin;overscroll-behavior-inline:contain;padding:12px 16px;border-bottom:1px solid rgba(237,28,36,.2)}
+.catalog-category-shortcuts button{flex:0 0 auto;min-height:44px;padding:10px 14px;border:1px solid rgba(237,28,36,.4);background:#FEFEFE;color:#ED1C24;font:800 11px/1.2 var(--jojo-body,Arial,sans-serif);cursor:pointer}
+.catalog-category-shortcuts button.active{background:#ED1C24;color:#FEFEFE}
+.catalog-category-shortcuts button:focus-visible{outline:3px solid #39BFE7;outline-offset:2px}
+.catalog-category-shortcuts .catalog-category-more{border-style:dashed}
+@media(max-width:760px){.catalog-category-shortcuts{padding:10px 13px;gap:6px}.catalog-category-shortcuts button{font-size:10px;padding:9px 11px}.catalog-control-row{gap:11px}}
