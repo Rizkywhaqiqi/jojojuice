@@ -268,3 +268,17 @@
  .jojo-editorial .jojo-editorial-hero h1{font-size:clamp(64px,14vw,105px)}
 }
 @media(max-width:390px){.jojo-editorial .jojo-editorial-hero h1{font-size:clamp(55px,13vw,70px)}}
+
+/* Responsive editorial: full-width product imagery on narrow mobile. */
+@media(max-width:760px){
+ .jojo-editorial .jojo-picks-grid{grid-template-columns:1fr;max-width:520px;gap:24px}
+ .jojo-pick-media{aspect-ratio:5/4}
+ .jojo-editorial .jojo-pick h3{font-size:clamp(31px,8vw,41px)}
+ .jojo-editorial .jojo-pick-link{display:inline-flex;align-items:center;min-height:44px;padding-top:9px}
+ .jojo-tropical-story h2,.jojo-tropical-feature h2{overflow-wrap:normal;hyphens:none}
+}
+@media(max-width:390px){
+ .jojo-editorial .jojo-editorial-hero-content{width:88%}
+ .jojo-editorial .jojo-editorial-hero h1{font-size:clamp(53px,12.5vw,68px)}
+ .jojo-tropical-content,.jojo-tropical-feature-copy{padding-inline:6%}
+}

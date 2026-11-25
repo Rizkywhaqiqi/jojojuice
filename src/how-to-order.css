@@ -30,3 +30,8 @@
 /* UX audit: comfortable touch targets for ordering step links. */
 .how-order-step>a{display:inline-flex;align-items:center;min-height:44px;line-height:1.35}
 .how-order-step>a:focus-visible{outline:3px solid #39BFE7;outline-offset:3px}
+
+/* The third step is instruction, not a duplicate platform-selection link. */
+#order-platforms{scroll-margin-top:clamp(70px,9vh,112px)}
+.how-order-step-finish{display:inline-flex;align-self:flex-start;align-items:center;min-height:44px;margin-top:auto;border-top:1px solid rgba(237,28,36,.25);padding:8px 0;color:#ED1C24;font:900 11px/1.35 var(--jojo-body,Arial,sans-serif);letter-spacing:.06em}
+@media(max-width:760px){.how-order-step-finish{margin-top:8px}}

@@ -66,9 +66,19 @@ export default function MenuCatalog(){
  const availableGroups=useMemo(()=>groups.filter(group=>family==='all'||(family==='drink'?drinkIds.has(group.id):family==='food'?!drinkIds.has(group.id):group.items.some(item=>item.featured))),[family]);
  const filtered=useMemo(()=>availableGroups.filter(group=>category==='all'||category===group.id).map(group=>{
   const items=group.items.filter(item=>(family!=='favorite'||item.featured)&&(!search||[item.name,group.title,group.subtitle].some(text=>text.toLocaleLowerCase('id').includes(search))));
-  if(sort!=='default')items.sort((a,b)=>sort==='low'?a.price-b.price:b.price-a.price);
   return {...group,items};
- }).filter(group=>group.items.length>0).sort((a,b)=>sort==='default'?0:sort==='low'?a.items[0].price-b.items[0].price:b.items[0].price-a.items[0].price),[availableGroups,category,search,sort,family]);
+ }).filter(group=>group.items.length>0),[availableGroups,category,search,family]);
+ // When sorting by price, compare ALL matching items across category boundaries.
+ const sortedItems=useMemo(()=>filtered.flatMap(group=>group.items.map(item=>({
+  ...item,groupTitle:group.title,groupId:group.id
+ }))).sort((a,b)=>sort==='high'?b.price-a.price:a.price-b.price),[filtered,sort]);
+ const shortcutGroups=useMemo(()=>{
+  if(showAllCategories)return availableGroups;
+  const firstFive=availableGroups.slice(0,5);
+  if(category==='all'||firstFive.some(group=>group.id===category))return firstFive;
+  const active=availableGroups.find(group=>group.id===category);
+  return active?[active,...firstFive.slice(0,4)]:firstFive;
+ },[availableGroups,category,showAllCategories]);
  const count=filtered.reduce((sum,g)=>sum+g.items.length,0);
  const total=groups.reduce((sum,g)=>sum+g.items.length,0);
  const chooseFamily=(next:Family)=>{setFamily(next);setCategory('all');setShowAllCategories(false)};
@@ -100,17 +110,22 @@ export default function MenuCatalog(){
     </div>
     <div className="catalog-category-shortcuts" aria-label="Pintasan kategori">
      <button type="button" className={category==='all'?'active':''} aria-pressed={category==='all'} onClick={()=>setCategory('all')}>SEMUA KATEGORI</button>
-     {availableGroups.slice(0,showAllCategories?availableGroups.length:5).map(group=><button type="button" key={group.id} className={category===group.id?'active':''} aria-pressed={category===group.id} onClick={()=>setCategory(group.id)}>{group.title}</button>)}
+     {shortcutGroups.map(group=><button type="button" key={group.id} className={category===group.id?'active':''} aria-pressed={category===group.id} onClick={()=>setCategory(group.id)}>{group.title}</button>)}
      {availableGroups.length>5&&<button type="button" className="catalog-category-more" aria-expanded={showAllCategories} onClick={()=>setShowAllCategories(value=>!value)}>{showAllCategories?'LEBIH SEDIKIT':'+ KATEGORI LAIN'}</button>}
     </div>
     <div className="catalog-control-row">
      <label className="catalog-search"><span className="sr-only">Cari menu</span><input type="search" value={query} onChange={event=>setQuery(event.target.value)} placeholder="Cari minuman, buah, makanan…" aria-label="Cari nama menu"/>{query&&<button type="button" onClick={()=>setQuery('')} aria-label="Hapus pencarian">×</button>}</label>
      <label className="catalog-control-select"><span>KATEGORI</span><select value={category} onChange={event=>setCategory(event.target.value)} aria-label="Pilih kategori"><option value="all">Semua kategori</option>{availableGroups.map(group=><option value={group.id} key={group.id}>{group.title}</option>)}</select></label>
-     <label className="catalog-control-select catalog-sort"><span>URUTKAN</span><select value={sort} onChange={event=>setSort(event.target.value as Sort)} aria-label="Urutkan berdasarkan harga"><option value="default">Urutan menu</option><option value="low">Kategori termurah dulu</option><option value="high">Kategori termahal dulu</option></select></label>
+     <label className="catalog-control-select catalog-sort"><span>URUTKAN</span><select value={sort} onChange={event=>setSort(event.target.value as Sort)} aria-label="Urutkan berdasarkan harga"><option value="default">Urutan menu</option><option value="low">Harga terendah (semua menu)</option><option value="high">Harga tertinggi (semua menu)</option></select></label>
     </div>
    </div>
    <div className="catalog-result-line"><p aria-live="polite"><strong>{count}</strong> PILIHAN · {filtered.length} KATEGORI</p>{(family!=='all'||category!=='all'||query||sort!=='default')&&<button type="button" className="catalog-reset" onClick={reset}>RESET FILTER</button>}</div>
-   {count===0?<div className="catalog-empty"><h3>BELUM KETEMU.</h3><p>Coba nama lain atau kembali ke seluruh pilihan.</p><button type="button" className="button" onClick={reset}>LIHAT SEMUA MENU</button></div>:<div className="catalog-results">{filtered.map((group,index)=><section className="catalog-group" key={group.id} aria-labelledby={'cat-'+group.id}>
+   {count===0?<div className="catalog-empty"><h3>BELUM KETEMU.</h3><p>Coba nama lain atau kembali ke seluruh pilihan.</p><button type="button" className="button" onClick={reset}>LIHAT SEMUA MENU</button></div>:sort!=='default'?<div className="catalog-price-list" aria-label={sort==='low'?'Menu dari harga terendah':'Menu dari harga tertinggi'}>
+     {sortedItems.map(item=><article className="catalog-price-item" key={item.groupId+'-'+item.name}>
+      <div><span className="catalog-price-category">{item.groupTitle}</span><h3>{item.name}</h3>{item.featured&&<span className="catalog-favorite">FAVORIT</span>}</div>
+      <strong>{format(item.price)}</strong>
+     </article>)}
+    </div>:<div className="catalog-results">{filtered.map((group,index)=><section className="catalog-group" key={group.id} aria-labelledby={'cat-'+group.id}>
     <div className="catalog-group-top"><div><span className="catalog-index">{String(index+1).padStart(2,'0')} / {drinkIds.has(group.id)?'MINUMAN':'MAKANAN'}</span><h3 id={'cat-'+group.id}>{group.title}</h3><p>{group.subtitle}</p></div>{group.image&&<img src={group.image} alt={group.imageAlt||group.title} width="160" height="165" loading="lazy"/>}</div>
     <div className="catalog-item-grid">{group.items.map(item=><article className="catalog-item" key={item.name}><div><span className="catalog-item-name">{item.name}</span>{item.featured&&<span className="catalog-favorite">FAVORIT</span>}</div><strong>{format(item.price)}</strong></article>)}</div>
    </section>)}</div>}

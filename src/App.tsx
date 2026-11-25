@@ -43,27 +43,46 @@ function Header({path}:{path:string}){
  },[path]);
  useEffect(()=>{
   if(!open)return;
+  const dialog=overlayRef.current;
   const previousOverflow=document.body.style.overflow;
+  // Hide all background content from pointer, keyboard and assistive-technology navigation.
+  const background=Array.from(document.querySelectorAll<HTMLElement>('.anna-header,#main-content,.jojo-site-footer,.skip-to-content'));
+  const oldInert=background.map(node=>({node,inert:node.inert}));
   document.body.style.overflow='hidden';
-  const first=overlayRef.current?.querySelector<HTMLAnchorElement>('.anna-overlay-links a');
-  first?.focus();
+  background.forEach(node=>{node.inert=true});
+  const focusable=()=>Array.from(dialog?.querySelectorAll<HTMLElement>('a[href],button:not([disabled]):not([tabindex="-1"])')??[])
+   .filter(node=>node.getClientRects().length>0);
+  const items=focusable();
+  (items.find(node=>node.classList.contains('anna-overlay-close'))??items[0])?.focus();
+  const closeWithFocus=()=>{setOpen(false);requestAnimationFrame(()=>toggleRef.current?.focus())};
   const onKey=(event:KeyboardEvent)=>{
-   if(event.key==='Escape'){
-    event.preventDefault();setOpen(false);toggleRef.current?.focus();
-   }
-   if(event.key==='Tab'&&overlayRef.current){
-    const focusable=Array.from(overlayRef.current.querySelectorAll<HTMLElement>('a[href],button:not([disabled]):not([tabindex="-1"])'));
-    const firstItem=focusable[0],lastItem=focusable[focusable.length-1];
-    if(!firstItem||!lastItem)return;
-    if(event.shiftKey&&document.activeElement===firstItem){event.preventDefault();lastItem.focus();}
-    else if(!event.shiftKey&&document.activeElement===lastItem){event.preventDefault();firstItem.focus();}
+   if(event.key==='Escape'){event.preventDefault();closeWithFocus();return;}
+   if(event.key!=='Tab')return;
+   const options=focusable();
+   if(!options.length){event.preventDefault();return;}
+   const first=options[0],last=options[options.length-1];
+   if(!dialog?.contains(document.activeElement)){
+    event.preventDefault();(event.shiftKey?last:first).focus();
+   }else if(event.shiftKey&&document.activeElement===first){
+    event.preventDefault();last.focus();
+   }else if(!event.shiftKey&&document.activeElement===last){
+    event.preventDefault();first.focus();
    }
   };
-  window.addEventListener('keydown',onKey);
-  return()=>{document.body.style.overflow=previousOverflow;window.removeEventListener('keydown',onKey)};
- },[open]);
- useEffect(()=>{const onResize=()=>{if(window.innerWidth>1120)setOpen(false)};window.addEventListener('resize',onResize);return()=>window.removeEventListener('resize',onResize)},[]);
- const close=()=>{setOpen(false);toggleRef.current?.focus()};
+  const onFocus=(event:FocusEvent)=>{
+   if(dialog&&!dialog.contains(event.target as Node))focusable()[0]?.focus();
+  };
+  document.addEventListener('keydown',onKey);
+  document.addEventListener('focusin',onFocus);
+  return()=>{
+   document.body.style.overflow=previousOverflow;
+   oldInert.forEach(({node,inert})=>{node.inert=inert});
+   document.removeEventListener('keydown',onKey);
+   document.removeEventListener('focusin',onFocus);
+  };
+ },[]);
+  useEffect(()=>{const onResize=()=>{if(window.innerWidth>1120)setOpen(false)};window.addEventListener('resize',onResize);return()=>window.removeEventListener('resize',onResize)},[]);
+ const close=()=>{setOpen(false);requestAnimationFrame(()=>toggleRef.current?.focus())};
  const left=nav.slice(0,3);
  const right=nav.slice(3);
  return <>
