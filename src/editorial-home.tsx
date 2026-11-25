@@ -66,7 +66,7 @@ export default function EditorialHome(){
   </section>
 
   <section className="jojo-tropical-feature" aria-labelledby="jojo-feature-title">
-   <div className="jojo-tropical-feature-photo"><img src="/brands/jojo-photo-2.webp" alt="Keranjang berisi buah tropis dan minuman JOJO Juice di tepi pantai" loading="lazy"/></div>
+   <div className="jojo-tropical-feature-photo"><img src="/brands/jojo-together.webp" alt="Dua minuman JOJO dinikmati bersama dalam suasana cerah" loading="lazy"/></div>
    <div className="jojo-tropical-feature-copy">
     <span className="jojo-editorial-overline">MADE FOR EVERYDAY MOMENTS</span>
     <h2 id="jojo-feature-title">MADE FRESH.<br/><em>MADE FOR FUN.</em></h2>
@@ -97,7 +97,7 @@ export default function EditorialHome(){
    <div className="jojo-community-top"><span className="jojo-editorial-overline">FRESHNESS IN EVERY FEED</span><h2>STAY IN <em>THE LOOP.</em></h2><p>Ikuti cerita, menu terbaru, dan momen segar JOJO di Instagram.</p></div>
    <div className="jojo-community-photos">
     <a href={JOJO_LINKS.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram JOJO - minuman Dragon Ball"><img src="/brands/jojo-dragon.webp" alt="Dragon Ball JOJO" loading="lazy"/></a>
-    <a href={JOJO_LINKS.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram JOJO - momen bersama"><img src="/brands/jojo-together.webp" alt="Momen bersama JOJO" loading="lazy"/></a>
+    <a href={JOJO_LINKS.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram JOJO - momen bersama"><img src="/brands/jojo-hero.webp" alt="Suasana segar JOJO Juice" loading="lazy"/></a>
     <a href={JOJO_LINKS.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram JOJO - minuman segar"><img src="/brands/jojo-green.webp" alt="Minuman Green N Glow JOJO" loading="lazy"/></a>
     <a href={JOJO_LINKS.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram JOJO - piknik"><img src="/brands/jojo-picnic.webp" alt="Momen piknik JOJO" loading="lazy"/></a>
    </div>
