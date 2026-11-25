@@ -16,7 +16,7 @@ function JOJOVideo({className='',label='Video JOJO Juice'}:{className?:string;la
 }
 function JOJOMomentVideo({source,poster,label}:{source:string;poster:string;label:string}){
  const ref=useCoordinatedVideo();
- return <video ref={ref} src={source} poster={poster} muted loop playsInline preload="metadata" aria-label={label}/>;
+ return <video ref={ref} src={source} poster={poster} muted loop playsInline preload="none" aria-label={label}/>;
 }
 function JOJOFilm(){return <section className="jojo-film" aria-label="Film pendek JOJO Juice"><div className="jojo-film-stage"><JOJOVideo label="Film produk minuman segar JOJO Juice"/></div></section>}
 

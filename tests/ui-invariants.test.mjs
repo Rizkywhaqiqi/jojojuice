@@ -216,3 +216,17 @@ test('homepage uses the exact uploaded JOJO cooler photograph',()=>{
  assert.equal(home.split('<JOJOFilm/>').length-1,1);
  assert.equal((home.match(/<JOJOMomentVideo source=/g)??[]).length,2);
 });
+
+test('deployment runtime and above-the-fold media are explicitly optimized',()=>{
+ const pkg=JSON.parse(read('package.json'));
+ assert.equal(pkg.engines.node,'26.x');
+ const index=read('index.html');
+ assert.ok(index.includes('rel="preload" as="image" href="/brands/jojo-home-cooler-original-20261125.jpg"'));
+ const home=read('src/editorial-home.tsx');
+ assert.ok(home.includes('poster={poster} muted loop playsInline preload="none"'));
+ assert.ok(home.includes('fetchPriority="high"'));
+ const app=read('src/App.tsx');
+ assert.ok(!app.includes('function Home(){'));
+ assert.ok(!app.includes('function Products(){'));
+ assert.ok(app.includes('path===\'/\'?<EditorialHome/>'));
+});
