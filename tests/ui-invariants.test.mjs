@@ -230,3 +230,14 @@ test('deployment runtime and above-the-fold media are explicitly optimized',()=>
  assert.ok(!app.includes('function Products(){'));
  assert.ok(app.includes('path===\'/\'?<EditorialHome/>'));
 });
+
+test('How to Order hero supports uploaded looping video with a readable fallback',()=>{
+ const order=read('src/how-to-order.tsx');
+ const styles=read('src/how-to-order.css');
+ assert.match(order,/className="how-order-hero-video"/);
+ assert.match(order,/source src="\/media\/how-to-order-hero\.mp4"/);
+ assert.match(order,/autoPlay muted loop playsInline/);
+ assert.match(order,/how-order-hero-fallback/);
+ assert.match(styles,/\.how-order-hero-media::after/);
+ assert.match(styles,/prefers-reduced-motion:reduce/);
+});
