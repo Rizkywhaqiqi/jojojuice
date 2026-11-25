@@ -1,4 +1,4 @@
-/* JOJO motion: readable first, animated on entrance. No extra runtime dependency. */
+/* JOJO motion: all content readable by default; animation is an enhancement. */
 @media(prefers-reduced-motion:no-preference){
  @keyframes jojo-rise{
   from{opacity:0;transform:translate3d(0,20px,0)}
@@ -12,12 +12,16 @@
   from{transform:scale(1.04)}
   to{transform:scale(1)}
  }
+
+ /* Page-level media and headings. */
  .hero>img{animation:jojo-photo 1.25s cubic-bezier(.2,.75,.2,1) both;transform-origin:center}
- .hero .eyebrow,.banner h1,.catalog-intro>.eyebrow{animation:jojo-rise .6s .08s ease-out both}
+ .hero .eyebrow,.banner h1,.catalog-intro-content>.eyebrow{animation:jojo-rise .6s .08s ease-out both}
  .hero h1,.catalog-intro h1{animation:jojo-rise .85s .17s cubic-bezier(.2,.7,.2,1) both}
  .hero p,.catalog-intro p{animation:jojo-rise .7s .3s ease-out both}
  .hero .actions,.catalog-intro-links{animation:jojo-rise .7s .4s ease-out both}
  .motion-visible{animation:jojo-reveal .7s cubic-bezier(.22,.75,.24,1) both}
+
+ /* Keep hover motion restrained and only for pointer-capable devices. */
  .product-grid article>img,.catalog-featured-images img,.catalog-group-top>img{
   transition:transform .55s cubic-bezier(.2,.75,.2,1)
  }
@@ -25,7 +29,7 @@
  .story-split figure img,.visual-split>img,.community>img{
   transition:transform .75s cubic-bezier(.2,.75,.2,1)
  }
- .button,.catalog-category-bar button,.catalog-inline-cta,.desktop-nav a,.mobile-nav a{
+ .button,.catalog-category-shortcuts button,.catalog-inline-cta{
   transition:color .22s ease,background-color .22s ease,transform .22s ease,box-shadow .22s ease
  }
  @media(hover:hover) and (pointer:fine){
@@ -33,13 +37,12 @@
   .product-grid article:hover img,.catalog-featured-images figure:hover img{transform:scale(1.04)}
   .story-split figure:hover img,.visual-split:hover>img,.community:hover>img{transform:scale(1.025)}
   .button:hover{transform:translateY(-2px);box-shadow:0 8px 18px #18171024}
-  .desktop-nav a:hover{transform:translateY(-2px)}
  }
  .button:active{transform:translateY(0) scale(.98);box-shadow:none}
- .catalog-category-bar button:active{transform:scale(.97)}
+ .catalog-category-shortcuts button:active{transform:scale(.97)}
 }
 @media(prefers-reduced-motion:reduce){
  .hero>img,.hero h1,.hero p,.hero .actions,.hero .eyebrow,.banner h1,
- .catalog-intro>.eyebrow,.catalog-intro h1,.catalog-intro p,.catalog-intro-links,
+ .catalog-intro-content>.eyebrow,.catalog-intro h1,.catalog-intro p,.catalog-intro-links,
  .motion-visible{animation:none!important;transform:none!important;opacity:1!important}
 }
