@@ -29,6 +29,25 @@ function JOJOVideo({className='',label='Video JOJO Juice'}:{className?:string;la
  },[]);
  return <video className={className} ref={videoRef} src="/media/jojovid.mp4" poster="/brands/jojo-photo-2.webp" muted loop playsInline preload="metadata" aria-label={label}/>;
 }
+function JOJOMomentVideo({source,poster,label}:{source:string;poster:string;label:string}){
+ const ref=useRef<HTMLVideoElement>(null);
+ useEffect(()=>{
+  const video=ref.current;
+  if(!video)return;
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
+  let visible=false;
+  const sync=()=>{
+   if(!visible||document.hidden||reduced.matches){video.pause();return;}
+   video.play().catch(()=>{/* Poster remains visible if browser autoplay is blocked. */});
+  };
+  const observer=new IntersectionObserver(([entry])=>{visible=entry.isIntersecting&&entry.intersectionRatio>=.25;sync()},{threshold:[0,.25]});
+  observer.observe(video);
+  reduced.addEventListener('change',sync);
+  document.addEventListener('visibilitychange',sync);
+  return()=>{observer.disconnect();reduced.removeEventListener('change',sync);document.removeEventListener('visibilitychange',sync);video.pause()};
+ },[]);
+ return <video ref={ref} src={source} poster={poster} muted loop playsInline preload="metadata" aria-label={label}/>;
+}
 function JOJOFilm(){return <section className="jojo-film" aria-label="Film pendek JOJO Juice"><div className="jojo-film-stage"><JOJOVideo label="Film produk minuman segar JOJO Juice"/></div></section>}
 
 export default function EditorialHome(){
@@ -66,7 +85,10 @@ export default function EditorialHome(){
   </section>
 
   <section className="jojo-tropical-feature" aria-labelledby="jojo-feature-title">
-   <div className="jojo-tropical-feature-photo"><img src="/brands/jojo-together.webp" alt="Dua minuman JOJO dinikmati bersama dalam suasana cerah" loading="lazy"/></div>
+   <div className="jojo-tropical-feature-photo jojo-tropical-video-pair" aria-label="Dua video momen JOJO">
+    <JOJOMomentVideo source="/media/jojo-moments-1.mp4" poster="/media/jojo-moments-1-poster.webp" label="Video JOJO Juice saat jalan-jalan di kota"/>
+    <JOJOMomentVideo source="/media/jojo-moments-2.mp4" poster="/media/jojo-moments-2-poster.webp" label="Video JOJO Juice bersama teman di luar ruangan"/>
+   </div>
    <div className="jojo-tropical-feature-copy">
     <span className="jojo-editorial-overline">MADE FOR EVERYDAY MOMENTS</span>
     <h2 id="jojo-feature-title">MADE FRESH.<br/><em>MADE FOR FUN.</em></h2>

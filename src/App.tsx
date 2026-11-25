@@ -113,46 +113,11 @@ function Footer(){return <footer className="jojo-site-footer">
 function Banner({title,image,eyebrow,copy,cta,href}:{title:string;image:string;eyebrow:string;copy:string;cta:string;href:string}){return <section className="banner jojo-page-hero"><img src={'/brands/'+image} alt="" fetchPriority="high"/><div className="banner-inner"><span className="eyebrow">{eyebrow}</span><h1>{title}</h1><p>{copy}</p><a className="jojo-page-hero-link" href={href}>{cta}</a></div></section>}
 function Products(){return <section className="products section"><h2>MADE FRESH DAILY.</h2><p className="center-copy">Pilihan visual minuman JOJO. Menu dan harga terbaru bisa dikonfirmasi lewat outlet resmi.</p><div className="product-grid">{products.map(p=><article key={p.name}><img src={'/brands/'+p.img} alt={p.name} loading="lazy"/><h3>{p.name}</h3><p>{p.desc}</p></article>)}</div><div className="center"><CTA href="/menu">LIHAT MENU LENGKAP</CTA></div></section>}
 function Home(){return <><section className="hero"><img src="/brands/jojo-hero.webp" alt="Minuman JOJO Juice segar" fetchPriority="high"/><div className="hero-inner"><span className="eyebrow">PONTIANAK · EST. 2007</span><h1>FEEL FRESH.<br/><em>LIVE FUN.</em></h1><p>Segarnya buah, serunya tiap hari.</p><div className="actions"><CTA href="/menu">EXPLORE OUR MENU</CTA><CTA href="/how-to-order">HOW TO ORDER</CTA></div></div></section><section className="story-split section"><div><span className="eyebrow">WELCOME TO JOJO</span><h2>FRESH BUAT<br/><em>SETIAP MOMEN.</em></h2><p>JOJO hadir dari Pontianak sejak 2007. Dari jeda kuliah sampai nongkrong, selalu ada momen yang lebih asik bersama rasa segar.</p><CTA href="/story">LEARN MORE</CTA></div><figure><img src="/brands/jojo-together.webp" alt="Dua minuman JOJO dinikmati bersama" loading="lazy"/></figure></section><section className="visual-split"><img src="/brands/jojo-picnic.webp" alt="JOJO dalam momen piknik" loading="lazy"/><div><span className="eyebrow">FRESHNESS IN EVERY SIP</span><h2>YANG SEGAR,<br/><em>BUAT HARI INI.</em></h2><p>Minuman berbasis buah dengan pilihan rasa untuk menemani aktivitasmu.</p><CTA href="/menu">EXPLORE MENU</CTA></div></section><Products/><section className="community"><div><span className="eyebrow">EVERYDAY MOMENTS</span><h2>KETEMU.<br/>NGOBROL.<br/><em>HAVE FUN.</em></h2><CTA href="/outlet" outline>CARI OUTLET</CTA></div><img src="/brands/jojo-moments.webp" alt="Momen santai bersama JOJO" loading="lazy"/></section><OrderOptions compact/><section className="closing"><h2>JOJO AJA.</h2><CTA>ORDER NOW</CTA></section></>}
-function StoryLoopVideo({source,poster,label}:{source:string;poster:string;label:string}){
- const ref=useRef<HTMLVideoElement>(null);
- useEffect(()=>{
-  const video=ref.current;
-  if(!video)return;
-  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
-  let visible=false;
-  const sync=()=>{
-   if(!visible||document.hidden||reduced.matches){video.pause();return;}
-   video.play().catch(()=>{/* Poster remains visible if browser autoplay is blocked. */});
-  };
-  const observer=new IntersectionObserver(([entry])=>{visible=entry.isIntersecting&&entry.intersectionRatio>=.25;sync()},{threshold:[0,.25]});
-  observer.observe(video);
-  reduced.addEventListener('change',sync);
-  document.addEventListener('visibilitychange',sync);
-  return()=>{observer.disconnect();reduced.removeEventListener('change',sync);document.removeEventListener('visibilitychange',sync);video.pause()};
- },[]);
- return <video ref={ref} src={source} poster={poster} muted loop playsInline preload="metadata" aria-label={label}/>;
-}
 function Story(){return <>
  <Banner title="OUR STORY" image="jojo-picnic.webp" eyebrow="PONTIANAK · SINCE 2007" copy="Dari buah segar sampai momen seru, kenalan dengan JOJO." cta="KENALAN LEBIH DEKAT" href="#cerita-jojo"/>
  <section className="section jojo-story-intro" id="cerita-jojo">
   <div className="jojo-story-intro-heading"><span className="eyebrow">KENALAN LEBIH DEKAT</span><h2>SEJAK 2007,<br/><em>SELALU FRESH.</em></h2></div>
   <div className="jojo-story-intro-copy"><p>JOJO Juice tumbuh dari Pontianak dengan semangat menghadirkan minuman berbasis buah yang fresh, fun, dan dekat dengan keseharian.</p><p>Dari kerja, kuliah, nongkrong, sampai santai bersama teman, JOJO hadir menemani.</p><a className="button" href="/menu">LIHAT PILIHAN MENU</a></div>
- </section>
- <section className="jojo-story-reels section" aria-labelledby="jojo-story-reels-title" id="jojo-moments">
-  <div className="jojo-story-reels-heading">
-   <div><span className="eyebrow">REAL MOMENTS, REAL JOJO</span><h2 id="jojo-story-reels-title">TAKE A SIP.<br/><em>KEEP MOVING.</em></h2></div>
-   <p>Dari jalan-jalan di kota sampai menikmati udara segar bareng teman. Dua cerita singkat tentang momen sehari-hari bersama JOJO.</p>
-  </div>
-  <div className="jojo-story-reels-grid">
-   <figure className="jojo-story-reel">
-    <StoryLoopVideo source="/media/jojo-moments-1.mp4" poster="/media/jojo-moments-1-poster.webp" label="Video JOJO Juice saat jalan-jalan santai di kota"/>
-    <figcaption><span>01 / CITY MOMENTS</span><strong>FRESH ON THE GO.</strong><small>JOJO untuk hari yang terus bergerak.</small></figcaption>
-   </figure>
-   <figure className="jojo-story-reel">
-    <StoryLoopVideo source="/media/jojo-moments-2.mp4" poster="/media/jojo-moments-2-poster.webp" label="Video momen outdoor bersama teman dan JOJO Juice"/>
-    <figcaption><span>02 / OUTDOOR MOMENTS</span><strong>TAKE THE FRESH ROUTE.</strong><small>Teman jalan, teman cerita, teman segar.</small></figcaption>
-   </figure>
-  </div>
  </section>
  <section className="story-split section jojo-story-values"><figure><img src="/brands/jojo-together.webp" alt="Dua minuman JOJO dinikmati bersama" loading="lazy"/></figure><div><span className="eyebrow">THE JOJO WAY</span><h2>FUN.<br/>FRESH.<br/><em>ACTIVE.</em></h2><p>Karakter kami ceria, aktif, dan mudah akrab. Kini hadir di berbagai lokasi Kalimantan Barat.</p><CTA href="/outlet">TEMUKAN OUTLET</CTA></div></section>
 </>}
