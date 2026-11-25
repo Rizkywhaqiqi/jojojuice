@@ -57,3 +57,15 @@ test('outlet search exposes filtering status and an explicit reset',()=>{
  assert.match(directory,/Hapus pencarian outlet/);
  assert.match(directory,/RESET FILTER/);
 });
+
+test('two extra JOJO story clips load on demand without repeating homepage autoplay',()=>{
+ const app=read('src/App.tsx');
+ const story=app.slice(app.indexOf('function Story(){'),app.indexOf('function Menu(){'));
+ assert.equal((story.match(/<video controls playsInline preload="none"/g)??[]).length,2);
+ assert.match(story,/src="\/media\/jojo-moments-1\.mp4"/);
+ assert.match(story,/src="\/media\/jojo-moments-2\.mp4"/);
+ assert.doesNotMatch(story,/<video[^>]*autoplay/i);
+ for(const file of ['jojo-moments-1.mp4','jojo-moments-2.mp4','jojo-moments-1-poster.webp','jojo-moments-2-poster.webp']){
+  assert.ok(existsSync(new URL('../public/media/'+file,import.meta.url)),file+' must be deployed');
+ }
+});
