@@ -8,6 +8,9 @@ const picks=[
  {name:'FRESH JOJO',tag:'THE EVERYDAY ONE',image:'/brands/jojo-refresh.webp',tone:'blue'}
 ];
 
+function ScribbleArrow(){return <svg className="jojo-scribble-arrow" viewBox="0 0 155 98" fill="none" aria-hidden="true"><path d="M7 8C45 31 74 9 93 33c17 22-9 41-25 25-19-20 40-44 69 17M119 74l18 1-4-18" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round"/></svg>}
+function Spark({className=''}:{className?:string}){return <svg className={className} viewBox="0 0 90 90" fill="none" aria-hidden="true"><path d="M45 4c3 27 14 38 41 41-27 3-38 14-41 41C42 59 31 48 4 45 31 42 42 31 45 4Z" stroke="currentColor" strokeWidth="3" strokeLinejoin="round"/></svg>}
+
 function JOJOFilm(){
  const videoRef=useRef<HTMLVideoElement>(null);
  useEffect(()=>{
