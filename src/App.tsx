@@ -1,3 +1,4 @@
+import {JOJO_TAGLINE} from './brand-copy';
 import EditorialHome from './editorial-home';
 import './editorial-footer.css';
 import HowToOrder from './how-to-order';
@@ -7,7 +8,7 @@ import SiteMotion from './site-motion';
 import './anna-navbar.css';
 import MenuCatalog from './menu-catalog';
 import {StoryNature,StoryStreet,OutletExperience} from './jojo-editorial-gallery';
-import {useEffect,useRef,useState} from 'react';
+import {useEffect,useLayoutEffect,useRef,useState} from 'react';
 const IG=JOJO_LINKS.instagram;
 const nav=[['HOME','/'],['STORY','/story'],['MENU','/menu'],['HOW TO ORDER','/how-to-order'],['OUTLET','/outlet'],['CONTACT','/contact']];
 function Logo(){return <img className="logo" src="/brands/jojo-logo.svg" alt="JOJO Juice" width="135" height="70"/>}
@@ -101,14 +102,14 @@ function Header({path}:{path:string}){
    <div className="anna-overlay-panel">
     <div className="anna-overlay-top"><a href="/" aria-label="Beranda JOJO"><Logo/></a><button type="button" className="anna-overlay-close" onClick={close} aria-label="Tutup menu">TUTUP <span aria-hidden="true">×</span></button></div>
     <nav className="anna-overlay-links" aria-label="Semua halaman">{nav.map(([label,href],i)=><a key={href} href={href} aria-current={path===href?'page':undefined}><span className="anna-overlay-number">{String(i+1).padStart(2,'0')}</span>{label}</a>)}</nav>
-    <div className="anna-overlay-bottom"><span>FEEL FRESH LIVE FUN</span><a href={IG} target="_blank" rel="noopener noreferrer">INSTAGRAM JOJO</a></div>
+    <div className="anna-overlay-bottom"><span>{JOJO_TAGLINE.toUpperCase()}</span><a href={IG} target="_blank" rel="noopener noreferrer">INSTAGRAM JOJO</a></div>
    </div>
   </div>}
  </>;
 }
 function Footer(){return <footer className="jojo-site-footer">
  <div className="jojo-footer-top"><div className="jojo-footer-brand"><a href="/" aria-label="Kembali ke beranda JOJO"><Logo/></a><p>Rasa segar buat cerita seru setiap hari.</p><span>PONTIANAK · EST. 2007</span></div><div className="jojo-footer-links"><span className="jojo-footer-label">EXPLORE JOJO</span><nav aria-label="Navigasi footer">{nav.map(([label,href])=><a href={href} key={href}>{label}</a>)}</nav></div><div className="jojo-footer-connect"><span className="jojo-footer-label">STAY CONNECTED</span><a href={IG} target="_blank" rel="noopener noreferrer">INSTAGRAM</a><a href={JOJO_LINKS.whatsapp} target="_blank" rel="noopener noreferrer">WHATSAPP</a><a className="jojo-footer-order" href={JOJO_LINKS.esb} target="_blank" rel="noopener noreferrer">ORDER NOW</a></div></div>
- <div className="jojo-footer-bottom"><span>© {new Date().getFullYear()} JOJO JUICE</span><span>FEEL FRESH LIVE FUN</span><span>MADE WITH FRESH ENERGY</span></div>
+ <div className="jojo-footer-bottom"><span>© {new Date().getFullYear()} JOJO JUICE</span><span>{JOJO_TAGLINE.toUpperCase()}</span><span>MADE WITH FRESH ENERGY</span></div>
  </footer>}
 function Banner({title,image,eyebrow,copy,cta,href}:{title:string;image:string;eyebrow:string;copy:string;cta:string;href:string}){return <section className="banner jojo-page-hero"><img src={'/brands/'+image} alt="" fetchPriority="high"/><div className="banner-inner"><span className="eyebrow">{eyebrow}</span><h1>{title}</h1><p>{copy}</p><a className="jojo-page-hero-link" href={href}>{cta}</a></div></section>}
 function Story(){return <>
@@ -133,4 +134,18 @@ function Menu(){return <MenuCatalog/>}
 function Outlet(){return <><Banner title="FIND US" image="editorial/jojo-interior-space.webp" eyebrow="TEMPAT KETEMU YANG FRESH" copy="Cari cabang JOJO yang paling sesuai dengan wilayahmu." cta="LIHAT LOKASI OUTLET" href="#outlet-list"/><OutletExperience/><OutletDirectory/><OrderOptions compact/></>}
 function Contact(){return <><Banner title="SAY HELLO" image="jojo-together.webp" eyebrow="KEEP IN TOUCH" copy="Ada pertanyaan atau ide kolaborasi? Hubungi JOJO melalui kanal resmi." cta="PILIH CARA KONTAK" href="#contact-channels"/><ContactOptions/><OrderOptions compact/></>}
 function NotFound(){return <section className="section centered not-found"><span className="eyebrow">404 / HALAMAN TIDAK DITEMUKAN</span><h1>NYASAR,<br/>BRO?</h1><p>Halaman yang kamu cari tidak tersedia. Yuk kembali ke yang fresh.</p><CTA href="/">KEMBALI KE BERANDA</CTA></section>}
-export default function App(){let path=window.location.pathname.replace(/\/$/,'')||'/';useEffect(()=>{document.title=(path==='/'?'JOJO Juice':path.slice(1).toUpperCase()+' — JOJO Juice')+' · Feel Fresh Live Fun'},[path]);return <><a className="skip-to-content" href="#main-content">LEWATI NAVIGASI</a><Header path={path}/><SiteMotion/><main id="main-content">{path==='/story'?<Story/>:path==='/menu'?<Menu/>:path==='/outlet'?<Outlet/>:path==='/contact'?<Contact/>:path==='/how-to-order'?<HowToOrder/>:path==='/'?<EditorialHome/>:<NotFound/>}</main><Footer/></>}
+export default function App(){
+ const path=window.location.pathname.replace(/\/$/,'')||'/';
+ useLayoutEffect(()=>{
+  const fragment=window.location.hash.slice(1);
+  if(!fragment)return;
+  const frame=requestAnimationFrame(()=>{
+   try{
+    document.getElementById(decodeURIComponent(fragment))?.scrollIntoView({behavior:'instant'});
+   }catch(error){
+    if(!(error instanceof URIError))throw error;
+   }
+  });
+  return()=>cancelAnimationFrame(frame);
+ },[path]);
+ useEffect(()=>{document.title=(path==='/'?'JOJO Juice':path.slice(1).toUpperCase()+' — JOJO Juice')+' · '+JOJO_TAGLINE},[path]);return <><a className="skip-to-content" href="#main-content">LEWATI NAVIGASI</a><Header path={path}/><SiteMotion/><main id="main-content">{path==='/story'?<Story/>:path==='/menu'?<Menu/>:path==='/outlet'?<Outlet/>:path==='/contact'?<Contact/>:path==='/how-to-order'?<HowToOrder/>:path==='/'?<EditorialHome/>:<NotFound/>}</main><Footer/></>}

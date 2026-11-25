@@ -1,11 +1,12 @@
+import {JOJO_TAGLINE, JOJO_TAGLINE_LEAD, JOJO_TAGLINE_END} from './brand-copy';
 import {useCoordinatedVideo} from './use-coordinated-video';
 import {JOJO_LINKS} from './jojo-links';
 import './editorial-home.css';
 
 const picks=[
- {name:'DRAGON BALL',tag:'THE FUN ONE',image:'/brands/jojo-dragon.webp',tone:'yellow'},
- {name:'GREEN N GLOW',tag:'THE FRESH ONE',image:'/brands/jojo-green.webp',tone:'pink'},
- {name:'FRESH JOJO',tag:'THE EVERYDAY ONE',image:'/brands/jojo-refresh.webp',tone:'blue'}
+ {name:'DRAGON BALL',query:'Dragon Ball',tag:'THE FUN ONE',image:'/brands/jojo-dragon.webp',tone:'yellow'},
+ {name:'GREEN N GLOW',query:'Green N Glow',tag:'THE FRESH ONE',image:'/brands/jojo-green.webp',tone:'pink'},
+ {name:'FRESH JOJO',query:'Fruit Juice',tag:'THE EVERYDAY ONE',image:'/brands/jojo-refresh.webp',tone:'blue'}
 ];
 
 function Spark({className=''}:{className?:string}){return <svg className={className} viewBox="0 0 90 90" fill="none" aria-hidden="true"><path d="M45 4c3 27 14 38 41 41-27 3-38 14-41 41C42 59 31 48 4 45 31 42 42 31 45 4Z" stroke="currentColor" strokeWidth="3" strokeLinejoin="round"/></svg>}
@@ -27,7 +28,7 @@ export default function EditorialHome(){
    <div className="jojo-editorial-hero-shade"/>
    <div className="jojo-editorial-hero-content">
     <span className="jojo-editorial-kicker">PONTIANAK · EST. 2007</span>
-    <h1>FEEL <span>FRESH</span><br/><em>LIVE FUN</em></h1>
+    <h1>{JOJO_TAGLINE_LEAD.toUpperCase()}<br/><em>{JOJO_TAGLINE_END.toUpperCase()}</em></h1>
     <p>Rasa segar buat cerita seru setiap hari.</p>
     <div className="jojo-editorial-actions">
      <a className="jojo-editorial-btn" href="/menu">EXPLORE OUR MENU</a>
@@ -80,7 +81,7 @@ export default function EditorialHome(){
     <h2 id="jojo-picks-title">WHAT'S <em>YOUR</em><br/>FRESH MOOD?</h2>
     <p>Kenalan dengan beberapa rasa yang jadi bagian dari cerita JOJO.</p>
    </div>
-   <div className="jojo-picks-grid">{picks.map((p,i)=><a className={`jojo-pick jojo-pick-${p.tone}`} key={p.name} href="/menu">
+   <div className="jojo-picks-grid">{picks.map((p,i)=><a className={`jojo-pick jojo-pick-${p.tone}`} key={p.name} href={`/menu?q=${encodeURIComponent(p.query)}#hasil-menu`}>
     <span className="jojo-pick-index">0{i+1} / JOJO FAVES</span>
     <div className="jojo-pick-media"><img src={p.image} alt={p.name} loading="lazy"/></div>
     <div className="jojo-pick-details"><span className="jojo-pick-tag">{p.tag}</span><h3>{p.name}</h3><span className="jojo-pick-link">SEE THE MENU</span></div>
@@ -103,6 +104,6 @@ export default function EditorialHome(){
    <a className="jojo-editorial-btn" href={JOJO_LINKS.instagram} target="_blank" rel="noopener noreferrer">FOLLOW @JOJOJUICEID</a>
   </section>
 
-  <section className="jojo-last-call"><Spark className="jojo-last-spark"/><span className="jojo-editorial-overline">ONE MORE SIP?</span><h2>YOUR FRESH<br/><em>MOMENT STARTS HERE.</em></h2><div className="jojo-editorial-actions"><a className="jojo-editorial-btn" href="/how-to-order">HOW TO ORDER</a><a className="jojo-editorial-btn secondary" href={JOJO_LINKS.esb} target="_blank" rel="noopener noreferrer">ORDER NOW</a></div><span className="jojo-last-small">FEEL FRESH LIVE FUN · JOJO JUICE</span></section>
+  <section className="jojo-last-call"><Spark className="jojo-last-spark"/><span className="jojo-editorial-overline">ONE MORE SIP?</span><h2>YOUR FRESH<br/><em>MOMENT STARTS HERE.</em></h2><div className="jojo-editorial-actions"><a className="jojo-editorial-btn" href="/how-to-order">HOW TO ORDER</a><a className="jojo-editorial-btn secondary" href={JOJO_LINKS.esb} target="_blank" rel="noopener noreferrer">ORDER NOW</a></div><span className="jojo-last-small">{JOJO_TAGLINE.toUpperCase()} · JOJO JUICE</span></section>
  </div>;
 }

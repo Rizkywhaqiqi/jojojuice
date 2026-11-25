@@ -187,7 +187,7 @@ test('GSAP animates JOJO editorial sections while leaving media playback indepen
  assert.ok(motion.includes('.jojo-editorial-gallery-photo'));
  assert.ok(motion.includes('.jojo-pick'));
  assert.ok(motion.includes('.how-order-step'));
- assert.ok(motion.includes('.catalog-group'));
+ assert.ok(motion.includes('.catalog-body-head'));
  assert.ok(motion.includes('.jojo-full-bleed-film'));
  assert.ok(!motion.includes('video.play('));
  assert.ok(!motion.includes('pin:true'));
@@ -221,7 +221,7 @@ test('deployment runtime and above-the-fold media are explicitly optimized',()=>
  const pkg=JSON.parse(read('package.json'));
  assert.equal(pkg.engines.node,'26.x');
  const index=read('index.html');
- assert.ok(index.includes('rel="preload" as="image" href="/brands/jojo-home-cooler-original-20261125.jpg"'));
+ assert.ok(!index.includes('jojo-home-cooler-original-20261125.jpg'));
  const home=read('src/editorial-home.tsx');
  assert.ok(home.includes('poster={poster} muted loop playsInline preload="none"'));
  assert.ok(home.includes('fetchPriority="high"'));
@@ -235,9 +235,11 @@ test('How to Order hero supports uploaded looping video with a readable fallback
  const order=read('src/how-to-order.tsx');
  const styles=read('src/how-to-order.css');
  assert.match(order,/className="how-order-hero-video"/);
- assert.match(order,/source src="\/media\/how-to-order-hero\.mp4"/);
+ assert.match(order,/src="\/media\/how-to-order-hero\.mp4"/);
  assert.match(order,/autoPlay muted loop playsInline/);
  assert.match(order,/how-order-hero-fallback/);
  assert.match(styles,/\.how-order-hero-media::after/);
- assert.match(styles,/prefers-reduced-motion:reduce/);
+ assert.match(order,/prefers-reduced-motion: reduce/);
+ assert.match(order,/showVideo&&<video/);
+ assert.match(order,/Jeda video/);
 });

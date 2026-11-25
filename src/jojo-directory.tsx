@@ -6,7 +6,7 @@ type Area='Semua'|OutletArea;
 const areas:Area[]=['Semua','Pontianak','Singkawang','Mempawah','Kubu Raya'];
 const services=[
  {label:'ESB ORDER',sub:'Pesan langsung',url:JOJO_LINKS.esb,primary:true},
- {label:'GOFOOD',sub:'Pesan via GoFood',url:JOJO_LINKS.gofood},
+ {label:'GOFOOD',sub:'Cabang HOS Cokroaminoto, Pontianak',url:JOJO_LINKS.gofood},
  {label:'SHOPEEFOOD',sub:'Pesan via ShopeeFood',url:JOJO_LINKS.shopee},
  {label:'GRABFOOD',sub:'Pesan via GrabFood',url:JOJO_LINKS.grab}
 ];

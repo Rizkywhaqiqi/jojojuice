@@ -1,3 +1,4 @@
+import {JOJO_TAGLINE} from './brand-copy';
 import './jojo-editorial-gallery.css';
 
 const base='/brands/editorial/';
@@ -47,7 +48,7 @@ export function StoryStreet(){
    <p>Dari ngobrol sampai jalan bareng, setiap tegukan punya cerita sendiri. Momen urban dalam warna, cahaya, dan energi JOJO.</p>
   </div>
   <div className="jojo-street-grid">{moments.map(item=><GalleryImage key={item.src} item={item}/>)}</div>
-  <div className="jojo-gallery-ending"><span>FEEL FRESH. LIVE FUN.</span><a href="/menu">FIND YOUR FRESH MOOD <span aria-hidden="true">↗</span></a></div>
+  <div className="jojo-gallery-ending"><span>{JOJO_TAGLINE.toUpperCase()}</span><a href="/menu">FIND YOUR FRESH MOOD <span aria-hidden="true">↗</span></a></div>
  </section>;
 }
 

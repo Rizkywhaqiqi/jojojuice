@@ -10,14 +10,12 @@
 .how-order-head .eyebrow{grid-column:1/-1}
 .how-order-head h2{font-size:clamp(60px,7.5vw,110px);margin:10px 0}
 .how-order-head>p{font-size:15px;max-width:450px;margin-bottom:10px}
-.how-order-steps{scroll-margin-top:88px}
 .how-order-steps-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px;margin-top:35px}
 .how-order-step{background:#fffaf3;min-width:0;display:flex;flex-direction:column;min-height:350px;gap:21px;padding:29px;border-top:4px solid #283327}
 .how-order-number{font-family:var(--jojo-display,Impact,sans-serif);font-size:clamp(85px,9vw,125px);line-height:.92;color:#ed1c24}
 .how-order-step h3{font-family:var(--jojo-display,Impact,sans-serif);font-size:clamp(28px,3vw,42px);line-height:1.06;margin-bottom:13px}
 .how-order-step p{font-size:13px;line-height:1.75}
 .how-order-step>a{align-self:flex-start;color:#ed1c24;border-bottom:1px solid currentColor;padding:6px 0;font-size:11px;letter-spacing:.06em;font-weight:900;margin-top:auto}
-#order-platforms{scroll-margin-top:78px}
 .how-order-help{background:#283327;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:35px}
 .how-order-help h2{color:#fff}
 .how-order-help h2 em{color:#ffc103}
@@ -32,12 +30,10 @@
 .how-order-step>a:focus-visible{outline:3px solid #39BFE7;outline-offset:3px}
 
 /* The third step is instruction, not a duplicate platform-selection link. */
-#order-platforms{scroll-margin-top:clamp(70px,9vh,112px)}
 .how-order-step-finish{display:inline-flex;align-self:flex-start;align-items:center;min-height:44px;margin-top:auto;border-top:1px solid rgba(237,28,36,.25);padding:8px 0;color:#ED1C24;font:900 11px/1.35 var(--jojo-body,Arial,sans-serif);letter-spacing:.06em}
 @media(max-width:760px){.how-order-step-finish{margin-top:8px}}
 
 /* Mobile order page: reserve scroll space and limit oversized hero emphasis. */
-#order-steps,#order-platforms{scroll-margin-top:92px}
 @media(max-width:760px){
  .how-order-hero{padding-top:120px}
  .how-order-hero h1{font-size:clamp(58px,13vw,94px)}
@@ -80,18 +76,28 @@
 .how-order .how-order-hero-content{width:min(100%,770px);z-index:1}
 .how-order .how-order-hero h1{text-wrap:balance;text-shadow:0 3px 18px rgba(0,0,0,.16)}
 .how-order .how-order-hero p{max-width:500px}
-@media(max-width:760px){
- .how-order .how-order-hero{
-  min-height:clamp(590px,90svh,850px);
-  padding:150px 6% 85px;
-  align-items:flex-end;
- }
- .how-order-hero-media::after{background:linear-gradient(0deg,rgba(25,15,14,.88),rgba(25,15,14,.42) 68%,rgba(25,15,14,.3))}
- .how-order-hero-media .how-order-hero-video,
- .how-order-hero-media .how-order-hero-fallback{object-position:56% center}
- .how-order .how-order-hero h1{font-size:clamp(62px,13vw,94px)}
- .how-order .how-order-hero p{max-width:36ch}
+.how-order-hero-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px}
+.how-order-video-toggle{
+ min-height:44px;padding:8px 14px;border:1px solid currentColor;
+ background:#36080a;color:var(--jojo-white);font:700 14px var(--jojo-body);
+ cursor:pointer;
 }
-@media(prefers-reduced-motion:reduce){
- .how-order-hero-media .how-order-hero-video{display:none}
+@media(max-width:760px) and (orientation:portrait){
+ .how-order .how-order-hero{
+  display:block;min-height:0;padding:77px 0 0;
+  background:#36080a;
+ }
+ .how-order-hero-media{
+  position:relative;aspect-ratio:16/9;
+ }
+ .how-order-hero-media::after{background:linear-gradient(0deg,#36080a,transparent 35%)}
+ .how-order-hero-media .how-order-hero-video,
+ .how-order-hero-media .how-order-hero-fallback{object-fit:contain}
+ .how-order .how-order-hero-content{position:relative;padding:12px 6% 34px}
+ .how-order .how-order-hero h1{font-size:clamp(48px,12vw,78px)}
+}
+@media(max-height:500px) and (orientation:landscape){
+ .how-order .how-order-hero{min-height:100svh;padding:84px 6% 28px}
+ .how-order .how-order-hero h1{font-size:clamp(44px,8vw,66px);margin:12px 0}
+ .how-order .how-order-hero p{margin-bottom:14px}
 }

@@ -426,3 +426,12 @@
   aspect-ratio:16/9;
  }
 }
+
+@media(max-height:500px) and (orientation:landscape){
+ .jojo-editorial .jojo-editorial-hero{
+  min-height:100svh;height:auto;padding:85px 0 32px;
+ }
+ .jojo-editorial .jojo-editorial-hero-content{margin:0 auto;padding:0}
+ .jojo-editorial .jojo-editorial-hero h1{font-size:clamp(42px,8vw,68px);margin:12px 0}
+ .jojo-editorial .jojo-editorial-hero p{margin-bottom:16px}
+}

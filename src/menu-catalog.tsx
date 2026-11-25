@@ -1,3 +1,4 @@
+import {JOJO_TAGLINE} from './brand-copy';
 import {JOJO_LINKS} from './jojo-links';
 import {useEffect,useMemo,useRef,useState} from 'react';
 import './menu-catalog.css';
@@ -57,10 +58,29 @@ const drinkIds=new Set(['refresher','special','juice','mixed','oreo','foam','cof
 type Family='all'|'drink'|'food'|'favorite';
 type Sort='default'|'low'|'high';
 export default function MenuCatalog(){
- const [family,setFamily]=useState<Family>('all');
- const [category,setCategory]=useState('all');
- const [query,setQuery]=useState('');
- const [sort,setSort]=useState<Sort>('default');
+ const [initialFilters]=useState(()=>{
+  const params=new URLSearchParams(window.location.search);
+  const family=params.get('jenis');
+  const sort=params.get('urut');
+  return {
+   family:family==='drink'||family==='food'||family==='favorite'?family:'all',
+   category:params.get('kategori')||'all',
+   query:params.get('q')||'',
+   sort:sort==='low'||sort==='high'?sort:'default'
+  } satisfies {family:Family;category:string;query:string;sort:Sort};
+ });
+ const [family,setFamily]=useState<Family>(initialFilters.family);
+ const [requestedCategory,setCategory]=useState(initialFilters.category);
+ const [query,setQuery]=useState(initialFilters.query);
+ const [sort,setSort]=useState<Sort>(initialFilters.sort);
+ const availableGroups=useMemo(()=>groups.filter(group=>family==='all'||(family==='drink'?drinkIds.has(group.id):family==='food'?!drinkIds.has(group.id):group.items.some(item=>item.featured))),[family]);
+ const category=availableGroups.some(group=>group.id===requestedCategory)?requestedCategory:'all';
+ useEffect(()=>{
+  const url=new URL(window.location.href);
+  const filters={jenis:family==='all'?'':family,kategori:category==='all'?'':category,q:query.trim(),urut:sort==='default'?'':sort};
+  Object.entries(filters).forEach(([key,value])=>value?url.searchParams.set(key,value):url.searchParams.delete(key));
+  if(url.href!==window.location.href)window.history.replaceState(window.history.state,'',url);
+ },[family,category,query,sort]);
  const [showAllCategories,setShowAllCategories]=useState(false);
  const shortcutsRef=useRef<HTMLDivElement>(null);
  useEffect(()=>{
@@ -76,7 +96,6 @@ export default function MenuCatalog(){
   else if(right>viewRight-8)wrapper.scrollTo({left:right-wrapper.clientWidth+12,behavior:'auto'});
  },[category,family,showAllCategories]);
  const search=query.trim().toLocaleLowerCase('id');
- const availableGroups=useMemo(()=>groups.filter(group=>family==='all'||(family==='drink'?drinkIds.has(group.id):family==='food'?!drinkIds.has(group.id):group.items.some(item=>item.featured))),[family]);
  const filtered=useMemo(()=>availableGroups.filter(group=>category==='all'||category===group.id).map(group=>{
   const items=group.items.filter(item=>(family!=='favorite'||item.featured)&&(!search||[item.name,group.title,group.subtitle].some(text=>text.toLocaleLowerCase('id').includes(search))));
   return {...group,items};
@@ -101,10 +120,10 @@ export default function MenuCatalog(){
    <img className="catalog-intro-photo" src="/brands/jojo-photo-2.webp" alt="Keranjang buah tropis bersama cup JOJO Juice" fetchPriority="high"/>
    <div className="catalog-intro-shade" aria-hidden="true"/>
    <div className="catalog-intro-content">
-    <span className="eyebrow">FEEL FRESH. LIVE FUN.</span>
+    <span className="eyebrow">{JOJO_TAGLINE.toUpperCase()}</span>
     <h1>THE <span>MENU.</span></h1>
     <p>Cari rasa favoritmu. Dari jus buah segar sampai teman ngemil.</p>
-    <div className="catalog-intro-links"><a className="button" href="#pilihan-menu">LIHAT PILIHAN</a><span className="catalog-hero-counter">{total} PILIHAN · 15 KATEGORI</span></div>
+    <div className="catalog-intro-links"><a className="button" href="#pilihan-menu">LIHAT PILIHAN</a><span className="catalog-hero-counter">{total} PILIHAN · {groups.length} KATEGORI</span></div>
    </div>
   </section>
   <section className="catalog-featured" aria-label="Pilihan minuman JOJO">
@@ -129,10 +148,10 @@ export default function MenuCatalog(){
     <div className="catalog-control-row">
      <label className="catalog-search"><span className="sr-only">Cari menu</span><input type="search" value={query} onChange={event=>setQuery(event.target.value)} placeholder="Cari minuman, buah, makanan…" aria-label="Cari nama menu"/>{query&&<button type="button" onClick={()=>setQuery('')} aria-label="Hapus pencarian">×</button>}</label>
      <label className="catalog-control-select"><span>KATEGORI</span><select value={category} onChange={event=>setCategory(event.target.value)} aria-label="Pilih kategori"><option value="all">Semua kategori</option>{availableGroups.map(group=><option value={group.id} key={group.id}>{group.title}</option>)}</select></label>
-     <label className="catalog-control-select catalog-sort"><span>URUTKAN</span><select value={sort} onChange={event=>setSort(event.target.value as Sort)} aria-label="Urutkan berdasarkan harga"><option value="default">Urutan menu</option><option value="low">Harga terendah (semua menu)</option><option value="high">Harga tertinggi (semua menu)</option></select></label>
+     <label className="catalog-control-select catalog-sort"><span>URUTKAN</span><select value={sort} onChange={event=>setSort(event.target.value as Sort)} aria-label="Urutkan berdasarkan harga"><option value="default">Urutan menu</option><option value="low">Harga terendah</option><option value="high">Harga tertinggi</option></select></label>
     </div>
    </div>
-   <div className="catalog-result-line"><p aria-live="polite"><strong>{count}</strong> PILIHAN · {filtered.length} KATEGORI</p>{(family!=='all'||category!=='all'||query||sort!=='default')&&<button type="button" className="catalog-reset" onClick={reset}>RESET FILTER</button>}</div>
+   <div className="catalog-result-line" id="hasil-menu"><p aria-live="polite"><strong>{count}</strong> PILIHAN · {filtered.length} KATEGORI</p>{(family!=='all'||category!=='all'||query||sort!=='default')&&<button type="button" className="catalog-reset" onClick={reset}>RESET FILTER</button>}</div>
    {count===0?<div className="catalog-empty"><h3>BELUM KETEMU.</h3><p>Coba nama lain atau kembali ke seluruh pilihan.</p><button type="button" className="button" onClick={reset}>LIHAT SEMUA MENU</button></div>:sort!=='default'?<div className="catalog-price-list" aria-label={sort==='low'?'Menu dari harga terendah':'Menu dari harga tertinggi'}>
      {sortedItems.map(item=><article className="catalog-price-item" key={item.groupId+'-'+item.name}>
       <div><span className="catalog-price-category">{item.groupTitle}</span><h3>{item.name}</h3>{item.featured&&<span className="catalog-favorite">FAVORIT</span>}</div>
