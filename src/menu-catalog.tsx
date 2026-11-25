@@ -75,10 +75,14 @@ export default function MenuCatalog(){
  const reset=()=>{setFamily('all');setCategory('all');setQuery('');setSort('default');setShowAllCategories(false)};
  return <div className="menu-catalog">
   <section className="catalog-intro">
-   <span className="eyebrow">FEEL FRESH. LIVE FUN.</span>
-   <h1>THE <span>MENU.</span></h1>
-   <p>Cari rasa favoritmu. Dari jus buah segar sampai teman ngemil.</p>
-   <div className="catalog-intro-links"><a className="button" href="#pilihan-menu">LIHAT PILIHAN</a><span className="catalog-hero-counter">{total} PILIHAN · 15 KATEGORI</span></div>
+   <img className="catalog-intro-photo" src="/brands/jojo-photo-2.webp" alt="Keranjang buah tropis bersama cup JOJO Juice" fetchPriority="high"/>
+   <div className="catalog-intro-shade" aria-hidden="true"/>
+   <div className="catalog-intro-content">
+    <span className="eyebrow">FEEL FRESH. LIVE FUN.</span>
+    <h1>THE <span>MENU.</span></h1>
+    <p>Cari rasa favoritmu. Dari jus buah segar sampai teman ngemil.</p>
+    <div className="catalog-intro-links"><a className="button" href="#pilihan-menu">LIHAT PILIHAN</a><span className="catalog-hero-counter">{total} PILIHAN · 15 KATEGORI</span></div>
+   </div>
   </section>
   <section className="catalog-featured" aria-label="Pilihan minuman JOJO">
    <div className="catalog-featured-text"><span className="eyebrow">JOJO FAVORITES</span><h2>RASA<br/><em>SEGAR.</em></h2><p>Yang fruity, creamy, sampai savory. Tinggal pilih sesuai mood.</p></div>

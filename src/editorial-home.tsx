@@ -8,48 +8,33 @@ const picks=[
  {name:'FRESH JOJO',tag:'THE EVERYDAY ONE',image:'/brands/jojo-refresh.webp',tone:'blue'}
 ];
 
-function ScribbleArrow(){return <svg className="jojo-scribble-arrow" viewBox="0 0 155 98" fill="none" aria-hidden="true"><path d="M7 8C45 31 74 9 93 33c17 22-9 41-25 25-19-20 40-44 69 17M119 74l18 1-4-18" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round"/></svg>}
 function Spark({className=''}:{className?:string}){return <svg className={className} viewBox="0 0 90 90" fill="none" aria-hidden="true"><path d="M45 4c3 27 14 38 41 41-27 3-38 14-41 41C42 59 31 48 4 45 31 42 42 31 45 4Z" stroke="currentColor" strokeWidth="3" strokeLinejoin="round"/></svg>}
 
-function JOJOFilm(){
+function JOJOVideo({className='',label='Video JOJO Juice'}:{className?:string;label?:string}){
  const videoRef=useRef<HTMLVideoElement>(null);
  useEffect(()=>{
   const video=videoRef.current;
   if(!video)return;
-  const motion=window.matchMedia('(prefers-reduced-motion: reduce)');
-  const syncPlayback=()=>{
-   if(motion.matches||document.hidden||!visible){
-    video.pause();
-    return;
-   }
-   video.play().catch(()=>{/* Browser autoplay may be blocked; poster remains visible. */});
-  };
+  const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
   let visible=false;
-  const observer=new IntersectionObserver(([entry])=>{
-   visible=entry.isIntersecting&&entry.intersectionRatio>=0.25;
-   syncPlayback();
-  },{threshold:[0,0.25]});
-  observer.observe(video);
-  motion.addEventListener('change',syncPlayback);
-  document.addEventListener('visibilitychange',syncPlayback);
-  return()=>{
-   observer.disconnect();
-   motion.removeEventListener('change',syncPlayback);
-   document.removeEventListener('visibilitychange',syncPlayback);
-   video.pause();
+  const sync=()=>{
+   if(reducedMotion.matches||document.hidden||!visible){video.pause();return;}
+   video.play().catch(()=>{/* Autoplay may be blocked; the JOJO photo poster stays visible. */});
   };
+  const observer=new IntersectionObserver(([entry])=>{visible=entry.isIntersecting&&entry.intersectionRatio>=.25;sync()},{threshold:[0,.25]});
+  observer.observe(video);
+  reducedMotion.addEventListener('change',sync);
+  document.addEventListener('visibilitychange',sync);
+  return()=>{observer.disconnect();reducedMotion.removeEventListener('change',sync);document.removeEventListener('visibilitychange',sync);video.pause()};
  },[]);
- return <section className="jojo-film" aria-label="JOJO Juice brand video">
-  <div className="jojo-film-stage">
-   <video ref={videoRef} src="/media/jojovid.mp4" poster="/brands/jojo-refresh.webp" muted loop playsInline preload="metadata" aria-label="Video singkat produk minuman JOJO Juice"/>
-  </div>
- </section>;
+ return <video className={className} ref={videoRef} src="/media/jojovid.mp4" poster="/brands/jojo-photo-2.webp" muted loop playsInline preload="metadata" aria-label={label}/>;
 }
+function JOJOFilm(){return <section className="jojo-film" aria-label="Film pendek JOJO Juice"><div className="jojo-film-stage"><JOJOVideo label="Film produk minuman segar JOJO Juice"/></div></section>}
 
 export default function EditorialHome(){
  return <div className="jojo-editorial">
   <section className="jojo-editorial-hero">
-   <img className="jojo-editorial-hero-image" src="/brands/jojo-hero.webp" alt="Pilihan minuman segar JOJO Juice" fetchPriority="high"/>
+   <JOJOVideo className="jojo-editorial-hero-video" label="Video hero JOJO Juice, minuman segar dan buah tropis"/>
    <div className="jojo-editorial-hero-shade"/>
    <div className="jojo-editorial-hero-content">
     <span className="jojo-editorial-kicker">PONTIANAK · EST. 2007</span>
@@ -75,11 +60,9 @@ export default function EditorialHome(){
      <span><strong>02</strong> FRESHLY BLENDED</span>
      <span><strong>03</strong> TROPICAL GOODNESS</span>
     </div>
-    <a href="/menu" className="jojo-tropical-cta">EXPLORE OUR JUICES <span aria-hidden="true">↗</span></a>
+    <a href="/menu" className="jojo-tropical-cta">EXPLORE OUR JUICES</a>
    </div>
-   <div className="jojo-tropical-photo">
-    <img src="/brands/jojo-photo-1.webp" alt="Aneka minuman JOJO Juice dan buah segar dalam suasana piknik tropis" loading="lazy"/>
-   </div>
+   <div className="jojo-tropical-photo"><JOJOVideo label="Video JOJO Juice untuk momen tropis sehari-hari"/></div>
   </section>
 
   <section className="jojo-tropical-feature" aria-labelledby="jojo-feature-title">
@@ -88,7 +71,7 @@ export default function EditorialHome(){
     <span className="jojo-editorial-overline">MADE FOR EVERYDAY MOMENTS</span>
     <h2 id="jojo-feature-title">MADE FRESH.<br/><em>MADE FOR FUN.</em></h2>
     <p>Dari jeda kuliah sampai nongkrong sore, selalu ada alasan buat menikmati yang fresh. Temukan JOJO favoritmu, lalu ajak teman buat berbagi cerita.</p>
-    <a href="/story" className="jojo-tropical-cta">GET TO KNOW US <span aria-hidden="true">↗</span></a>
+    <a href="/story" className="jojo-tropical-cta">GET TO KNOW US</a>
    </div>
   </section>
 
@@ -98,18 +81,15 @@ export default function EditorialHome(){
     <h2 id="jojo-picks-title">WHAT'S <em>YOUR</em><br/>FRESH MOOD?</h2>
     <p>Kenalan dengan beberapa rasa yang jadi bagian dari cerita JOJO.</p>
    </div>
-   <ScribbleArrow/>
    <div className="jojo-picks-grid">{picks.map((p,i)=><a className={`jojo-pick jojo-pick-${p.tone}`} key={p.name} href="/menu">
     <span className="jojo-pick-index">0{i+1} / JOJO FAVES</span>
-    <img src={p.image} alt={p.name} loading="lazy"/>
-    <span className="jojo-pick-tag">{p.tag}</span>
-    <h3>{p.name}</h3>
-    <span className="jojo-pick-link">SEE THE MENU <span aria-hidden="true">↗</span></span>
+    <div className="jojo-pick-media"><img src={p.image} alt={p.name} loading="lazy"/></div>
+    <div className="jojo-pick-details"><span className="jojo-pick-tag">{p.tag}</span><h3>{p.name}</h3><span className="jojo-pick-link">SEE THE MENU</span></div>
    </a>)}</div>
   </section>
 
   <section className="jojo-gather" aria-labelledby="jojo-gather-title">
-   <div className="jojo-gather-image"><img src="/brands/jojo-picnic.webp" loading="lazy" alt="JOJO Juice untuk momen berkumpul"/><span className="jojo-gather-stamp">GOOD TIMES<br/>TASTE BETTER</span></div>
+   <div className="jojo-gather-image"><JOJOVideo label="Video JOJO Juice untuk momen berkumpul"/><span className="jojo-gather-stamp">GOOD TIMES<br/>TASTE BETTER</span></div>
    <div className="jojo-gather-copy"><span className="jojo-editorial-overline">EVERY SIP IS A MOMENT</span><h2 id="jojo-gather-title">GATHER.<br/>SIP.<br/><em>REPEAT.</em></h2><p>Ketemu, ngobrol, ketawa, dan ulangi. Bikin hari biasa jadi sedikit lebih spesial bareng JOJO.</p><a className="jojo-editorial-btn" href="/outlet">FIND OUR OUTLETS</a></div>
   </section>
 
