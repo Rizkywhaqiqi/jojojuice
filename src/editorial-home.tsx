@@ -51,6 +51,9 @@ export default function EditorialHome(){
     </div>
     <a href="/menu" className="jojo-tropical-cta">EXPLORE OUR JUICES</a>
    </div>
+  </section>
+
+  <section className="jojo-full-bleed-film" aria-label="Video JOJO saat jalan-jalan di kota">
    <div className="jojo-tropical-photo jojo-tropical-video" aria-label="Momen JOJO di kota">
     <JOJOMomentVideo source="/media/jojo-moments-1.mp4" poster="/media/jojo-moments-1-poster.webp" label="Video JOJO Juice saat jalan-jalan di kota"/>
    </div>
@@ -63,6 +66,9 @@ export default function EditorialHome(){
     <p>Dari jeda kuliah sampai nongkrong sore, selalu ada alasan buat menikmati yang fresh. Temukan JOJO favoritmu, lalu ajak teman buat berbagi cerita.</p>
     <a href="/story" className="jojo-tropical-cta">GET TO KNOW US</a>
    </div>
+  </section>
+
+  <section className="jojo-full-bleed-film" aria-label="Video JOJO bersama teman di luar ruangan">
    <div className="jojo-tropical-feature-photo jojo-tropical-video" aria-label="Momen JOJO bersama teman">
     <JOJOMomentVideo source="/media/jojo-moments-2.mp4" poster="/media/jojo-moments-2-poster.webp" label="Video JOJO Juice bersama teman di luar ruangan"/>
    </div>
