@@ -58,3 +58,40 @@
  .how-order-step{gap:14px}
  .how-order-step-finish{width:100%}
 }
+
+/* Video-first How to Order hero: readable overlay, full-bleed footage, photo fallback. */
+.how-order .how-order-hero{
+ position:relative;isolation:isolate;display:flex;align-items:center;
+ min-height:clamp(620px,85svh,920px);
+ padding:clamp(175px,18vh,225px) max(6%,calc((100vw - 1320px)/2)) 100px;
+ background:#851016;overflow:hidden;
+}
+.how-order-hero-media,.how-order-hero-media::after{position:absolute;inset:0}
+.how-order-hero-media{z-index:-1;pointer-events:none}
+.how-order-hero-media::after{content:"";background:linear-gradient(90deg,rgba(33,17,16,.78) 0%,rgba(33,17,16,.48) 49%,rgba(33,17,16,.12) 100%),linear-gradient(0deg,rgba(33,17,16,.28),transparent 36%)}
+.how-order-hero-media .how-order-hero-fallback,
+.how-order-hero-media .how-order-hero-video{
+ position:absolute;inset:0;display:block;width:100%;height:100%;
+ max-height:none;object-fit:cover;object-position:center;
+ filter:none;
+}
+.how-order-hero-media .how-order-hero-video{z-index:1}
+.how-order-hero-media::after{z-index:2}
+.how-order .how-order-hero-content{width:min(100%,770px);z-index:1}
+.how-order .how-order-hero h1{text-wrap:balance;text-shadow:0 3px 18px rgba(0,0,0,.16)}
+.how-order .how-order-hero p{max-width:500px}
+@media(max-width:760px){
+ .how-order .how-order-hero{
+  min-height:clamp(590px,90svh,850px);
+  padding:150px 6% 85px;
+  align-items:flex-end;
+ }
+ .how-order-hero-media::after{background:linear-gradient(0deg,rgba(25,15,14,.88),rgba(25,15,14,.42) 68%,rgba(25,15,14,.3))}
+ .how-order-hero-media .how-order-hero-video,
+ .how-order-hero-media .how-order-hero-fallback{object-position:56% center}
+ .how-order .how-order-hero h1{font-size:clamp(62px,13vw,94px)}
+ .how-order .how-order-hero p{max-width:36ch}
+}
+@media(prefers-reduced-motion:reduce){
+ .how-order-hero-media .how-order-hero-video{display:none}
+}
