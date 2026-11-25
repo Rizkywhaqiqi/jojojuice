@@ -16,9 +16,9 @@ export default function SiteMotion(){
    '.community > div','.community > img','.closing > *',
    '.centered > *','.catalog-featured-text',
    '.catalog-featured-images figure','.catalog-body-head',
-   '.catalog-toolbar','.catalog-group','.catalog-note',
+   '.catalog-controls','.catalog-result-line','.catalog-group','.catalog-note',
    '.catalog-footer-cta','.catalog-empty',
-   '.catalog-featured-images figure','.jojo-directory-heading',
+   '.jojo-directory-heading',
    '.jojo-outlet-card','.jojo-order-header','.jojo-service',
    '.jojo-contact-heading','.jojo-contact-grid > a',
    '.how-order-head','.how-order-step','.how-order-help > div'

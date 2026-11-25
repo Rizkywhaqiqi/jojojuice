@@ -26,3 +26,7 @@
 @media(max-width:1000px){.how-order-hero{grid-template-columns:1.15fr .85fr}.how-order-steps-grid{gap:11px}.how-order-step{padding:22px;min-height:390px}}
 @media(max-width:760px){.how-order-hero{padding:140px 6% 45px;grid-template-columns:1fr;gap:20px;min-height:0}.how-order-hero h1{font-size:clamp(67px,14vw,110px)}.how-order-hero>img{max-height:285px;margin:auto}.how-order-head{grid-template-columns:1fr;gap:12px}.how-order-head .eyebrow{grid-column:auto}.how-order-head h2{font-size:clamp(57px,12vw,85px)}.how-order-head>p{font-size:14px}.how-order-steps-grid{grid-template-columns:1fr;gap:12px;margin-top:22px}.how-order-step{min-height:0;padding:22px;gap:16px}.how-order-number{font-size:85px}.how-order-step h3{font-size:34px}.how-order-step>a{margin-top:8px}.how-order-help{flex-direction:column;align-items:flex-start}.how-order-help>.button{width:100%}}
 @media(prefers-reduced-motion:reduce){.how-order *{scroll-behavior:auto}}
+
+/* UX audit: comfortable touch targets for ordering step links. */
+.how-order-step>a{display:inline-flex;align-items:center;min-height:44px;line-height:1.35}
+.how-order-step>a:focus-visible{outline:3px solid #39BFE7;outline-offset:3px}

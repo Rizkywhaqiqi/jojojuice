@@ -5,7 +5,7 @@ import './how-to-order.css';
 const steps=[
  {num:'01',title:'PILIH MENU',copy:'Lihat pilihan minuman dan makanan JOJO terlebih dahulu. Temukan rasa favoritmu sebelum mulai memesan.',label:'LIHAT MENU',url:'/menu'},
  {num:'02',title:'PILIH PLATFORM',copy:'Kamu bisa memesan lewat ESB Order, GoFood, ShopeeFood, atau GrabFood. Pilih yang paling nyaman dan tersedia di lokasimu.',label:'PILIH LAYANAN',url:'#order-platforms'},
- {num:'03',title:'SELESAIKAN PESANAN',copy:'Pilih outlet dan item yang tersedia di aplikasi, cek detail serta total harga, lalu ikuti langkah pembayaran dan pengantaran atau pengambilan.',label:'MULAI PESAN',url:JOJO_LINKS.esb}
+ {num:'03',title:'SELESAIKAN PESANAN',copy:'Pilih outlet dan item yang tersedia di aplikasi, cek detail serta total harga, lalu ikuti langkah pembayaran dan pengantaran atau pengambilan.',label:'LIHAT OPSI PEMESANAN',url:'#order-platforms'}
 ];
 export default function HowToOrder(){
  return <div className="how-order">

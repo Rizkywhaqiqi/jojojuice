@@ -94,11 +94,7 @@
  .anna-menu-bars{display:flex;flex-direction:column;gap:6px}
  .anna-menu-bars i{display:block;width:22px;height:2px;background:currentColor;border-radius:2px}
 }
-@media(min-width:1121px) and (max-width:1100px){
- .anna-header .header-inner.anna-header-inner{column-gap:25px}
- .anna-header .anna-nav-side{gap:20px}
- .anna-header .anna-nav-side a{font-size:11px}
-}
+/* The 1121px–1190px breakpoint below handles narrow desktops. */
 @media(max-width:480px){
  .anna-overlay-panel{padding:24px;width:100%}
  .anna-overlay-links a{font-size:clamp(48px,13vw,66px)}

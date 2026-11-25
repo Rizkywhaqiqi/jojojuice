@@ -97,7 +97,7 @@
  .jojo-community-photos a{height:210px}
 }
 @media(max-width:760px){
- .jojo-editorial-hero{min-height:700px;height:100svh;max-height:900px;align-items:flex-end}
+ .jojo-editorial-hero{min-height:100svh;height:auto;max-height:none;align-items:flex-end;padding-top:90px}
  .jojo-editorial-hero-image{object-position:54% center}
  .jojo-editorial-hero-shade{background:linear-gradient(to top,#172b1ade 0%,#172b1a69 58%,#172b1a45)}
  .jojo-editorial-hero-content{width:88%;margin:0 auto;padding:0 0 93px}
