@@ -23,7 +23,7 @@ function JOJOFilm(){return <section className="jojo-film" aria-label="Film pende
 export default function EditorialHome(){
  return <div className="jojo-editorial">
   <section className="jojo-editorial-hero">
-   <img className="jojo-editorial-hero-image" src="/brands/jojo-home-cooler-landscape.jpg" alt="Cooler box merah berisi empat minuman JOJO Juice di pantai tropis" width="1920" height="1080" fetchPriority="high"/>
+   <img className="jojo-editorial-hero-image" src="/brands/jojo-home-cooler-original-20261125.jpg" alt="Cooler box merah berisi empat minuman JOJO Juice di pantai tropis" width="2048" height="1143" fetchPriority="high"/>
    <div className="jojo-editorial-hero-shade"/>
    <div className="jojo-editorial-hero-content">
     <span className="jojo-editorial-kicker">PONTIANAK · EST. 2007</span>
