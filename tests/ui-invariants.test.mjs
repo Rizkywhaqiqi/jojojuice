@@ -161,3 +161,16 @@ test('homepage has four full-width, alternating editorial sections',()=>{
  assert.ok(fix.includes('position:relative'));
  assert.ok(fix.includes('object-fit:contain'));
 });
+
+test('Gather section uses the official lifestyle drink photo without yellow slogan badge',()=>{
+ const home=read('src/editorial-home.tsx');
+ const start=home.indexOf('<section className="jojo-gather"');
+ const end=home.indexOf('</section>',start);
+ assert.ok(start>=0&&end>start);
+ const section=home.slice(start,end);
+ assert.ok(section.includes('/brands/editorial/jojo-street-drink.webp'));
+ assert.ok(!section.includes('jojo-gather-stamp'));
+ assert.ok(!section.includes('GOOD TIMES'));
+ assert.ok(existsSync(new URL('../public/brands/editorial/jojo-street-drink.webp',import.meta.url)));
+ assert.ok(section.includes('GATHER.'));
+});
