@@ -10,7 +10,7 @@ const css=read('src/motion.css');
 
 test('homepage hero remains a static JOJO photograph',()=>{
  assert.match(home,/<img className="jojo-editorial-hero-image" src="\/brands\/jojo-home-hero\.jpg"/);
- assert.ok(existsSync(new URL('../public/brands/jojo-home-hero.jpg',import.meta.url)));
+ assert.ok(existsSync(new URL('../public/brands/jojo-home-cooler-landscape.jpg',import.meta.url)));
  assert.doesNotMatch(home,/jojo-editorial-hero-video/);
 });
 
