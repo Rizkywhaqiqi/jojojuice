@@ -132,7 +132,7 @@ test('new JOJO lifestyle, freshness and outlet editorial photo sets render in in
 
 test('existing looping homepage videos remain untouched by new visual galleries',()=>{
  const home=read('src/editorial-home.tsx');
- assert.equal((home.match(/<JOJOFilm\\/>/g)??[]).length,1);
+ assert.equal(home.split('<JOJOFilm/>').length-1,1);
  assert.equal((home.match(/<JOJOMomentVideo source=/g)??[]).length,2);
  assert.ok(home.includes('jojo-moments-1.mp4')&&home.includes('jojo-moments-2.mp4'));
  assert.ok(!read('src/jojo-editorial-gallery.tsx').includes('<video'));
