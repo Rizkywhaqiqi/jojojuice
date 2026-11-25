@@ -8,14 +8,6 @@ const picks=[
  {name:'FRESH JOJO',tag:'THE EVERYDAY ONE',image:'/brands/jojo-refresh.webp',tone:'blue'}
 ];
 
-function SunDoodle({className=''}:{className?:string}){
- return <svg className={className} viewBox="0 0 140 140" fill="none" aria-hidden="true"><circle cx="70" cy="70" r="34" stroke="currentColor" strokeWidth="3"/>{Array.from({length:12},(_,i)=><path key={i} d="M70 9 V24" stroke="currentColor" strokeWidth="3" strokeLinecap="round" transform={`rotate(${i*30} 70 70)`}/>)}</svg>
-}
-function ScribbleArrow(){return <svg className="jojo-scribble-arrow" viewBox="0 0 155 98" fill="none" aria-hidden="true"><path d="M7 8C45 31 74 9 93 33c17 22-9 41-25 25-19-20 40-44 69 17M119 74l18 1-4-18" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round"/></svg>}
-function Spark({className=''}:{className?:string}){return <svg className={className} viewBox="0 0 90 90" fill="none" aria-hidden="true"><path d="M45 4c3 27 14 38 41 41-27 3-38 14-41 41C42 59 31 48 4 45 31 42 42 31 45 4Z" stroke="currentColor" strokeWidth="3" strokeLinejoin="round"/></svg>}
-function PhotoStamp({src,alt,caption,className}:{src:string;alt:string;caption:string;className:string}){
- return <figure className={`jojo-photo-stamp ${className}`}><img src={src} alt={alt} loading="lazy"/><figcaption>{caption}</figcaption></figure>;
-}
 function JOJOFilm(){
  const videoRef=useRef<HTMLVideoElement>(null);
  useEffect(()=>{
@@ -45,7 +37,6 @@ function JOJOFilm(){
   };
  },[]);
  return <section className="jojo-film" aria-label="JOJO Juice brand video">
-  <div className="jojo-film-header"><span className="jojo-editorial-overline">SIX SECONDS OF FRESH</span><span className="jojo-film-divider" aria-hidden="true"/><span className="jojo-editorial-overline">THIS IS JOJO.</span></div>
   <div className="jojo-film-stage">
    <video ref={videoRef} src="/media/jojovid.mp4" poster="/brands/jojo-refresh.webp" muted loop playsInline preload="metadata" aria-label="Video singkat produk minuman JOJO Juice"/>
   </div>
@@ -71,34 +62,30 @@ export default function EditorialHome(){
 
   <JOJOFilm/>
 
-  <section className="jojo-paper jojo-origin" aria-labelledby="jojo-origin-title">
-   <div className="jojo-origin-copy">
+  <section className="jojo-tropical-story" aria-labelledby="jojo-tropical-title">
+   <div className="jojo-tropical-content">
     <span className="jojo-editorial-overline">HEY, WELCOME TO JOJO!</span>
-    <h2 id="jojo-origin-title">FRESH<br/><em>FEELS</em><br/>GOOD.</h2>
-    <p>Dari Pontianak sejak 2007, JOJO hadir buat nemenin momen kecil yang berarti. Habis kelas, jeda kerja, atau nongkrong bareng teman—selalu ada alasan untuk menikmati yang segar.</p>
-    <a className="jojo-editorial-btn" href="/story">GET TO KNOW US</a>
+    <h2 id="jojo-tropical-title">A LITTLE JOY<br/><em>IN EVERY SIP.</em></h2>
+    <p>Segarnya buah, hangatnya matahari, dan momen seru yang selalu layak dirayakan. JOJO hadir dari Pontianak sejak 2007 untuk nemenin harimu.</p>
+    <div className="jojo-tropical-highlights" aria-label="Karakter JOJO Juice">
+     <span><strong>01</strong> REAL FRUITS</span>
+     <span><strong>02</strong> FRESHLY BLENDED</span>
+     <span><strong>03</strong> TROPICAL GOODNESS</span>
+    </div>
+    <a href="/menu" className="jojo-tropical-cta">EXPLORE OUR JUICES <span aria-hidden="true">↗</span></a>
    </div>
-   <div className="jojo-origin-art" aria-label="Kolase foto JOJO">
-    <span className="jojo-origin-outline" aria-hidden="true">JOJO<br/>JUICE</span>
-    <PhotoStamp src="/brands/jojo-together.webp" alt="Dua minuman JOJO bersama" caption="BEST SHARED TOGETHER" className="jojo-stamp-one"/>
-    <PhotoStamp src="/brands/jojo-picnic.webp" alt="Momen piknik bersama JOJO" caption="FRESH LITTLE MOMENTS" className="jojo-stamp-two"/>
-    <Spark className="jojo-origin-spark"/>
-    <span className="jojo-origin-handwritten">a little joy<br/>in every sip!</span>
+   <div className="jojo-tropical-photo">
+    <img src="/brands/jojo-picnic.webp" alt="Momen tropical bersama minuman JOJO Juice" loading="lazy"/>
    </div>
   </section>
 
-  <section className="jojo-paper jojo-lifestyle" aria-labelledby="jojo-lifestyle-title">
-   <div className="jojo-lifestyle-visual">
-    <div className="jojo-lifestyle-circle"/>
-    <img className="jojo-lifestyle-image" src="/brands/jojo-moments.webp" loading="lazy" alt="Momen santai bersama JOJO Juice"/>
-    <span className="jojo-lifestyle-sticker">STAY<br/>FRESH!</span>
-    <SunDoodle className="jojo-lifestyle-sun"/>
-   </div>
-   <div className="jojo-lifestyle-copy">
+  <section className="jojo-tropical-feature" aria-labelledby="jojo-feature-title">
+   <div className="jojo-tropical-feature-photo"><img src="/brands/jojo-together.webp" alt="Minuman JOJO Juice dinikmati bersama" loading="lazy"/></div>
+   <div className="jojo-tropical-feature-copy">
     <span className="jojo-editorial-overline">MADE FOR EVERYDAY MOMENTS</span>
-    <h2>MADE <em>FRESH.</em><br/>MADE FOR <span>FUN!</span></h2>
-    <p>Buah segar, pilihan rasa, dan vibe yang selalu bikin hari lebih asyik. Apapun aktivitasmu, ada JOJO buat nemenin.</p>
-    <div className="jojo-editorial-actions"><a href="/menu" className="jojo-editorial-btn">EXPLORE OUR MENU</a><a href="/outlet" className="jojo-editorial-btn secondary">FIND JOJO NEAR YOU</a></div>
+    <h2 id="jojo-feature-title">MADE FRESH.<br/><em>MADE FOR FUN.</em></h2>
+    <p>Dari jeda kuliah sampai nongkrong sore, selalu ada alasan buat menikmati yang fresh. Temukan JOJO favoritmu, lalu ajak teman buat berbagi cerita.</p>
+    <a href="/story" className="jojo-tropical-cta">GET TO KNOW US <span aria-hidden="true">↗</span></a>
    </div>
   </section>
 

@@ -169,3 +169,52 @@
  .jojo-film-header .jojo-editorial-overline{font-size:9px}
  .jojo-film-stage{max-height:none;aspect-ratio:16/9}
 }
+
+/* Cinematic tropical editorial: replaces the former scrapbook photo collage.
+   All brand hues use the existing JOJO palette; photography remains unframed. */
+.jojo-film{padding:0;background:#FEFEFE}
+.jojo-film-header,.jojo-film-divider{display:none}
+.jojo-film-stage{aspect-ratio:16/9;max-height:none;background:#ED1C24}
+.jojo-film-stage video{width:100%;height:100%;object-fit:cover}
+.jojo-tropical-story,.jojo-tropical-feature{background:#FEFEFE;display:grid;grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);min-height:680px;overflow:hidden}
+.jojo-tropical-content,.jojo-tropical-feature-copy{padding:clamp(72px,8vw,130px) max(7%,calc((100vw - 1320px)/2));display:flex;flex-direction:column;align-items:flex-start;justify-content:center;position:relative;z-index:1}
+.jojo-tropical-content{padding-left:max(8%,calc((100vw - 1320px)/2));padding-right:clamp(24px,4vw,70px)}
+.jojo-tropical-content .jojo-editorial-overline,.jojo-tropical-feature-copy .jojo-editorial-overline{color:#ED1C24}
+.jojo-tropical-story h2,.jojo-tropical-feature h2{color:#ED1C24;font-size:clamp(49px,5.6vw,92px);line-height:1.02;letter-spacing:-.055em;margin:27px 0}
+.jojo-tropical-story h2 em,.jojo-tropical-feature h2 em{color:#ED1C24;font-style:italic}
+.jojo-tropical-story p,.jojo-tropical-feature p{max-width:490px;color:#292929;font-size:clamp(14px,1.1vw,17px);line-height:1.75}
+.jojo-tropical-photo,.jojo-tropical-feature-photo{min-height:620px;position:relative;overflow:hidden;background:#39BFE7}
+.jojo-tropical-photo img,.jojo-tropical-feature-photo img{width:100%;height:100%;position:absolute;inset:0;object-fit:cover;object-position:center}
+.jojo-tropical-photo img{object-position:center 57%}
+.jojo-tropical-highlights{display:flex;flex-wrap:wrap;gap:12px;margin:32px 0 31px}
+.jojo-tropical-highlights span{display:flex;flex-direction:column;gap:8px;color:#333;font-size:11px;font-weight:800;letter-spacing:.03em;padding-right:17px;border-right:1px solid rgba(237,28,36,.3)}
+.jojo-tropical-highlights span:last-child{border-right:0}
+.jojo-tropical-highlights strong{font-size:25px;color:#ED1C24;font-family:var(--jojo-display,Impact,sans-serif);line-height:1}
+.jojo-tropical-cta{display:inline-flex;align-items:center;justify-content:center;gap:16px;min-height:49px;padding:15px 24px;background:#ED1C24;color:#FEFEFE;font:900 11px/1.2 var(--jojo-body,Arial,sans-serif);letter-spacing:.07em;transition:background .22s,transform .22s}
+.jojo-tropical-cta:hover{background:#cf1820;transform:translateY(-2px)}
+.jojo-tropical-cta:focus-visible{outline:3px solid #39BFE7;outline-offset:3px}
+.jojo-tropical-feature{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);min-height:570px}
+.jojo-tropical-feature-photo{min-height:570px}
+.jojo-tropical-feature-copy{padding-left:clamp(35px,6vw,90px);padding-right:max(8%,calc((100vw - 1320px)/2))}
+.jojo-tropical-feature h2{font-size:clamp(47px,4.7vw,78px)}
+.jojo-tropical-feature .jojo-tropical-cta{margin-top:28px}
+@media(max-width:900px){
+ .jojo-tropical-story,.jojo-tropical-feature{grid-template-columns:1fr;min-height:0}
+ .jojo-tropical-content,.jojo-tropical-feature-copy{padding:65px 6%}
+ .jojo-tropical-photo{min-height:480px;order:-1}
+ .jojo-tropical-photo img{object-position:center 56%}
+ .jojo-tropical-feature-photo{min-height:420px}
+ .jojo-tropical-story h2,.jojo-tropical-feature h2{font-size:clamp(55px,8vw,84px)}
+}
+@media(max-width:520px){
+ .jojo-tropical-photo{min-height:0;aspect-ratio:4/5}
+ .jojo-tropical-photo img{object-position:center}
+ .jojo-tropical-content,.jojo-tropical-feature-copy{padding:52px 6% 66px}
+ .jojo-tropical-story h2,.jojo-tropical-feature h2{font-size:clamp(45px,12vw,62px);margin:20px 0}
+ .jojo-tropical-highlights{gap:8px;margin:25px 0}
+ .jojo-tropical-highlights span{font-size:9px;padding-right:8px}
+ .jojo-tropical-highlights strong{font-size:21px}
+ .jojo-tropical-feature-photo{min-height:0;aspect-ratio:4/3}
+ .jojo-tropical-cta{width:100%}
+}
+@media(prefers-reduced-motion:reduce){.jojo-tropical-cta{transition:none}}
