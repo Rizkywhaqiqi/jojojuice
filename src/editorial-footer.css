@@ -53,3 +53,27 @@
  .jojo-page-hero .banner-inner{padding-bottom:48px}
  .jojo-page-hero-link{width:100%}
 }
+
+/* Two original JOJO short videos. Deliberately play-on-demand so the homepage remains
+   the only page with a looping muted brand film. */
+.jojo-story-reels{background:var(--jojo-white,#FEFEFE);color:#252525;border-block:1px solid rgba(237,28,36,.18)}
+.jojo-story-reels-heading{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.7fr);gap:6%;align-items:end;margin-bottom:36px}
+.jojo-story-reels-heading .eyebrow{color:var(--jojo-red,#ED1C24)}
+.jojo-story-reels-heading h2{font-size:clamp(52px,6.5vw,100px);line-height:.95;color:var(--jojo-red,#ED1C24);margin:18px 0 0}
+.jojo-story-reels-heading h2 em{color:var(--jojo-red,#ED1C24)}
+.jojo-story-reels-heading>p{max-width:410px;font-size:clamp(14px,1.1vw,17px);line-height:1.7}
+.jojo-story-reels-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.jojo-story-reel{min-width:0;margin:0}
+.jojo-story-reel video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#252525;box-shadow:none}
+.jojo-story-reel video:focus-visible{outline:3px solid var(--jojo-blue,#39BFE7);outline-offset:4px}
+.jojo-story-reel figcaption{display:flex;flex-direction:column;gap:8px;padding:17px 0 23px;border-bottom:1px solid rgba(237,28,36,.32)}
+.jojo-story-reel figcaption span{font-size:10px;letter-spacing:.12em;font-weight:900;color:var(--jojo-red,#ED1C24)}
+.jojo-story-reel figcaption strong{font-family:var(--jojo-display,Impact,sans-serif);font-size:clamp(25px,3vw,38px);line-height:1.08;color:var(--jojo-red,#ED1C24)}
+.jojo-story-reel figcaption small{font-size:13px;line-height:1.6}
+#jojo-moments{scroll-margin-top:90px}
+@media(max-width:760px){
+ .jojo-story-reels-heading{grid-template-columns:1fr;gap:17px;margin-bottom:26px}
+ .jojo-story-reels-heading h2{font-size:clamp(48px,11vw,74px)}
+ .jojo-story-reels-grid{grid-template-columns:1fr;gap:25px}
+ .jojo-story-reel figcaption{padding:14px 0 18px}
+}
