@@ -27,7 +27,7 @@ export default function EditorialHome(){
    <div className="jojo-editorial-hero-shade"/>
    <div className="jojo-editorial-hero-content">
     <span className="jojo-editorial-kicker">PONTIANAK · EST. 2007</span>
-    <h1>FEEL <span>FRESH.</span><br/><em>LIVE FUN!</em></h1>
+    <h1>FEEL <span>FRESH</span><br/><em>LIVE FUN</em></h1>
     <p>Rasa segar buat cerita seru setiap hari.</p>
     <div className="jojo-editorial-actions">
      <a className="jojo-editorial-btn" href="/menu">EXPLORE OUR MENU</a>
@@ -103,6 +103,6 @@ export default function EditorialHome(){
    <a className="jojo-editorial-btn" href={JOJO_LINKS.instagram} target="_blank" rel="noopener noreferrer">FOLLOW @JOJOJUICEID</a>
   </section>
 
-  <section className="jojo-last-call"><Spark className="jojo-last-spark"/><span className="jojo-editorial-overline">ONE MORE SIP?</span><h2>YOUR FRESH<br/><em>MOMENT STARTS HERE.</em></h2><div className="jojo-editorial-actions"><a className="jojo-editorial-btn" href="/how-to-order">HOW TO ORDER</a><a className="jojo-editorial-btn secondary" href={JOJO_LINKS.esb} target="_blank" rel="noopener noreferrer">ORDER NOW</a></div><span className="jojo-last-small">FEEL FRESH. LIVE FUN. · JOJO JUICE</span></section>
+  <section className="jojo-last-call"><Spark className="jojo-last-spark"/><span className="jojo-editorial-overline">ONE MORE SIP?</span><h2>YOUR FRESH<br/><em>MOMENT STARTS HERE.</em></h2><div className="jojo-editorial-actions"><a className="jojo-editorial-btn" href="/how-to-order">HOW TO ORDER</a><a className="jojo-editorial-btn secondary" href={JOJO_LINKS.esb} target="_blank" rel="noopener noreferrer">ORDER NOW</a></div><span className="jojo-last-small">FEEL FRESH LIVE FUN · JOJO JUICE</span></section>
  </div>;
 }
