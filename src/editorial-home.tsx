@@ -12,7 +12,7 @@ function Spark({className=''}:{className?:string}){return <svg className={classN
 
 function JOJOVideo({className='',label='Video JOJO Juice'}:{className?:string;label?:string}){
  const ref=useCoordinatedVideo();
- return <video className={className} ref={ref} src="/media/jojovid.mp4" poster="/brands/jojo-photo-2.webp" muted loop playsInline preload="metadata" aria-label={label}/>;
+ return <video className={className} ref={ref} src="/media/jojovid.mp4" poster="/media/jojovid-poster.webp" muted loop playsInline preload="metadata" aria-label={label}/>;
 }
 function JOJOMomentVideo({source,poster,label}:{source:string;poster:string;label:string}){
  const ref=useCoordinatedVideo();
