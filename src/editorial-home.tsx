@@ -34,7 +34,7 @@ function JOJOFilm(){return <section className="jojo-film" aria-label="Film pende
 export default function EditorialHome(){
  return <div className="jojo-editorial">
   <section className="jojo-editorial-hero">
-   <JOJOVideo className="jojo-editorial-hero-video" label="Video hero JOJO Juice, minuman segar dan buah tropis"/>
+   <img className="jojo-editorial-hero-image" src="/brands/jojo-home-hero.jpg" alt="Cooler box merah berisi minuman JOJO Juice di pantai tropis" width="1350" height="1687" fetchPriority="high"/>
    <div className="jojo-editorial-hero-shade"/>
    <div className="jojo-editorial-hero-content">
     <span className="jojo-editorial-kicker">PONTIANAK · EST. 2007</span>

@@ -251,3 +251,20 @@
  .jojo-pick-media{aspect-ratio:4/4}
  .jojo-editorial .jojo-pick h3{font-size:35px}
 }
+
+/* Homepage hero uses a real JOJO Drive photograph; the separate brand film stays a video. */
+.jojo-editorial .jojo-editorial-hero{background:#ED1C24}
+.jojo-editorial .jojo-editorial-hero-image{
+ position:absolute;inset:0 0 0 auto;z-index:-2;
+ display:block;width:66%;height:100%;object-fit:cover;object-position:center 54%;
+}
+.jojo-editorial .jojo-editorial-hero-shade{
+ background:linear-gradient(90deg,#AD0A17 0%,rgba(173,10,23,.96) 29%,rgba(173,10,23,.51) 58%,rgba(173,10,23,.06) 100%);
+}
+.jojo-editorial .jojo-editorial-hero h1{font-size:clamp(72px,10.3vw,150px);max-width:980px}
+@media(max-width:760px){
+ .jojo-editorial .jojo-editorial-hero-image{inset:0;width:100%;height:100%;object-position:center 52%}
+ .jojo-editorial .jojo-editorial-hero-shade{background:linear-gradient(to top,rgba(68,5,13,.92),rgba(68,5,13,.42) 56%,rgba(68,5,13,.13))}
+ .jojo-editorial .jojo-editorial-hero h1{font-size:clamp(64px,14vw,105px)}
+}
+@media(max-width:390px){.jojo-editorial .jojo-editorial-hero h1{font-size:clamp(55px,13vw,70px)}}
