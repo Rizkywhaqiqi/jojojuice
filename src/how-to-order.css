@@ -67,7 +67,7 @@
  background:#851016;overflow:hidden;
 }
 .how-order-hero-media,.how-order-hero-media::after{position:absolute;inset:0}
-.how-order-hero-media{z-index:-1;pointer-events:none}
+.how-order-hero-media{z-index:0;pointer-events:none}
 .how-order-hero-media::after{content:"";background:linear-gradient(90deg,rgba(33,17,16,.78) 0%,rgba(33,17,16,.48) 49%,rgba(33,17,16,.12) 100%),linear-gradient(0deg,rgba(33,17,16,.28),transparent 36%)}
 .how-order-hero-media .how-order-hero-fallback,
 .how-order-hero-media .how-order-hero-video{
