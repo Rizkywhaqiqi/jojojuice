@@ -37,7 +37,7 @@ function RefresherStories({group,onDetails}:{group:Group;onDetails:(drink:Refres
   const update=()=>{
    frame=0;
    const stage=stageRef.current?.getBoundingClientRect();
-   if(!stage)return;
+   if(!stage||stage.height===0)return;
    const readingLine=stage.top+stage.height/2;
    let current=0;
    panels.forEach((panel,index)=>{
@@ -81,6 +81,8 @@ function RefresherStories({group,onDetails}:{group:Group;onDetails:(drink:Refres
     {refresherDrinks.map(drink=>{
      const price=priceFor(drink.name);
      return <section className="refresher-scroll-panel" key={drink.id} id={'cerita-'+drink.id} data-variant={drink.id} aria-labelledby={drink.id+'-title'}>
+      <img className="refresher-card-cup" src={`/brands/refresher/${drink.id}.webp`}
+       alt={`Cup JOJO ${drink.name}`} width="360" height="600" loading="lazy" decoding="async"/>
       <header className="refresher-poster-heading">
        <p className="eyebrow">{drink.profile}</p>
        <h3 id={drink.id+'-title'}>{drink.name}</h3>
@@ -88,6 +90,7 @@ function RefresherStories({group,onDetails}:{group:Group;onDetails:(drink:Refres
       <img className="refresher-ingredient-photo" src={`/brands/refresher/ingredients-${drink.id}.webp`}
        width="480" height="480" alt={drink.ingredients} loading="lazy" decoding="async"/>
       <div className="refresher-poster-copy">
+       <p className="refresher-poster-ingredients"><strong>Komposisi</strong>{drink.ingredients}</p>
        <p className="refresher-poster-benefit"><strong>Pas buat kamu</strong>{drink.benefit}</p>
        <div className="refresher-poster-actions">
         {price!==undefined&&<strong>{format(price)}</strong>}
@@ -284,18 +287,22 @@ export default function MenuCategory({group}:{group:Group}){
      <h2 id="refresher-goodness-title">Sela hari bareng Refresher</h2>
      <p className="refresher-magazine-deck">Tiga momen buat menikmati Refresher, dari istirahat siang sampai ketemu teman.</p>
     </header>
+    <div className="refresher-magazine-spread">
     <figure className="refresher-magazine-lead">
-     <img src="/brands/refresher/ingredients-tropical-twist.webp" alt="Nanas, jeruk, dan kelapa untuk Tropical Twist" width="480" height="480" loading="lazy"/>
+     <div className="refresher-magazine-media"><img src="/brands/refresher/ingredients-tropical-twist.webp" alt="Nanas, jeruk, dan kelapa untuk Tropical Twist" width="480" height="480" loading="lazy"/></div>
      <figcaption><h3>Jeda makan siang</h3><p>Keluar sebentar, cari makan siang, dan ambil satu cup untuk dinikmati sebelum balik beraktivitas.</p></figcaption>
     </figure>
+    <div className="refresher-magazine-rail">
     <figure>
-     <img src="/brands/refresher/ingredients-green-n-glow.webp" alt="Apel, bayam, nanas, dan timun untuk Green N Glow" width="480" height="480" loading="lazy"/>
+     <div className="refresher-magazine-media"><img src="/brands/refresher/ingredients-green-n-glow.webp" alt="Apel, bayam, nanas, dan timun untuk Green N Glow" width="480" height="480" loading="lazy"/></div>
      <figcaption><h3>Bawa buat di jalan</h3><p>Mampir ke gerai sebelum lanjut jalan. Kalau waktumu mepet, cek layanan pesan yang tersedia di lokasimu.</p></figcaption>
     </figure>
     <figure>
-     <img src="/brands/refresher/ingredients-boost-immunity.webp" alt="Jeruk, jahe, dan madu untuk Boost Immunity" width="480" height="480" loading="lazy"/>
+     <div className="refresher-magazine-media"><img src="/brands/refresher/ingredients-boost-immunity.webp" alt="Jeruk, jahe, dan madu untuk Boost Immunity" width="480" height="480" loading="lazy"/></div>
      <figcaption><h3>Cobain bareng teman</h3><p>Kalau lagi nongkrong, pesan varian yang berbeda. Saling tukar cerita soal rasa mana yang paling kalian suka.</p></figcaption>
     </figure>
+    </div>
+    </div>
    </section>}
    <p className="menu-category-note">Harga dan ketersediaan bisa berbeda di tiap gerai atau aplikasi.</p>
    <a className="button" href="/how-to-order#order-platforms">Pilih layanan pesan</a>
