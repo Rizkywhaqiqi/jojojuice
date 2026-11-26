@@ -248,15 +248,11 @@ html:has(.refresher-dialog[open]){overflow:hidden}
 .refresher-poster-heading .eyebrow{
  background:var(--jojo-yellow);color:#111827;border-radius:5px;padding:5px 9px;
 }
-.refresher-scroll-panel:not(:is([data-variant="inner-glow"],[data-variant="detoxify"])) :is(.refresher-poster-tagline,.refresher-poster-copy p,.refresher-poster-actions>strong){
+.refresher-scroll-panel[data-variant="green-n-glow"]{--poster-color:var(--jojo-blue);color:#111827}
+.refresher-scroll-panel[data-variant="vitablends"]{--poster-color:var(--jojo-yellow);color:#111827}
+.refresher-scroll-panel[data-variant="vitablends"] .refresher-poster-heading .eyebrow{background:var(--jojo-white)}
+.refresher-scroll-panel:is([data-variant="tropical-twist"],[data-variant="boost-immunity"]) :is(.refresher-poster-tagline,.refresher-poster-copy p,.refresher-poster-actions>strong){
  font-size:1.1875rem;font-weight:700;
-}
-.refresher-scroll-panel:is([data-variant="green-n-glow"],[data-variant="boost-immunity"]) .refresher-poster-photo{border-bottom:5px solid var(--jojo-blue)}
-@media(min-width:768px){
- .refresher-scroll-panel:is([data-variant="green-n-glow"],[data-variant="boost-immunity"]){
-  --cup-field-end:calc(var(--refresher-gutter) + var(--refresher-content) * .42);
-  background:linear-gradient(to right,var(--jojo-blue) var(--cup-field-end),var(--poster-color) var(--cup-field-end));
- }
 }
 .refresher-poster-heading,.refresher-poster-copy{display:grid;gap:8px;justify-items:start;min-width:0}
 .refresher-poster-heading h3{
