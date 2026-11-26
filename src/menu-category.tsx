@@ -148,7 +148,7 @@ function RefresherPicker({group}:{group:Group}){
    url.hash=selected.id+'-poster';
    window.history.replaceState(window.history.state,'',url);
   }
-  (dialogTrigger.current??pickerRef.current?.querySelector<HTMLButtonElement>('[aria-pressed=true]'))?.focus({preventScroll:true});
+  (dialogTrigger.current??pickerRef.current)?.focus({preventScroll:true});
   dialogTrigger.current=null;
   setSelected(null);
  }
@@ -159,7 +159,14 @@ function RefresherPicker({group}:{group:Group}){
   <section className="refresher-feature" data-variant={active.id}>
    {activeIndex!==previousIndex&&<div className="refresher-feature-wipe" key={'wipe-'+active.id} data-variant={refresherDrinks[previousIndex].id} aria-hidden="true"/>}
    <h1>Refresher Series</h1>
-   <div className="refresher-swipe-area"
+   <div className="refresher-swipe-area" ref={pickerRef} tabIndex={0} role="group"
+    aria-label="Varian Refresher, gunakan panah kiri dan kanan untuk mengganti varian"
+    onKeyDown={event=>{
+     if(event.key!=='ArrowLeft'&&event.key!=='ArrowRight')return;
+     event.preventDefault();
+     const count=refresherDrinks.length;
+     chooseSlide((activeIndex+(event.key==='ArrowRight'?1:-1)+count)%count);
+    }}
     onPointerDown={event=>{
      if(!event.isPrimary||event.button!==0)return;
      swipeStart.current={id:event.pointerId,x:event.clientX,y:event.clientY};
@@ -183,19 +190,7 @@ function RefresherPicker({group}:{group:Group}){
     <div className="refresher-feature-cup">
      <img src={`/brands/refresher/${active.id}.webp`} alt={`Cup JOJO ${active.name}`} width="360" height="600"/>
     </div>
-    <div className="refresher-feature-ingredients">
-     <img src={`/brands/refresher/ingredients-${active.id}.webp`} alt="" width="480" height="480"/>
-     <ul aria-label="Bahan minuman">{active.ingredients.split(', ').map(ingredient=><li key={ingredient}>{ingredient}</li>)}</ul>
-    </div>
    </div>
-   </div>
-   <div className="refresher-feature-pagination">
-    <span aria-label={`Varian ${activeIndex+1} dari ${refresherDrinks.length}`}>{String(activeIndex+1).padStart(2,'0')} / {String(refresherDrinks.length).padStart(2,'0')}</span>
-    <span>Geser untuk ganti varian</span>
-   </div>
-   <div className="refresher-feature-controls" ref={pickerRef} role="group" aria-label="Pilih varian Refresher">
-    {refresherDrinks.map((drink,index)=><button type="button" key={drink.id} aria-pressed={activeIndex===index}
-     onClick={()=>chooseSlide(index)}>{drink.name}</button>)}
    </div>
   </section>
   <RefresherStories group={group} onDetails={openDrink}/>
