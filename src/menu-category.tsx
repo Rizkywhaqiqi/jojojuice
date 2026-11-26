@@ -82,12 +82,14 @@ function RefresherStories({group,onDetails}:{group:Group;onDetails:(drink:Refres
     {refresherDrinks.map(drink=>{
      const price=priceFor(drink.name);
      return <section className="refresher-scroll-panel" key={drink.id} id={'cerita-'+drink.id} data-variant={drink.id} aria-labelledby={drink.id+'-title'}>
+      <img className="refresher-poster-cup" src={`/brands/refresher/${drink.id}.webp`}
+       width="360" height="600" alt={`Cup JOJO ${drink.name}`} loading="lazy" decoding="async"/>
       <header className="refresher-poster-heading">
        <p className="eyebrow">{drink.profile}</p>
        <h3 id={drink.id+'-title'}>{drink.name}</h3>
        <p lang="en" className="refresher-poster-tagline">{drink.tagline}</p>
       </header>
-      <img className="refresher-poster-backdrop" src={`/brands/refresher/ingredients-${drink.id}.webp`}
+      <img className="refresher-poster-photo" src={`/brands/refresher/ingredients-${drink.id}.webp`}
        width="480" height="480" alt="" loading="lazy" decoding="async"/>
       <div className="refresher-poster-copy">
        <p className="refresher-poster-ingredients"><strong>Komposisi</strong>{drink.ingredients}</p>
