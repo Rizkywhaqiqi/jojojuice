@@ -80,7 +80,7 @@ function RefresherStories({group,onDetails}:{group:Group;onDetails:(drink:Refres
    <div className="refresher-scroll-panels">
     {refresherDrinks.map(drink=>{
      const price=priceFor(drink.name);
-     return <section className="refresher-scroll-panel" key={drink.id} data-variant={drink.id} aria-labelledby={drink.id+'-title'}>
+     return <section className="refresher-scroll-panel" key={drink.id} id={'cerita-'+drink.id} data-variant={drink.id} aria-labelledby={drink.id+'-title'}>
       <header className="refresher-poster-heading">
        <p className="eyebrow">{drink.profile}</p>
        <h3 id={drink.id+'-title'}>{drink.name}</h3>
@@ -224,20 +224,17 @@ export default function MenuCategory({group}:{group:Group}){
     <div>
      <p className="eyebrow">Goodness in Every Blend</p>
      <h2 id="refresher-goodness-title">Manfaat Refresher</h2>
-     <p>Dari buah yang cerah sampai sayur yang segar, tiap racikan punya cara sendiri buat nemenin harimu.</p>
+     <p>Mau yang ringan, tropis, atau ada sentuhan jahe? Pilih racikan berdasarkan rasa dan bahan yang kamu suka.</p>
     </div>
-    <div className="refresher-goodness-photos">
-     <img src="/brands/refresher/ingredients-green-n-glow.webp" alt="" width="480" height="480" loading="lazy"/>
-     <img src="/brands/refresher/ingredients-detoxify.webp" alt="" width="480" height="480" loading="lazy"/>
-    </div>
-    <dl>
-     <dt>Buah dan sayur dalam satu gelas</dt>
-     <dd>Beberapa varian memadukan buah dengan wortel, bayam, timun, atau seledri.</dd>
-     <dt>Pilih rasa sesuai selera</dt>
-     <dd>Ada yang tropis, ringan, sampai jeruk dengan sentuhan jahe.</dd>
-     <dt>Praktis buat sehari-hari</dt>
-     <dd>Tinggal pilih racikanmu buat jeda kerja, habis kelas, atau sambil jalan.</dd>
-    </dl>
+    <ul className="refresher-benefit-list">
+     {refresherDrinks.map(drink=><li key={drink.id}>
+      <a href={'#cerita-'+drink.id}>
+       <img src={`/brands/refresher/${drink.id}.webp`} alt="" width="360" height="600" loading="lazy"/>
+       <h3>{drink.name}</h3>
+       <p>{drink.ingredients}</p>
+      </a>
+     </li>)}
+    </ul>
    </section>}
    <p className="menu-category-note">Harga dan ketersediaan bisa berbeda di tiap gerai atau aplikasi.</p>
    <a className="button" href="/how-to-order#order-platforms">Pilih layanan pesan</a>

@@ -49,40 +49,30 @@ html:has(.refresher-dialog[open]){overflow:hidden}
 }
 
 .refresher-goodness{
+ background:var(--jojo-yellow);color:var(--jojo-text);padding-inline:clamp(16px,4vw,56px);
  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
  gap:20px clamp(26px,6vw,90px);
  border-block:1px solid var(--jojo-red);
  margin-block:clamp(36px,8vw,92px) 24px;
  padding-block:clamp(24px,5vw,60px);
 }
+.refresher-goodness>div{grid-column:1 / -1}
 .refresher-goodness h2{margin-bottom:12px}
-.refresher-goodness dl,.refresher-goodness dd{margin:0}
-.refresher-goodness dt{font-weight:700}
-.refresher-goodness dd+dt{margin-top:16px}
+.refresher-benefit-list{
+ grid-column:1 / -1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:16px;margin:0;padding:0;list-style:none;
+}
+.refresher-benefit-list a{
+ display:grid;justify-items:center;text-align:center;gap:8px;height:100%;
+ padding:16px 12px;background:var(--jojo-white);color:var(--jojo-text);
+}
+.refresher-benefit-list img{width:100%;height:clamp(110px,16vw,172px);object-fit:contain}
+.refresher-benefit-list h3{font-size:clamp(18px,2.6vw,28px);line-height:1.1}
+.refresher-benefit-list p{font-size:.875rem}
+.refresher-benefit-list a:hover h3{text-decoration:underline}
 @media(max-width:760px){
  .refresher-goodness{grid-template-columns:1fr}
-}
-
-.refresher-goodness{
- background:var(--jojo-yellow);
- color:var(--jojo-text);
- padding-inline:clamp(20px,5vw,64px);
- align-items:center;
-}
-.refresher-goodness-photos{
- display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;
-}
-.refresher-goodness-photos img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover}
-.refresher-goodness dl{
- grid-column:1 / -1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
- column-gap:clamp(14px,3vw,36px);
-}
-.refresher-goodness dl dt{grid-row:1;border-top:1px solid currentColor;padding-top:12px;margin-top:0}
-.refresher-goodness dl dd{grid-row:2;margin-top:4px}
-@media(max-width:760px){
- .refresher-goodness dl{display:block}
- .refresher-goodness dl dt{margin-top:14px}
- .refresher-goodness dl dd{margin-top:4px}
+ .refresher-benefit-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 }
 
 .refresher-feature{
