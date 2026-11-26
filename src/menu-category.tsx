@@ -36,23 +36,13 @@ function RefresherStories({group,onDetails}:{group:Group;onDetails:(drink:Refres
   let frame=0;
   const update=()=>{
    frame=0;
-   const stage=stageRef.current;
-   const bounds=stage?.getBoundingClientRect();
-   if(!stage||!bounds||bounds.height===0)return;
-   const readingLine=bounds.top+bounds.height/2;
-   const halfTravel=Math.min(95,bounds.height*.22);
+   const stage=stageRef.current?.getBoundingClientRect();
+   if(!stage||stage.height===0)return;
+   const readingLine=stage.top+stage.height/2;
    let current=0;
-   let lane=0;
    panels.forEach((panel,index)=>{
-    if(index===0)return;
-    const distance=readingLine-panel.getBoundingClientRect().top;
-    if(distance>=0)current=index;
-    if(distance < -halfTravel)return;
-    const progress=Math.min(1,(distance+halfTravel)/(2*halfTravel));
-    const eased=progress*progress*(3-2*progress);
-    lane=index%2===1?eased:1-eased;
+    if(panel.getBoundingClientRect().top<=readingLine)current=index;
    });
-   stage.style.setProperty('--cup-lane',String(lane));
    setActiveIndex(current);
   };
   const schedule=()=>{
@@ -77,7 +67,7 @@ function RefresherStories({group,onDetails}:{group:Group;onDetails:(drink:Refres
   <h2 id="refresher-stories-title">Kenali enam racikannya</h2>
   <p className="refresher-stories-deck" lang="en">A refreshing blend of <strong>fruits and vegetables</strong>, making everyday <strong>wellness</strong> more enjoyable.</p>
   <div className="refresher-scroll" ref={storyRef}>
-   <div className="refresher-scroll-stage" ref={stageRef} data-cup-side={activeIndex%2===0?'left':'right'} aria-hidden="true">
+   <div className="refresher-scroll-stage" ref={stageRef} aria-hidden="true">
     {refresherDrinks.map(drink=><img className="refresher-cup-display" data-variant={drink.id} key={drink.id}
      data-active={drink.id===active.id&&cupStatus[drink.id]==='ready'}
      src={`/brands/refresher/${drink.id}.webp`} alt="" width="360" height="600"

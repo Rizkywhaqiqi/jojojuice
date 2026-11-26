@@ -203,14 +203,12 @@ html:has(.refresher-dialog[open]){overflow:hidden}
  letter-spacing:-.03em;text-wrap:balance;
 }
 .refresher-scroll{
- display:grid;grid-template-columns:minmax(0,1fr);isolation:isolate;container-type:inline-size;
+ display:grid;grid-template-columns:minmax(0,1fr);isolation:isolate;
 }
 .refresher-scroll-stage,.refresher-scroll-panels{grid-area:1 / 1}
 .refresher-scroll-panels{display:grid;min-width:0}
 .refresher-scroll-stage{
  --scroll-cup-height:clamp(150px,43svh,360px);
- --cup-travel:calc(100cqw - 100% - 2 * max(6vw,(100cqw - 1320px) / 2));
- transform:translateX(calc(var(--cup-travel) * var(--cup-lane,0)));
  position:sticky;top:100px;align-self:start;justify-self:start;
  width:calc(var(--refresher-content) * .42);margin-inline-start:var(--refresher-gutter);height:clamp(184px,64svh,590px);
  display:grid;place-items:center;z-index:1;pointer-events:none;
@@ -240,8 +238,7 @@ html:has(.refresher-dialog[open]){overflow:hidden}
  position:relative;isolation:isolate;
  display:grid;align-content:center;justify-items:start;gap:clamp(14px,2vw,24px);
  min-height:78svh;padding-block:clamp(36px,5vw,80px);
- --poster-wide-inset:calc(var(--refresher-gutter) + var(--refresher-content) * .46);
- padding-inline:var(--poster-wide-inset) var(--refresher-gutter);
+ padding-inline:calc(var(--refresher-gutter) + var(--refresher-content) * .46) var(--refresher-gutter);
  background:var(--poster-color);color:var(--jojo-white);
 }
 .refresher-scroll-panel[data-variant="green-n-glow"],.refresher-scroll-panel[data-variant="boost-immunity"]{--poster-color:#086b94}
@@ -252,8 +249,6 @@ html:has(.refresher-dialog[open]){overflow:hidden}
  width:calc(100% - var(--poster-photo-edge));height:100%;object-fit:cover;
  filter:brightness(.35);
 }
-.refresher-scroll-panel:nth-child(even){padding-inline:var(--refresher-gutter) var(--poster-wide-inset)}
-.refresher-scroll-panel:nth-child(even) .refresher-poster-backdrop{inset-inline:0 var(--poster-photo-edge)}
 .refresher-poster-heading,.refresher-poster-copy{display:grid;gap:8px;justify-items:start;min-width:0}
 .refresher-poster-heading h3{
  font-size:clamp(32px,5.4vw,76px);line-height:.98;letter-spacing:-.05em;
@@ -273,19 +268,15 @@ html:has(.refresher-dialog[open]){overflow:hidden}
  .refresher-scroll-stage{--scroll-cup-height:clamp(120px,34svh,200px);top:76px;width:29%;height:clamp(170px,46svh,300px)}
  .refresher-cup-display{width:94%}
  .refresher-scroll-panel{
-  --poster-photo-edge:32%;--poster-wide-inset:36%;
-  min-height:64svh;gap:12px;padding-block:32px;
+  --poster-photo-edge:32%;
+  min-height:64svh;gap:12px;padding:32px var(--refresher-gutter) 32px 36%;
  }
  .refresher-poster-heading h3{font-size:clamp(25px,6.7vw,48px)}
 }
 @media(max-height:500px) and (orientation:landscape){
  .refresher-scroll-stage{--scroll-cup-height:min(43svh,180px);top:96px;height:51svh}
 }
-@media(prefers-reduced-motion:reduce){
- .refresher-scroll-stage{transform:none}
- .refresher-scroll-stage[data-cup-side="right"]{transform:translateX(var(--cup-travel))}
- .refresher-cup-display{transition:none;transform:none}
-}
+@media(prefers-reduced-motion:reduce){.refresher-cup-display{transition:none;transform:none}}
 
 /* Keep the transparent navbar readable over the yellow Refresher cover. */
 body:has(.refresher-feature[data-variant="tropical-twist"])
