@@ -81,8 +81,6 @@ function RefresherStories({group,onDetails}:{group:Group;onDetails:(drink:Refres
     {refresherDrinks.map(drink=>{
      const price=priceFor(drink.name);
      return <section className="refresher-scroll-panel" key={drink.id} id={'cerita-'+drink.id} data-variant={drink.id} aria-labelledby={drink.id+'-title'}>
-      <img className="refresher-card-cup" src={`/brands/refresher/${drink.id}.webp`}
-       alt={`Cup JOJO ${drink.name}`} width="360" height="600" loading="lazy" decoding="async"/>
       <header className="refresher-poster-heading">
        <p className="eyebrow">{drink.profile}</p>
        <h3 id={drink.id+'-title'}>{drink.name}</h3>

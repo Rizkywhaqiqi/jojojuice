@@ -178,7 +178,6 @@ html:has(.refresher-dialog[open]){overflow:hidden}
 }
 .refresher-scroll-stage,.refresher-scroll-panels{grid-area:1 / 1}
 .refresher-scroll-panels{display:grid;min-width:0}
-.refresher-card-cup{display:none}
 .refresher-scroll-stage{
  position:sticky;top:100px;align-self:start;justify-self:start;
  width:calc(var(--refresher-content) * .42);margin-inline-start:var(--refresher-gutter);height:clamp(184px,64svh,590px);
@@ -229,13 +228,12 @@ html:has(.refresher-dialog[open]){overflow:hidden}
 .refresher-poster-heading .eyebrow{padding:5px 9px;border:1px solid currentColor;border-radius:999px}
 
 @media(max-width:767px){
- .refresher-scroll-stage{display:none}
- .refresher-card-cup{
-  display:block;justify-self:center;width:auto;height:clamp(140px,42vw,220px);
-  object-fit:contain;filter:drop-shadow(0 8px 10px rgba(0,0,0,.18));
+ .refresher-scroll-stage{top:76px;width:29%;height:clamp(170px,46svh,300px)}
+ .refresher-cup-display{width:94%;height:clamp(120px,34svh,200px)}
+ .refresher-scroll-panel{
+  min-height:64svh;gap:12px;padding:28px var(--refresher-gutter) 28px 38%;
  }
- .refresher-scroll-panel{min-height:0;padding:32px var(--refresher-gutter);gap:14px}
- .refresher-poster-heading h3{font-size:clamp(30px,8vw,54px)}
+ .refresher-poster-heading h3{font-size:clamp(25px,6.7vw,48px)}
  .refresher-ingredient-photo{width:100%;height:auto;aspect-ratio:16/10}
 }
 @media(max-height:500px) and (orientation:landscape){
