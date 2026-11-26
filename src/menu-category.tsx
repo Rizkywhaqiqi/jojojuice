@@ -27,6 +27,7 @@ type RefresherDrink=(typeof refresherDrinks)[number];
 function RefresherPicker({group}:{group:Group}){
  const dialogRef=useRef<HTMLDialogElement>(null);
  const storyRef=useRef<HTMLDivElement>(null);
+ const stageRef=useRef<HTMLDivElement>(null);
  const [activeIndex,setActiveIndex]=useState(0);
  const active=refresherDrinks[activeIndex];
  const [selected,setSelected]=useState<RefresherDrink|null>(null);
@@ -53,7 +54,9 @@ function RefresherPicker({group}:{group:Group}){
   let frame=0;
   const update=()=>{
    frame=0;
-   const readingLine=window.innerHeight*(window.innerWidth<=760?.73:.52);
+   const stage=stageRef.current?.getBoundingClientRect();
+   if(!stage)return;
+   const readingLine=stage.top+stage.height/2;
    let current=0;
    panels.forEach((panel,index)=>{
     if(panel.getBoundingClientRect().top<=readingLine)current=index;
@@ -96,20 +99,24 @@ function RefresherPicker({group}:{group:Group}){
  return <>
   <p className="refresher-picker-intro">Ketuk varianmu buat cek bahan dan rasanya.</p>
   <div className="refresher-scroll" ref={storyRef}>
-   <div className="refresher-scroll-stage" aria-hidden="true">
+   <div className="refresher-scroll-stage" ref={stageRef} aria-hidden="true">
     <img className="refresher-cup-display" data-variant={active.id} key={active.id}
      src={`/brands/refresher/${active.id}.webp`} alt="" width="360" height="600"/>
    </div>
    <div className="refresher-scroll-panels">
     {refresherDrinks.map(drink=>{
      const price=priceFor(drink.name);
-     return <section className="refresher-scroll-panel" key={drink.id} aria-labelledby={drink.id+'-title'}>
+     return <section className="refresher-scroll-panel" key={drink.id} data-variant={drink.id} aria-labelledby={drink.id+'-title'}>
+      <img className="refresher-ingredient-photo" src={`/brands/refresher/ingredients-${drink.id}.webp`}
+       width="480" height="480" alt={drink.ingredients} loading="lazy" decoding="async"/>
+      <div className="refresher-poster-copy">
       <p className="eyebrow">{drink.profile}</p>
       <h3 id={drink.id+'-title'}>{drink.name}</h3>
       <p>{drink.taste}</p>
       {price!==undefined&&<strong>{format(price)}</strong>}
       <button type="button" className="button refresher-choice" id={drink.id} aria-haspopup="dialog"
        onClick={()=>openDrink(drink.id)}>Cek bahan dan rasa</button>
+      </div>
      </section>;
     })}
    </div>
