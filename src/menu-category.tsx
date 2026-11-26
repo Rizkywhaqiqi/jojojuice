@@ -24,8 +24,87 @@ const refresherDrinks=refresherProfiles.flatMap(profile=>
 );
 type RefresherDrink=(typeof refresherDrinks)[number];
 
+function RefresherStories({group,onDetails}:{group:Group;onDetails:(drink:RefresherDrink,trigger:HTMLButtonElement)=>void}){
+ const storyRef=useRef<HTMLDivElement>(null);
+ const stageRef=useRef<HTMLDivElement>(null);
+ const [activeIndex,setActiveIndex]=useState(0);
+ const active=refresherDrinks[activeIndex];
+ const [cupStatus,setCupStatus]=useState<Record<string,'ready'|'failed'>>({});
+ const priceFor=(name:string)=>group.items.find(item=>item.name===name)?.price;
+ useEffect(()=>{
+  const panels=Array.from(storyRef.current?.querySelectorAll<HTMLElement>('.refresher-scroll-panel')??[]);
+  let frame=0;
+  const update=()=>{
+   frame=0;
+   const stage=stageRef.current?.getBoundingClientRect();
+   if(!stage)return;
+   const readingLine=stage.top+stage.height/2;
+   let current=0;
+   panels.forEach((panel,index)=>{
+    if(panel.getBoundingClientRect().top<=readingLine)current=index;
+   });
+   setActiveIndex(current);
+  };
+  const schedule=()=>{
+   if(!frame)frame=requestAnimationFrame(update);
+  };
+  const observer=new ResizeObserver(schedule);
+  const stage=stageRef.current;
+  if(stage)observer.observe(stage);
+  panels.forEach(panel=>observer.observe(panel));
+  update();
+  window.addEventListener('scroll',schedule,{passive:true});
+  window.addEventListener('resize',schedule);
+  return()=>{
+   cancelAnimationFrame(frame);
+   observer.disconnect();
+   window.removeEventListener('scroll',schedule);
+   window.removeEventListener('resize',schedule);
+  };
+ },[]);
+
+ return <section className="section refresher-stories" id="cerita-refresher" aria-labelledby="refresher-stories-title">
+  <h2 id="refresher-stories-title">Kenali enam racikannya</h2>
+  <div className="refresher-scroll" ref={storyRef}>
+   <div className="refresher-scroll-stage" ref={stageRef} aria-hidden="true">
+    {refresherDrinks.map(drink=><img className="refresher-cup-display" data-variant={drink.id} key={drink.id}
+     data-active={drink.id===active.id&&cupStatus[drink.id]==='ready'}
+     src={`/brands/refresher/${drink.id}.webp`} alt="" width="360" height="600"
+     fetchPriority={drink.id===refresherDrinks[0].id?'auto':'low'}
+     onLoad={()=>setCupStatus(status=>({...status,[drink.id]:'ready'}))}
+     onError={()=>setCupStatus(status=>({...status,[drink.id]:'failed'}))}/>)}
+    {cupStatus[active.id]!=='ready'&&<span className="refresher-cup-fallback" data-variant={active.id}>
+     {cupStatus[active.id]==='failed'?'Foto belum tersedia':'Memuat foto…'}
+    </span>}
+   </div>
+   <div className="refresher-scroll-panels">
+    {refresherDrinks.map(drink=>{
+     const price=priceFor(drink.name);
+     return <section className="refresher-scroll-panel" key={drink.id} data-variant={drink.id} aria-labelledby={drink.id+'-title'}>
+      <header className="refresher-poster-heading">
+       <p className="eyebrow">{drink.profile}</p>
+       <h3 id={drink.id+'-title'}>{drink.name}</h3>
+      </header>
+      <img className="refresher-ingredient-photo" src={`/brands/refresher/ingredients-${drink.id}.webp`}
+       width="480" height="480" alt={drink.ingredients} loading="lazy" decoding="async"/>
+      <div className="refresher-poster-copy">
+       <p>{drink.taste}</p>
+       <div className="refresher-poster-actions">
+        {price!==undefined&&<strong>{format(price)}</strong>}
+        <button type="button" className="button refresher-choice" aria-haspopup="dialog"
+         onClick={event=>onDetails(drink,event.currentTarget)}>Cek bahan dan rasa</button>
+       </div>
+      </div>
+     </section>;
+    })}
+   </div>
+  </div>
+ </section>;
+}
+
 function RefresherPicker({group}:{group:Group}){
  const dialogRef=useRef<HTMLDialogElement>(null);
+ const dialogTrigger=useRef<HTMLButtonElement>(null);
  const [activeIndex,setActiveIndex]=useState(0);
  const active=refresherDrinks[activeIndex];
  const [selected,setSelected]=useState<RefresherDrink|null>(null);
@@ -49,9 +128,10 @@ function RefresherPicker({group}:{group:Group}){
   if(selected&&dialog&&!dialog.open)dialog.showModal();
  },[selected]);
 
- function openDrink(){
-  window.history.replaceState(window.history.state,'','#'+active.id);
-  setSelected(active);
+ function openDrink(drink:RefresherDrink,trigger:HTMLButtonElement){
+  dialogTrigger.current=trigger;
+  window.history.replaceState(window.history.state,'','#'+drink.id);
+  setSelected(drink);
  }
 
  function closeDrink(){
@@ -61,7 +141,8 @@ function RefresherPicker({group}:{group:Group}){
    url.hash=selected.id+'-poster';
    window.history.replaceState(window.history.state,'',url);
   }
-  document.getElementById('refresher-details')?.focus({preventScroll:true});
+  (dialogTrigger.current??document.getElementById('refresher-details'))?.focus({preventScroll:true});
+  dialogTrigger.current=null;
   setSelected(null);
  }
 
@@ -78,7 +159,7 @@ function RefresherPicker({group}:{group:Group}){
      <h2>{active.name}</h2>
      <p>{active.taste}</p>
      {activePrice!==undefined&&<strong>{format(activePrice)}</strong>}
-     <button className="button" type="button" id="refresher-details" aria-haspopup="dialog" onClick={openDrink}>Cek bahan dan rasa</button>
+     <button className="button" type="button" id="refresher-details" aria-haspopup="dialog" onClick={event=>openDrink(active,event.currentTarget)}>Cek bahan dan rasa</button>
     </div>
     <div className="refresher-feature-cup">
      <img src={`/brands/refresher/${active.id}.webp`} alt={`Cup JOJO ${active.name}`} width="360" height="600"/>
@@ -96,6 +177,7 @@ function RefresherPicker({group}:{group:Group}){
      }}>{drink.name}</button>)}
    </div>
   </section>
+  <RefresherStories group={group} onDetails={openDrink}/>
   <dialog className="refresher-dialog" ref={dialogRef} aria-labelledby="refresher-variant-title" onClose={closeDrink}
    onClick={event=>{if(event.target===event.currentTarget)event.currentTarget.close()}}>
    {selected&&<div className="refresher-dialog-body">
