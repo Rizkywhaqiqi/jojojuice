@@ -3,18 +3,18 @@ import {format, type Group} from './menu-data';
 import './menu-category.css';
 
 const refresherProfiles=[
- {title:'Fruity & Tropical', description:'Buat kamu yang suka rasa buah yang familiar dan nuansa tropis.', drinks:[
+ {title:'Fruity & Tropical', drinks:[
   {id:'tropical-twist',name:'Tropical Twist', ingredients:'Nanas, jeruk Sunkist, kelapa', taste:'Rasa tropis yang ringan dengan sentuhan kelapa.'},
   {id:'inner-glow',name:'Inner Glow',ingredients:'Wortel, apel, jeruk Sunkist, jahe',taste:'Buah dan wortel dengan sedikit hangat dari jahe.'},
  ]},
- {title:'Fresh & Green', description:'Coba perpaduan buah dengan bayam, timun, bit, atau seledri.', drinks:[
+ {title:'Fresh & Green', drinks:[
   {id:'green-n-glow',name:'Green N Glow',ingredients:'Apel, bayam, nanas, timun',taste:'Rasa hijau yang segar dengan manis-asam dari nanas.'},
   {id:'vitablends',name:'Vitablends',ingredients:'Jeruk, apel, bit, seledri',taste:'Perpaduan buah dengan karakter bit dan seledri.'},
  ]},
- {title:'Boost & Bold', description:'Rasa jeruk yang tegas dengan sentuhan hangat jahe.', drinks:[
+ {title:'Boost & Bold', drinks:[
   {id:'boost-immunity',name:'Boost Immunity',ingredients:'Jeruk Sunkist, jahe, madu',taste:'Rasa jeruk dengan sentuhan jahe dan madu.'},
  ]},
- {title:'Crisp & Refreshing', description:'Rasa buah yang ringan dengan sentuhan jeruk nipis.', drinks:[
+ {title:'Crisp & Refreshing', drinks:[
   {id:'detoxify',name:'Detoxify',ingredients:'Semangka, jeruk nipis, seledri, jahe',taste:'Semangka yang ringan dengan rasa asam dari jeruk nipis.'},
  ]},
 ];
@@ -26,6 +26,9 @@ type RefresherDrink=(typeof refresherDrinks)[number];
 
 function RefresherPicker({group}:{group:Group}){
  const dialogRef=useRef<HTMLDialogElement>(null);
+ const storyRef=useRef<HTMLDivElement>(null);
+ const [activeIndex,setActiveIndex]=useState(0);
+ const active=refresherDrinks[activeIndex];
  const [selected,setSelected]=useState<RefresherDrink|null>(null);
  const priceFor=(name:string)=>group.items.find(item=>item.name===name)?.price;
 
@@ -44,6 +47,31 @@ function RefresherPicker({group}:{group:Group}){
   const dialog=dialogRef.current;
   if(selected&&dialog&&!dialog.open)dialog.showModal();
  },[selected]);
+
+ useEffect(()=>{
+  const panels=Array.from(storyRef.current?.querySelectorAll<HTMLElement>('.refresher-scroll-panel')??[]);
+  let frame=0;
+  const update=()=>{
+   frame=0;
+   const readingLine=window.innerHeight*(window.innerWidth<=760?.73:.52);
+   let current=0;
+   panels.forEach((panel,index)=>{
+    if(panel.getBoundingClientRect().top<=readingLine)current=index;
+   });
+   setActiveIndex(current);
+  };
+  const schedule=()=>{
+   if(!frame)frame=requestAnimationFrame(update);
+  };
+  update();
+  window.addEventListener('scroll',schedule,{passive:true});
+  window.addEventListener('resize',schedule);
+  return()=>{
+   cancelAnimationFrame(frame);
+   window.removeEventListener('scroll',schedule);
+   window.removeEventListener('resize',schedule);
+  };
+ },[]);
 
  function openDrink(id:string){
   const drink=refresherDrinks.find(item=>item.id===id);
@@ -67,20 +95,30 @@ function RefresherPicker({group}:{group:Group}){
 
  return <>
   <p className="refresher-picker-intro">Ketuk varianmu buat cek bahan dan rasanya.</p>
-  {refresherProfiles.map(profile=><section className="menu-category-profile" key={profile.title}>
-   <div><h3>{profile.title}</h3><p>{profile.description}</p></div>
-   <div>{profile.drinks.map(drink=>{
-    const price=priceFor(drink.name);
-    return <button type="button" className="menu-category-item refresher-choice" key={drink.id}
-     id={drink.id} aria-haspopup="dialog" onClick={()=>openDrink(drink.id)}>
-     <span><strong>{drink.name}</strong><span className="refresher-choice-label">Cek bahan dan rasa</span></span>
-     <span className="refresher-choice-end">
+  <div className="refresher-scroll" ref={storyRef}>
+   <div className="refresher-scroll-stage" aria-hidden="true">
+    <div className="refresher-cup-display" data-variant={active.id} key={active.id}>
+     <div className="refresher-cup-lid"/>
+     <div className="refresher-cup">
+      <img src="/brands/jojo-logo.svg" alt=""/>
+      <span>{active.name}</span>
+     </div>
+    </div>
+   </div>
+   <div className="refresher-scroll-panels">
+    {refresherDrinks.map(drink=>{
+     const price=priceFor(drink.name);
+     return <section className="refresher-scroll-panel" key={drink.id} aria-labelledby={drink.id+'-title'}>
+      <p className="eyebrow">{drink.profile}</p>
+      <h3 id={drink.id+'-title'}>{drink.name}</h3>
+      <p>{drink.taste}</p>
       {price!==undefined&&<strong>{format(price)}</strong>}
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
-     </span>
-    </button>;
-   })}</div>
-  </section>)}
+      <button type="button" className="button refresher-choice" id={drink.id} aria-haspopup="dialog"
+       onClick={()=>openDrink(drink.id)}>Cek bahan dan rasa</button>
+     </section>;
+    })}
+   </div>
+  </div>
   <dialog className="refresher-dialog" ref={dialogRef} aria-labelledby="refresher-variant-title" onClose={closeDrink}
    onClick={event=>{if(event.target===event.currentTarget)event.currentTarget.close()}}>
    {selected&&<div className="refresher-dialog-body">
