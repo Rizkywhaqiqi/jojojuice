@@ -117,7 +117,6 @@ function RefresherPicker({group}:{group:Group}){
  const [reducedMotion,setReducedMotion]=useState(()=>window.matchMedia('(prefers-reduced-motion: reduce)').matches);
  const [{activeIndex,previousIndex},setSlide]=useState({activeIndex:0,previousIndex:0});
  const active=refresherDrinks[activeIndex];
- const [firstWord,...restOfName]=active.name.split(' ');
  const [selected,setSelected]=useState<RefresherDrink|null>(null);
  const priceFor=(name:string)=>group.items.find(item=>item.name===name)?.price;
 
@@ -196,7 +195,7 @@ function RefresherPicker({group}:{group:Group}){
    onFocus={event=>{if(event.target.matches(':focus-visible'))setInteracting(true)}}
    onBlur={event=>{if(!event.currentTarget.contains(event.relatedTarget))setInteracting(false)}}>
    {activeIndex!==previousIndex&&<div className="refresher-feature-wipe" key={'wipe-'+active.id} data-variant={refresherDrinks[previousIndex].id} aria-hidden="true"/>}
-   <h1>Refresher Series</h1>
+   <p className="refresher-series-label">Refresher Series</p>
    <p className="refresher-slide-announcement" aria-live="polite">{interacting?active.name:null}</p>
    <div className="refresher-swipe-area" ref={pickerRef} tabIndex={0} role="group"
     aria-label="Varian Refresher, gunakan panah kiri dan kanan untuk mengganti varian"
@@ -221,14 +220,19 @@ function RefresherPicker({group}:{group:Group}){
      const count=refresherDrinks.length;
      chooseSlide((activeIndex+(dx<0?1:-1)+count)%count);
     }}>
-   <div className="refresher-feature-grid" key={active.id}>
-    <header className="refresher-feature-title">
-     <p className="eyebrow">{active.profile}</p>
-     <h2 aria-label={active.name}>
-      {firstWord}{restOfName.length>0&&<><br/><em>{restOfName.join(' ')}</em></>}
-     </h2>
-    </header>
-    <div className="refresher-feature-cup">
+   <div className="refresher-feature-grid">
+    <div className="refresher-feature-copy">
+     <header className="refresher-feature-intro" lang="en">
+      <h1><span>Enjoy the freshness</span><span>Embrace the goodness</span></h1>
+      <p>A refreshing blend of <strong>fruits and vegetables</strong>, making everyday <strong>wellness</strong> more enjoyable.</p>
+      <p className="refresher-feature-signoff">Real fruits. Real vegetables. Real refresher.</p>
+     </header>
+     <div className="refresher-feature-title" key={active.id}>
+      <p className="eyebrow">{active.profile}</p>
+      <h2>{active.name}</h2>
+     </div>
+    </div>
+    <div className="refresher-feature-cup" key={active.id}>
      <img src={`/brands/refresher/${active.id}.webp`} alt={`Cup JOJO ${active.name}`} width="360" height="600"/>
     </div>
    </div>
