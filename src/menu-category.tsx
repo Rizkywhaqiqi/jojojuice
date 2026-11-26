@@ -109,7 +109,7 @@ function RefresherPicker({group}:{group:Group}){
  const pickerRef=useRef<HTMLDivElement>(null);
  const [{activeIndex,previousIndex},setSlide]=useState({activeIndex:0,previousIndex:0});
  const active=refresherDrinks[activeIndex];
- const [leftTitle,...rightTitle]=active.name.split(' ');
+ const [firstWord,...restOfName]=active.name.split(' ');
  const [selected,setSelected]=useState<RefresherDrink|null>(null);
  const priceFor=(name:string)=>group.items.find(item=>item.name===name)?.price;
 
@@ -187,8 +187,7 @@ function RefresherPicker({group}:{group:Group}){
     <header className="refresher-feature-title" aria-live="polite">
      <p className="eyebrow">{active.profile}</p>
      <h2 aria-label={active.name}>
-      <span className="refresher-word-left">{leftTitle}</span>{' '}
-      <span className="refresher-word-right">{rightTitle.join(' ')||active.profile}</span>
+      {firstWord}{restOfName.length>0&&<><br/><em>{restOfName.join(' ')}</em></>}
      </h2>
     </header>
     <div className="refresher-feature-cup">
