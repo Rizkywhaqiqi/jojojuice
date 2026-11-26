@@ -86,14 +86,14 @@ function RefresherStories({group,onDetails}:{group:Group;onDetails:(drink:Refres
        <h3 id={drink.id+'-title'}>{drink.name}</h3>
       </header>
       <img className="refresher-ingredient-photo" src={`/brands/refresher/ingredients-${drink.id}.webp`}
-       width="480" height="480" alt={drink.ingredients} loading="lazy" decoding="async"/>
+       width="480" height="480" alt="" loading="lazy" decoding="async"/>
       <div className="refresher-poster-copy">
        <p className="refresher-poster-ingredients"><strong>Komposisi</strong>{drink.ingredients}</p>
        <p className="refresher-poster-benefit"><strong>Pas buat kamu</strong>{drink.benefit}</p>
        <div className="refresher-poster-actions">
         {price!==undefined&&<strong>{format(price)}</strong>}
         <button type="button" className="button refresher-choice" aria-haspopup="dialog"
-         onClick={event=>onDetails(drink,event.currentTarget)}>Cek bahan dan rasa</button>
+         onClick={event=>onDetails(drink,event.currentTarget)} aria-label={`Cek profil rasa ${drink.name}`}>Cek profil rasa</button>
        </div>
       </div>
      </section>;
@@ -106,10 +106,12 @@ function RefresherStories({group,onDetails}:{group:Group;onDetails:(drink:Refres
 function RefresherPicker({group}:{group:Group}){
  const dialogRef=useRef<HTMLDialogElement>(null);
  const dialogTrigger=useRef<HTMLButtonElement>(null);
+ const originalHash=useRef<string|null>(null);
  const swipeStart=useRef<{id:number;x:number;y:number}|null>(null);
  const pickerRef=useRef<HTMLDivElement>(null);
  const featureRef=useRef<HTMLElement>(null);
  const [visible,setVisible]=useState(false);
+ const [interacting,setInteracting]=useState(false);
  const [pageVisible,setPageVisible]=useState(()=>!document.hidden);
  const [reducedMotion,setReducedMotion]=useState(()=>window.matchMedia('(prefers-reduced-motion: reduce)').matches);
  const [{activeIndex,previousIndex},setSlide]=useState({activeIndex:0,previousIndex:0});
@@ -152,7 +154,7 @@ function RefresherPicker({group}:{group:Group}){
   };
  },[]);
 
- const rotating=visible&&pageVisible&&!reducedMotion&&!selected;
+ const rotating=visible&&pageVisible&&!reducedMotion&&!selected&&!interacting;
  useEffect(()=>{
   if(!rotating)return;
   const timer=window.setTimeout(()=>setSlide(({activeIndex:index})=>({
@@ -168,6 +170,7 @@ function RefresherPicker({group}:{group:Group}){
 
  function openDrink(drink:RefresherDrink,trigger:HTMLButtonElement){
   dialogTrigger.current=trigger;
+  originalHash.current=window.location.hash;
   window.history.replaceState(window.history.state,'','#'+drink.id);
   setSelected(drink);
  }
@@ -176,20 +179,24 @@ function RefresherPicker({group}:{group:Group}){
   if(!selected)return;
   const url=new URL(window.location.href);
   if(url.hash==='#'+selected.id){
-   url.hash=selected.id+'-poster';
+   url.hash=originalHash.current??selected.id+'-poster';
    window.history.replaceState(window.history.state,'',url);
   }
   (dialogTrigger.current??pickerRef.current)?.focus({preventScroll:true});
   dialogTrigger.current=null;
+  originalHash.current=null;
   setSelected(null);
  }
 
  const selectedPrice=selected?priceFor(selected.name):undefined;
 
  return <>
-  <section className="refresher-feature" data-variant={active.id} ref={featureRef}>
+  <section className="refresher-feature" data-variant={active.id} ref={featureRef}
+   onFocus={event=>{if(event.target.matches(':focus-visible'))setInteracting(true)}}
+   onBlur={event=>{if(!event.currentTarget.contains(event.relatedTarget))setInteracting(false)}}>
    {activeIndex!==previousIndex&&<div className="refresher-feature-wipe" key={'wipe-'+active.id} data-variant={refresherDrinks[previousIndex].id} aria-hidden="true"/>}
    <h1>Refresher Series</h1>
+   <p className="refresher-slide-announcement" aria-live="polite">{interacting?active.name:null}</p>
    <div className="refresher-swipe-area" ref={pickerRef} tabIndex={0} role="group"
     aria-label="Varian Refresher, gunakan panah kiri dan kanan untuk mengganti varian"
     onKeyDown={event=>{
@@ -214,7 +221,7 @@ function RefresherPicker({group}:{group:Group}){
      chooseSlide((activeIndex+(dx<0?1:-1)+count)%count);
     }}>
    <div className="refresher-feature-grid" key={active.id}>
-    <header className="refresher-feature-title" aria-live={rotating?'off':'polite'}>
+    <header className="refresher-feature-title">
      <p className="eyebrow">{active.profile}</p>
      <h2 aria-label={active.name}>
       {firstWord}{restOfName.length>0&&<><br/><em>{restOfName.join(' ')}</em></>}
