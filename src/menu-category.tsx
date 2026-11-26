@@ -63,7 +63,7 @@ function RefresherStories({group,onDetails}:{group:Group;onDetails:(drink:Refres
   };
  },[]);
 
- return <section className="section refresher-stories" id="cerita-refresher" aria-labelledby="refresher-stories-title">
+ return <section className="refresher-stories" id="cerita-refresher" aria-labelledby="refresher-stories-title">
   <h2 id="refresher-stories-title">Kenali enam racikannya</h2>
   <div className="refresher-scroll" ref={storyRef}>
    <div className="refresher-scroll-stage" ref={stageRef} aria-hidden="true">
@@ -274,7 +274,7 @@ export default function MenuCategory({group}:{group:Group}){
    </div>
    {group.image&&<img src={group.image} alt={group.imageAlt??''} fetchPriority="high"/>}
   </section>}
-  <section className="section menu-category-list" id="pilihan-kategori">
+  <section className={refresher?'refresher-closing menu-category-list':'section menu-category-list'} id="pilihan-kategori">
    {!refresher&&<>
     <h2>Pilihan menu</h2>
     {group.items.map(item=><article className="menu-category-item" key={item.name}>
