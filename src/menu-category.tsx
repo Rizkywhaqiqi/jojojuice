@@ -4,18 +4,18 @@ import './menu-category.css';
 
 const refresherProfiles=[
  {title:'Fruity & Tropical', drinks:[
-  {id:'tropical-twist',name:'Tropical Twist', ingredients:'Nanas, jeruk Sunkist, kelapa', taste:'Rasa tropis yang ringan dengan sentuhan kelapa.'},
-  {id:'inner-glow',name:'Inner Glow',ingredients:'Wortel, apel, jeruk Sunkist, jahe',taste:'Buah dan wortel dengan sedikit hangat dari jahe.'},
+  {id:'tropical-twist',name:'Tropical Twist', ingredients:'Nanas, jeruk Sunkist, kelapa', taste:'Nanas dan jeruk membuka dengan rasa segar, lalu kelapa memberi sentuhan tropis.'},
+  {id:'inner-glow',name:'Inner Glow',ingredients:'Wortel, apel, jeruk Sunkist, jahe',taste:'Wortel dan apel memberi rasa manis, disusul jeruk dan hangatnya jahe.'},
  ]},
  {title:'Fresh & Green', drinks:[
-  {id:'green-n-glow',name:'Green N Glow',ingredients:'Apel, bayam, nanas, timun',taste:'Rasa hijau yang segar dengan manis-asam dari nanas.'},
-  {id:'vitablends',name:'Vitablends',ingredients:'Jeruk, apel, bit, seledri',taste:'Perpaduan buah dengan karakter bit dan seledri.'},
+  {id:'green-n-glow',name:'Green N Glow',ingredients:'Apel, bayam, nanas, timun',taste:'Bayam dan timun memberi karakter hijau. Apel dan nanas menambah rasa manis-asam.'},
+  {id:'vitablends',name:'Vitablends',ingredients:'Jeruk, apel, bit, seledri',taste:'Bit memberi warna merah pekat. Jeruk dan apel menyeimbangkan karakter bit dan seledri.'},
  ]},
  {title:'Boost & Bold', drinks:[
-  {id:'boost-immunity',name:'Boost Immunity',ingredients:'Jeruk Sunkist, jahe, madu',taste:'Rasa jeruk dengan sentuhan jahe dan madu.'},
+  {id:'boost-immunity',name:'Boost Immunity',ingredients:'Jeruk Sunkist, jahe, madu',taste:'Jeruk membuka dengan rasa cerah. Jahe memberi hangat dan madu memberi manis.'},
  ]},
  {title:'Crisp & Refreshing', drinks:[
-  {id:'detoxify',name:'Detoxify',ingredients:'Semangka, jeruk nipis, seledri, jahe',taste:'Semangka yang ringan dengan rasa asam dari jeruk nipis.'},
+  {id:'detoxify',name:'Detoxify',ingredients:'Semangka, jeruk nipis, seledri, jahe',taste:'Semangka jadi rasa utamanya. Jeruk nipis memberi asam segar, dengan sentuhan seledri dan jahe.'},
  ]},
 ];
 
@@ -30,6 +30,7 @@ function RefresherPicker({group}:{group:Group}){
  const stageRef=useRef<HTMLDivElement>(null);
  const [activeIndex,setActiveIndex]=useState(0);
  const active=refresherDrinks[activeIndex];
+ const [cupStatus,setCupStatus]=useState<Record<string,'ready'|'failed'>>({});
  const [selected,setSelected]=useState<RefresherDrink|null>(null);
  const priceFor=(name:string)=>group.items.find(item=>item.name===name)?.price;
 
@@ -66,11 +67,16 @@ function RefresherPicker({group}:{group:Group}){
   const schedule=()=>{
    if(!frame)frame=requestAnimationFrame(update);
   };
+  const observer=new ResizeObserver(schedule);
+  const stage=stageRef.current;
+  if(stage)observer.observe(stage);
+  panels.forEach(panel=>observer.observe(panel));
   update();
   window.addEventListener('scroll',schedule,{passive:true});
   window.addEventListener('resize',schedule);
   return()=>{
    cancelAnimationFrame(frame);
+   observer.disconnect();
    window.removeEventListener('scroll',schedule);
    window.removeEventListener('resize',schedule);
   };
@@ -90,7 +96,7 @@ function RefresherPicker({group}:{group:Group}){
    url.hash='pilihan-kategori';
    window.history.replaceState(window.history.state,'',url);
   }
-  document.getElementById(selected.id)?.focus({preventScroll:true});
+  document.getElementById(selected.id+'-details')?.focus({preventScroll:true});
   setSelected(null);
  }
 
@@ -100,13 +106,20 @@ function RefresherPicker({group}:{group:Group}){
   <p className="refresher-picker-intro">Ketuk varianmu buat cek bahan dan rasanya.</p>
   <div className="refresher-scroll" ref={storyRef}>
    <div className="refresher-scroll-stage" ref={stageRef} aria-hidden="true">
-    <img className="refresher-cup-display" data-variant={active.id} key={active.id}
-     src={`/brands/refresher/${active.id}.webp`} alt="" width="360" height="600"/>
+    {refresherDrinks.map(drink=><img className="refresher-cup-display" data-variant={drink.id} key={drink.id}
+     data-active={drink.id===active.id&&cupStatus[drink.id]==='ready'}
+     src={`/brands/refresher/${drink.id}.webp`} alt="" width="360" height="600"
+     fetchPriority={drink.id===refresherDrinks[0].id?'auto':'low'}
+     onLoad={()=>setCupStatus(status=>({...status,[drink.id]:'ready'}))}
+     onError={()=>setCupStatus(status=>({...status,[drink.id]:'failed'}))}/>)}
+    {cupStatus[active.id]!=='ready'&&<span className="refresher-cup-fallback" data-variant={active.id}>
+     {cupStatus[active.id]==='failed'?'Foto belum tersedia':'Memuat foto…'}
+    </span>}
    </div>
    <div className="refresher-scroll-panels">
     {refresherDrinks.map(drink=>{
      const price=priceFor(drink.name);
-     return <section className="refresher-scroll-panel" key={drink.id} data-variant={drink.id} aria-labelledby={drink.id+'-title'}>
+     return <section className="refresher-scroll-panel" key={drink.id} id={drink.id} data-variant={drink.id} aria-labelledby={drink.id+'-title'}>
       <img className="refresher-ingredient-photo" src={`/brands/refresher/ingredients-${drink.id}.webp`}
        width="480" height="480" alt={drink.ingredients} loading="lazy" decoding="async"/>
       <div className="refresher-poster-copy">
@@ -114,7 +127,7 @@ function RefresherPicker({group}:{group:Group}){
       <h3 id={drink.id+'-title'}>{drink.name}</h3>
       <p>{drink.taste}</p>
       {price!==undefined&&<strong>{format(price)}</strong>}
-      <button type="button" className="button refresher-choice" id={drink.id} aria-haspopup="dialog"
+      <button type="button" className="button refresher-choice" id={drink.id+'-details'} aria-haspopup="dialog"
        onClick={()=>openDrink(drink.id)}>Cek bahan dan rasa</button>
       </div>
      </section>;
@@ -170,12 +183,16 @@ export default function MenuCategory({group}:{group:Group}){
    {refresher&&<section className="refresher-goodness" aria-labelledby="refresher-goodness-title">
     <div>
      <h2 id="refresher-goodness-title">Goodness in Every Blend</h2>
-     <p>Lagi cari minuman yang segar buat sehari-hari? Pilih racikan yang cocok sama seleramu.</p>
+     <p>Dari semangka yang ringan sampai jeruk dengan hangatnya jahe, tiap racikan punya karakter sendiri. Mulai dari rasa yang kamu suka, lalu cek bahan di dalamnya.</p>
+    </div>
+    <div className="refresher-goodness-photos">
+     <img src="/brands/refresher/ingredients-green-n-glow.webp" alt="" width="480" height="480" loading="lazy"/>
+     <img src="/brands/refresher/ingredients-detoxify.webp" alt="" width="480" height="480" loading="lazy"/>
     </div>
     <dl>
-     <dt>Bahan gampang dicek</dt>
+     <dt>Kenali bahan di gelasmu</dt>
      <dd>Ketuk varian untuk lihat buah, sayur, dan bahan lain di dalamnya.</dd>
-     <dt>Rasa sesuai selera</dt>
+     <dt>Pilih rasa sesuai selera</dt>
      <dd>Ada yang tropis, ringan, sampai jeruk dengan sentuhan jahe.</dd>
      <dt>Praktis buat sehari-hari</dt>
      <dd>Tinggal pilih racikanmu buat jeda kerja, habis kelas, atau sambil jalan.</dd>
