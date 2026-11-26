@@ -43,20 +43,20 @@ export default function HowToOrder(){
    </div>
    <div className="how-order-hero-content">
     <span className="eyebrow">{JOJO_TAGLINE.toUpperCase()}</span>
-    <h1>HOW TO<br/><em>ORDER.</em></h1>
-    <p>Pesan JOJO favoritmu dengan cara yang paling gampang. Tiga langkah, siap fresh!</p>
+    <h1>Cara <em>pesan</em></h1>
+    <p>Lihat menu, lalu pilih layanan pemesanan yang tersedia di lokasimu.</p>
     <div className="how-order-hero-actions">
-     <a className="button" href="#order-steps">MULAI DI SINI</a>
+     <a className="button" href="#order-steps">Lihat langkahnya</a>
      {showVideo&&<button type="button" className="how-order-video-toggle" onClick={toggleVideo}>
       {playing?'Jeda video':'Putar video'}
      </button>}
     </div>
    </div>
   </section>
-  <section className="how-order-steps section" id="order-steps"><div className="how-order-head"><span className="eyebrow">SIMPLE AS 1, 2, 3</span><h2>TINGGAL<br/><em>IKUTI.</em></h2><p>Semua transaksi dilakukan di layanan pemesanan resmi yang kamu pilih, bukan di website ini.</p></div>
+  <section className="how-order-steps section" id="order-steps"><div className="how-order-head"><h2>Langkah <em>pemesanan</em></h2><p>Pembayaran dilakukan di layanan pemesanan yang kamu pilih.</p></div>
    <div className="how-order-steps-grid">{steps.map(step=><article className="how-order-step" key={step.num}><span className="how-order-number">{step.num}</span><div><h3>{step.title}</h3><p>{step.copy}</p></div>{step.url?<a href={step.url}>{step.label}</a>:<p className="how-order-step-finish" role="note">{step.label}</p>}</article>)}</div>
   </section>
   <div id="order-platforms"><OrderOptions/></div>
-  <section className="how-order-help section"><div><span className="eyebrow">BUTUH BANTUAN?</span><h2>LET'S <em>TALK.</em></h2><p>Ketersediaan outlet, harga, metode pembayaran, dan pilihan pengantaran mengikuti ketentuan masing-masing platform. Kalau ada pertanyaan, hubungi JOJO lewat WhatsApp.</p></div><a className="button" href={JOJO_LINKS.whatsapp} target="_blank" rel="noopener noreferrer">CHAT WHATSAPP</a></section>
+  <section className="how-order-help section"><div><h2>Butuh <em>bantuan?</em></h2><p>Harga, stok, dan ongkir bisa berbeda di tiap aplikasi. Hubungi kami lewat WhatsApp jika ada pertanyaan.</p></div><a className="button" href={JOJO_LINKS.whatsapp} target="_blank" rel="noopener noreferrer">CHAT WHATSAPP</a></section>
  </div>;
 }
