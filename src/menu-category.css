@@ -246,17 +246,6 @@ html:has(.refresher-dialog[open]){overflow:hidden}
  display:block;width:min(100%,510px);height:clamp(148px,28svh,300px);
  object-fit:cover;object-position:center;border-radius:16px;
 }
-.refresher-tropical-art{
- position:relative;isolation:isolate;width:min(100%,510px);aspect-ratio:16/9;
-}
-.refresher-tropical-art img{
- position:absolute;height:auto;filter:drop-shadow(0 5px 5px rgb(0 0 0 / .16));
-}
-.refresher-tropical-art [data-fruit="leaves"]{width:66%;right:0;top:0}
-.refresher-tropical-art [data-fruit="pineapple"]{width:39%;left:9%;top:6%;transform:rotate(-14deg)}
-.refresher-tropical-art [data-fruit="coconut"]{width:32%;right:9%;bottom:2%;transform:rotate(12deg)}
-.refresher-tropical-art [data-fruit="orange"]{width:34%;left:32%;bottom:0;transform:rotate(-8deg)}
-.refresher-tropical-art [data-fruit="wedges"]{width:21%;left:3%;bottom:2%;transform:rotate(-12deg)}
 .refresher-poster-heading,.refresher-poster-copy{display:grid;gap:8px;justify-items:start;min-width:0}
 .refresher-poster-heading h3{
  font-size:clamp(32px,5.4vw,76px);line-height:.98;letter-spacing:-.05em;
