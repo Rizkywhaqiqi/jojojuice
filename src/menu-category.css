@@ -136,9 +136,9 @@ body:has(.refresher-feature:is([data-variant="inner-glow"],[data-variant="detoxi
 .refresher-page :is(.refresher-feature-intro h1,.refresher-feature-title h2,.refresher-poster-heading h3){
  color:var(--variant-heading,var(--jojo-yellow));text-shadow:none;
 }
-:is(.refresher-feature,.refresher-scroll-panel):is([data-variant="tropical-twist"],[data-variant="boost-immunity"])
- :is(.refresher-feature-intro h1,.refresher-feature-title,.refresher-series-label,.refresher-poster-heading,.refresher-poster-copy){
- background:var(--jojo-red-text);border-radius:8px;padding:.3em .5em;
+.refresher-page :is(.refresher-feature,.refresher-scroll-panel):is([data-variant="tropical-twist"],[data-variant="boost-immunity"])
+ :is(.refresher-feature-intro h1,.refresher-feature-title h2,.refresher-poster-heading h3){
+ text-shadow:0 1px 2px rgb(17 24 39 / .55);
 }
 .refresher-feature-intro h1{width:fit-content}
 .refresher-feature-intro h1{
