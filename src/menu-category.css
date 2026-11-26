@@ -284,9 +284,6 @@ html:has(.refresher-dialog[open]){overflow:hidden}
 }
 @media(prefers-reduced-motion:reduce){.refresher-cup-display{transition:none;transform:none}}
 
-body:has(.refresher-page) .header.anna-header:not(.is-scrolled):not(.is-open){
- background:var(--jojo-white);color:#111827;
-}
 .refresher-page .button:hover{color:var(--jojo-red-text)}
 .refresher-stories>h2,.refresher-poster-heading h3{text-wrap:balance}
 .refresher-poster-benefit{font-size:clamp(.9375rem,1.5vw,1.125rem);line-height:1.55}
