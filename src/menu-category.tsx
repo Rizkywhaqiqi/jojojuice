@@ -107,6 +107,11 @@ function RefresherPicker({group}:{group:Group}){
  const dialogTrigger=useRef<HTMLButtonElement>(null);
  const swipeStart=useRef<{id:number;x:number;y:number}|null>(null);
  const pickerRef=useRef<HTMLDivElement>(null);
+ const featureRef=useRef<HTMLElement>(null);
+ const [paused,setPaused]=useState(false);
+ const [visible,setVisible]=useState(false);
+ const [pageVisible,setPageVisible]=useState(()=>!document.hidden);
+ const [reducedMotion,setReducedMotion]=useState(()=>window.matchMedia('(prefers-reduced-motion: reduce)').matches);
  const [{activeIndex,previousIndex},setSlide]=useState({activeIndex:0,previousIndex:0});
  const active=refresherDrinks[activeIndex];
  const [firstWord,...restOfName]=active.name.split(' ');
@@ -130,6 +135,31 @@ function RefresherPicker({group}:{group:Group}){
   const dialog=dialogRef.current;
   if(selected&&dialog&&!dialog.open)dialog.showModal();
  },[selected]);
+
+ useEffect(()=>{
+  const preference=window.matchMedia('(prefers-reduced-motion: reduce)');
+  const syncMotion=()=>setReducedMotion(preference.matches);
+  const syncVisibility=()=>setPageVisible(!document.hidden);
+  const observer=new IntersectionObserver(([entry])=>setVisible(entry.intersectionRatio>=.25),{threshold:.25});
+  const hero=featureRef.current;
+  if(hero)observer.observe(hero);
+  preference.addEventListener('change',syncMotion);
+  document.addEventListener('visibilitychange',syncVisibility);
+  return()=>{
+   observer.disconnect();
+   preference.removeEventListener('change',syncMotion);
+   document.removeEventListener('visibilitychange',syncVisibility);
+  };
+ },[]);
+
+ const rotating=visible&&pageVisible&&!paused&&!reducedMotion&&!selected;
+ useEffect(()=>{
+  if(!rotating)return;
+  const timer=window.setTimeout(()=>setSlide(({activeIndex:index})=>({
+   activeIndex:(index+1)%refresherDrinks.length,previousIndex:index
+  })),3000);
+  return()=>window.clearTimeout(timer);
+ },[rotating,activeIndex]);
 
  function chooseSlide(index:number){
   window.history.replaceState(window.history.state,'','#'+refresherDrinks[index].id+'-poster');
@@ -157,7 +187,7 @@ function RefresherPicker({group}:{group:Group}){
  const selectedPrice=selected?priceFor(selected.name):undefined;
 
  return <>
-  <section className="refresher-feature" data-variant={active.id}>
+  <section className="refresher-feature" data-variant={active.id} ref={featureRef}>
    {activeIndex!==previousIndex&&<div className="refresher-feature-wipe" key={'wipe-'+active.id} data-variant={refresherDrinks[previousIndex].id} aria-hidden="true"/>}
    <h1>Refresher Series</h1>
    <div className="refresher-swipe-area" ref={pickerRef} tabIndex={0} role="group"
@@ -184,7 +214,7 @@ function RefresherPicker({group}:{group:Group}){
      chooseSlide((activeIndex+(dx<0?1:-1)+count)%count);
     }}>
    <div className="refresher-feature-grid" key={active.id}>
-    <header className="refresher-feature-title" aria-live="polite">
+    <header className="refresher-feature-title" aria-live={rotating?'off':'polite'}>
      <p className="eyebrow">{active.profile}</p>
      <h2 aria-label={active.name}>
       {firstWord}{restOfName.length>0&&<><br/><em>{restOfName.join(' ')}</em></>}
@@ -195,11 +225,22 @@ function RefresherPicker({group}:{group:Group}){
     </div>
    </div>
    </div>
-   <button className="refresher-swipe-next" type="button" aria-label="Geser ke varian berikutnya"
-    onClick={()=>chooseSlide((activeIndex+1)%refresherDrinks.length)}>
-    <span>Geser</span>
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg>
-   </button>
+   <div className="refresher-swipe-controls" role="group" aria-label="Navigasi varian Refresher">
+    <button className="refresher-swipe-next" type="button" aria-label="Varian sebelumnya"
+     onClick={()=>chooseSlide((activeIndex-1+refresherDrinks.length)%refresherDrinks.length)}>
+     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 12H5m6-6-6 6 6 6"/></svg>
+    </button>
+    {!reducedMotion&&<button className="refresher-swipe-next" type="button"
+     aria-label={paused?'Lanjutkan pergantian otomatis':'Jeda pergantian otomatis'} onClick={()=>setPaused(value=>!value)}>
+     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d={paused?'m8 5 12 7-12 7z':'M9 5v14m6-14v14'}/>
+     </svg>
+    </button>}
+    <button className="refresher-swipe-next" type="button" aria-label="Varian berikutnya"
+     onClick={()=>chooseSlide((activeIndex+1)%refresherDrinks.length)}>
+     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg>
+    </button>
+   </div>
   </section>
   <RefresherStories group={group} onDetails={openDrink}/>
   <dialog className="refresher-dialog" ref={dialogRef} aria-labelledby="refresher-variant-title" onClose={closeDrink}
