@@ -234,29 +234,20 @@ html:has(.refresher-dialog[open]){overflow:hidden}
 }
 .refresher-scroll-panel{
  --poster-color:var(--jojo-yellow);
+ --poster-photo-edge:calc(var(--refresher-gutter) + var(--refresher-content) * .42);
+ position:relative;isolation:isolate;
  display:grid;align-content:center;justify-items:start;gap:clamp(14px,2vw,24px);
  min-height:78svh;padding-block:clamp(36px,5vw,80px);
  padding-inline:calc(var(--refresher-gutter) + var(--refresher-content) * .46) var(--refresher-gutter);
- background:var(--poster-color);color:var(--poster-ink,#0f172a);
+ background:var(--poster-color);color:var(--jojo-white);
 }
-.refresher-scroll-panel[data-variant="green-n-glow"],.refresher-scroll-panel[data-variant="boost-immunity"]{--poster-color:#086b94;--poster-ink:#f8fafc}
+.refresher-scroll-panel[data-variant="green-n-glow"],.refresher-scroll-panel[data-variant="boost-immunity"]{--poster-color:#086b94}
 .refresher-scroll-panel[data-variant="inner-glow"],.refresher-scroll-panel[data-variant="detoxify"]{--poster-color:var(--jojo-white)}
-.refresher-scroll-panel[data-variant="vitablends"]{--poster-color:var(--jojo-red-text);--poster-ink:#f8fafc}
-.refresher-scroll-panel[data-variant="tropical-twist"]{
- position:relative;isolation:isolate;--poster-ink:var(--jojo-white);
-}
-.refresher-scroll-panel[data-variant="tropical-twist"]::before{
- content:"";position:absolute;pointer-events:none;z-index:-1;
- inset:0 0 0 calc(var(--refresher-gutter) + var(--refresher-content) * .42);
- background:linear-gradient(rgb(0 0 0 / .65),rgb(0 0 0 / .65)),
-  url("/brands/refresher/ingredients-tropical-twist.webp") center / cover no-repeat;
-}
-@media(max-width:767px){
- .refresher-scroll-panel[data-variant="tropical-twist"]::before{left:32%}
-}
-.refresher-ingredient-photo{
- display:block;width:min(100%,510px);height:clamp(148px,28svh,300px);
- object-fit:cover;object-position:center;border-radius:16px;
+.refresher-scroll-panel[data-variant="vitablends"]{--poster-color:var(--jojo-red-text)}
+.refresher-poster-backdrop{
+ position:absolute;inset:0 0 0 var(--poster-photo-edge);z-index:-1;pointer-events:none;
+ width:calc(100% - var(--poster-photo-edge));height:100%;object-fit:cover;
+ filter:brightness(.35);
 }
 .refresher-poster-heading,.refresher-poster-copy{display:grid;gap:8px;justify-items:start;min-width:0}
 .refresher-poster-heading h3{
@@ -277,10 +268,10 @@ html:has(.refresher-dialog[open]){overflow:hidden}
  .refresher-scroll-stage{--scroll-cup-height:clamp(120px,34svh,200px);top:76px;width:29%;height:clamp(170px,46svh,300px)}
  .refresher-cup-display{width:94%}
  .refresher-scroll-panel{
+  --poster-photo-edge:32%;
   min-height:64svh;gap:12px;padding:32px var(--refresher-gutter) 32px 36%;
  }
  .refresher-poster-heading h3{font-size:clamp(25px,6.7vw,48px)}
- .refresher-ingredient-photo{width:100%;height:auto;aspect-ratio:16/10}
 }
 @media(max-height:500px) and (orientation:landscape){
  .refresher-scroll-stage{--scroll-cup-height:min(43svh,180px);top:96px;height:51svh}
