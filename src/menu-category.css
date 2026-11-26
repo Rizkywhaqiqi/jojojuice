@@ -71,11 +71,11 @@ html:has(.refresher-dialog[open]){overflow:hidden}
 }
 .refresher-scroll-stage{
  position:sticky;top:104px;align-self:start;
- min-height:clamp(340px,66svh,620px);
+ height:clamp(340px,66svh,620px);
  display:grid;place-items:center;background:var(--jojo-white);
 }
 .refresher-cup-display{
- width:clamp(112px,21vw,300px);height:auto;display:block;
+ width:clamp(112px,21vw,300px);height:100%;max-height:calc(100% - 24px);object-fit:contain;display:block;
  animation:refresher-cup-swap .38s ease-out both;
 }
 .refresher-scroll-panel{

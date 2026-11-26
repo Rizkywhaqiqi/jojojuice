@@ -98,7 +98,7 @@ function RefresherPicker({group}:{group:Group}){
   <div className="refresher-scroll" ref={storyRef}>
    <div className="refresher-scroll-stage" aria-hidden="true">
     <img className="refresher-cup-display" data-variant={active.id} key={active.id}
-     src={`/brands/refresher/${active.id}.webp`} alt="" width="405" height="449"/>
+     src={`/brands/refresher/${active.id}.webp`} alt="" width="360" height="600"/>
    </div>
    <div className="refresher-scroll-panels">
     {refresherDrinks.map(drink=>{
