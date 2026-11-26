@@ -65,6 +65,7 @@ function RefresherStories({group,onDetails}:{group:Group;onDetails:(drink:Refres
 
  return <section className="refresher-stories" id="cerita-refresher" aria-labelledby="refresher-stories-title">
   <h2 id="refresher-stories-title">Kenali enam racikannya</h2>
+  <p className="refresher-stories-deck" lang="en">A refreshing blend of <strong>fruits and vegetables</strong>, making everyday <strong>wellness</strong> more enjoyable.</p>
   <div className="refresher-scroll" ref={storyRef}>
    <div className="refresher-scroll-stage" ref={stageRef} aria-hidden="true">
     {refresherDrinks.map(drink=><img className="refresher-cup-display" data-variant={drink.id} key={drink.id}
@@ -223,9 +224,7 @@ function RefresherPicker({group}:{group:Group}){
    <div className="refresher-feature-grid">
     <div className="refresher-feature-copy">
      <header className="refresher-feature-intro" lang="en">
-      <h1><span>Enjoy the freshness</span><span>Embrace the goodness</span></h1>
-      <p>A refreshing blend of <strong>fruits and vegetables</strong>, making everyday <strong>wellness</strong> more enjoyable.</p>
-      <p className="refresher-feature-signoff">Real fruits. Real vegetables. Real refresher.</p>
+      <h1>Enjoy the freshness</h1>
      </header>
      <div className="refresher-feature-title" key={active.id}>
       <p className="eyebrow">{active.profile}</p>
@@ -297,7 +296,7 @@ export default function MenuCategory({group}:{group:Group}){
    {refresher&&<section className="refresher-magazine" aria-labelledby="refresher-goodness-title">
     <header>
      <p className="eyebrow">Goodness in Every Blend</p>
-     <h2 id="refresher-goodness-title">Sela hari bareng Refresher</h2>
+     <h2 id="refresher-goodness-title" lang="en">Embrace the goodness</h2>
      <p className="refresher-magazine-deck">Tiga momen buat menikmati Refresher, dari istirahat siang sampai ketemu teman.</p>
     </header>
     <div className="refresher-magazine-spread">
@@ -316,6 +315,7 @@ export default function MenuCategory({group}:{group:Group}){
     </figure>
     </div>
     </div>
+    <p className="refresher-magazine-signoff" lang="en">Real fruits. Real vegetables. Real refresher.</p>
    </section>}
    <p className="menu-category-note">Harga dan ketersediaan bisa berbeda di tiap gerai atau aplikasi.</p>
    <a className="button" href="/how-to-order#order-platforms">Pilih layanan pesan</a>

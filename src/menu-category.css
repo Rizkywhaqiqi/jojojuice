@@ -125,9 +125,6 @@ html:has(.refresher-dialog[open]){overflow:hidden}
  font:900 clamp(32px,4vw,68px)/.98 var(--jojo-display);
  letter-spacing:-.048em;text-wrap:balance;
 }
-.refresher-feature-intro h1 span{display:block}
-.refresher-feature-intro p{max-width:42ch;margin-top:14px;line-height:1.5}
-.refresher-feature-intro .refresher-feature-signoff{margin-top:8px;font-weight:800}
 .refresher-feature-title{
  margin-top:clamp(18px,3vw,36px);
  animation:refresher-copy-in .44s .1s ease-out both;
@@ -197,6 +194,14 @@ html:has(.refresher-dialog[open]){overflow:hidden}
 
 .refresher-stories{padding-block:clamp(36px,6vw,82px) 0}
 .refresher-stories>h2{padding-inline:var(--refresher-gutter);font-size:clamp(32px,6vw,72px);line-height:1;margin-bottom:24px;letter-spacing:-.045em}
+.refresher-stories>h2{margin-bottom:12px}
+.refresher-stories-deck{
+ max-width:48ch;margin:0 var(--refresher-gutter) clamp(24px,4vw,42px);line-height:1.5;
+}
+.refresher-magazine-signoff{
+ margin-top:clamp(24px,4vw,44px);font:900 clamp(20px,3vw,38px)/1.12 var(--jojo-display);
+ letter-spacing:-.03em;text-wrap:balance;
+}
 .refresher-scroll{
  display:grid;grid-template-columns:minmax(0,1fr);isolation:isolate;
 }
