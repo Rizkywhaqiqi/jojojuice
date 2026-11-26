@@ -97,13 +97,8 @@ function RefresherPicker({group}:{group:Group}){
   <p className="refresher-picker-intro">Ketuk varianmu buat cek bahan dan rasanya.</p>
   <div className="refresher-scroll" ref={storyRef}>
    <div className="refresher-scroll-stage" aria-hidden="true">
-    <div className="refresher-cup-display" data-variant={active.id} key={active.id}>
-     <div className="refresher-cup-lid"/>
-     <div className="refresher-cup">
-      <img src="/brands/jojo-logo.svg" alt=""/>
-      <span>{active.name}</span>
-     </div>
-    </div>
+    <img className="refresher-cup-display" data-variant={active.id} key={active.id}
+     src={`/brands/refresher/${active.id}.webp`} alt="" width="405" height="449"/>
    </div>
    <div className="refresher-scroll-panels">
     {refresherDrinks.map(drink=>{
