@@ -57,3 +57,21 @@ html:has(.refresher-dialog[open]){overflow:hidden}
  .refresher-dialog{width:100%;margin:auto 0 0}
  .refresher-dialog-body{padding-bottom:max(22px,env(safe-area-inset-bottom))}
 }
+
+.refresher-positioning>strong{display:block;font-size:clamp(17px,2vw,23px);margin-bottom:8px}
+.refresher-price-range{font-weight:700;margin-top:12px}
+.menu-category-profile h3+p{margin:8px 0 0;max-width:30ch}
+.refresher-goodness{
+ display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+ gap:20px clamp(26px,6vw,90px);
+ border-block:1px solid var(--jojo-red);
+ margin-block:clamp(36px,8vw,92px) 24px;
+ padding-block:clamp(24px,5vw,60px);
+}
+.refresher-goodness h2{margin-bottom:12px}
+.refresher-goodness dl,.refresher-goodness dd{margin:0}
+.refresher-goodness dt{font-weight:700}
+.refresher-goodness dd+dt{margin-top:16px}
+@media(max-width:760px){
+ .refresher-goodness{grid-template-columns:1fr}
+}

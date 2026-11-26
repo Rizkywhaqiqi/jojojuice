@@ -3,18 +3,18 @@ import {format, type Group} from './menu-data';
 import './menu-category.css';
 
 const refresherProfiles=[
- {title:'Fruity & Tropical', drinks:[
+ {title:'Fruity & Tropical', description:'Buat kamu yang suka rasa buah yang familiar dan nuansa tropis.', drinks:[
   {id:'tropical-twist',name:'Tropical Twist', ingredients:'Nanas, jeruk Sunkist, kelapa', taste:'Rasa tropis yang ringan dengan sentuhan kelapa.'},
   {id:'inner-glow',name:'Inner Glow',ingredients:'Wortel, apel, jeruk Sunkist, jahe',taste:'Buah dan wortel dengan sedikit hangat dari jahe.'},
  ]},
- {title:'Fresh & Green', drinks:[
+ {title:'Fresh & Green', description:'Coba perpaduan buah dengan bayam, timun, bit, atau seledri.', drinks:[
   {id:'green-n-glow',name:'Green N Glow',ingredients:'Apel, bayam, nanas, timun',taste:'Rasa hijau yang segar dengan manis-asam dari nanas.'},
   {id:'vitablends',name:'Vitablends',ingredients:'Jeruk, apel, bit, seledri',taste:'Perpaduan buah dengan karakter bit dan seledri.'},
  ]},
- {title:'Boost & Bold', drinks:[
+ {title:'Boost & Bold', description:'Rasa jeruk yang tegas dengan sentuhan hangat jahe.', drinks:[
   {id:'boost-immunity',name:'Boost Immunity',ingredients:'Jeruk Sunkist, jahe, madu',taste:'Rasa jeruk dengan sentuhan jahe dan madu.'},
  ]},
- {title:'Crisp & Refreshing', drinks:[
+ {title:'Crisp & Refreshing', description:'Rasa buah yang ringan dengan sentuhan jeruk nipis.', drinks:[
   {id:'detoxify',name:'Detoxify',ingredients:'Semangka, jeruk nipis, seledri, jahe',taste:'Semangka yang ringan dengan rasa asam dari jeruk nipis.'},
  ]},
 ];
@@ -68,7 +68,7 @@ function RefresherPicker({group}:{group:Group}){
  return <>
   <p className="refresher-picker-intro">Ketuk varianmu buat cek bahan dan rasanya.</p>
   {refresherProfiles.map(profile=><section className="menu-category-profile" key={profile.title}>
-   <h3>{profile.title}</h3>
+   <div><h3>{profile.title}</h3><p>{profile.description}</p></div>
    <div>{profile.drinks.map(drink=>{
     const price=priceFor(drink.name);
     return <button type="button" className="menu-category-item refresher-choice" key={drink.id}
@@ -103,13 +103,18 @@ function RefresherPicker({group}:{group:Group}){
 
 export default function MenuCategory({group}:{group:Group}){
  const refresher=group.id==='refresher';
+ const prices=group.items.map(item=>item.price);
  return <div className="menu-category">
   <section className={`menu-category-hero${group.image?' has-image':''}`}>
    <div>
     <a className="menu-category-back" href="/menu#pilihan-menu">Kembali ke katalog</a>
     {refresher&&<p className="eyebrow">{group.title}</p>}
     <h1>{refresher?'Nature’s Goodness':group.title}</h1>
-    <p>{refresher?'Buah dan sayur dalam satu gelas. Lagi pengin yang tropis, ringan, atau ada sentuhan jahe? Pilih racikanmu di bawah.':group.subtitle}</p>
+    {refresher?<div className="refresher-positioning">
+     <strong>Fresh Fruit &amp; Vegetable Blends</strong>
+     <p>Racikan buah dan sayur yang segar dan praktis buat nemenin harimu.</p>
+     <p className="refresher-price-range">{format(Math.min(...prices))}–{format(Math.max(...prices))} per cup</p>
+    </div>:<p>{group.subtitle}</p>}
     <div className="menu-category-actions">
      <a className="button" href="#pilihan-kategori">{refresher?'Cek bahan minuman':'Lihat pilihan'}</a>
      <a className="button outline" href="/how-to-order#order-platforms">Pesan JOJO</a>
@@ -122,6 +127,20 @@ export default function MenuCategory({group}:{group:Group}){
    {refresher?<RefresherPicker group={group}/>:<div>{group.items.map(item=><article className="menu-category-item" key={item.name}>
     <h3>{item.name}</h3><strong>{format(item.price)}</strong>
    </article>)}</div>}
+   {refresher&&<section className="refresher-goodness" aria-labelledby="refresher-goodness-title">
+    <div>
+     <h2 id="refresher-goodness-title">Goodness in Every Blend</h2>
+     <p>Lagi cari minuman yang segar buat sehari-hari? Pilih racikan yang cocok sama seleramu.</p>
+    </div>
+    <dl>
+     <dt>Bahan gampang dicek</dt>
+     <dd>Ketuk varian untuk lihat buah, sayur, dan bahan lain di dalamnya.</dd>
+     <dt>Rasa sesuai selera</dt>
+     <dd>Ada yang tropis, ringan, sampai jeruk dengan sentuhan jahe.</dd>
+     <dt>Praktis buat sehari-hari</dt>
+     <dd>Tinggal pilih racikanmu buat jeda kerja, habis kelas, atau sambil jalan.</dd>
+    </dl>
+   </section>}
    <p className="menu-category-note">Harga dan ketersediaan bisa berbeda di tiap gerai atau aplikasi.</p>
    <a className="button" href="/how-to-order#order-platforms">Pilih layanan pesan</a>
   </section>
