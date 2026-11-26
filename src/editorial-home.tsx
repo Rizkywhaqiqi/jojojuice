@@ -5,7 +5,7 @@ import './editorial-home.css';
 
 const picks=[
  {name:'DRAGON BALL',query:'Dragon Ball',tag:'Special Series',image:'/brands/jojo-dragon.webp',tone:'yellow'},
- {name:'GREEN N GLOW',query:'Green N Glow',tag:'Refresher Series',image:'/brands/jojo-green.webp',tone:'pink'},
+ {name:'GREEN N GLOW',query:'Green N Glow',href:'/refresher#green-n-glow',tag:'Refresher Series',image:'/brands/jojo-green.webp',tone:'pink'},
  {name:'Jus buah',query:'Fruit Juice',tag:'Fruit Juice',image:'/brands/jojo-refresh.webp',tone:'blue'}
 ];
 
@@ -70,7 +70,7 @@ export default function EditorialHome(){
    <div className="jojo-picks-heading">
     <h2 id="jojo-picks-title">Pilihan <em>jus JOJO</em></h2>
    </div>
-   <div className="jojo-picks-grid">{picks.map(p=><a className={`jojo-pick jojo-pick-${p.tone}`} key={p.name} href={`/menu?q=${encodeURIComponent(p.query)}#hasil-menu`}>
+   <div className="jojo-picks-grid">{picks.map(p=><a className={`jojo-pick jojo-pick-${p.tone}`} key={p.name} href={p.href??`/menu?q=${encodeURIComponent(p.query)}#hasil-menu`}>
     <div className="jojo-pick-media"><img src={p.image} alt={p.name} loading="lazy"/></div>
     <div className="jojo-pick-details"><span className="jojo-pick-tag">{p.tag}</span><h3>{p.name}</h3><span className="jojo-pick-link">Lihat di menu</span></div>
    </a>)}</div>

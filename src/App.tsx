@@ -1,3 +1,5 @@
+import MenuCategory from './menu-category';
+import {categoryHref, groups} from './menu-data';
 import {JOJO_TAGLINE} from './brand-copy';
 import EditorialHome from './editorial-home';
 import './editorial-footer.css';
@@ -135,6 +137,8 @@ function Contact(){return <><Banner title="Kontak JOJO" image="jojo-together.web
 function NotFound(){return <section className="section centered not-found"><span className="eyebrow">404 / HALAMAN TIDAK DITEMUKAN</span><h1>NYASAR,<br/>BRO?</h1><p>Halaman yang kamu cari tidak tersedia. Yuk kembali ke yang fresh.</p><CTA href="/">KEMBALI KE BERANDA</CTA></section>}
 export default function App(){
  const path=window.location.pathname.replace(/\/$/,'')||'/';
+ const menuGroup=groups.find(group=>categoryHref(group.id)===path);
+ const navPath=menuGroup?'/menu':path;
  useLayoutEffect(()=>{
   const fragment=window.location.hash.slice(1);
   if(!fragment)return;
@@ -147,4 +151,4 @@ export default function App(){
   });
   return()=>cancelAnimationFrame(frame);
  },[path]);
- useEffect(()=>{document.title=(path==='/'?'JOJO Juice':path.slice(1).toUpperCase()+' — JOJO Juice')+' · '+JOJO_TAGLINE},[path]);return <><a className="skip-to-content" href="#main-content">LEWATI NAVIGASI</a><Header path={path}/><SiteMotion/><main id="main-content">{path==='/story'?<Story/>:path==='/menu'?<Menu/>:path==='/outlet'?<Outlet/>:path==='/contact'?<Contact/>:path==='/how-to-order'?<HowToOrder/>:path==='/'?<EditorialHome/>:<NotFound/>}</main><Footer/></>}
+ useEffect(()=>{document.title=(path==='/'?'JOJO Juice':(menuGroup?.title??path.slice(1).toUpperCase())+' — JOJO Juice')+' · '+JOJO_TAGLINE},[path,menuGroup]);return <><a className="skip-to-content" href="#main-content">LEWATI NAVIGASI</a><Header path={navPath}/><SiteMotion/><main id="main-content">{menuGroup?<MenuCategory group={menuGroup}/>:path==='/story'?<Story/>:path==='/menu'?<Menu/>:path==='/outlet'?<Outlet/>:path==='/contact'?<Contact/>:path==='/how-to-order'?<HowToOrder/>:path==='/'?<EditorialHome/>:<NotFound/>}</main><Footer/></>}

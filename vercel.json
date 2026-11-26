@@ -20,6 +20,14 @@
     {
       "source": "/contact",
       "destination": "/index.html"
+    },
+    {
+      "source": "/refresher",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/menu/:category(special|juice|mixed|oreo|foam|coffee|tea|chocolate|others|bowl|handwich|potato|bakery|daily)",
+      "destination": "/index.html"
     }
   ]
 }
