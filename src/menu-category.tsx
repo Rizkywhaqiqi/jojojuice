@@ -4,18 +4,18 @@ import './menu-category.css';
 
 const refresherProfiles=[
  {title:'Fruity & Tropical', drinks:[
-  {id:'tropical-twist',name:'Tropical Twist', ingredients:'Nanas, jeruk Sunkist, kelapa', taste:'Nanas dan jeruk membuka dengan rasa segar, lalu kelapa memberi sentuhan tropis.'},
-  {id:'inner-glow',name:'Inner Glow',ingredients:'Wortel, apel, jeruk Sunkist, jahe',taste:'Wortel dan apel memberi rasa manis, disusul jeruk dan hangatnya jahe.'},
+  {id:'tropical-twist',benefit:'Pilihan buat jeda siang kalau kamu suka rasa buah yang akrab dan sentuhan kelapa.',name:'Tropical Twist', ingredients:'Nanas, jeruk Sunkist, kelapa', taste:'Nanas dan jeruk membuka dengan rasa segar, lalu kelapa memberi sentuhan tropis.'},
+  {id:'inner-glow',benefit:'Cara praktis menikmati wortel bareng buah, dengan jahe yang terasa di akhir.',name:'Inner Glow',ingredients:'Wortel, apel, jeruk Sunkist, jahe',taste:'Wortel dan apel memberi rasa manis, disusul jeruk dan hangatnya jahe.'},
  ]},
  {title:'Fresh & Green', drinks:[
-  {id:'green-n-glow',name:'Green N Glow',ingredients:'Apel, bayam, nanas, timun',taste:'Bayam dan timun memberi karakter hijau. Apel dan nanas menambah rasa manis-asam.'},
-  {id:'vitablends',name:'Vitablends',ingredients:'Jeruk, apel, bit, seledri',taste:'Bit memberi warna merah pekat. Jeruk dan apel menyeimbangkan karakter bit dan seledri.'},
+  {id:'green-n-glow',benefit:'Pilihan kalau kamu ingin menikmati bayam dan timun dalam racikan yang manis-asam.',name:'Green N Glow',ingredients:'Apel, bayam, nanas, timun',taste:'Bayam dan timun memberi karakter hijau. Apel dan nanas menambah rasa manis-asam.'},
+  {id:'vitablends',benefit:'Coba bit dan seledri dalam satu gelas, dengan apel dan jeruk yang menyeimbangkan rasanya.',name:'Vitablends',ingredients:'Jeruk, apel, bit, seledri',taste:'Bit memberi warna merah pekat. Jeruk dan apel menyeimbangkan karakter bit dan seledri.'},
  ]},
  {title:'Boost & Bold', drinks:[
-  {id:'boost-immunity',name:'Boost Immunity',ingredients:'Jeruk Sunkist, jahe, madu',taste:'Jeruk membuka dengan rasa cerah. Jahe memberi hangat dan madu memberi manis.'},
+  {id:'boost-immunity',benefit:'Pilihan buat kamu yang suka jeruk dengan rasa jahe yang lebih terasa dan manis dari madu.',name:'Boost Immunity',ingredients:'Jeruk Sunkist, jahe, madu',taste:'Jeruk membuka dengan rasa cerah. Jahe memberi hangat dan madu memberi manis.'},
  ]},
  {title:'Crisp & Refreshing', drinks:[
-  {id:'detoxify',name:'Detoxify',ingredients:'Semangka, jeruk nipis, seledri, jahe',taste:'Semangka jadi rasa utamanya. Jeruk nipis memberi asam segar, dengan sentuhan seledri dan jahe.'},
+  {id:'detoxify',benefit:'Racikan ringan buat jeda di hari panas, dengan semangka dan sentuhan jeruk nipis.',name:'Detoxify',ingredients:'Semangka, jeruk nipis, seledri, jahe',taste:'Semangka jadi rasa utamanya. Jeruk nipis memberi asam segar, dengan sentuhan seledri dan jahe.'},
  ]},
 ];
 
@@ -89,6 +89,7 @@ function RefresherStories({group,onDetails}:{group:Group;onDetails:(drink:Refres
        width="480" height="480" alt={drink.ingredients} loading="lazy" decoding="async"/>
       <div className="refresher-poster-copy">
        <p>{drink.taste}</p>
+       <p className="refresher-poster-benefit"><strong>Pas buat kamu</strong>{drink.benefit}</p>
        <div className="refresher-poster-actions">
         {price!==undefined&&<strong>{format(price)}</strong>}
         <button type="button" className="button refresher-choice" aria-haspopup="dialog"
@@ -220,21 +221,24 @@ export default function MenuCategory({group}:{group:Group}){
      <h3>{item.name}</h3><strong>{format(item.price)}</strong>
     </article>)}
    </>}
-   {refresher&&<section className="refresher-goodness" aria-labelledby="refresher-goodness-title">
-    <div>
+   {refresher&&<section className="refresher-magazine" aria-labelledby="refresher-goodness-title">
+    <header>
      <p className="eyebrow">Goodness in Every Blend</p>
-     <h2 id="refresher-goodness-title">Manfaat Refresher</h2>
-     <p>Mau yang ringan, tropis, atau ada sentuhan jahe? Pilih racikan berdasarkan rasa dan bahan yang kamu suka.</p>
-    </div>
-    <ul className="refresher-benefit-list">
-     {refresherDrinks.map(drink=><li key={drink.id}>
-      <a href={'#cerita-'+drink.id}>
-       <img src={`/brands/refresher/${drink.id}.webp`} alt="" width="360" height="600" loading="lazy"/>
-       <h3>{drink.name}</h3>
-       <p>{drink.ingredients}</p>
-      </a>
-     </li>)}
-    </ul>
+     <h2 id="refresher-goodness-title">Dari bahan ke gelas</h2>
+     <p>Buah, sayur, dan sedikit kejutan. Begini bahan-bahan Refresher menemukan pasangannya.</p>
+    </header>
+    <figure className="refresher-magazine-lead">
+     <img src="/brands/refresher/ingredients-tropical-twist.webp" alt="Nanas, jeruk, dan kelapa untuk Tropical Twist" width="480" height="480" loading="lazy"/>
+     <figcaption><h3>Rasa tropis yang akrab</h3><p>Nanas dan jeruk memberi rasa manis-asam. Kelapa melengkapi Tropical Twist dengan sentuhan tropis.</p></figcaption>
+    </figure>
+    <figure>
+     <img src="/brands/refresher/ingredients-green-n-glow.webp" alt="Apel, bayam, nanas, dan timun untuk Green N Glow" width="480" height="480" loading="lazy"/>
+     <figcaption><h3>Kenalan dengan racikan hijau</h3><p>Di Green N Glow, apel dan nanas memberi rasa manis-asam pada campuran bayam dan timun.</p></figcaption>
+    </figure>
+    <figure>
+     <img src="/brands/refresher/ingredients-boost-immunity.webp" alt="Jeruk, jahe, dan madu untuk Boost Immunity" width="480" height="480" loading="lazy"/>
+     <figcaption><h3>Sedikit hangat dari jahe</h3><p>Di Boost Immunity, hangat jahe menyusul rasa jeruk, lalu madu memberi sentuhan manis.</p></figcaption>
+    </figure>
    </section>}
    <p className="menu-category-note">Harga dan ketersediaan bisa berbeda di tiap gerai atau aplikasi.</p>
    <a className="button" href="/how-to-order#order-platforms">Pilih layanan pesan</a>

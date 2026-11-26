@@ -48,31 +48,26 @@ html:has(.refresher-dialog[open]){overflow:hidden}
  .refresher-dialog-body{padding-bottom:max(22px,env(safe-area-inset-bottom))}
 }
 
-.refresher-goodness{
- background:var(--jojo-yellow);color:var(--jojo-text);padding-inline:clamp(16px,4vw,56px);
- display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
- gap:20px clamp(26px,6vw,90px);
- border-block:1px solid var(--jojo-red);
- margin-block:clamp(36px,8vw,92px) 24px;
- padding-block:clamp(24px,5vw,60px);
+.refresher-magazine{
+ display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);
+ gap:clamp(18px,3vw,40px);
+ border-top:2px solid var(--jojo-red);padding-block:clamp(24px,5vw,62px);
 }
-.refresher-goodness>div{grid-column:1 / -1}
-.refresher-goodness h2{margin-bottom:12px}
-.refresher-benefit-list{
- grid-column:1 / -1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
- gap:16px;margin:0;padding:0;list-style:none;
-}
-.refresher-benefit-list a{
- display:grid;justify-items:center;text-align:center;gap:8px;height:100%;
- padding:16px 12px;background:var(--jojo-white);color:var(--jojo-text);
-}
-.refresher-benefit-list img{width:100%;height:clamp(110px,16vw,172px);object-fit:contain}
-.refresher-benefit-list h3{font-size:clamp(18px,2.6vw,28px);line-height:1.1}
-.refresher-benefit-list p{font-size:.875rem}
-.refresher-benefit-list a:hover h3{text-decoration:underline}
+.refresher-magazine header{grid-column:1 / -1;max-width:58ch}
+.refresher-magazine header h2{font-size:clamp(38px,7vw,92px);line-height:.97;letter-spacing:-.055em;margin:8px 0 12px}
+.refresher-magazine figure{display:grid;align-content:start;gap:12px;margin:0;min-width:0}
+.refresher-magazine-lead{grid-row:span 2}
+.refresher-magazine img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover}
+.refresher-magazine-lead img{aspect-ratio:4/5}
+.refresher-magazine h3{font-size:clamp(20px,3vw,36px);line-height:1.08;margin-bottom:5px}
+.refresher-magazine figcaption{max-width:43ch}
+.refresher-poster-copy .refresher-poster-benefit{border-left:2px solid currentColor;padding:3px 0 3px 12px}
+.refresher-poster-benefit strong{display:block;margin-bottom:3px}
 @media(max-width:760px){
- .refresher-goodness{grid-template-columns:1fr}
- .refresher-benefit-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .refresher-magazine{grid-template-columns:minmax(0,1fr)}
+ .refresher-magazine-lead{grid-row:auto}
+ .refresher-magazine-lead img{aspect-ratio:5/4}
+ .refresher-poster-copy .refresher-poster-benefit{padding-left:8px}
 }
 
 .refresher-feature{
@@ -107,7 +102,6 @@ html:has(.refresher-dialog[open]){overflow:hidden}
 .refresher-feature-controls button[aria-pressed="true"]{background:var(--jojo-white);color:var(--jojo-red-text);border-color:var(--jojo-white);font-weight:700}
 .refresher-feature :focus-visible{outline:2px solid currentColor;outline-offset:3px}
 .refresher-page .menu-category-list{padding-block:clamp(28px,5vw,74px)}
-.refresher-page .refresher-goodness{margin-top:0}
 @keyframes refresher-feature-in{from{opacity:.3;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:760px){
  .refresher-feature{padding-top:88px}
