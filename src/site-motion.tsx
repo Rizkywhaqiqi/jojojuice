@@ -64,6 +64,7 @@ export default function SiteMotion(){
      '.jojo-photo-story-heading','.jojo-editorial-gallery-photo',
      '.jojo-story-intro-heading','.jojo-story-intro-copy',
      '.jojo-story-values > div',
+     '.refresher-magazine figure img',
      '.catalog-featured-text','.catalog-featured-images figure',
      '.catalog-body-head',
      '.jojo-directory-heading','.jojo-outlet-card',

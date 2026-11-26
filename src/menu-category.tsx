@@ -224,7 +224,7 @@ export default function MenuCategory({group}:{group:Group}){
     <header>
      <p className="eyebrow">Goodness in Every Blend</p>
      <h2 id="refresher-goodness-title">Sela hari bareng Refresher</h2>
-     <p>Tiga momen buat menikmati Refresher, dari istirahat siang sampai ketemu teman.</p>
+     <p className="refresher-magazine-deck">Tiga momen buat menikmati Refresher, dari istirahat siang sampai ketemu teman.</p>
     </header>
     <figure className="refresher-magazine-lead">
      <img src="/brands/refresher/ingredients-tropical-twist.webp" alt="Nanas, jeruk, dan kelapa untuk Tropical Twist" width="480" height="480" loading="lazy"/>
