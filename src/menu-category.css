@@ -93,10 +93,9 @@ html:has(.refresher-dialog[open]){overflow:hidden}
 .refresher-page{
  --studio-shadow:radial-gradient(ellipse at center,rgb(0 0 0 / .27),transparent 70%);
 }
-:is(.refresher-feature,.refresher-feature-wipe,.refresher-scroll-panel){
- --studio-surface:linear-gradient(to bottom,transparent 50%,rgb(0 0 0 / .035) var(--studio-horizon),rgb(0 0 0 / .13) var(--studio-horizon),rgb(0 0 0 / .045) 100%);
-}
 :is(.refresher-feature,.refresher-feature-wipe){
+ --studio-surface:linear-gradient(to bottom,transparent 50%,rgb(0 0 0 / .035) var(--studio-horizon),rgb(0 0 0 / .13) var(--studio-horizon),rgb(0 0 0 / .045) 100%);
+
  --studio-horizon:78%;
  background:var(--studio-surface),var(--feature-bg);
 }
@@ -226,26 +225,14 @@ html:has(.refresher-dialog[open]){overflow:hidden}
 }
 .refresher-scroll-panel{
  --poster-color:var(--jojo-yellow);
- --poster-fade:clamp(78px,13svh,154px);
- --studio-horizon:68%;
  display:grid;align-content:center;justify-items:start;gap:clamp(14px,2vw,24px);
  min-height:78svh;padding-block:clamp(36px,5vw,80px);
  padding-inline:calc(var(--refresher-gutter) + var(--refresher-content) * .46) var(--refresher-gutter);
- background:var(--studio-surface),var(--poster-color);color:var(--poster-ink,#0f172a);
+ background:var(--poster-color);color:var(--poster-ink,#0f172a);
 }
 .refresher-scroll-panel[data-variant="green-n-glow"],.refresher-scroll-panel[data-variant="boost-immunity"]{--poster-color:#086b94;--poster-ink:#f8fafc}
 .refresher-scroll-panel[data-variant="inner-glow"],.refresher-scroll-panel[data-variant="detoxify"]{--poster-color:var(--jojo-white)}
 .refresher-scroll-panel[data-variant="vitablends"]{--poster-color:var(--jojo-red-text);--poster-ink:#f8fafc}
-.refresher-scroll-panel[data-next-variant]{
- --poster-next:var(--jojo-yellow);
- background-image:linear-gradient(to bottom,transparent,var(--poster-next)),var(--studio-surface);
- background-size:100% var(--poster-fade),100% 100%;
- background-position:bottom,center;background-repeat:no-repeat;
- padding-bottom:calc(var(--poster-fade) + 18px);
-}
-.refresher-scroll-panel:is([data-next-variant="green-n-glow"],[data-next-variant="boost-immunity"]){--poster-next:#086b94}
-.refresher-scroll-panel:is([data-next-variant="inner-glow"],[data-next-variant="detoxify"]){--poster-next:var(--jojo-white)}
-.refresher-scroll-panel[data-next-variant="vitablends"]{--poster-next:var(--jojo-red-text)}
 .refresher-ingredient-photo{
  display:block;width:min(100%,510px);height:clamp(148px,28svh,300px);
  object-fit:cover;object-position:center;border-radius:16px;
