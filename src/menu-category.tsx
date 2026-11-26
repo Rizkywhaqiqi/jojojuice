@@ -87,8 +87,12 @@ function RefresherStories({group,onDetails}:{group:Group;onDetails:(drink:Refres
        <h3 id={drink.id+'-title'}>{drink.name}</h3>
        <p lang="en" className="refresher-poster-tagline">{drink.tagline}</p>
       </header>
-      <img className="refresher-ingredient-photo" src={`/brands/refresher/ingredients-${drink.id}.webp`}
-       width="480" height="480" alt="" loading="lazy" decoding="async"/>
+      {drink.id==='tropical-twist'?<div className="refresher-tropical-art" aria-hidden="true">
+       {['leaves','pineapple','coconut','orange','wedges'].map(fruit=>
+        <img key={fruit} data-fruit={fruit} src={`/brands/refresher/tropical/${fruit}.webp`} alt="" loading="lazy" decoding="async"/>
+       )}
+      </div>:<img className="refresher-ingredient-photo" src={`/brands/refresher/ingredients-${drink.id}.webp`}
+       width="480" height="480" alt="" loading="lazy" decoding="async"/>}
       <div className="refresher-poster-copy">
        <p className="refresher-poster-ingredients"><strong>Komposisi</strong>{drink.ingredients}</p>
        <p className="refresher-poster-benefit"><strong>Pas buat kamu</strong>{drink.description}</p>
