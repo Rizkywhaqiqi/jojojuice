@@ -105,13 +105,8 @@ function RefresherStories({group,onDetails}:{group:Group;onDetails:(drink:Refres
 function RefresherPicker({group}:{group:Group}){
  const dialogRef=useRef<HTMLDialogElement>(null);
  const dialogTrigger=useRef<HTMLButtonElement>(null);
- const featureRef=useRef<HTMLElement>(null);
- const [playing,setPlaying]=useState(true);
- const [inView,setInView]=useState(false);
- const [pageVisible,setPageVisible]=useState(()=>!document.hidden);
- const [reducedMotion,setReducedMotion]=useState(()=>window.matchMedia('(prefers-reduced-motion: reduce)').matches);
- const [hovered,setHovered]=useState(false);
- const [reading,setReading]=useState(false);
+ const swipeStart=useRef<{id:number;x:number;y:number}|null>(null);
+ const pickerRef=useRef<HTMLDivElement>(null);
  const [{activeIndex,previousIndex},setSlide]=useState({activeIndex:0,previousIndex:0});
  const active=refresherDrinks[activeIndex];
  const [selected,setSelected]=useState<RefresherDrink|null>(null);
@@ -121,7 +116,7 @@ function RefresherPicker({group}:{group:Group}){
   const openFromHash=()=>{
    const hash=window.location.hash.slice(1);
    const index=refresherDrinks.findIndex(item=>item.id===hash||item.id+'-poster'===hash);
-   if(index!==-1){setSlide(current=>current.activeIndex===index?current:{activeIndex:index,previousIndex:current.activeIndex});setPlaying(false)}
+   if(index!==-1)setSlide(current=>current.activeIndex===index?current:{activeIndex:index,previousIndex:current.activeIndex});
    if(index!==-1&&refresherDrinks[index].id===hash)setSelected(refresherDrinks[index]);
    else dialogRef.current?.close();
   };
@@ -135,28 +130,10 @@ function RefresherPicker({group}:{group:Group}){
   if(selected&&dialog&&!dialog.open)dialog.showModal();
  },[selected]);
 
- useEffect(()=>{
-  const preference=window.matchMedia('(prefers-reduced-motion: reduce)');
-  const syncMotion=()=>setReducedMotion(preference.matches);
-  const syncVisibility=()=>setPageVisible(!document.hidden);
-  const feature=featureRef.current;
-  const observer=new IntersectionObserver(([entry])=>setInView(entry.isIntersecting),{threshold:.25});
-  if(feature)observer.observe(feature);
-  preference.addEventListener('change',syncMotion);
-  document.addEventListener('visibilitychange',syncVisibility);
-  return()=>{
-   observer.disconnect();
-   preference.removeEventListener('change',syncMotion);
-   document.removeEventListener('visibilitychange',syncVisibility);
-  };
- },[]);
-
- const rotating=playing&&inView&&pageVisible&&!reducedMotion&&!hovered&&!reading&&!selected;
- useEffect(()=>{
-  if(!rotating)return;
-  const timer=window.setTimeout(()=>setSlide(({activeIndex:index})=>({activeIndex:(index+1)%refresherDrinks.length,previousIndex:index})),7000);
-  return()=>window.clearTimeout(timer);
- },[rotating,activeIndex]);
+ function chooseSlide(index:number){
+  window.history.replaceState(window.history.state,'','#'+refresherDrinks[index].id+'-poster');
+  setSlide(current=>current.activeIndex===index?current:{activeIndex:index,previousIndex:current.activeIndex});
+ }
 
  function openDrink(drink:RefresherDrink,trigger:HTMLButtonElement){
   dialogTrigger.current=trigger;
@@ -171,32 +148,38 @@ function RefresherPicker({group}:{group:Group}){
    url.hash=selected.id+'-poster';
    window.history.replaceState(window.history.state,'',url);
   }
-  (dialogTrigger.current??document.getElementById('refresher-details'))?.focus({preventScroll:true});
+  (dialogTrigger.current??pickerRef.current?.querySelector<HTMLButtonElement>('[aria-pressed=true]'))?.focus({preventScroll:true});
   dialogTrigger.current=null;
   setSelected(null);
  }
 
- const activePrice=priceFor(active.name);
  const selectedPrice=selected?priceFor(selected.name):undefined;
 
  return <>
-  <section className="refresher-feature" data-variant={active.id} ref={featureRef}
-   onPointerEnter={event=>{if(event.pointerType==='mouse')setHovered(true)}}
-   onPointerLeave={()=>setHovered(false)}>
+  <section className="refresher-feature" data-variant={active.id}>
    {activeIndex!==previousIndex&&<div className="refresher-feature-wipe" key={'wipe-'+active.id} data-variant={refresherDrinks[previousIndex].id} aria-hidden="true"/>}
-   <a className="menu-category-back" href="/menu#pilihan-menu">Kembali ke katalog</a>
    <h1>Refresher Series</h1>
-   <div className="refresher-feature-grid" key={active.id} onFocus={()=>setReading(true)}
-    onBlur={event=>{if(!event.currentTarget.contains(event.relatedTarget))setReading(false)}}>
-    <header className="refresher-feature-title" aria-live={rotating?'off':'polite'}>
+   <div className="refresher-swipe-area"
+    onPointerDown={event=>{
+     if(!event.isPrimary||event.button!==0)return;
+     swipeStart.current={id:event.pointerId,x:event.clientX,y:event.clientY};
+     event.currentTarget.setPointerCapture(event.pointerId);
+    }}
+    onPointerCancel={()=>{swipeStart.current=null}}
+    onPointerUp={event=>{
+     const start=swipeStart.current;
+     swipeStart.current=null;
+     if(!start||start.id!==event.pointerId)return;
+     const dx=event.clientX-start.x,dy=event.clientY-start.y;
+     if(Math.abs(dx)<48||Math.abs(dx)<Math.abs(dy)*1.25)return;
+     const count=refresherDrinks.length;
+     chooseSlide((activeIndex+(dx<0?1:-1)+count)%count);
+    }}>
+   <div className="refresher-feature-grid" key={active.id}>
+    <header className="refresher-feature-title" aria-live="polite">
      <p className="eyebrow">{active.profile}</p>
      <h2>{active.name}</h2>
     </header>
-    <div className="refresher-feature-copy">
-     <p>{active.taste}</p>
-     {activePrice!==undefined&&<strong>{format(activePrice)}</strong>}
-     <button className="button" type="button" id="refresher-details" aria-haspopup="dialog" onClick={event=>openDrink(active,event.currentTarget)}>Cek bahan dan rasa</button>
-    </div>
     <div className="refresher-feature-cup">
      <img src={`/brands/refresher/${active.id}.webp`} alt={`Cup JOJO ${active.name}`} width="360" height="600"/>
     </div>
@@ -205,17 +188,14 @@ function RefresherPicker({group}:{group:Group}){
      <ul aria-label="Bahan minuman">{active.ingredients.split(', ').map(ingredient=><li key={ingredient}>{ingredient}</li>)}</ul>
     </div>
    </div>
+   </div>
    <div className="refresher-feature-pagination">
     <span aria-label={`Varian ${activeIndex+1} dari ${refresherDrinks.length}`}>{String(activeIndex+1).padStart(2,'0')} / {String(refresherDrinks.length).padStart(2,'0')}</span>
-    {!reducedMotion&&<button type="button" onClick={()=>setPlaying(value=>!value)}>{playing?'Jeda otomatis':'Putar otomatis'}</button>}
+    <span>Geser untuk ganti varian</span>
    </div>
-   <div className="refresher-feature-controls" role="group" aria-label="Pilih varian Refresher">
+   <div className="refresher-feature-controls" ref={pickerRef} role="group" aria-label="Pilih varian Refresher">
     {refresherDrinks.map((drink,index)=><button type="button" key={drink.id} aria-pressed={activeIndex===index}
-     onClick={()=>{
-      window.history.replaceState(window.history.state,'','#'+drink.id+'-poster');
-      setPlaying(false);
-      setSlide(current=>current.activeIndex===index?current:{activeIndex:index,previousIndex:current.activeIndex});
-     }}>{drink.name}</button>)}
+     onClick={()=>chooseSlide(index)}>{drink.name}</button>)}
    </div>
   </section>
   <RefresherStories group={group} onDetails={openDrink}/>
