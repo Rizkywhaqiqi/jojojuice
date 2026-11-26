@@ -199,6 +199,7 @@ html:has(.refresher-dialog[open]){overflow:hidden}
 }
 .refresher-scroll-panel{
  --poster-color:var(--jojo-yellow);
+ --poster-fade:clamp(54px,10svh,118px);
  display:grid;align-content:center;justify-items:start;gap:16px;
  min-height:78svh;padding-block:clamp(36px,5vw,80px);
  padding-inline:calc(var(--refresher-gutter) + var(--refresher-content) * .46) var(--refresher-gutter);
@@ -209,6 +210,15 @@ html:has(.refresher-dialog[open]){overflow:hidden}
 .refresher-scroll-panel[data-variant="green-n-glow"],.refresher-scroll-panel[data-variant="boost-immunity"]{--poster-color:#086b94;--poster-ink:#f8fafc}
 .refresher-scroll-panel[data-variant="inner-glow"],.refresher-scroll-panel[data-variant="detoxify"]{--poster-color:var(--jojo-white)}
 .refresher-scroll-panel[data-variant="vitablends"]{--poster-color:var(--jojo-red-text);--poster-ink:#f8fafc}
+.refresher-scroll-panel[data-next-variant]{
+ --poster-next:var(--jojo-yellow);
+ background-image:linear-gradient(to bottom,var(--poster-color),var(--poster-next));
+ background-size:100% var(--poster-fade);background-position:bottom;background-repeat:no-repeat;
+ padding-bottom:calc(var(--poster-fade) + 18px);
+}
+.refresher-scroll-panel:is([data-next-variant="green-n-glow"],[data-next-variant="boost-immunity"]){--poster-next:#086b94}
+.refresher-scroll-panel:is([data-next-variant="inner-glow"],[data-next-variant="detoxify"]){--poster-next:var(--jojo-white)}
+.refresher-scroll-panel[data-next-variant="vitablends"]{--poster-next:var(--jojo-red-text)}
 .refresher-ingredient-photo{
  display:block;width:min(100%,510px);height:clamp(148px,28svh,300px);
  object-fit:cover;object-position:center;border-radius:16px;

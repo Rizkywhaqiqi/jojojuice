@@ -78,9 +78,9 @@ function RefresherStories({group,onDetails}:{group:Group;onDetails:(drink:Refres
     </span>}
    </div>
    <div className="refresher-scroll-panels">
-    {refresherDrinks.map(drink=>{
+    {refresherDrinks.map((drink,index)=>{
      const price=priceFor(drink.name);
-     return <section className="refresher-scroll-panel" key={drink.id} id={'cerita-'+drink.id} data-variant={drink.id} aria-labelledby={drink.id+'-title'}>
+     return <section className="refresher-scroll-panel" key={drink.id} id={'cerita-'+drink.id} data-variant={drink.id} data-next-variant={refresherDrinks[index+1]?.id} aria-labelledby={drink.id+'-title'}>
       <header className="refresher-poster-heading">
        <p className="eyebrow">{drink.profile}</p>
        <h3 id={drink.id+'-title'}>{drink.name}</h3>
