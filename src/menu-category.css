@@ -114,7 +114,6 @@ html:has(.refresher-dialog[open]){overflow:hidden}
 .refresher-feature[data-variant="detoxify"] .refresher-feature-title h2 em{color:var(--jojo-yellow)}
 .refresher-feature-cup{grid-column:1;grid-row:1;display:grid;place-items:end;min-width:0;position:relative;z-index:1}
 .refresher-feature-cup img{width:auto;max-width:100%;height:clamp(220px,42svh,340px);object-fit:contain;filter:drop-shadow(0 8px 10px rgba(0,0,0,.19))}
-.refresher-swipe-controls{display:flex;justify-content:flex-end;min-height:44px}
 .refresher-swipe-prev,.refresher-swipe-forward{
  position:absolute;top:50%;transform:translateY(-50%);z-index:2;
 }

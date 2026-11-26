@@ -108,7 +108,6 @@ function RefresherPicker({group}:{group:Group}){
  const swipeStart=useRef<{id:number;x:number;y:number}|null>(null);
  const pickerRef=useRef<HTMLDivElement>(null);
  const featureRef=useRef<HTMLElement>(null);
- const [paused,setPaused]=useState(false);
  const [visible,setVisible]=useState(false);
  const [pageVisible,setPageVisible]=useState(()=>!document.hidden);
  const [reducedMotion,setReducedMotion]=useState(()=>window.matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -152,7 +151,7 @@ function RefresherPicker({group}:{group:Group}){
   };
  },[]);
 
- const rotating=visible&&pageVisible&&!paused&&!reducedMotion&&!selected;
+ const rotating=visible&&pageVisible&&!reducedMotion&&!selected;
  useEffect(()=>{
   if(!rotating)return;
   const timer=window.setTimeout(()=>setSlide(({activeIndex:index})=>({
@@ -230,12 +229,6 @@ function RefresherPicker({group}:{group:Group}){
      onClick={()=>chooseSlide((activeIndex-1+refresherDrinks.length)%refresherDrinks.length)}>
      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 12H5m6-6-6 6 6 6"/></svg>
     </button>
-    {!reducedMotion&&<button className="refresher-swipe-next" type="button"
-     aria-label={paused?'Lanjutkan pergantian otomatis':'Jeda pergantian otomatis'} onClick={()=>setPaused(value=>!value)}>
-     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d={paused?'m8 5 12 7-12 7z':'M9 5v14m6-14v14'}/>
-     </svg>
-    </button>}
     <button className="refresher-swipe-next refresher-swipe-forward" type="button" aria-label="Varian berikutnya"
      onClick={()=>chooseSlide((activeIndex+1)%refresherDrinks.length)}>
      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg>
