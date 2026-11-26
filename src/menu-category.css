@@ -243,6 +243,7 @@ html:has(.refresher-dialog[open]){overflow:hidden}
  overflow-wrap:break-word;text-wrap:balance;
 }
 .refresher-poster-heading .eyebrow{color:inherit}
+.refresher-poster-tagline{font-size:clamp(.875rem,1.5vw,1.125rem);line-height:1.4;font-style:italic}
 .refresher-poster-copy>p{max-width:43ch;line-height:1.5}
 .refresher-poster-actions{display:flex;align-items:center;flex-wrap:wrap;gap:8px 16px}
 .refresher-poster-actions strong{white-space:nowrap;font-variant-numeric:tabular-nums}

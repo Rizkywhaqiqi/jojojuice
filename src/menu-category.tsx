@@ -3,24 +3,24 @@ import {format, type Group} from './menu-data';
 import './menu-category.css';
 
 const refresherProfiles=[
- {title:'Fruity & Tropical', drinks:[
-  {id:'tropical-twist',benefit:'Buat teman makan siang saat kamu pengin yang segar dengan rasa buah yang familiar.',name:'Tropical Twist', ingredients:'Nanas, jeruk Sunkist, kelapa', taste:'Nanas dan jeruk membuka dengan rasa segar, lalu kelapa memberi sentuhan tropis.'},
-  {id:'inner-glow',benefit:'Buat jeda sore kalau kamu pengin mencoba kombinasi buah dan wortel dalam satu gelas.',name:'Inner Glow',ingredients:'Wortel, apel, jeruk Sunkist, jahe',taste:'Wortel dan apel memberi rasa manis, disusul jeruk dan hangatnya jahe.'},
+ {title:'Fruity & Tropical', tagline:'Your fruity kind of goodness.', description:'Buat kamu yang suka rasa buah yang familiar dan segar.', drinks:[
+  {id:'tropical-twist',tagline:'A taste of tropical goodness.',name:'Tropical Twist', ingredients:'Nanas, jeruk Sunkist, kelapa', taste:'Nanas dan jeruk membuka dengan rasa segar, lalu kelapa memberi sentuhan tropis.'},
+  {id:'inner-glow',tagline:'Nourish from within.',name:'Inner Glow',ingredients:'Wortel, apel, jeruk Sunkist, jahe',taste:'Wortel dan apel memberi rasa manis, disusul jeruk dan hangatnya jahe.'},
  ]},
- {title:'Fresh & Green', drinks:[
-  {id:'green-n-glow',benefit:'Buat kamu yang baru mau coba racikan buah dan sayur dan suka rasa manis-asam.',name:'Green N Glow',ingredients:'Apel, bayam, nanas, timun',taste:'Bayam dan timun memberi karakter hijau. Apel dan nanas menambah rasa manis-asam.'},
-  {id:'vitablends',benefit:'Buat kamu yang sudah biasa minum jus buah dan penasaran sama racikan bit.',name:'Vitablends',ingredients:'Jeruk, apel, bit, seledri',taste:'Bit memberi warna merah pekat. Jeruk dan apel menyeimbangkan karakter bit dan seledri.'},
+ {title:'Fresh & Green', tagline:'A greener kind of freshness.', description:'Buat kamu yang ingin coba perpaduan buah dan sayur dengan rasa segar.', drinks:[
+  {id:'green-n-glow',tagline:'A greener kind of freshness.',name:'Green N Glow',ingredients:'Apel, bayam, nanas, timun',taste:'Bayam dan timun memberi karakter hijau. Apel dan nanas menambah rasa manis-asam.'},
+  {id:'vitablends',tagline:'Naturally vibrant, freshly juiced.',name:'Vitablends',ingredients:'Jeruk, apel, bit, seledri',taste:'Bit memberi warna merah pekat. Jeruk dan apel menyeimbangkan karakter bit dan seledri.'},
  ]},
- {title:'Boost & Bold', drinks:[
-  {id:'boost-immunity',benefit:'Buat kamu yang lebih suka rasa jahe yang terasa jelas di minuman dingin.',name:'Boost Immunity',ingredients:'Jeruk Sunkist, jahe, madu',taste:'Jeruk membuka dengan rasa cerah. Jahe memberi hangat dan madu memberi manis.'},
+ {title:'Boost & Bold', tagline:'A little boost, a lot of character.', description:'Buat kamu yang suka rasa jeruk yang kuat dengan sentuhan jahe.', drinks:[
+  {id:'boost-immunity',tagline:'Bright citrus, a little ginger taste.',name:'Boost Immunity',ingredients:'Jeruk Sunkist, jahe, madu',taste:'Jeruk membuka dengan rasa cerah. Jahe memberi hangat dan madu memberi manis.'},
  ]},
- {title:'Crisp & Refreshing', drinks:[
-  {id:'detoxify',benefit:'Buat jeda di hari panas saat kamu lagi pengin minuman dengan rasa ringan.',name:'Detoxify',ingredients:'Semangka, jeruk nipis, seledri, jahe',taste:'Semangka jadi rasa utamanya. Jeruk nipis memberi asam segar, dengan sentuhan seledri dan jahe.'},
+ {title:'Crisp & Refreshing', tagline:'Keep it fresh, keep it fruity.', description:'Buat kamu yang cari minuman buah yang segar dan ringan.', drinks:[
+  {id:'detoxify',tagline:'Light, fruity, and refreshing.',name:'Detoxify',ingredients:'Semangka, jeruk nipis, seledri, jahe',taste:'Semangka jadi rasa utamanya. Jeruk nipis memberi asam segar, dengan sentuhan seledri dan jahe.'},
  ]},
 ];
 
 const refresherDrinks=refresherProfiles.flatMap(profile=>
- profile.drinks.map(drink=>({...drink, profile:profile.title}))
+ profile.drinks.map(drink=>({...drink, profile:profile.title, profileTagline:profile.tagline, description:profile.description}))
 );
 type RefresherDrink=(typeof refresherDrinks)[number];
 
@@ -84,12 +84,13 @@ function RefresherStories({group,onDetails}:{group:Group;onDetails:(drink:Refres
       <header className="refresher-poster-heading">
        <p className="eyebrow">{drink.profile}</p>
        <h3 id={drink.id+'-title'}>{drink.name}</h3>
+       <p lang="en" className="refresher-poster-tagline">{drink.tagline}</p>
       </header>
       <img className="refresher-ingredient-photo" src={`/brands/refresher/ingredients-${drink.id}.webp`}
        width="480" height="480" alt="" loading="lazy" decoding="async"/>
       <div className="refresher-poster-copy">
        <p className="refresher-poster-ingredients"><strong>Komposisi</strong>{drink.ingredients}</p>
-       <p className="refresher-poster-benefit"><strong>Pas buat kamu</strong>{drink.benefit}</p>
+       <p className="refresher-poster-benefit"><strong>Pas buat kamu</strong>{drink.description}</p>
        <div className="refresher-poster-actions">
         {price!==undefined&&<strong>{format(price)}</strong>}
         <button type="button" className="button refresher-choice" aria-haspopup="dialog"
@@ -257,6 +258,9 @@ function RefresherPicker({group}:{group:Group}){
     <dl>
      <dt>Bahan</dt><dd>{selected.ingredients}</dd>
      <dt>Rasanya</dt><dd>{selected.taste}</dd>
+     {selected.profileTagline!==selected.tagline&&<>
+      <dt>{selected.profile}</dt><dd lang="en">{selected.profileTagline}</dd>
+     </>}
     </dl>
     <a className="button" href="/how-to-order#order-platforms">Pilih layanan pesan</a>
    </div>}
