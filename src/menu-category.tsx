@@ -114,6 +114,7 @@ function RefresherPicker({group}:{group:Group}){
  const featureRef=useRef<HTMLElement>(null);
  const [visible,setVisible]=useState(false);
  const [interacting,setInteracting]=useState(false);
+ const [paused,setPaused]=useState(false);
  const [pageVisible,setPageVisible]=useState(()=>!document.hidden);
  const [reducedMotion,setReducedMotion]=useState(()=>window.matchMedia('(prefers-reduced-motion: reduce)').matches);
  const [{activeIndex,previousIndex},setSlide]=useState({activeIndex:0,previousIndex:0});
@@ -155,7 +156,7 @@ function RefresherPicker({group}:{group:Group}){
   };
  },[]);
 
- const rotating=visible&&pageVisible&&!reducedMotion&&!selected&&!interacting;
+ const rotating=visible&&pageVisible&&!reducedMotion&&!selected&&!interacting&&!paused;
  useEffect(()=>{
   if(!rotating)return;
   const timer=window.setTimeout(()=>setSlide(({activeIndex:index})=>({
@@ -196,7 +197,16 @@ function RefresherPicker({group}:{group:Group}){
    onFocus={event=>{if(event.target.matches(':focus-visible'))setInteracting(true)}}
    onBlur={event=>{if(!event.currentTarget.contains(event.relatedTarget))setInteracting(false)}}>
    {activeIndex!==previousIndex&&<div className="refresher-feature-wipe" key={'wipe-'+active.id} data-variant={refresherDrinks[previousIndex].id} aria-hidden="true"/>}
-   <p className="refresher-series-label">Refresher Series</p>
+   <div className="refresher-feature-top">
+    <p className="refresher-series-label">Refresher Series</p>
+    {!reducedMotion&&<button type="button" className="refresher-autoplay"
+     onClick={()=>{setPaused(!paused);setInteracting(false)}}>
+     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d={paused?'m8 5 12 7-12 7Z':'M9 5v14m6-14v14'}/>
+     </svg>
+     {paused?'Putar otomatis':'Jeda slider'}
+    </button>}
+   </div>
    <p className="refresher-slide-announcement" aria-live="polite">{interacting?active.name:null}</p>
    <div className="refresher-swipe-area" ref={pickerRef} tabIndex={0} role="group"
     aria-label="Varian Refresher, gunakan panah kiri dan kanan untuk mengganti varian"
@@ -301,16 +311,16 @@ export default function MenuCategory({group}:{group:Group}){
     </header>
     <div className="refresher-magazine-spread">
     <figure className="refresher-magazine-lead">
-     <div className="refresher-magazine-media"><img src="/brands/refresher/ingredients-tropical-twist.webp" alt="Nanas, jeruk, dan kelapa untuk Tropical Twist" width="480" height="480" loading="lazy"/></div>
+     <div className="refresher-magazine-media"><img src="/brands/editorial/jojo-street-overhead.webp" alt="Dua teman menikmati makanan dan minuman JOJO dari sudut pandang atas" width="1200" height="1500" loading="lazy"/></div>
      <figcaption><h3>Jeda makan siang</h3><p>Keluar sebentar, cari makan siang, dan ambil satu cup untuk dinikmati sebelum balik beraktivitas.</p></figcaption>
     </figure>
     <div className="refresher-magazine-rail">
     <figure>
-     <div className="refresher-magazine-media"><img src="/brands/refresher/ingredients-green-n-glow.webp" alt="Apel, bayam, nanas, dan timun untuk Green N Glow" width="480" height="480" loading="lazy"/></div>
+     <div className="refresher-magazine-media"><img src="/brands/editorial/jojo-street-moving.webp" alt="Dua orang berjalan sambil membawa minuman JOJO" width="1200" height="1500" loading="lazy"/></div>
      <figcaption><h3>Bawa buat di jalan</h3><p>Mampir ke gerai sebelum lanjut jalan. Kalau waktumu mepet, cek layanan pesan yang tersedia di lokasimu.</p></figcaption>
     </figure>
     <figure>
-     <div className="refresher-magazine-media"><img src="/brands/refresher/ingredients-boost-immunity.webp" alt="Jeruk, jahe, dan madu untuk Boost Immunity" width="480" height="480" loading="lazy"/></div>
+     <div className="refresher-magazine-media"><img src="/brands/editorial/jojo-street-moment.webp" alt="Dua teman membawa minuman JOJO di dekat tangga" width="1200" height="1500" loading="lazy"/></div>
      <figcaption><h3>Cobain bareng teman</h3><p>Kalau lagi nongkrong, pesan varian yang berbeda. Saling tukar cerita soal rasa mana yang paling kalian suka.</p></figcaption>
     </figure>
     </div>
