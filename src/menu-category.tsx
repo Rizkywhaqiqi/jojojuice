@@ -105,6 +105,13 @@ function RefresherStories({group,onDetails}:{group:Group;onDetails:(drink:Refres
 function RefresherPicker({group}:{group:Group}){
  const dialogRef=useRef<HTMLDialogElement>(null);
  const dialogTrigger=useRef<HTMLButtonElement>(null);
+ const featureRef=useRef<HTMLElement>(null);
+ const [playing,setPlaying]=useState(true);
+ const [inView,setInView]=useState(false);
+ const [pageVisible,setPageVisible]=useState(()=>!document.hidden);
+ const [reducedMotion,setReducedMotion]=useState(()=>window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+ const [hovered,setHovered]=useState(false);
+ const [reading,setReading]=useState(false);
  const [activeIndex,setActiveIndex]=useState(0);
  const active=refresherDrinks[activeIndex];
  const [selected,setSelected]=useState<RefresherDrink|null>(null);
@@ -114,7 +121,7 @@ function RefresherPicker({group}:{group:Group}){
   const openFromHash=()=>{
    const hash=window.location.hash.slice(1);
    const index=refresherDrinks.findIndex(item=>item.id===hash||item.id+'-poster'===hash);
-   if(index!==-1)setActiveIndex(index);
+   if(index!==-1){setActiveIndex(index);setPlaying(false)}
    if(index!==-1&&refresherDrinks[index].id===hash)setSelected(refresherDrinks[index]);
    else dialogRef.current?.close();
   };
@@ -127,6 +134,29 @@ function RefresherPicker({group}:{group:Group}){
   const dialog=dialogRef.current;
   if(selected&&dialog&&!dialog.open)dialog.showModal();
  },[selected]);
+
+ useEffect(()=>{
+  const preference=window.matchMedia('(prefers-reduced-motion: reduce)');
+  const syncMotion=()=>setReducedMotion(preference.matches);
+  const syncVisibility=()=>setPageVisible(!document.hidden);
+  const feature=featureRef.current;
+  const observer=new IntersectionObserver(([entry])=>setInView(entry.isIntersecting),{threshold:.25});
+  if(feature)observer.observe(feature);
+  preference.addEventListener('change',syncMotion);
+  document.addEventListener('visibilitychange',syncVisibility);
+  return()=>{
+   observer.disconnect();
+   preference.removeEventListener('change',syncMotion);
+   document.removeEventListener('visibilitychange',syncVisibility);
+  };
+ },[]);
+
+ const rotating=playing&&inView&&pageVisible&&!reducedMotion&&!hovered&&!reading&&!selected;
+ useEffect(()=>{
+  if(!rotating)return;
+  const timer=window.setTimeout(()=>setActiveIndex(index=>(index+1)%refresherDrinks.length),7000);
+  return()=>window.clearTimeout(timer);
+ },[rotating,activeIndex]);
 
  function openDrink(drink:RefresherDrink,trigger:HTMLButtonElement){
   dialogTrigger.current=trigger;
@@ -150,11 +180,14 @@ function RefresherPicker({group}:{group:Group}){
  const selectedPrice=selected?priceFor(selected.name):undefined;
 
  return <>
-  <section className="refresher-feature" data-variant={active.id}>
+  <section className="refresher-feature" data-variant={active.id} ref={featureRef}
+   onPointerEnter={event=>{if(event.pointerType==='mouse')setHovered(true)}}
+   onPointerLeave={()=>setHovered(false)}>
    <a className="menu-category-back" href="/menu#pilihan-menu">Kembali ke katalog</a>
    <h1>Refresher Series</h1>
-   <div className="refresher-feature-grid" key={active.id}>
-    <div className="refresher-feature-copy" aria-live="polite">
+   <div className="refresher-feature-grid" key={active.id} onFocus={()=>setReading(true)}
+    onBlur={event=>{if(!event.currentTarget.contains(event.relatedTarget))setReading(false)}}>
+    <div className="refresher-feature-copy" aria-live={rotating?'off':'polite'}>
      <p className="eyebrow">{active.profile}</p>
      <h2>{active.name}</h2>
      <p>{active.taste}</p>
@@ -169,10 +202,15 @@ function RefresherPicker({group}:{group:Group}){
      <ul aria-label="Bahan minuman">{active.ingredients.split(', ').map(ingredient=><li key={ingredient}>{ingredient}</li>)}</ul>
     </div>
    </div>
+   <div className="refresher-feature-pagination">
+    <span aria-label={`Varian ${activeIndex+1} dari ${refresherDrinks.length}`}>{String(activeIndex+1).padStart(2,'0')} / {String(refresherDrinks.length).padStart(2,'0')}</span>
+    {!reducedMotion&&<button type="button" onClick={()=>setPlaying(value=>!value)}>{playing?'Jeda otomatis':'Putar otomatis'}</button>}
+   </div>
    <div className="refresher-feature-controls" role="group" aria-label="Pilih varian Refresher">
     {refresherDrinks.map((drink,index)=><button type="button" key={drink.id} aria-pressed={activeIndex===index}
      onClick={()=>{
       window.history.replaceState(window.history.state,'','#'+drink.id+'-poster');
+      setPlaying(false);
       setActiveIndex(index);
      }}>{drink.name}</button>)}
    </div>
