@@ -109,6 +109,7 @@ function RefresherPicker({group}:{group:Group}){
  const pickerRef=useRef<HTMLDivElement>(null);
  const [{activeIndex,previousIndex},setSlide]=useState({activeIndex:0,previousIndex:0});
  const active=refresherDrinks[activeIndex];
+ const [leftTitle,...rightTitle]=active.name.split(' ');
  const [selected,setSelected]=useState<RefresherDrink|null>(null);
  const priceFor=(name:string)=>group.items.find(item=>item.name===name)?.price;
 
@@ -185,13 +186,21 @@ function RefresherPicker({group}:{group:Group}){
    <div className="refresher-feature-grid" key={active.id}>
     <header className="refresher-feature-title" aria-live="polite">
      <p className="eyebrow">{active.profile}</p>
-     <h2>{active.name}</h2>
+     <h2 aria-label={active.name}>
+      <span className="refresher-word-left">{leftTitle}</span>{' '}
+      <span className="refresher-word-right">{rightTitle.join(' ')||active.profile}</span>
+     </h2>
     </header>
     <div className="refresher-feature-cup">
      <img src={`/brands/refresher/${active.id}.webp`} alt={`Cup JOJO ${active.name}`} width="360" height="600"/>
     </div>
    </div>
    </div>
+   <button className="refresher-swipe-next" type="button" aria-label="Geser ke varian berikutnya"
+    onClick={()=>chooseSlide((activeIndex+1)%refresherDrinks.length)}>
+    <span>Geser</span>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg>
+   </button>
   </section>
   <RefresherStories group={group} onDetails={openDrink}/>
   <dialog className="refresher-dialog" ref={dialogRef} aria-labelledby="refresher-variant-title" onClose={closeDrink}
