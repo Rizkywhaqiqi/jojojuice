@@ -103,7 +103,10 @@ function RefresherPicker({group}:{group:Group}){
  const selectedPrice=selected?priceFor(selected.name):undefined;
 
  return <>
-  <p className="refresher-picker-intro">Ketuk varianmu buat cek bahan dan rasanya.</p>
+  <p className="refresher-picker-intro">Pilih varian untuk lihat cerita rasanya dan cek bahan di dalamnya.</p>
+  <nav className="refresher-jump" aria-label="Pilih varian Refresher">
+   {refresherDrinks.map(drink=><a key={drink.id} href={'#'+drink.id+'-poster'}>{drink.name}</a>)}
+  </nav>
   <div className="refresher-scroll" ref={storyRef}>
    <div className="refresher-scroll-stage" ref={stageRef} aria-hidden="true">
     {refresherDrinks.map(drink=><img className="refresher-cup-display" data-variant={drink.id} key={drink.id}
@@ -120,15 +123,19 @@ function RefresherPicker({group}:{group:Group}){
     {refresherDrinks.map(drink=>{
      const price=priceFor(drink.name);
      return <section className="refresher-scroll-panel" key={drink.id} id={drink.id} data-variant={drink.id} aria-labelledby={drink.id+'-title'}>
+      <header className="refresher-poster-heading" id={drink.id+'-poster'}>
+       <p className="eyebrow">{drink.profile}</p>
+       <h3 id={drink.id+'-title'}>{drink.name}</h3>
+      </header>
       <img className="refresher-ingredient-photo" src={`/brands/refresher/ingredients-${drink.id}.webp`}
        width="480" height="480" alt={drink.ingredients} loading="lazy" decoding="async"/>
       <div className="refresher-poster-copy">
-      <p className="eyebrow">{drink.profile}</p>
-      <h3 id={drink.id+'-title'}>{drink.name}</h3>
-      <p>{drink.taste}</p>
-      {price!==undefined&&<strong>{format(price)}</strong>}
-      <button type="button" className="button refresher-choice" id={drink.id+'-details'} aria-haspopup="dialog"
-       onClick={()=>openDrink(drink.id)}>Cek bahan dan rasa</button>
+       <p>{drink.taste}</p>
+       <div className="refresher-poster-actions">
+        {price!==undefined&&<strong>{format(price)}</strong>}
+        <button type="button" className="button refresher-choice" id={drink.id+'-details'} aria-haspopup="dialog"
+         onClick={()=>openDrink(drink.id)}>Cek bahan dan rasa</button>
+       </div>
       </div>
      </section>;
     })}
@@ -157,7 +164,7 @@ function RefresherPicker({group}:{group:Group}){
 export default function MenuCategory({group}:{group:Group}){
  const refresher=group.id==='refresher';
  const prices=group.items.map(item=>item.price);
- return <div className="menu-category">
+ return <div className={refresher?'menu-category refresher-page':'menu-category'}>
   <section className={`menu-category-hero${group.image?' has-image':''}`}>
    <div>
     <a className="menu-category-back" href="/menu#pilihan-menu">Kembali ke katalog</a>
@@ -173,10 +180,12 @@ export default function MenuCategory({group}:{group:Group}){
      <a className="button outline" href="/how-to-order#order-platforms">Pesan JOJO</a>
     </div>
    </div>
-   {group.image&&<img src={group.image} alt={group.imageAlt??''} fetchPriority="high"/>}
+   {refresher?<div className="refresher-hero-visual">
+    <img src="/brands/refresher/green-n-glow.webp" alt="Cup Green N Glow dari Refresher Series" width="360" height="600" fetchPriority="high"/>
+   </div>:group.image&&<img src={group.image} alt={group.imageAlt??''} fetchPriority="high"/>}
   </section>
   <section className="section menu-category-list" id="pilihan-kategori">
-   <h2>{refresher?'Kenali enam racikannya':'Pilihan menu'}</h2>
+   <h2 className={refresher?'refresher-list-title':undefined}>{refresher?'Kenali enam racikannya':'Pilihan menu'}</h2>
    {refresher?<RefresherPicker group={group}/>:<div>{group.items.map(item=><article className="menu-category-item" key={item.name}>
     <h3>{item.name}</h3><strong>{format(item.price)}</strong>
    </article>)}</div>}
