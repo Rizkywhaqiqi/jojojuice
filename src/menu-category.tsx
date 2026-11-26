@@ -112,7 +112,7 @@ function RefresherPicker({group}:{group:Group}){
  const [reducedMotion,setReducedMotion]=useState(()=>window.matchMedia('(prefers-reduced-motion: reduce)').matches);
  const [hovered,setHovered]=useState(false);
  const [reading,setReading]=useState(false);
- const [activeIndex,setActiveIndex]=useState(0);
+ const [{activeIndex,previousIndex},setSlide]=useState({activeIndex:0,previousIndex:0});
  const active=refresherDrinks[activeIndex];
  const [selected,setSelected]=useState<RefresherDrink|null>(null);
  const priceFor=(name:string)=>group.items.find(item=>item.name===name)?.price;
@@ -121,7 +121,7 @@ function RefresherPicker({group}:{group:Group}){
   const openFromHash=()=>{
    const hash=window.location.hash.slice(1);
    const index=refresherDrinks.findIndex(item=>item.id===hash||item.id+'-poster'===hash);
-   if(index!==-1){setActiveIndex(index);setPlaying(false)}
+   if(index!==-1){setSlide(current=>current.activeIndex===index?current:{activeIndex:index,previousIndex:current.activeIndex});setPlaying(false)}
    if(index!==-1&&refresherDrinks[index].id===hash)setSelected(refresherDrinks[index]);
    else dialogRef.current?.close();
   };
@@ -154,7 +154,7 @@ function RefresherPicker({group}:{group:Group}){
  const rotating=playing&&inView&&pageVisible&&!reducedMotion&&!hovered&&!reading&&!selected;
  useEffect(()=>{
   if(!rotating)return;
-  const timer=window.setTimeout(()=>setActiveIndex(index=>(index+1)%refresherDrinks.length),7000);
+  const timer=window.setTimeout(()=>setSlide(({activeIndex:index})=>({activeIndex:(index+1)%refresherDrinks.length,previousIndex:index})),7000);
   return()=>window.clearTimeout(timer);
  },[rotating,activeIndex]);
 
@@ -183,13 +183,16 @@ function RefresherPicker({group}:{group:Group}){
   <section className="refresher-feature" data-variant={active.id} ref={featureRef}
    onPointerEnter={event=>{if(event.pointerType==='mouse')setHovered(true)}}
    onPointerLeave={()=>setHovered(false)}>
+   {activeIndex!==previousIndex&&<div className="refresher-feature-wipe" key={'wipe-'+active.id} data-variant={refresherDrinks[previousIndex].id} aria-hidden="true"/>}
    <a className="menu-category-back" href="/menu#pilihan-menu">Kembali ke katalog</a>
    <h1>Refresher Series</h1>
    <div className="refresher-feature-grid" key={active.id} onFocus={()=>setReading(true)}
     onBlur={event=>{if(!event.currentTarget.contains(event.relatedTarget))setReading(false)}}>
-    <div className="refresher-feature-copy" aria-live={rotating?'off':'polite'}>
+    <header className="refresher-feature-title" aria-live={rotating?'off':'polite'}>
      <p className="eyebrow">{active.profile}</p>
      <h2>{active.name}</h2>
+    </header>
+    <div className="refresher-feature-copy">
      <p>{active.taste}</p>
      {activePrice!==undefined&&<strong>{format(activePrice)}</strong>}
      <button className="button" type="button" id="refresher-details" aria-haspopup="dialog" onClick={event=>openDrink(active,event.currentTarget)}>Cek bahan dan rasa</button>
@@ -211,7 +214,7 @@ function RefresherPicker({group}:{group:Group}){
      onClick={()=>{
       window.history.replaceState(window.history.state,'','#'+drink.id+'-poster');
       setPlaying(false);
-      setActiveIndex(index);
+      setSlide(current=>current.activeIndex===index?current:{activeIndex:index,previousIndex:current.activeIndex});
      }}>{drink.name}</button>)}
    </div>
   </section>
