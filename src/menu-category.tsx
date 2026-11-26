@@ -226,7 +226,7 @@ function RefresherPicker({group}:{group:Group}){
    </div>
    </div>
    <div className="refresher-swipe-controls" role="group" aria-label="Navigasi varian Refresher">
-    <button className="refresher-swipe-next" type="button" aria-label="Varian sebelumnya"
+    <button className="refresher-swipe-next refresher-swipe-prev" type="button" aria-label="Varian sebelumnya"
      onClick={()=>chooseSlide((activeIndex-1+refresherDrinks.length)%refresherDrinks.length)}>
      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 12H5m6-6-6 6 6 6"/></svg>
     </button>
@@ -236,7 +236,7 @@ function RefresherPicker({group}:{group:Group}){
       <path d={paused?'m8 5 12 7-12 7z':'M9 5v14m6-14v14'}/>
      </svg>
     </button>}
-    <button className="refresher-swipe-next" type="button" aria-label="Varian berikutnya"
+    <button className="refresher-swipe-next refresher-swipe-forward" type="button" aria-label="Varian berikutnya"
      onClick={()=>chooseSlide((activeIndex+1)%refresherDrinks.length)}>
      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg>
     </button>
