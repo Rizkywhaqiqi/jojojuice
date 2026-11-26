@@ -10,7 +10,7 @@ import MenuCatalog from './menu-catalog';
 import {StoryNature,StoryStreet,OutletExperience} from './jojo-editorial-gallery';
 import {useEffect,useLayoutEffect,useRef,useState} from 'react';
 const IG=JOJO_LINKS.instagram;
-const nav=[['HOME','/'],['STORY','/story'],['MENU','/menu'],['HOW TO ORDER','/how-to-order'],['OUTLET','/outlet'],['CONTACT','/contact']];
+const nav=[['Beranda','/'],['Cerita','/story'],['Menu','/menu'],['Cara Pesan','/how-to-order'],['Gerai','/outlet'],['Kontak','/contact']];
 function Logo(){return <img className="logo" src="/brands/jojo-logo.svg" alt="JOJO Juice" width="135" height="70"/>}
 function CTA({children,href=JOJO_LINKS.esb,outline=false}:{children:string,href?:string,outline?:boolean}){return <a className={outline?'button outline':'button'} href={href} {...(href.startsWith('http')?{target:'_blank',rel:'noreferrer noopener'}:{})}>{children}</a>}
 function Header({path}:{path:string}){
@@ -101,38 +101,37 @@ function Header({path}:{path:string}){
    <button tabIndex={-1} className="anna-overlay-backdrop" type="button" aria-label="Tutup navigasi" onClick={close}/>
    <div className="anna-overlay-panel">
     <div className="anna-overlay-top"><a href="/" aria-label="Beranda JOJO"><Logo/></a><button type="button" className="anna-overlay-close" onClick={close} aria-label="Tutup menu">TUTUP <span aria-hidden="true">×</span></button></div>
-    <nav className="anna-overlay-links" aria-label="Semua halaman">{nav.map(([label,href],i)=><a key={href} href={href} aria-current={path===href?'page':undefined}><span className="anna-overlay-number">{String(i+1).padStart(2,'0')}</span>{label}</a>)}</nav>
+    <nav className="anna-overlay-links" aria-label="Semua halaman">{nav.map(([label,href])=><a key={href} href={href} aria-current={path===href?'page':undefined}>{label}</a>)}</nav>
     <div className="anna-overlay-bottom"><span>{JOJO_TAGLINE.toUpperCase()}</span><a href={IG} target="_blank" rel="noopener noreferrer">INSTAGRAM JOJO</a></div>
    </div>
   </div>}
  </>;
 }
 function Footer(){return <footer className="jojo-site-footer">
- <div className="jojo-footer-top"><div className="jojo-footer-brand"><a href="/" aria-label="Kembali ke beranda JOJO"><Logo/></a><p>Rasa segar buat cerita seru setiap hari.</p><span>PONTIANAK · EST. 2007</span></div><div className="jojo-footer-links"><span className="jojo-footer-label">EXPLORE JOJO</span><nav aria-label="Navigasi footer">{nav.map(([label,href])=><a href={href} key={href}>{label}</a>)}</nav></div><div className="jojo-footer-connect"><span className="jojo-footer-label">STAY CONNECTED</span><a href={IG} target="_blank" rel="noopener noreferrer">INSTAGRAM</a><a href={JOJO_LINKS.whatsapp} target="_blank" rel="noopener noreferrer">WHATSAPP</a><a className="jojo-footer-order" href={JOJO_LINKS.esb} target="_blank" rel="noopener noreferrer">ORDER NOW</a></div></div>
- <div className="jojo-footer-bottom"><span>© {new Date().getFullYear()} JOJO JUICE</span><span>{JOJO_TAGLINE.toUpperCase()}</span><span>MADE WITH FRESH ENERGY</span></div>
+ <div className="jojo-footer-top"><div className="jojo-footer-brand"><a href="/" aria-label="Kembali ke beranda JOJO"><Logo/></a><span>PONTIANAK · EST. 2007</span></div><div className="jojo-footer-links"><span className="jojo-footer-label">Halaman</span><nav aria-label="Navigasi footer">{nav.map(([label,href])=><a href={href} key={href}>{label}</a>)}</nav></div><div className="jojo-footer-connect"><span className="jojo-footer-label">Kontak</span><a href={IG} target="_blank" rel="noopener noreferrer">INSTAGRAM</a><a href={JOJO_LINKS.whatsapp} target="_blank" rel="noopener noreferrer">WHATSAPP</a><a className="jojo-footer-order" href={JOJO_LINKS.esb} target="_blank" rel="noopener noreferrer">Pesan lewat ESB</a></div></div>
+ <div className="jojo-footer-bottom"><span>© {new Date().getFullYear()} JOJO JUICE</span><span>{JOJO_TAGLINE.toUpperCase()}</span></div>
  </footer>}
 function Banner({title,image,eyebrow,copy,cta,href}:{title:string;image:string;eyebrow:string;copy:string;cta:string;href:string}){return <section className="banner jojo-page-hero"><img src={'/brands/'+image} alt="" fetchPriority="high"/><div className="banner-inner"><span className="eyebrow">{eyebrow}</span><h1>{title}</h1><p>{copy}</p><a className="jojo-page-hero-link" href={href}>{cta}</a></div></section>}
 function Story(){return <>
- <Banner title="OUR STORY" image="jojo-story-hero-1.jpg" eyebrow="PONTIANAK · SINCE 2007" copy="Dari buah segar sampai momen seru, kenalan dengan JOJO." cta="KENALAN LEBIH DEKAT" href="#cerita-jojo"/>
+ <Banner title="Cerita JOJO" image="jojo-story-hero-1.jpg" eyebrow="Pontianak · Sejak 2007" copy="Kenali JOJO dan awal perjalanan kami di Pontianak." cta="Baca cerita kami" href="#cerita-jojo"/>
  <section className="section jojo-story-intro" id="cerita-jojo">
-  <div className="jojo-story-intro-heading"><span className="eyebrow">KENALAN LEBIH DEKAT</span><h2>SEJAK 2007,<br/><em>SELALU FRESH.</em></h2></div>
-  <div className="jojo-story-intro-copy"><p>JOJO Juice tumbuh dari Pontianak dengan semangat menghadirkan minuman berbasis buah yang fresh, fun, dan dekat dengan keseharian.</p><p>Dari kerja, kuliah, nongkrong, sampai santai bersama teman, JOJO hadir menemani.</p><a className="button" href="/menu">LIHAT PILIHAN MENU</a></div>
+  <div className="jojo-story-intro-heading"><h2>Berawal <em>di Pontianak</em></h2></div>
+  <div className="jojo-story-intro-copy"><p>JOJO mulai menyajikan jus buah di Pontianak pada 2007.</p><a className="button" href="/menu">LIHAT PILIHAN MENU</a></div>
  </section>
  <StoryNature/>
  <section className="jojo-story-values" aria-labelledby="jojo-story-values-title">
   <img src="/brands/jojo-story-fruit-basket.webp" alt="Jus JOJO dingin di keranjang berisi buah segar" loading="lazy" decoding="async"/>
   <div>
-   <span className="eyebrow">THE JOJO WAY</span>
-   <h2 id="jojo-story-values-title">BUAH SEGAR.<br/><em>JUS DINGIN.</em></h2>
-   <p>Dari keranjang buah ke gelas dingin. Begini cara JOJO menikmati segarnya buah.</p>
+   <h2 id="jojo-story-values-title">Buah segar, <em>jus dingin</em></h2>
+   <p>Mampir ke gerai untuk mencoba jus buah JOJO.</p>
    <CTA href="/outlet">TEMUKAN OUTLET</CTA>
   </div>
  </section>
  <StoryStreet/>
 </>}
 function Menu(){return <MenuCatalog/>}
-function Outlet(){return <><Banner title="FIND US" image="editorial/jojo-interior-space.webp" eyebrow="TEMPAT KETEMU YANG FRESH" copy="Cari cabang JOJO yang paling sesuai dengan wilayahmu." cta="LIHAT LOKASI OUTLET" href="#outlet-list"/><OutletExperience/><OutletDirectory/><OrderOptions compact/></>}
-function Contact(){return <><Banner title="SAY HELLO" image="jojo-together.webp" eyebrow="KEEP IN TOUCH" copy="Ada pertanyaan atau ide kolaborasi? Hubungi JOJO melalui kanal resmi." cta="PILIH CARA KONTAK" href="#contact-channels"/><ContactOptions/><OrderOptions compact/></>}
+function Outlet(){return <><Banner title="Gerai JOJO" image="editorial/jojo-interior-space.webp" eyebrow="Lokasi" copy="Cari cabang berdasarkan kota atau nama gerai." cta="LIHAT LOKASI OUTLET" href="#outlet-list"/><OutletExperience/><OutletDirectory/><OrderOptions compact/></>}
+function Contact(){return <><Banner title="Kontak JOJO" image="jojo-together.webp" eyebrow="Kontak" copy="Hubungi kami untuk pertanyaan atau kerja sama." cta="PILIH CARA KONTAK" href="#contact-channels"/><ContactOptions/><OrderOptions compact/></>}
 function NotFound(){return <section className="section centered not-found"><span className="eyebrow">404 / HALAMAN TIDAK DITEMUKAN</span><h1>NYASAR,<br/>BRO?</h1><p>Halaman yang kamu cari tidak tersedia. Yuk kembali ke yang fresh.</p><CTA href="/">KEMBALI KE BERANDA</CTA></section>}
 export default function App(){
  const path=window.location.pathname.replace(/\/$/,'')||'/';

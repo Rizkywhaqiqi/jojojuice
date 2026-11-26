@@ -121,21 +121,21 @@ export default function MenuCatalog(){
    <div className="catalog-intro-shade" aria-hidden="true"/>
    <div className="catalog-intro-content">
     <span className="eyebrow">{JOJO_TAGLINE.toUpperCase()}</span>
-    <h1>THE <span>MENU.</span></h1>
-    <p>Cari rasa favoritmu. Dari jus buah segar sampai teman ngemil.</p>
-    <div className="catalog-intro-links"><a className="button" href="#pilihan-menu">LIHAT PILIHAN</a><span className="catalog-hero-counter">{total} PILIHAN · {groups.length} KATEGORI</span></div>
+    <h1>Menu <span>JOJO</span></h1>
+    <p>Lihat pilihan minuman, camilan, dan harganya.</p>
+    <div className="catalog-intro-links"><a className="button" href="#pilihan-menu">Lihat pilihan</a><span className="catalog-hero-counter">{total} PILIHAN · {groups.length} KATEGORI</span></div>
    </div>
   </section>
   <section className="catalog-featured" aria-label="Pilihan minuman JOJO">
-   <div className="catalog-featured-text"><span className="eyebrow">JOJO FAVORITES</span><h2>RASA<br/><em>SEGAR.</em></h2><p>Yang fruity, creamy, sampai savory. Tinggal pilih sesuai mood.</p></div>
+   <div className="catalog-featured-text"><h2>Jus <em>favorit</em></h2></div>
    <div className="catalog-featured-images">
     <figure><img src="/brands/jojo-green.webp" alt="Green N Glow JOJO" loading="lazy" width="360" height="400"/><figcaption>GREEN N GLOW</figcaption></figure>
     <figure><img src="/brands/jojo-dragon.webp" alt="Dragon Ball JOJO" loading="lazy" width="360" height="400"/><figcaption>DRAGON BALL</figcaption></figure>
-    <figure><img src="/brands/jojo-refresh.webp" alt="Minuman buah JOJO" loading="lazy" width="360" height="400"/><figcaption>FRESH EVERY DAY</figcaption></figure>
+    <figure><img src="/brands/jojo-refresh.webp" alt="Minuman buah JOJO" loading="lazy" width="360" height="400"/><figcaption>Jus buah</figcaption></figure>
    </div>
   </section>
   <section className="catalog-body section" id="pilihan-menu">
-   <div className="catalog-body-head"><div><span className="eyebrow">EXPLORE THE MENU</span><h2>PILIH <em>RASAMU.</em></h2></div><p>Nama dan harga mengikuti materi menu JOJO yang dibagikan. Harga dan ketersediaan di outlet bisa berubah.</p></div>
+   <div className="catalog-body-head"><div><h2>Katalog <em>menu</em></h2></div><p>Nama dan harga mengikuti materi menu JOJO yang dibagikan. Harga dan ketersediaan di outlet bisa berubah.</p></div>
    <div className="catalog-controls">
     <div className="catalog-families" role="group" aria-label="Jenis menu">
      {([{id:'all',label:'SEMUA'},{id:'drink',label:'MINUMAN'},{id:'food',label:'MAKANAN'},{id:'favorite',label:'FAVORIT'}] as const).map(tab=><button key={tab.id} type="button" className={family===tab.id?'active':''} aria-pressed={family===tab.id} onClick={()=>chooseFamily(tab.id)}>{tab.label}</button>)}
@@ -152,7 +152,7 @@ export default function MenuCatalog(){
     </div>
    </div>
    <div className="catalog-result-line" id="hasil-menu"><p aria-live="polite"><strong>{count}</strong> PILIHAN · {filtered.length} KATEGORI</p>{(family!=='all'||category!=='all'||query||sort!=='default')&&<button type="button" className="catalog-reset" onClick={reset}>RESET FILTER</button>}</div>
-   {count===0?<div className="catalog-empty"><h3>BELUM KETEMU.</h3><p>Coba nama lain atau kembali ke seluruh pilihan.</p><button type="button" className="button" onClick={reset}>LIHAT SEMUA MENU</button></div>:sort!=='default'?<div className="catalog-price-list" aria-label={sort==='low'?'Menu dari harga terendah':'Menu dari harga tertinggi'}>
+   {count===0?<div className="catalog-empty"><h3>Menu tidak ditemukan</h3><p>Coba kata lain atau reset filter.</p><button type="button" className="button" onClick={reset}>LIHAT SEMUA MENU</button></div>:sort!=='default'?<div className="catalog-price-list" aria-label={sort==='low'?'Menu dari harga terendah':'Menu dari harga tertinggi'}>
      {sortedItems.map(item=><article className="catalog-price-item" key={item.groupId+'-'+item.name}>
       <div><span className="catalog-price-category">{item.groupTitle}</span><h3>{item.name}</h3>{item.featured&&<span className="catalog-favorite">FAVORIT</span>}</div>
       <strong>{format(item.price)}</strong>
@@ -163,7 +163,7 @@ export default function MenuCatalog(){
    </section>)}</div>}
    <aside className="catalog-note"><strong>INFO MENU</strong><p>Harga disalin dari materi menu JOJO; terdapat perbedaan harga pada sebagian materi. Silakan konfirmasi harga dan stok terbaru langsung ke outlet.</p><p><strong>TOPPING +Rp 4.000:</strong> Chia Seed, Bubble, Grass Jelly, Coffee Jelly, Rainbow Jelly, Nata De Coco, Popping Boba, Bouncing Pearl.</p></aside>
    <div className="jojo-official-menu-links"><span className="eyebrow">MATERI MENU RESMI</span><p>Butuh versi asli dari JOJO? Lihat menu melalui tautan Google Drive resmi.</p><div><a href={JOJO_LINKS.juiceMenu} target="_blank" rel="noopener noreferrer">MENU JOJO JUICE</a><a href={JOJO_LINKS.dailyBarMenu} target="_blank" rel="noopener noreferrer">MENU JOJO DAILY BAR</a></div></div>
-   <div className="catalog-footer-cta"><div><span className="eyebrow">LAGI HAUS?</span><h2>JOJO AJA.</h2></div><a className="button" href={JOJO_LINKS.esb} target="_blank" rel="noopener noreferrer">ORDER SEKARANG</a></div>
+   <div className="catalog-footer-cta"><div><h2>Pesan JOJO</h2></div><a className="button" href={JOJO_LINKS.esb} target="_blank" rel="noopener noreferrer">Pesan lewat ESB</a></div>
   </section>
  </div>;
 }

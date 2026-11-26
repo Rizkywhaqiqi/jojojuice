@@ -81,3 +81,22 @@
  .jojo-service{min-height:115px;padding:19px 18px;gap:7px}
  .jojo-service-action{margin-top:6px}
 }
+
+.jojo-order .jojo-order-grid{
+ grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:16px clamp(16px,3vw,40px);
+}
+.jojo-order .jojo-service{
+ min-height:0;
+ border-top-width:1px;
+ box-shadow:none;
+}
+.jojo-order .jojo-service.is-primary{grid-column:1 / -1}
+.jojo-directory .jojo-outlet-card,
+.jojo-contact-options .jojo-contact-grid>a{
+ border-top-width:1px;
+ box-shadow:none;
+}
+@media(max-width:760px){
+ .jojo-order .jojo-order-grid{grid-template-columns:minmax(0,1fr);gap:12px}
+}

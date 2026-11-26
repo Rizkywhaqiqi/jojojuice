@@ -12,7 +12,7 @@ const services=[
 ];
 export function OrderOptions({compact=false}:{compact?:boolean}){
  return <section className={compact?'jojo-order jojo-order-compact':'jojo-order'} aria-labelledby="jojo-order-title">
-  <div className="jojo-order-header"><span className="eyebrow">ONLINE ORDER</span><h2 id="jojo-order-title">PESAN <em>JOJO.</em></h2><p>Pilih layanan pemesanan yang kamu gunakan. Tautan menuju kanal yang dicantumkan JOJO.</p></div>
+  <div className="jojo-order-header"><h2 id="jojo-order-title">Pilih layanan <em>pesan</em></h2><p>Pilih aplikasi yang tersedia di lokasimu.</p></div>
   <div className="jojo-order-grid">{services.map(service=><a className={service.primary?'jojo-service is-primary':'jojo-service'} href={service.url} target="_blank" rel="noopener noreferrer" key={service.label}><span>{service.label}</span><small>{service.sub}</small><span className="jojo-service-action">BUKA LAYANAN</span></a>)}</div>
  </section>
 }
@@ -21,7 +21,7 @@ export function OutletDirectory(){
  const [query,setQuery]=useState('');
  const filtered=useMemo(()=>JOJO_OUTLETS.filter(outlet=>(area==='Semua'||outlet.area===area)&&outlet.name.toLocaleLowerCase('id').includes(query.trim().toLocaleLowerCase('id'))),[area,query]);
  return <section className="jojo-directory section" id="outlet-list">
-  <div className="jojo-directory-heading"><div><span className="eyebrow">{JOJO_OUTLETS.length} LOKASI DI LINKTREE RESMI</span><h2>CARI <em>OUTLET.</em></h2></div><p>Pilih wilayah dan buka navigasi menuju cabang yang tercantum. Untuk alamat atau jam terbaru, lihat Maps masing-masing outlet.</p></div>
+  <div className="jojo-directory-heading"><div><span className="eyebrow">{JOJO_OUTLETS.length} LOKASI DI LINKTREE RESMI</span><h2>Cari <em>gerai</em></h2></div><p>Cari cabang berdasarkan wilayah. Lihat alamat dan jam buka di Google Maps.</p></div>
   <div className="jojo-directory-filters"><div className="jojo-directory-tabs" role="group" aria-label="Filter wilayah">{areas.map(item=><button type="button" key={item} onClick={()=>setArea(item)} aria-pressed={area===item} className={area===item?'active':''}>{item}</button>)}</div><div className="jojo-directory-search"><label htmlFor="jojo-outlet-search">CARI CABANG</label><div className="jojo-directory-search-field"><input id="jojo-outlet-search" aria-label="Cari nama outlet" type="search" placeholder="Cari nama cabang…" value={query} onChange={event=>setQuery(event.target.value)}/>{query&&<button type="button" aria-label="Hapus pencarian outlet" onClick={()=>setQuery('')}>×</button>}</div></div></div>
   <div className="jojo-directory-count-row"><p className="jojo-directory-count" role="status" aria-live="polite">{filtered.length} OUTLET DITEMUKAN</p>{(area!=='Semua'||query.trim())&&<button className="jojo-directory-clear" type="button" onClick={()=>{setArea('Semua');setQuery('')}}>RESET FILTER</button>}</div>
   {filtered.length?<div className="jojo-outlet-grid">{filtered.map(outlet=><article className="jojo-outlet-card" key={outlet.maps}><div><span className="jojo-outlet-area">{outlet.area}{outlet.kind==='daily'?' · DAILY BAR':''}</span><h3>{outlet.name}</h3></div><a href={outlet.maps} target="_blank" rel="noopener noreferrer" aria-label={'Buka Google Maps untuk '+outlet.name}>BUKA GOOGLE MAPS</a></article>)}</div>:<div className="jojo-outlet-empty"><h3>OUTLET TIDAK DITEMUKAN</h3><p>Coba kata pencarian lain atau ubah wilayah.</p><button type="button" onClick={()=>{setArea('Semua');setQuery('')}}>LIHAT SEMUA OUTLET</button></div>}
@@ -30,12 +30,12 @@ export function OutletDirectory(){
 }
 export function ContactOptions(){
  return <section className="jojo-contact-options section" id="contact-channels">
-  <div className="jojo-contact-heading"><span className="eyebrow">SAY HELLO</span><h2>LET'S <em>TALK.</em></h2><p>Punya pertanyaan menu, outlet, atau kolaborasi? Hubungi JOJO melalui kanal yang tercantum di Linktree resminya.</p></div>
+  <div className="jojo-contact-heading"><h2>Hubungi <em>JOJO</em></h2><p>Tanya soal menu, cabang, atau kerja sama.</p></div>
   <div className="jojo-contact-grid">
-   <a href={JOJO_LINKS.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="Buka chat WhatsApp JOJO Juice"><span>01 / CHAT</span><h3>WHATSAPP</h3><p>Hubungi tim JOJO lewat nomor bisnis resmi.</p><strong>CHAT SEKARANG</strong></a>
-   <a href={JOJO_LINKS.instagram} target="_blank" rel="noopener noreferrer" aria-label="Kunjungi Instagram JOJO Juice"><span>02 / SOCIAL</span><h3>INSTAGRAM</h3><p>Info terbaru dan cerita fresh JOJO.</p><strong>@JOJOJUICEID</strong></a>
-   <a href={JOJO_LINKS.juiceMenu} target="_blank" rel="noopener noreferrer"><span>03 / MENU</span><h3>MENU RESMI</h3><p>Lihat materi menu JOJO Juice di Google Drive.</p><strong>BUKA MENU</strong></a>
-   <a href={JOJO_LINKS.dailyBarMenu} target="_blank" rel="noopener noreferrer"><span>04 / MENU</span><h3>DAILY BAR</h3><p>Lihat materi menu JOJO Daily Bar.</p><strong>BUKA MENU</strong></a>
+   <a href={JOJO_LINKS.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="Buka chat WhatsApp JOJO Juice"><h3>WHATSAPP</h3><p>Hubungi tim JOJO lewat nomor bisnis resmi.</p><strong>CHAT SEKARANG</strong></a>
+   <a href={JOJO_LINKS.instagram} target="_blank" rel="noopener noreferrer" aria-label="Kunjungi Instagram JOJO Juice"><h3>INSTAGRAM</h3><p>Info terbaru dan cerita fresh JOJO.</p><strong>@JOJOJUICEID</strong></a>
+   <a href={JOJO_LINKS.juiceMenu} target="_blank" rel="noopener noreferrer"><h3>MENU RESMI</h3><p>Lihat materi menu JOJO Juice di Google Drive.</p><strong>BUKA MENU</strong></a>
+   <a href={JOJO_LINKS.dailyBarMenu} target="_blank" rel="noopener noreferrer"><h3>DAILY BAR</h3><p>Lihat materi menu JOJO Daily Bar.</p><strong>BUKA MENU</strong></a>
   </div>
  </section>;
 }

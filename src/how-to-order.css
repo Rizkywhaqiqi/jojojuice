@@ -101,3 +101,25 @@
  .how-order .how-order-hero h1{font-size:clamp(44px,8vw,66px);margin:12px 0}
  .how-order .how-order-hero p{margin-bottom:14px}
 }
+
+.how-order .how-order-hero h1{text-shadow:none;letter-spacing:-.06em}
+.how-order .how-order-steps{padding-block:clamp(68px,9vw,132px)}
+.how-order .how-order-steps-grid{grid-template-columns:minmax(0,1fr);gap:0}
+.how-order .how-order-step{
+ display:grid;
+ grid-template-columns:minmax(42px,.2fr) minmax(0,1fr) minmax(0,.6fr);
+ align-items:center;
+ gap:clamp(16px,4vw,64px);
+ min-height:0;
+ padding:clamp(22px,4vw,44px) 0;
+ border-top-width:1px;
+ box-shadow:none;
+}
+.how-order .how-order-number{font-size:clamp(34px,5vw,68px);letter-spacing:-.05em}
+.how-order .how-order-step h3{letter-spacing:-.035em}
+.how-order .how-order-step>a,
+.how-order .how-order-step-finish{justify-self:start;margin:0}
+@media(max-width:760px){
+ .how-order .how-order-step{grid-template-columns:42px minmax(0,1fr);gap:12px 16px}
+ .how-order .how-order-step>a,.how-order .how-order-step-finish{grid-column:2}
+}

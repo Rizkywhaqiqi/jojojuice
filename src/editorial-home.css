@@ -435,3 +435,38 @@
  .jojo-editorial .jojo-editorial-hero h1{font-size:clamp(42px,8vw,68px);margin:12px 0}
  .jojo-editorial .jojo-editorial-hero p{margin-bottom:16px}
 }
+
+/* Keep the first drink prominent, then let the other two read as a short list. */
+.jojo-editorial .jojo-picks-grid{
+ grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);
+ gap:clamp(20px,3vw,44px);
+ max-width:none;
+}
+.jojo-editorial .jojo-pick:first-child{grid-row:span 2}
+.jojo-editorial .jojo-pick:first-child .jojo-pick-media{aspect-ratio:5/4}
+.jojo-editorial .jojo-pick:not(:first-child){
+ display:grid;
+ grid-template-columns:minmax(0,.85fr) minmax(0,1fr);
+ gap:clamp(14px,2vw,30px);
+ align-items:center;
+}
+.jojo-editorial .jojo-pick:not(:first-child) .jojo-pick-media{aspect-ratio:1}
+.jojo-editorial .jojo-pick:not(:first-child) h3{font-size:clamp(22px,3vw,36px)}
+.jojo-editorial .jojo-pick-details{gap:7px}
+.jojo-editorial :is(.jojo-picks-heading,.jojo-gather-copy,.jojo-community-top,.jojo-last-call) h2{
+ letter-spacing:-.055em;
+ line-height:.98;
+ text-wrap:balance;
+}
+.jojo-editorial .jojo-editorial-hero h1,
+.jojo-editorial .jojo-editorial-hero p{text-shadow:none}
+.jojo-editorial :is(.jojo-tropical-story,.jojo-tropical-feature-video) p{
+ max-width:52ch;
+ line-height:1.6;
+}
+.jojo-editorial .jojo-last-call{min-height:0;padding-block:clamp(64px,9vw,132px)}
+@media(max-width:760px){
+ .jojo-editorial .jojo-picks-grid{grid-template-columns:minmax(0,1fr);gap:24px}
+ .jojo-editorial .jojo-pick:first-child{grid-row:auto}
+ .jojo-editorial .jojo-pick:not(:first-child){grid-template-columns:minmax(0,.75fr) minmax(0,1fr)}
+}

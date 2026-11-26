@@ -174,7 +174,7 @@ test('Gather section uses the official lifestyle drink photo without yellow slog
  assert.ok(!section.includes('jojo-gather-stamp'));
  assert.ok(!section.includes('GOOD TIMES'));
  assert.ok(existsSync(new URL('../public/brands/editorial/jojo-street-drink.webp',import.meta.url)));
- assert.ok(section.includes('GATHER.'));
+ assert.ok(section.includes('Cari <em>gerai JOJO'));
 });
 
 test('GSAP animates JOJO editorial sections while leaving media playback independent',()=>{
@@ -203,7 +203,7 @@ test('GSAP dependency is pinned to a stable GSAP 3 version',()=>{
 test('Story hero uses official Drive 1.jpg without changing the homepage hero',()=>{
  const app=read('src/App.tsx');
  const home=read('src/editorial-home.tsx');
- assert.match(app,/<Banner title="OUR STORY" image="jojo-story-hero-1\.jpg"/);
+ assert.match(app,/<Banner title="Cerita JOJO" image="jojo-story-hero-1\.jpg"/);
  assert.ok(existsSync(new URL('../public/brands/jojo-story-hero-1.jpg',import.meta.url)));
  assert.match(home,/src="\/brands\/jojo-home-cooler-original-20261125\.jpg"/);
 });
