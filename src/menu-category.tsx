@@ -114,7 +114,6 @@ function RefresherPicker({group}:{group:Group}){
  const featureRef=useRef<HTMLElement>(null);
  const [visible,setVisible]=useState(false);
  const [interacting,setInteracting]=useState(false);
- const [paused,setPaused]=useState(false);
  const [pageVisible,setPageVisible]=useState(()=>!document.hidden);
  const [reducedMotion,setReducedMotion]=useState(()=>window.matchMedia('(prefers-reduced-motion: reduce)').matches);
  const [{activeIndex,previousIndex},setSlide]=useState({activeIndex:0,previousIndex:0});
@@ -156,7 +155,7 @@ function RefresherPicker({group}:{group:Group}){
   };
  },[]);
 
- const rotating=visible&&pageVisible&&!reducedMotion&&!selected&&!interacting&&!paused;
+ const rotating=visible&&pageVisible&&!reducedMotion&&!selected&&!interacting;
  useEffect(()=>{
   if(!rotating)return;
   const timer=window.setTimeout(()=>setSlide(({activeIndex:index})=>({
@@ -197,16 +196,7 @@ function RefresherPicker({group}:{group:Group}){
    onFocus={event=>{if(event.target.matches(':focus-visible'))setInteracting(true)}}
    onBlur={event=>{if(!event.currentTarget.contains(event.relatedTarget))setInteracting(false)}}>
    {activeIndex!==previousIndex&&<div className="refresher-feature-wipe" key={'wipe-'+active.id} data-variant={refresherDrinks[previousIndex].id} aria-hidden="true"/>}
-   <div className="refresher-feature-top">
-    <p className="refresher-series-label">Refresher Series</p>
-    {!reducedMotion&&<button type="button" className="refresher-autoplay"
-     onClick={()=>{setPaused(!paused);setInteracting(false)}}>
-     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d={paused?'m8 5 12 7-12 7Z':'M9 5v14m6-14v14'}/>
-     </svg>
-     {paused?'Putar otomatis':'Jeda slider'}
-    </button>}
-   </div>
+   <p className="refresher-series-label">Refresher Series</p>
    <p className="refresher-slide-announcement" aria-live="polite">{interacting?active.name:null}</p>
    <div className="refresher-swipe-area" ref={pickerRef} tabIndex={0} role="group"
     aria-label="Varian Refresher, gunakan panah kiri dan kanan untuk mengganti varian"

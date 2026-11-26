@@ -115,14 +115,7 @@ html:has(.refresher-dialog[open]){overflow:hidden}
 }
 body:has(.refresher-feature:is([data-variant="inner-glow"],[data-variant="detoxify"],[data-variant="green-n-glow"],[data-variant="vitablends"]))
  .header.anna-header:not(.is-scrolled):not(.is-open){color:#111827}
-.refresher-feature-top{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:44px}
 .refresher-series-label{font-size:.875rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase}
-.refresher-autoplay{
- display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:5px 11px;
- border:1px solid currentColor;border-radius:999px;background:var(--jojo-white);color:#111827;
- font-size:.8125rem;font-weight:700;
-}
-.refresher-autoplay:hover{background:var(--jojo-yellow)}
 .refresher-slide-announcement{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 .refresher-swipe-area{touch-action:pan-y pinch-zoom;user-select:none;cursor:grab}
 .refresher-swipe-area:active{cursor:grabbing}
