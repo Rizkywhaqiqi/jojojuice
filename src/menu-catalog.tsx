@@ -122,7 +122,7 @@ export default function MenuCatalog(){
    <div className="catalog-intro-content">
     <span className="eyebrow">{JOJO_TAGLINE.toUpperCase()}</span>
     <h1>Menu <span>JOJO</span></h1>
-    <p>Lihat pilihan minuman, camilan, dan harganya.</p>
+    <p>Lagi pengin jus, kopi, atau camilan? Cek pilihan dan harganya di sini.</p>
     <div className="catalog-intro-links"><a className="button" href="#pilihan-menu">Lihat pilihan</a><span className="catalog-hero-counter">{total} PILIHAN · {groups.length} KATEGORI</span></div>
    </div>
   </section>

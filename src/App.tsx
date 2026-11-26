@@ -113,7 +113,7 @@ function Footer(){return <footer className="jojo-site-footer">
  </footer>}
 function Banner({title,image,eyebrow,copy,cta,href}:{title:string;image:string;eyebrow:string;copy:string;cta:string;href:string}){return <section className="banner jojo-page-hero"><img src={'/brands/'+image} alt="" fetchPriority="high"/><div className="banner-inner"><span className="eyebrow">{eyebrow}</span><h1>{title}</h1><p>{copy}</p><a className="jojo-page-hero-link" href={href}>{cta}</a></div></section>}
 function Story(){return <>
- <Banner title="Cerita JOJO" image="jojo-story-hero-1.jpg" eyebrow="Pontianak · Sejak 2007" copy="Kenali JOJO dan awal perjalanan kami di Pontianak." cta="Baca cerita kami" href="#cerita-jojo"/>
+ <Banner title="Cerita JOJO" image="jojo-story-hero-1.jpg" eyebrow="Pontianak · Sejak 2007" copy="Cerita kami bermula dari segelas jus di Pontianak." cta="Baca cerita kami" href="#cerita-jojo"/>
  <section className="section jojo-story-intro" id="cerita-jojo">
   <div className="jojo-story-intro-heading"><h2>Berawal <em>di Pontianak</em></h2></div>
   <div className="jojo-story-intro-copy"><p>JOJO mulai menyajikan jus buah di Pontianak pada 2007.</p><a className="button" href="/menu">LIHAT PILIHAN MENU</a></div>
@@ -130,8 +130,8 @@ function Story(){return <>
  <StoryStreet/>
 </>}
 function Menu(){return <MenuCatalog/>}
-function Outlet(){return <><Banner title="Gerai JOJO" image="editorial/jojo-interior-space.webp" eyebrow="Lokasi" copy="Cari cabang berdasarkan kota atau nama gerai." cta="LIHAT LOKASI OUTLET" href="#outlet-list"/><OutletExperience/><OutletDirectory/><OrderOptions compact/></>}
-function Contact(){return <><Banner title="Kontak JOJO" image="jojo-together.webp" eyebrow="Kontak" copy="Hubungi kami untuk pertanyaan atau kerja sama." cta="PILIH CARA KONTAK" href="#contact-channels"/><ContactOptions/><OrderOptions compact/></>}
+function Outlet(){return <><Banner title="Gerai JOJO" image="editorial/jojo-interior-space.webp" eyebrow="Lokasi" copy="Mau mampir? Cari gerai lewat kota atau nama cabang." cta="LIHAT LOKASI OUTLET" href="#outlet-list"/><OutletExperience/><OutletDirectory/><OrderOptions compact/></>}
+function Contact(){return <><Banner title="Kontak JOJO" image="jojo-together.webp" eyebrow="Kontak" copy="Mau tanya soal JOJO atau ngajak kerja sama? Yuk, ngobrol." cta="PILIH CARA KONTAK" href="#contact-channels"/><ContactOptions/><OrderOptions compact/></>}
 function NotFound(){return <section className="section centered not-found"><span className="eyebrow">404 / HALAMAN TIDAK DITEMUKAN</span><h1>NYASAR,<br/>BRO?</h1><p>Halaman yang kamu cari tidak tersedia. Yuk kembali ke yang fresh.</p><CTA href="/">KEMBALI KE BERANDA</CTA></section>}
 export default function App(){
  const path=window.location.pathname.replace(/\/$/,'')||'/';

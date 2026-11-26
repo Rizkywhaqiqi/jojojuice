@@ -5,7 +5,7 @@ import {OrderOptions} from './jojo-directory';
 import './how-to-order.css';
 
 const steps=[
- {num:'01',title:'PILIH MENU',copy:'Lihat pilihan minuman dan makanan JOJO terlebih dahulu. Temukan rasa favoritmu sebelum mulai memesan.',label:'LIHAT MENU',url:'/menu'},
+ {num:'01',title:'PILIH MENU',copy:'Cek pilihan minuman dan camilan, lalu pilih yang lagi kamu pengin.',label:'LIHAT MENU',url:'/menu'},
  {num:'02',title:'PILIH PLATFORM',copy:'Kamu bisa memesan lewat ESB Order, GoFood, ShopeeFood, atau GrabFood. Pilih yang paling nyaman dan tersedia di lokasimu.',label:'PILIH LAYANAN',url:'#order-platforms'},
  {num:'03',title:'SELESAIKAN PESANAN',copy:'Setelah membuka platform pilihanmu, pilih outlet serta item, periksa total harga, lalu selesaikan pembayaran atau pengambilan di aplikasi.',label:'KONFIRMASI DI PLATFORM PILIHANMU',url:null}
 ];
@@ -44,7 +44,7 @@ export default function HowToOrder(){
    <div className="how-order-hero-content">
     <span className="eyebrow">{JOJO_TAGLINE.toUpperCase()}</span>
     <h1>Cara <em>pesan</em></h1>
-    <p>Lihat menu, lalu pilih layanan pemesanan yang tersedia di lokasimu.</p>
+    <p>Mulai dari pilih menu favoritmu, lalu pesan lewat aplikasi yang tersedia di lokasimu.</p>
     <div className="how-order-hero-actions">
      <a className="button" href="#order-steps">Lihat langkahnya</a>
      {showVideo&&<button type="button" className="how-order-video-toggle" onClick={toggleVideo}>

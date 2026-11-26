@@ -28,7 +28,7 @@ export default function EditorialHome(){
    <div className="jojo-editorial-hero-content">
     <span className="jojo-editorial-kicker">PONTIANAK · EST. 2007</span>
     <h1>{JOJO_TAGLINE_LEAD.toUpperCase()}<br/><em>{JOJO_TAGLINE_END.toUpperCase()}</em></h1>
-    <p>Jus buah, kopi, dan camilan dari Pontianak.</p>
+    <p>Fresh buat nemenin aktivitasmu.</p>
     <div className="jojo-editorial-actions">
      <a className="jojo-editorial-btn" href="/menu">Lihat menu</a>
      <a className="jojo-editorial-btn secondary" href="/how-to-order">Cara pesan</a>
@@ -41,7 +41,7 @@ export default function EditorialHome(){
   <section className="jojo-tropical-story" aria-labelledby="jojo-tropical-title">
    <div className="jojo-tropical-content">
     <h2 id="jojo-tropical-title">Jus dari <em>Pontianak</em></h2>
-    <p>Sejak 2007, kami menyajikan jus buah di Pontianak. Coba jus satu rasa atau campuran buah dari menu kami.</p>
+    <p>Sejak 2007, JOJO hadir di Pontianak. Kamu bisa pilih jus satu rasa atau coba campuran buah favoritmu.</p>
     <a href="/menu" className="jojo-tropical-cta">Lihat pilihan jus</a>
    </div>
   </section>
@@ -54,8 +54,8 @@ export default function EditorialHome(){
 
   <section className="jojo-tropical-feature jojo-tropical-feature-video" aria-labelledby="jojo-feature-title">
    <div className="jojo-tropical-feature-copy">
-    <h2 id="jojo-feature-title">Dari jus buah <em>hingga kopi</em></h2>
-    <p>Pilihan di JOJO juga mencakup kopi, teh, serta pastri dan camilan.</p>
+    <h2 id="jojo-feature-title">Buat jeda <em>di tengah hari</em></h2>
+    <p>Lagi istirahat kerja atau habis kelas? Mampir buat minum jus, ngopi, atau cari camilan.</p>
     <a href="/story" className="jojo-tropical-cta">Kenali JOJO</a>
    </div>
   </section>
@@ -91,6 +91,6 @@ export default function EditorialHome(){
    <a className="jojo-editorial-btn" href={JOJO_LINKS.instagram} target="_blank" rel="noopener noreferrer">Ikuti @jojojuiceid</a>
   </section>
 
-  <section className="jojo-last-call"><h2>Pesan <em>JOJO</em></h2><div className="jojo-editorial-actions"><a className="jojo-editorial-btn" href="/how-to-order">Cara pesan</a><a className="jojo-editorial-btn secondary" href={JOJO_LINKS.esb} target="_blank" rel="noopener noreferrer">Pesan lewat ESB</a></div><span className="jojo-last-small">{JOJO_TAGLINE.toUpperCase()} · JOJO JUICE</span></section>
+  <section className="jojo-last-call"><h2>Lagi butuh yang fresh? <em>JOJO aja.</em></h2><div className="jojo-editorial-actions"><a className="jojo-editorial-btn" href="/how-to-order">Cara pesan</a><a className="jojo-editorial-btn secondary" href={JOJO_LINKS.esb} target="_blank" rel="noopener noreferrer">Pesan lewat ESB</a></div><span className="jojo-last-small">{JOJO_TAGLINE.toUpperCase()} · JOJO JUICE</span></section>
  </div>;
 }
