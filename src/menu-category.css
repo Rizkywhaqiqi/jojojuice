@@ -31,11 +31,11 @@
  position:relative;isolation:isolate;display:grid;place-items:center;min-width:0;
 }
 .refresher-hero-visual::before{
- content:"";position:absolute;z-index:-1;width:min(100%,390px);aspect-ratio:1;
+ content:"";position:absolute;z-index:-1;width:min(100%,300px);aspect-ratio:1;
  border-radius:50%;background:var(--jojo-yellow);
 }
 .refresher-page .refresher-hero-visual img{
- width:auto;height:clamp(250px,39vw,470px);max-width:100%;aspect-ratio:auto;object-fit:contain;
+ width:auto;height:clamp(220px,30vw,360px);max-width:100%;aspect-ratio:auto;object-fit:contain;
 }
 .refresher-page .menu-category-list{padding-block:clamp(40px,7vw,100px)}
 .refresher-page .refresher-list-title{line-height:1;margin-bottom:12px;text-wrap:balance}
@@ -100,7 +100,7 @@ html:has(.refresher-dialog[open]){overflow:hidden}
  display:grid;place-items:center;z-index:1;pointer-events:none;
 }
 .refresher-cup-display{
- width:86%;height:100%;max-height:calc(100% - 24px);object-fit:contain;
+ width:min(78%,220px);height:clamp(150px,43svh,340px);object-fit:contain;
  grid-area:1 / 1;visibility:hidden;
 }
 .refresher-cup-display[data-active="true"]{
@@ -139,9 +139,10 @@ html:has(.refresher-dialog[open]){overflow:hidden}
  .refresher-page .menu-category-hero.has-image{grid-template-columns:minmax(0,1fr);gap:22px}
  .refresher-page .menu-category-hero{padding-top:96px}
  .refresher-page .menu-category-hero h1{font-size:clamp(46px,10vw,76px)}
- .refresher-page .refresher-hero-visual img{height:clamp(176px,44vw,260px)}
- .refresher-hero-visual::before{width:clamp(145px,40vw,240px)}
+ .refresher-page .refresher-hero-visual img{height:clamp(148px,39vw,216px)}
+ .refresher-hero-visual::before{width:clamp(120px,34vw,188px)}
  .refresher-scroll-stage{top:76px;width:37%;height:clamp(145px,49svh,320px)}
+ .refresher-cup-display{width:min(86%,112px);height:clamp(108px,26svh,170px)}
  .refresher-scroll-panel{min-height:64svh;padding:24px 5% 24px 40%;gap:10px}
  .refresher-poster-heading h3{font-size:clamp(25px,6.8vw,44px)}
  .refresher-poster-heading .eyebrow{font-size:.66rem}
@@ -152,6 +153,7 @@ html:has(.refresher-dialog[open]){overflow:hidden}
 }
 @media(max-height:500px) and (orientation:landscape){
  .refresher-scroll-stage{top:96px;height:51svh}
+ .refresher-cup-display{height:min(43svh,180px)}
 }
 @media(prefers-reduced-motion:reduce){.refresher-cup-display[data-active="true"]{animation:none}}
 
