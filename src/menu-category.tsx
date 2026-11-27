@@ -36,13 +36,22 @@ function RefresherStories({group,onDetails}:{group:Group;onDetails:(drink:Refres
   let frame=0;
   const update=()=>{
    frame=0;
-   const stage=stageRef.current?.getBoundingClientRect();
-   if(!stage||stage.height===0)return;
-   const readingLine=stage.top+stage.height/2;
+   const stage=stageRef.current;
+   if(!stage)return;
+   const bounds=stage.getBoundingClientRect();
+   if(bounds.height===0)return;
+   const readingLine=bounds.top+bounds.height/2;
    let current=0;
+   let progress=0;
    panels.forEach((panel,index)=>{
-    if(panel.getBoundingClientRect().top<=readingLine)current=index;
+    const {top,height}=panel.getBoundingClientRect();
+    if(top>readingLine)return;
+    current=index;
+    progress=height>0?Math.min(1,(readingLine-top)/height):0;
    });
+   // Start and end at normal size so adjacent cups crossfade without a jump.
+   const lift=Math.sin(progress*Math.PI)**2;
+   stage.style.setProperty('--cup-pop',String(1+lift*.12));
    setActiveIndex(current);
   };
   const schedule=()=>{

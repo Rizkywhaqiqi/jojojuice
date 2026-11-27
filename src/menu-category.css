@@ -239,7 +239,7 @@ body:has(.refresher-feature:is([data-variant="inner-glow"],[data-variant="detoxi
 .refresher-cup-display[data-variant="vitablends"]{--cup-shadow:rgba(32,0,0,.34)}
 .refresher-cup-display[data-variant="green-n-glow"],
 .refresher-cup-display[data-variant="boost-immunity"]{--cup-shadow:rgba(0,32,53,.28)}
-.refresher-cup-display[data-active="true"]{opacity:1;transform:none;z-index:1}
+.refresher-cup-display[data-active="true"]{opacity:1;transform:scale(var(--cup-pop,1));z-index:1}
 .refresher-cup-fallback{
  grid-area:1 / 1;text-align:center;padding:8px;
  background:var(--jojo-white);color:var(--jojo-text);font-size:.875rem;
@@ -297,7 +297,9 @@ body:has(.refresher-feature:is([data-variant="inner-glow"],[data-variant="detoxi
 @media(max-height:500px) and (orientation:landscape){
  .refresher-scroll-stage{--scroll-cup-height:min(43svh,180px);top:96px;height:51svh}
 }
-@media(prefers-reduced-motion:reduce){.refresher-cup-display{transition:none;transform:none}}
+@media(prefers-reduced-motion:reduce){
+ .refresher-cup-display,.refresher-cup-display[data-active="true"]{transition:none;transform:none}
+}
 
 .refresher-page .button:hover{color:var(--jojo-red-text)}
 .refresher-stories>h2,.refresher-poster-heading h3{text-wrap:balance}
